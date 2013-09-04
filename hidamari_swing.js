@@ -154,6 +154,10 @@ window.onload = function mogura() {
 			if(MeetCursor.intersect(Ball)){
 				console.log('hit');
 			    hit_flag = true;
+			    game.popScene(SceneBatting);
+			    make_batted_ball(5);
+				game.pushScene(SceneChaseBall);
+
 			}
 			else{
 				console.log('スカ');
@@ -242,26 +246,47 @@ window.onload = function mogura() {
 //打球追跡画面
 //****************
 	//背景
-		var BackgroundChaseBall = new Sprite(480,SCREENSIZE_Y);
-		BackgroundChaseBall.image = game.assets['img/background_chase_ball.png'];
+		var BackgroundChaseBall = new Sprite(1440,1440);
+		BackgroundChaseBall.image = game.assets['img/background_chase_ball.jpg'];
 
 	//背景と打球をグループ化
-		var Stadium = Group(); 
+		var Stadium = new Group();
+		Stadium.x = -480;
+		Stadium.y = -960;
 		Stadium.addChild(BackgroundChaseBall);
-	
 	//打球生成関数
-		function make_batted_ball(){
+		//引数に必要そうなもの「落下点(飛距離)、スピード、方向」
+		function make_batted_ball(speed){
 			var BattedBall = new Sprite(30, 30);
-			BattedBall.x = BALL_DEFAULT_X;
-			BattedBall.y = BALL_DEFAULT_Y;
+			BattedBall.x = 720;
+			BattedBall.y = 1400;
 			BattedBall.image = game.assets['img/ball.png'];
+			BattedBall.disapear = function(){
+				SceneChaseBall.removeChild(this);
+				last_ball_num = last_ball_num - 1;
+				LastBallNumLabel.text = "<div class='label'>残り"+last_ball_num+"球</div>";
+			}
+			BattedBall.addEventListener('enterframe', function(){
+				if(hit_flag == true && Stadium.y <= 0){
+					BattedBall.y = BattedBall.y - speed;
+					if ( this.y <= 1200 ) {
+						Stadium.y = Stadium.y + speed;
+					}
+				}
+				else{
+					this.disapear();
+					game.popScene(SceneChaseBall);
+					hit_flag = false;
+					throw_flag = true;
+					game.pushScene(SceneBatting);
+
+				}
+			});
 			Stadium.addChild(BattedBall);
 		}
 
-
 	//add
-		SceneTitle.addChild(BackgroundTitle);
-		SceneTitle.addChild(StartButton);
+		SceneChaseBall.addChild(Stadium);
 
 //******************
 //リザルト画面
