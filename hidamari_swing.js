@@ -2,6 +2,7 @@ enchant();
 
 window.onload = function mogura() {
 	var game = new Game(480, 480);
+	game.keybind(32, "space");  // spaceキー
 	game.preload(
 		'img/background_title.jpg',
 		'img/background_batting.jpg',
@@ -14,9 +15,9 @@ window.onload = function mogura() {
 
 	//game.preload('sound/screem.wav');
 
-	//****
-	//コンフィグ定数
-	//****
+//****
+//コンフィグ定数
+//****
 	var SCREENSIZE_Y = 480;
 	var STARTBUTTON_X = 100;
 	var STARTBUTTON_Y = 300;
@@ -37,21 +38,21 @@ window.onload = function mogura() {
 	var BALL_DEFAULT_X = PITCHER_X + 15;
 	var BALL_DEFAULT_Y = PITCHER_Y + 50;
 
-	//
+
 	game.onload = function () {
 		var SceneTitle = new Scene(); //タイトル画面
 		var SceneBatting = new Scene(); //バッティング画面
 		var SceneChaseBall = new Scene(); //打球追跡画面
 		var SceneResult = new Scene(); //リザルト画面
 
-		//*********************
-		//タイトル画面
-		//*******************
-		//背景
+//*********************
+//タイトル画面
+//*******************
+	//背景
 		var BackgroundTitle = new Sprite(480,SCREENSIZE_Y);
 		BackgroundTitle.image = game.assets['img/background_title.jpg'];
 
-		//スタートボタン
+	//スタートボタン
 		var StartButton = new Label();
 		StartButton.x = STARTBUTTON_X;
 		StartButton.y = STARTBUTTON_Y;
@@ -61,40 +62,45 @@ window.onload = function mogura() {
 			game.pushScene(SceneBatting);
 		});
 
-		//add
+	//add
 		SceneTitle.addChild(BackgroundTitle);
 		SceneTitle.addChild(StartButton);
 
-		//バッティング画面とボール追跡画面の共有変数
+		
+
+//*********************
+//バッティング画面
+//*********************
+	//バッティング画面とボール追跡画面の共有変数
 		var last_ball_num = BALL_NUM;
 		var point = 0;
-
-		//*********************
-		//バッティング画面
-		//*********************
-		//背景
+		
+	//背景
 		BackgroundBatting = new Sprite(480,SCREENSIZE_Y);
 		BackgroundBatting.image = game.assets['img/background_batting.jpg'];
 
-		//残り球数
+	//残り球数
 		var LastBallNumLabel = new Label();
 		LastBallNumLabel.x = LASTBALLNUMLABEL_X;
 		LastBallNumLabel.y = LASTBALLNUMLABEL_Y;
 		LastBallNumLabel.text = "<div class='label'>残り"+last_ball_num+"球</div>";
 
-		//得点
+	//得点
 		var PointLabel = new Label();
 		PointLabel.x = POINTLABEL_X;
 		PointLabel.y = POINTLABEL_Y;
 		PointLabel.text = "<div class='label'>得点"+point+"点</div>";
 		
-		//ピッチャー
+	//ピッチャー
 		var Pitcher = new Sprite(100, 100);
 		Pitcher.x = PITCHER_X;
 		Pitcher.y = PITCHER_Y;
-		throw_flag = true;
-		pitch_interval_time = 0;
 		Pitcher.image = game.assets['img/pitcher.png'];
+		//投げるflag
+		throw_flag = true;
+		//投球間隔カウント変数
+		pitch_interval_time = 0;
+		//フレーム処理
 		Pitcher.addEventListener('enterframe', function(){
 			if ( (throw_flag == true) && (game.frame % game.fps == 0) ) {
 				pitch_interval_time++;
@@ -106,13 +112,23 @@ window.onload = function mogura() {
 			}
 		});
 
-		//バッター
+	//スペースが押されたとき呼ばれる関数（バッターとミートカーソルのswing関数を呼ぶ）
+		function get_space(){
+			Batter.swing();
+			MeetCursor.swing();
+		}
+
+	//バッター
 		var Batter = new Sprite(100, 100);
 		Batter.x = BATTER_DEFAULT_X;
 		Batter.y = BATTER_DEFAULT_Y;
 		Batter.image = game.assets['img/batter.png'];
+		//スイング（スペース押したときの）処理
+		Batter.swing = function(){
+			//（予定）スイングアニメーションを入れる
+		}
+		//フレーム処理
 		Batter.addEventListener('enterframe', function(){
-			//スイング動作入れる
 			if (game.input.up && Batter.y > BATTER_DEFAULT_Y-BATTER_LIMIT_Y){
 				Batter.y = Batter.y - 1;
 			}
@@ -127,24 +143,23 @@ window.onload = function mogura() {
 			}
 		});
 
-		//ミートカーソル
+
+	//ミートカーソル
 		var MeetCursor = new Sprite(70, 50);
 		MeetCursor.x = MEETCURSOR_DEFAULT_X;
 		MeetCursor.y = MEETCURSOR_DEFAULT_Y;
 		MeetCursor.image = game.assets['img/meetcursor.png'];
-		//クリックした時
-		MeetCursor.addEventListener('touchstart', function (e) {
-			if(this.intersect(Ball)){
+		//スイング（スペース押したときの）処理
+		MeetCursor.swing = function(){
+			if(MeetCursor.intersect(Ball)){
 				console.log('hit');
 			    hit_flag = true;
 			}
 			else{
 				console.log('スカ');
 			}
-
-		});
+		}
 		MeetCursor.addEventListener('enterframe', function(){
-			//スイング動作入れる
 			if (game.input.up && MeetCursor.y > MEETCURSOR_DEFAULT_Y-BATTER_LIMIT_Y){
 				MeetCursor.y = MeetCursor.y - 1;
 			}
@@ -159,15 +174,14 @@ window.onload = function mogura() {
 			}
 		});
 
-		//ボールとミートカーソル共有フラグ
+	//ボールとミートカーソル共有フラグ
 		hit_flag = false;
 
-		//投球
+	//投球
 		var Ball = new Sprite(30, 30);
 		Ball.x = BALL_DEFAULT_X;
 		Ball.y = BALL_DEFAULT_Y;
 		Ball.image = game.assets['img/ball.png'];
-		
 		//変化、コース用変数(デフォは0)
 		Ball.direction_x = 0;
 		Ball.direction_y = 0;
@@ -178,7 +192,7 @@ window.onload = function mogura() {
 			this.x = BALL_DEFAULT_X;
 			this.y = BALL_DEFAULT_Y;
 		}
-		//
+		//コース、球種の設定関数
 		Ball.change = function(template_num){
 			//ここで変化とコースのコントロール
 			if(template_num == 0){
@@ -192,6 +206,7 @@ window.onload = function mogura() {
 			last_ball_num = last_ball_num - 1;
 			LastBallNumLabel.text = "<div class='label'>残り"+last_ball_num+"球</div>";
 		}
+		//フレーム処理
 		Ball.addEventListener('enterframe', function(){
 			if(hit_flag == true){
 					this.disapear();
@@ -206,9 +221,8 @@ window.onload = function mogura() {
 				}
 			}
 		});
-
-		//ボールを投げる（球種ごとに関数作ったほうがいいかも）
-		//引数で投球コース、スピードとか
+	
+	//投球関数（引数で投球コース、スピードとか
 		function throw_ball(){
 			Ball.reset();
 			Ball.change(0);
@@ -216,7 +230,7 @@ window.onload = function mogura() {
 			SceneBatting.addChild(Ball);
 		};
 
-		//add
+	//add
 		SceneBatting.addChild(BackgroundBatting);
 		SceneBatting.addChild(LastBallNumLabel);
 		SceneBatting.addChild(PointLabel);
@@ -224,35 +238,37 @@ window.onload = function mogura() {
 		SceneBatting.addChild(Batter);
 		SceneBatting.addChild(MeetCursor);
 
-		//******************
-		//打球追跡画面
-		//****************
-		//背景
+//******************
+//打球追跡画面
+//****************
+	//背景
 		var BackgroundChaseBall = new Sprite(480,SCREENSIZE_Y);
 		BackgroundChaseBall.image = game.assets['img/background_chase_ball.png'];
 
-		//背景と打球をグループ化
+	//背景と打球をグループ化
 		var Stadium = Group(); 
 		Stadium.addChild(BackgroundChaseBall);
-
-		//打球生成関数
+	
+	//打球生成関数
 		function make_batted_ball(){
-			var BattedBall = new  
-
+			var BattedBall = new Sprite(30, 30);
+			BattedBall.x = BALL_DEFAULT_X;
+			BattedBall.y = BALL_DEFAULT_Y;
+			BattedBall.image = game.assets['img/ball.png'];
 			Stadium.addChild(BattedBall);
 		}
 
 
-		
-
-		//add
+	//add
 		SceneTitle.addChild(BackgroundTitle);
 		SceneTitle.addChild(StartButton);
 
-		//******************
-		//リザルト画面
-		//****************
+//******************
+//リザルト画面
+//****************
 
+
+		game.addEventListener('spacebuttondown', get_space);
 		game.pushScene(SceneTitle);
 	};
 	game.start();
