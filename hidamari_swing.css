@@ -1,0 +1,21 @@
+.button{
+	border: 2px solid #DEF;
+	border-radius: 20px;
+	background: #ddd;
+	padding: 10px;
+	text-align:center;
+}
+.mes{
+	border: 5px solid white;
+	border-radius: 20px;
+	background: #DEF;
+	height: 125px;
+	width: 460px;
+	padding: 10px;
+	margin-left: 10px;
+	text-align:center;
+}
+#clear{
+	font-size:30px;
+	color:#ff0;
+}
