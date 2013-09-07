@@ -6,12 +6,14 @@ window.onload = function mogura() {
 	game.preload(
 		'img/background_title.jpg',
 		'img/background_batting.jpg',
-		'img/pitcher.gif',
+		//'img/pitcher.gif',
+		'img/yuno.gif',
 		'img/batter.png',
 		'img/meetcursor.png',
 		'img/ball.png'
 	);
 
+	//var YUNO_MOTION = [0,1,2,3,4,5,6,7,8,9,10,11];
 	//game.preload('sound/screem.wav');
 
 //****
@@ -109,18 +111,27 @@ window.onload = function mogura() {
 		var Pitcher = new Sprite(PITCHERSIZE_X, PITCHERSIZE_Y);
 		Pitcher.x = PITCHER_X;
 		Pitcher.y = PITCHER_Y;
-		Pitcher.image = game.assets['img/pitcher.gif'];
+		Pitcher.image = game.assets['img/yuno.gif'];
+		//Pitcher.image = game.assets['img/pitcher.gif'];
 		//投げるflag
 		throw_flag = true;
 		//投球間隔カウント変数
-		pitch_interval_time = 0;
+		pitch_interval_count = 0;
+		//アニメーションフレーム
+		Pitcher.frame = 0;
 		//フレーム処理
 		Pitcher.addEventListener('enterframe', function(){
-			if ( (throw_flag == true) && (game.frame % game.fps == 0) ) {
-				pitch_interval_time++;
-				if(pitch_interval_time == PITCH_INTERVAL){
-					throw_ball();
-				}
+			if( (throw_flag == true) && (this.frame == 9) ){
+
+			}
+			else if(　(throw_flag == true) && (pitch_interval_count == PITCH_INTERVAL) ){
+				if(game.frame % (game.fps/10) == 0){
+	            	this.frame++;
+	        	}
+			}
+			//インターバルカウント
+			else if ( (throw_flag == true) && (game.frame % game.fps == 0) ) {
+				pitch_interval_count++;
 			}
 		});
 
@@ -241,7 +252,7 @@ window.onload = function mogura() {
 	//投球関数（引数で投球コース、スピードとか
 		function throw_ball(){
 			throw_flag = false;
-			pitch_interval_time = 0;
+			pitch_interval_count = 0;
 			Ball.reset();
 			Ball.change(0);
 			console.log('throw')
