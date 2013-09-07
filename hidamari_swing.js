@@ -29,7 +29,7 @@ window.onload = function mogura() {
 	var CAMERA_BATTING_X = -(GROUND_SIZE_X/2 - SCREEN_SIZE_X/2);
 	var CAMERA_BATTING_Y = -(GROUND_SIZE_Y - SCREEN_SIZE_Y);
 	//残り球数
-	var BALL_NUM = 1;
+	var BALL_NUM = 10;
 	//残り球数表示位置
 	var LASTBALL_X = (CAMERA_BATTING_X * -1) + 400;
 	var LASTBALL_Y = (CAMERA_BATTING_Y * -1) + 10;
