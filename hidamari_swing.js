@@ -28,7 +28,7 @@ window.onload = function mogura() {
 	var STARTBUTTON_X = 100;
 	var STARTBUTTON_Y = 300;
 	var BALL_NUM = 10;
-	var PITCH_INTERVAL = 4;
+	var PITCH_INTERVAL = 1; //4くらいがいいかも（デバック用に1）
 	var LASTBALLNUMLABEL_X = 400;
 	var LASTBALLNUMLABEL_Y = 10;
 	var POINTLABEL_X = 400;
@@ -116,22 +116,64 @@ window.onload = function mogura() {
 		//投げるflag
 		throw_flag = true;
 		//投球間隔カウント変数
-		pitch_interval_count = 0;
+		Pitcher.throw_interval_count = 0;
 		//アニメーションフレーム
 		Pitcher.frame = 0;
+		//セットモーションを呼び出す関数
+		Pitcher.set_throw = function(){
+
+		}
+		//投球関数（引数で投球コース、スピードとか
+		Pitcher.throw_ball = function(template_num){
+			Ball.x = BALL_DEFAULT_X;
+			Ball.y = BALL_DEFAULT_Y;
+
+			console.log(this.x,this.y);
+			switch(template_num){
+				case 0:
+					//テンプレート呼ばない場合（超ランダムとか用に用意しとく、使わないかも）
+					break;
+				case　1: //デバック用、ど真ん中ストレート
+					Ball.direction_x = 1;//1:右、-1:左
+					Ball.direction_y = 1;//1:前、-1:後
+					Ball.speed_x = 0;
+					Ball.speed_y = 10;
+					//フレーム処理
+					Ball.addEventListener('enterframe', function(){
+						/*if(hit_flag == true){
+								Camera.removeChild(this);
+						}*/
+						//else if(hit_flag == false){
+								//投球進行
+						this.y = this.y + this.direction_y*this.speed_y;
+						if ( this.y >= GROUNDSIZE_Y-15 ) {
+							Camera.removeChild(this);
+							throw_flag = true;
+						}
+						//}
+					});
+					break;
+			}
+			Pitcher.throw_interval_count = 0;
+			console.log('throw')
+			Camera.addChild(Ball);
+		};
 		//フレーム処理
 		Pitcher.addEventListener('enterframe', function(){
 			if( (throw_flag == true) && (this.frame == 9) ){
-
+				throw_flag = false;
+				this.throw_interval_count = 0;
+				//(予定)ここで球種、コース選定する
+				this.throw_ball(1);
 			}
-			else if(　(throw_flag == true) && (pitch_interval_count == PITCH_INTERVAL) ){
+			else if(　(throw_flag == true) && (this.throw_interval_count == PITCH_INTERVAL) ){
 				if(game.frame % (game.fps/10) == 0){
 	            	this.frame++;
 	        	}
 			}
 			//インターバルカウント
 			else if ( (throw_flag == true) && (game.frame % game.fps == 0) ) {
-				pitch_interval_count++;
+				this.throw_interval_count++;
 			}
 		});
 
@@ -159,6 +201,10 @@ window.onload = function mogura() {
 				Batter.x = Batter.x + 1;
 			}
 		});
+
+	//投球（ミートカーソルの判定用にここで定義、詳細はthrow_ballの中で設定）
+		var Ball = new Sprite(30, 30);
+		Ball.image = game.assets['img/ball.png'];
 
 	//ミートカーソル
 		var MeetCursor = new Sprite(70, 50);
@@ -201,64 +247,8 @@ window.onload = function mogura() {
 		Camera.addChild(MeetCursor);
 
 	//ボールとミートカーソル共有フラグ
-		hit_flag = false;
-
-	//投球
-		var Ball = new Sprite(30, 30);
-		Ball.x = BALL_DEFAULT_X;
-		Ball.y = BALL_DEFAULT_Y;
-		Ball.image = game.assets['img/ball.png'];
-		//変化、コース用変数(デフォは0)
-		Ball.direction_x = 0;
-		Ball.direction_y = 0;
-		Ball.speed_x = 0;
-		Ball.speed_y = 0;
-		//ボールの位置リセット、投球
-		Ball.reset = function(){
-			this.x = BALL_DEFAULT_X;
-			this.y = BALL_DEFAULT_Y;
-		}
-		//コース、球種の設定関数
-		Ball.change = function(template_num){
-			//ここで変化とコースのコントロール
-			if(template_num == 0){
-				this.direction_y = 1;
-				this.speed_y = 5;
-			}
-		}
-		//ボールを消す、残り球数を減らす関数
-		/*
-		Ball.disapear = function(){
-			SceneBatting.removeChild(this);
-			last_ball_num = last_ball_num - 1;
-			LastBallNumLabel.text = "<div class='label'>残り"+last_ball_num+"球</div>";
-		}
-		*/
-		//フレーム処理
-		Ball.addEventListener('enterframe', function(){
-			if(hit_flag == true){
-					Camera.removeChild(this);
-			}
-			else if(hit_flag == false){
-				//投球進行
-				this.y = this.y + this.direction_y*this.speed_y;
-				if ( this.y == SCREENSIZE_Y ) {
-					Camera.removeChild(this);
-					throw_flag = true;
-				}
-			}
-		});
+		hit_flag = false;		
 	
-	//投球関数（引数で投球コース、スピードとか
-		function throw_ball(){
-			throw_flag = false;
-			pitch_interval_count = 0;
-			Ball.reset();
-			Ball.change(0);
-			console.log('throw')
-			Camera.addChild(Ball);
-		};
-
 	//add
 		SceneBatting.addChild(Camera);
 		//SceneBatting.addChild(BackgroundBatting);
