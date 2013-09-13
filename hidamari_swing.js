@@ -125,6 +125,10 @@ window.onload = function mogura() {
 		Point.y = POINT_Y;
 		Point.num = 0;
 		Point.text = "<div class='label'>得点"+Point.num+"点</div>";
+		Point.addition = function(point){
+			this.num += point;
+			Point.text = "<div class='label'>得点"+this.num+"点</div>";
+		}
 
 	//背景
 		BackgroundBatting = new Sprite(GROUND_SIZE_X,GROUND_SIZE_Y);
@@ -221,7 +225,8 @@ window.onload = function mogura() {
 		Bat.x = BATTER_DEFAULT_X + BATTER_SIZE_X/2 + 10;
 		Bat.y = BATTER_DEFAULT_Y + BATTER_SIZE_Y/2;
 		Bat.image = game.assets['img/bat.gif'];
-        Bat.rotation = 60;     // プロパティで回転
+		//**************要調整*************
+        Bat.rotation = 60;
 		Bat.addEventListener('enterframe', function(){
 			if(Batter.swing_flag == false){	
 				if(Bat.rotation == -60){//6
@@ -252,6 +257,7 @@ window.onload = function mogura() {
 				}
 			}
 		});
+		//***************************
 
 
 	//バッター
@@ -263,9 +269,8 @@ window.onload = function mogura() {
 		Batter.swing_flag = true;
 		//スイング（スペース押したときの）処理
 		Batter.swing = function(){
-			console.log('swing');
+			console.log('swing'); //for debug
 			this.swing_flag = false;	
-			console.log('add bat');
 			Camera.addChild(Bat);
 		}
 		//フレーム処理
@@ -309,20 +314,73 @@ window.onload = function mogura() {
 		MeetCursor.image = game.assets['img/meetcursor.png'];
 		//スイング（スペース押したときの）処理
 		MeetCursor.swing = function(){
-			//
+			if(Pitcher.throw_flag == false){
+				if(MeetCursor.intersect(Ball)){
+					Camera.removeChild(Ball);
+					console.log('hit'); //for debag
+				    //打球角度
+				    var angle = Bat.rotation;
+				    console.log('angle:'+angle);//for debug
+				    //ミートカーソルとボールの距離計算
+				    var distance = Math.sqrt(Math.pow(Ball.x - MeetCursor.x, 2) + Math.pow(Ball.y - MeetCursor.y, 2))
+					console.log('distance:'+distance);//for debug
+				    var meetpoint = 30;
+				    var batted_speed = meetpoint - distance;
+				    console.log('batted_speed:'+batted_speed);//for debug
+				    var BattedBall = new Sprite(30, 30);
+					BattedBall.x = Ball.x;
+					BattedBall.y = Ball.y;					
+					BattedBall.image = game.assets['img/ball.png'];
+					BattedBall.speed_x = batted_speed * Math.cos(angle * Math.PI/180);
+					BattedBall.speed_y = batted_speed * Math.sin(angle * Math.PI/180);
+					BattedBall.h = 0.5;
+					BattedBall.stop_flag = false;
+					BattedBall.buoyancy = batted_speed;
+					BattedBall.flown = 0;
+					BattedBall.addEventListener('enterframe', function(){
+						if(this.stop_flag == false){
+							this.x = this.x - this.speed_x;
+							this.y = this.y - this.speed_y;
+							this.h =  this.h + this.buoyancy;
+							this.buoyancy -= 0.1;
+							if(this.h <= 0){
+								console.log('落下');
+								this.stop_flag = true;
+								var NowPoint = new Label();
+								NowPoint.x = (Camera.x * -1) + SCREEN_SIZE_X/2;
+								NowPoint.y = (Camera.y * -1) + SCREEN_SIZE_Y/2;
+								console.log(NowPoint.x);
+								NowPoint.text = "<h1 class='label'>飛距離:"+BattedBall.flown+"点</h1>";
+								Camera.addChild(NowPoint);
+								setTimeout(function(){
+									Camera.removeChild(this);
+									Camera.removeChild(NowPoint);
+									LastBall.decrement();
+									Pitcher.throw_flag = true;
+									Point.addition(BattedBall.flown);
+									Camera.x = CAMERA_BATTING_X;
+									Camera.y = CAMERA_BATTING_Y;
+									Camera.removeChild(BattedBall);
+								},3000);
+							}else{
+								this.flown += 1;
+							}
+							if(this.y >= CAMERA_BATTING_Y){
+								Camera.x = Camera.x + this.speed_x
+								Camera.y = Camera.y + this.speed_y;
+							}
+						}
+					});
+					Camera.addChild(BattedBall);
+			    }
+			}else{
+				console.log('スカ');
+			}
 		}
 		//フレーム処理
 		MeetCursor.addEventListener('enterframe', function(){
 			//
-			/*if(Batter.swing_flag == false){
-				if(MeetCursor.intersect(Ball)){
-					console.log('hit'); //for debag
-				    //make_batted_ball(Ball.x, Ball.y, 1, 20);
-			    }else{
-					console.log('スカ');
-				}
-			}*/
-
+		
 			//移動
 			if (game.input.up && MeetCursor.y > MEETCURSOR_DEFAULT_Y-BATTER_LIMIT_Y){
 				MeetCursor.y = MeetCursor.y - 1;
@@ -336,6 +394,7 @@ window.onload = function mogura() {
 			}
 		});
 		//打球生成関数	引数に必要そうなもの「落下点(飛距離)、スピード、方向」
+		/*
 		MeetCursor.make_batted_ball = function(start_x, start_y, core_value, speed){
 			//var speed_x;
 			//var speed_y;
@@ -356,6 +415,7 @@ window.onload = function mogura() {
 			});
 			Camera.addChild(BattedBall);
 		}
+		*/
 
 	//カメラ
 		var Camera = new Group();
