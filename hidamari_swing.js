@@ -114,6 +114,8 @@ window.onload = function mogura() {
 			this.num--;
 			this.text = "<div class='label'>残り"+this.num+"球</div>";
 			if(this.num == 0){
+				ResultPoint.text = "<h1>得点"+Point.num+"点</h1>";
+				SceneResult.addChild(ResultPoint);
 				game.popScene(SceneBatting);
 				game.pushScene(SceneResult);
 			}
@@ -135,8 +137,6 @@ window.onload = function mogura() {
 		BackgroundBatting.image = game.assets['img/background_batting.jpg'];
 		BackgroundBatting.x = 0;
 		BackgroundBatting.y = 0;
-		//BackgroundBatting.x = CAMERA_BATTING_X;
-		//BackgroundBatting.y = CAMERA_BATTING_Y;
 	
 	//投球（ミートカーソルのあたり判定用にここで変数定義）
 		var Ball;
@@ -316,8 +316,11 @@ window.onload = function mogura() {
 		MeetCursor.swing = function(){
 			if(Pitcher.throw_flag == false){
 				if(MeetCursor.intersect(Ball)){
+					LastBall.visible = false;
+					Point.visible = false;
 					Camera.removeChild(Ball);
 					console.log('hit'); //for debag
+
 				    //打球角度
 				    var angle = Bat.rotation;
 				    console.log('angle:'+angle);//for debug
@@ -358,6 +361,8 @@ window.onload = function mogura() {
 									LastBall.decrement();
 									Pitcher.throw_flag = true;
 									Point.addition(BattedBall.flown);
+									LastBall.visible = true;
+									Point.visible = true;
 									Camera.x = CAMERA_BATTING_X;
 									Camera.y = CAMERA_BATTING_Y;
 									Camera.removeChild(BattedBall);
@@ -393,29 +398,7 @@ window.onload = function mogura() {
 				MeetCursor.x = MeetCursor.x + 1;
 			}
 		});
-		//打球生成関数	引数に必要そうなもの「落下点(飛距離)、スピード、方向」
-		/*
-		MeetCursor.make_batted_ball = function(start_x, start_y, core_value, speed){
-			//var speed_x;
-			//var speed_y;
-			var BattedBall = new Sprite(30, 30);
-			BattedBall.x = start_x;
-			BattedBall.y = start_y;
-			BattedBall.image = game.assets['img/ball.png'];
-			BattedBall.disapear = function(){
-				SceneChaseBall.removeChild(this);
-				last_ball_num = last_ball_num - 1;
-				LastBall.text = "<div class='label'>残り"+last_ball_num+"球</div>";
-			}
-			BattedBall.addEventListener('enterframe', function(){
-				this.y = this.y - speed;
-				if(this.y >= CAMERA_BATTING_Y){
-					Camera.y = Camera.y + speed;
-				}
-			});
-			Camera.addChild(BattedBall);
-		}
-		*/
+		
 
 	//カメラ
 		var Camera = new Group();
@@ -447,14 +430,10 @@ window.onload = function mogura() {
 		var ResultPoint = new Label();
 		ResultPoint.x = 240;
 		ResultPoint.y = 240;
-		ResultPoint.text = "<h1>得点"+Point.num+"点</h1>";
 
 	//add
 		SceneResult.addChild(BackgroundResult);
 		SceneResult.addChild(ResultPoint);
-
-
-
 		game.addEventListener('spacebuttondown', get_space);
 		game.pushScene(SceneTitle);
 	};
