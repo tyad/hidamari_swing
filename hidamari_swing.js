@@ -233,15 +233,20 @@ window.onload = function mogura() {
 						Bat.x = BATTER_DEFAULT_X + BATTER_SIZE_X/2;
 						Bat.y = BATTER_DEFAULT_Y + BATTER_SIZE_Y/2 - 20;
 				}else if(Bat.rotation == -40){//5
+						MeetCursor.hit_flag = false;
+						console.log('hit_flag:'+MeetCursor.hit_flag);
 						Bat.x = BATTER_DEFAULT_X + BATTER_SIZE_X/2 - 10;
 						Bat.y = BATTER_DEFAULT_Y + BATTER_SIZE_Y/2 - 10;
-				}else if(Bat.rotation == -20){//4
+				}else if(Bat.rotation == -20){//4					
 						Bat.x = BATTER_DEFAULT_X + BATTER_SIZE_X/2 - 10;
 						Bat.y = BATTER_DEFAULT_Y + BATTER_SIZE_Y/2;
 				}else if(Bat.rotation == 0){//3
+
 						Bat.x = BATTER_DEFAULT_X + BATTER_SIZE_X/2;
 						Bat.y = BATTER_DEFAULT_Y + BATTER_SIZE_Y/2 - 10;
 				}else if(Bat.rotation == 20){//2
+						MeetCursor.hit_flag = true;
+						console.log('hit_flag:'+MeetCursor.hit_flag);
 						Bat.x = BATTER_DEFAULT_X + BATTER_SIZE_X/2 + 10;
 						Bat.y = BATTER_DEFAULT_Y + BATTER_SIZE_Y/2;
 				}else if(Bat.rotation == 40){//1
@@ -312,20 +317,23 @@ window.onload = function mogura() {
 		MeetCursor.x = MEETCURSOR_DEFAULT_X;
 		MeetCursor.y = MEETCURSOR_DEFAULT_Y;
 		MeetCursor.image = game.assets['img/meetcursor.png'];
+		//ヒットフラグ
+		MeetCursor.hit_flag = false;
 		//スイング（スペース押したときの）処理
 		MeetCursor.swing = function(){
 			if(Pitcher.throw_flag == false){
-				if(MeetCursor.intersect(Ball)){
+				console.log('now');
+				if(MeetCursor.intersect(Ball) && MeetCursor.hit_flag == true){
 					LastBall.visible = false;
 					Point.visible = false;
 					Camera.removeChild(Ball);
 					console.log('hit'); //for debag
 
 				    //打球角度
-				    var angle = Bat.rotation;
+				    var angle = 90 - (Ball.y - MeetCursor.y) * 2.5 * -1;
 				    console.log('angle:'+angle);//for debug
 				    //ミートカーソルとボールの距離計算
-				    var distance = Math.sqrt(Math.pow(Ball.x - MeetCursor.x, 2) + Math.pow(Ball.y - MeetCursor.y, 2))
+				    var distance = Math.sqrt(Math.pow(Ball.x - MeetCursor.x, 2));
 					console.log('distance:'+distance);//for debug
 				    var meetpoint = 30;
 				    var batted_speed = meetpoint - distance;
@@ -409,10 +417,7 @@ window.onload = function mogura() {
 		Camera.addChild(Point);
 		Camera.addChild(Pitcher);
 		Camera.addChild(Batter);
-		Camera.addChild(MeetCursor);
-
-	//ボールとミートカーソル共有フラグ
-		hit_flag = false;		
+		Camera.addChild(MeetCursor);		
 	
 	//add
 		SceneBatting.addChild(Camera);
