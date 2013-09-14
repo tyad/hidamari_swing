@@ -316,7 +316,7 @@ window.onload = function mogura() {
 		});
 
 	//*ミートカーソル*
-		var MeetCursor = new Sprite(70, 50);
+		var MeetCursor = new Sprite(MEETCURSOR_SIZE_X, MEETCURSOR_SIZE_Y);
 		MeetCursor.x = MEETCURSOR_DEFAULT_X;
 		MeetCursor.y = MEETCURSOR_DEFAULT_Y;
 		MeetCursor.image = game.assets['img/meetcursor.png'];
