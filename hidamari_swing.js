@@ -14,7 +14,7 @@ window.onload = function mogura() {
 		'img/ball.gif',
 		'img/ball_shadow.gif',
 		'img/swing_button.png',
-		'sound/bgm_batting.wav'
+		'sound/bgm_batting.mp3'
 	);
 
 
@@ -92,7 +92,7 @@ window.onload = function mogura() {
 //タイトル画面
 //*******************
 	//*背景*
-		var BackgroundTitle = new Sprite(480,SCREEN_SIZE_Y);
+		var BackgroundTitle = new Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y);
 		BackgroundTitle.image = game.assets['img/background_title.png'];
 
 	//*ロゴ*
@@ -426,7 +426,7 @@ window.onload = function mogura() {
 					Batter.frame = 2; //振る前の中割を設定
 				}else if(this.swing_frame < 7){
 					Batter.frame = 3; //振るアニメ
-					Bat.rotation -=11; 
+					Bat.rotation -= 11; 
 					//回転と位置が同期するように差分を取る
 					Bat.distance_x = -48 * Math.cos((Bat.rotation + 180) * Math.PI/180);
 					Bat.distance_y = -48 * Math.sin((Bat.rotation + 180) * Math.PI/180);
@@ -438,14 +438,10 @@ window.onload = function mogura() {
 					Bat.x = -9999; //表示が不自然にならないように退ける
 				}else if(this.swing_frame == 8){
 					Batter.frame = 5; //振るアニメ
-
 				}else if(this.swing_frame == 9){
 					Batter.frame = 6; //振るアニメ
-
-
 				}else if(this.swing_frame == 14){
 					Batter.frame = 5; //振るアニメ
-
 				}
 				//投球されている場合振り切ったままになるように制御
 				if(Pitcher.throw_flag == false && this.swing_frame > 10){
@@ -560,17 +556,11 @@ window.onload = function mogura() {
 							this.h =  this.h + this.buoyancy;
 							this.buoyancy -= 0.1;
 
-
-
 						if(this.stop_flag == false){
-
 							if(this.h <= 0){
-
 								console.log('落下');
-
 								BattedBall._element.style.zIndex = 1;
 								BattedBallHop._element.style.zIndex = 1;
-
 								this.stop_flag = true;
 							//*取得点*
 								var NowPoint = new Label();
@@ -656,7 +646,7 @@ window.onload = function mogura() {
 	//*カメラ*
 		var Camera = new Group();
 		Camera.x = CAMERA_BATTING_X;
-		Camera.y = CAMERA_BATTING_Y + 2000;
+		Camera.y = CAMERA_BATTING_Y + 2000; //2000:グイーン用
 		Camera.target_x = CAMERA_BATTING_X; //カメラが向かう位置
 		Camera.target_y = CAMERA_BATTING_Y; //カメラが向かう位置
 		Camera.addChild(BackgroundBatting);
@@ -680,10 +670,9 @@ window.onload = function mogura() {
 		// シーン更新処理
  		SceneBatting.onenterframe = function() {
             // BGM ループ再生
-            game.assets['sound/bgm_batting.wav'].play();
+            game.assets['sound/bgm_batting.mp3'].play();
+            game.assets['sound/bgm_batting.mp3'].volume = 0.4;
         };
-
-
 
 	
 //******************
