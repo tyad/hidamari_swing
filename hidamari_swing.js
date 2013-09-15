@@ -42,14 +42,14 @@ window.onload = function mogura() {
 	var PITCHER_SIZE_Y = 96;
 	//ピッチャー-位置
 	var PITCHER_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2;
-	var PITCHER_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 - 150;
+	var PITCHER_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 - 200;
 	//ピッチャー-モーション数
 	var PITCHER_MOTION_NUM = 10-1; //0,1,2,3,4,5,6,7,9
 	//ピッチャー-投球間隔
 	var PITCH_INTERVAL = 3; //4くらいがいいかも（デバック用に1）
 	//バッター-サイズ
-	var BATTER_SIZE_X = 96;
-	var BATTER_SIZE_Y = 96;
+	var BATTER_SIZE_X = 128;
+	var BATTER_SIZE_Y = 128;
 	//バッター-デフォルト位置
 	var BATTER_DEFAULT_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 - 100;
 	var BATTER_DEFAULT_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 + 130;
@@ -60,8 +60,8 @@ window.onload = function mogura() {
 	var MEETCURSOR_SIZE_X = 64;
 	var MEETCURSOR_SIZE_Y = 50;	
 	//ミートカーソル-位置
-	var MEETCURSOR_DEFAULT_X = BATTER_DEFAULT_X + 120;
-	var MEETCURSOR_DEFAULT_Y = BATTER_DEFAULT_Y + 50;
+	var MEETCURSOR_DEFAULT_X = BATTER_DEFAULT_X + 100;
+	var MEETCURSOR_DEFAULT_Y = BATTER_DEFAULT_Y + 60;
 	//ボール-サイズ
 	var BALL_SIZE_X = 15;
 	var BALL_SIZE_Y = 15;
@@ -178,7 +178,7 @@ window.onload = function mogura() {
 					Ball.direction_x = 1;//1:右、-1:左
 					Ball.direction_y = 1;//1:前、-1:後
 					Ball.speed_x = 0;
-					Ball.speed_y = 10;
+					Ball.speed_y = 2;
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.y = this.y + this.direction_y*this.speed_y;
@@ -240,28 +240,44 @@ window.onload = function mogura() {
     Bat.rotation = 0;
 		Bat.addEventListener('enterframe', function(){
 			Bat.swing_frame++;
+
 			if(Batter.swing_flag == false){	
-				if(Bat.swing_frame==1){ //宮子中割の設定とバットの初期化
+
+
+				if(this.swing_frame==1){ //宮子中割の設定とバットの初期化
 					Bat.x = -9999; //再表示で不自然にならないように退ける
     			Bat.rotation = 33;
 					Batter.frame = 2; //振る前の中割を設定
-				}else{
+				}else if(this.swing_frame < 7){
 					Batter.frame = 3; //振るアニメ
 					Bat.rotation -=11; 
 					//回転と位置が同期するように差分を取る
 					Bat.distance_x = -48 * Math.cos((Bat.rotation + 180) * Math.PI/180);
 					Bat.distance_y = -48 * Math.sin((Bat.rotation + 180) * Math.PI/180);
 					//差分を利用してバッターの腕にくっつける
-					Bat.x = Batter.x + Bat.distance_x - 10;
-					Bat.y = Batter.y + BATTER_SIZE_Y/2 + Bat.distance_y - 14;
+					Bat.x = Batter.x + Bat.distance_x + 22;
+					Bat.y = Batter.y + BATTER_SIZE_Y/2 + Bat.distance_y + 2;
+				}else if(this.swing_frame == 7){
+					Batter.frame = 4; //振るアニメ
+					Bat.x = -9999; //表示が不自然にならないように退ける
+				}else if(this.swing_frame == 8){
+					Batter.frame = 5; //振るアニメ
+
+				}else if(this.swing_frame == 9){
+					Batter.frame = 6; //振るアニメ
+
+				}else if(this.swing_frame == 14){
+					Batter.frame = 5; //振るアニメ
+
 				}
 
-				if(this.swing_frame >= 7){
+
+				if(this.swing_frame == 15){
 					Camera.removeChild(Bat);
+
 					Bat.swing_frame= 0; //フレームカウントリセット
 					Batter.swing_flag = true;	
-
-					Bat.x = -9999; //表示が不自然にならないように退ける
+					Batter.frame = 1; //振るアニメ
 				}
 			}
 		});
@@ -283,26 +299,20 @@ window.onload = function mogura() {
 		}
 		//フレーム処理
 		Batter.addEventListener('enterframe', function(){
-			if(this.swing_flag == false){
-				if(this.frame <= 1){
-					this.frame = 2;
-				}else if(Bat.swing_flame >= 7){
-					this.frame++;
-					//Batのリセット
-					Bat.rotation = 60;
 
-				}
-			}
 			//構えモーション
-			if(this.swing_flag == true){
+			if(this.swing_flag == true ){
 
 				if(Pitcher.throw_flag == false){
 					if(this.frame == 0){
 						this.frame = 1;
 					}
 				}else if(Pitcher.throw_flag == true){
-					this.frame = 0;
+					if(this.frame == 1){
+						this.frame = 0;
+					}
 				}
+
 			}else{ 
 
 			}
@@ -335,7 +345,7 @@ window.onload = function mogura() {
 		MeetCursor.addEventListener('enterframe', function(){
 			//
 			if(Pitcher.throw_flag == false){
-				if(MeetCursor.intersect(Ball) && Bat.swing_frame == 3){
+				if(MeetCursor.intersect(Ball) && Bat.swing_frame == 4){
 					LastBall.visible = false;
 					Point.visible = false;
 					Camera.removeChild(Ball);
@@ -343,14 +353,20 @@ window.onload = function mogura() {
 					MeetCursor.hit_flag = false;
 				    //打球角度
 				    var angle = 90 - ((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2)) * 2.5 * -1;
+						
+
+						
 				    console.log('angle:'+angle);//for debug
 				    //ミートカーソルとボールの距離計算
-				    var distance = Math.sqrt(Math.pow((Ball.x + BALL_SIZE_X/2) - (MeetCursor.x + MEETCURSOR_SIZE_X/2), 2));
+				    var distance = Math.sqrt(Math.pow((Ball.x + BALL_SIZE_X/2) - (MeetCursor.x + MEETCURSOR_SIZE_X/2), 2) + Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2));
 					console.log('distance:'+distance);//for debug
 				    //真芯値
 				    var meetpoint = 30;
 				    //打球スピード
-				    var batted_speed = meetpoint - distance;
+				    var batted_speed = (meetpoint - distance)* 0.6 + 3;
+						
+						if(batted_speed < 3) batted_speed = 3;
+						
 				    console.log('batted_speed:'+batted_speed);//for debug
 				//*打球*
 				    var BattedBall = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
@@ -364,7 +380,12 @@ window.onload = function mogura() {
 					//打球が着地したらtrue
 					BattedBall.stop_flag = false;
 					//浮力
-					BattedBall.buoyancy = batted_speed;
+					BattedBall.buoyancy = 3  + batted_speed * 0.4 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/4;
+
+					if(BattedBall.buoyancy < 0.5)BattedBall.buoyancy = 0.5;
+
+					console.log('tate:'+(Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/3);
+console.log('buoyancy:'+BattedBall.buoyancy);
 					//飛距離（得点）
 					BattedBall.flown = 0;
 					//フレーム処理
@@ -382,14 +403,14 @@ window.onload = function mogura() {
 								NowPoint.x = (Camera.x * -1) + SCREEN_SIZE_X/2;
 								NowPoint.y = (Camera.y * -1) + SCREEN_SIZE_Y/2;
 								console.log(NowPoint.x);
-								NowPoint.text = "<h1 class='label'>飛距離:"+BattedBall.flown+"点</h1>";
+								NowPoint.text = "<h1 class='label'>飛距離:"+parseInt(BattedBall.flown)+"点</h1>";
 								Camera.addChild(NowPoint);
 								setTimeout(function(){
 									Camera.removeChild(this);
 									Camera.removeChild(NowPoint);
 									LastBall.decrement();
 									Pitcher.throw_flag = true;
-									Point.addition(BattedBall.flown);
+									Point.addition(parseInt(BattedBall.flown));
 									LastBall.visible = true;
 									Point.visible = true;
 									Camera.x = CAMERA_BATTING_X;
@@ -397,7 +418,8 @@ window.onload = function mogura() {
 									Camera.removeChild(BattedBall);
 								},3000);
 							}else{
-								this.flown += 1;
+								//飛距離でスコア計算されるように修正
+								this.flown += batted_speed * 0.05;
 							}
 							//カメラ追従
 							if(this.y >= CAMERA_BATTING_Y){
@@ -432,9 +454,10 @@ window.onload = function mogura() {
 		Camera.addChild(BackgroundBatting);
 		Camera.addChild(LastBall);
 		Camera.addChild(Point);
+		Camera.addChild(MeetCursor);
 		Camera.addChild(Pitcher);
 		Camera.addChild(Batter);
-		Camera.addChild(MeetCursor);		
+
 	
 	//add
 		SceneBatting.addChild(Camera);
