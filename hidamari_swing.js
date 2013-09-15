@@ -221,7 +221,6 @@ window.onload = function mogura() {
 					});
 					break;
 
-
 				case　2: //ストレート 左右に少し角度がつく
 					Ball.direction_x = (Math.random() - Math.random()) * 0.8;//1:右、-1:左
 					Ball.direction_y = 1;//1:前、-1:後
@@ -239,17 +238,17 @@ window.onload = function mogura() {
 					});
 					break;
 
-
 				case　3: //カーブとシンカー 弧を描く
 					Ball.carve = Math.random() * 3 + 2;
 
-					if(parseInt(Math.random()*10)%2 == 1) Ball.carve *= -1;
+					if(parseInt(Math.random()*10)%2 == 1){
+						Ball.carve *= -1;
+					}
 					Ball.speed_x = 	Ball.carve;
 					Ball.speed_y = 8 + Math.random() * 3;
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
-
-						this.speed_x -=  Ball.carve/21
+						this.speed_x -=  Ball.carve/21;
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y;
 						if ( this.y >= GROUND_SIZE_Y-15 ) {
@@ -259,7 +258,6 @@ window.onload = function mogura() {
 						}
 					});
 					break;
-
 
 				case　4: //ナックル ぶれる 見切りづらいボール
 					Ball.speed_x = (Math.random() - Math.random()) * 0.8;
@@ -275,11 +273,12 @@ window.onload = function mogura() {
 						}
 
 						if(this.bure > 0){
-						 this.bure *= 0.9;
+							this.bure *= 0.9;
 						}
 						this.plus_x = this.bure;
-						if(this.throw_frame %2 == 1)this.plus_x *= -1;
-						
+						if(this.throw_frame %2 == 1){
+							this.plus_x *= -1;
+						}
 
 						this.x = this.x + this.speed_x+this.plus_x;
 						this.y = this.y + this.speed_y;
@@ -291,7 +290,6 @@ window.onload = function mogura() {
 					});
 					break;
 
-
 				case　5: //スローボール
 
 					Ball.speed_x = (Math.random() - Math.random()) * 0.8;
@@ -301,11 +299,7 @@ window.onload = function mogura() {
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.throw_frame ++;
-
-						
-
 						Ball.buoyancy += 0.3
-						
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y + Ball.buoyancy;
 						if ( this.y >= GROUND_SIZE_Y-15 ) {
@@ -316,7 +310,6 @@ window.onload = function mogura() {
 					});
 					break;
 
-
 				case　6: //チェンジアップ：スローボールの強化版
 
 					Ball.speed_x = (Math.random() - Math.random()) * 0.8;
@@ -326,9 +319,6 @@ window.onload = function mogura() {
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.throw_frame ++;
-
-						
-
 						Ball.buoyancy += 0.5
 						
 						this.x = this.x + this.speed_x;
@@ -341,7 +331,6 @@ window.onload = function mogura() {
 					});
 					break;
 
-
 				case　7: //オウルボール
 
 					Ball.speed_x = (Math.random() - Math.random()) * 0.5;
@@ -352,8 +341,9 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.throw_frame ++;
 
-						if(this.throw_frame % 2 == 0) Ball.speed_ex_x *= -1;
-						
+						if(this.throw_frame % 2 == 0){
+							Ball.speed_ex_x *= -1;
+						}
 						this.x = this.x + this.speed_x + this.speed_x + this.speed_ex_x;
 						this.y = this.y + this.speed_y;
 						if ( this.y >= GROUND_SIZE_Y-15 ) {
@@ -363,7 +353,6 @@ window.onload = function mogura() {
 						}
 					});
 					break;
-
 
 			}
 			console.log('throw')
@@ -377,9 +366,8 @@ window.onload = function mogura() {
 					this.throw_flag = false;
 					this.throw_interval_count = 0;
 					//(予定)ここで球種、コース選定する
-
 					this.ball_type = parseInt((Math.random()*10) %6 +2); //とりあえずデバッグ以外の6種からランダム
-					console.log('ball_type:'+this.ball_type)
+					console.log('ball_type:'+this.ball_type);
 					this.throw_ball(this.ball_type);
 				}
 				//投球モーション
@@ -398,7 +386,7 @@ window.onload = function mogura() {
 				//セットモーション
 				else if((this.frame >= 9) && (this.throw_interval_count == 0)){
 					if(game.frame % (game.fps/10) == 0){
-						console.log(this.frame)//for debug
+						console.log(this.frame);//for debug
 		            	if(this.frame == 11){
 		            		this.frame = 0;
 		            	}else{
@@ -446,7 +434,6 @@ window.onload = function mogura() {
 				//投球されている場合振り切ったままになるように制御
 				if(Pitcher.throw_flag == false && this.swing_frame > 10){
 					this.swing_frame = 10;
-
 				}
 				if(this.swing_frame >= 15){
 					Camera.removeChild(Bat);
@@ -466,6 +453,7 @@ window.onload = function mogura() {
 		Batter.image = game.assets['img/miyako.gif'];
 		Batter.frame = 0;
 		Batter.swing_flag = true;
+		Batter._element.style.zIndex = 3;
 		//スイング（スペース押したときの）処理
 		Batter.swing = function(){
 			console.log('swing'); //for debug
@@ -531,7 +519,7 @@ window.onload = function mogura() {
 				    }
 				    console.log('batted_speed:'+batted_speed);//for debug
 				//*打球*
-				  var BattedBall = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
+					var BattedBall = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
 					BattedBall.x = Ball.x;
 					BattedBall.y = Ball.y;					
 					BattedBall.image = game.assets['img/ball_shadow.gif'];
@@ -543,8 +531,9 @@ window.onload = function mogura() {
 					BattedBall.stop_flag = false;
 					//浮力
 					BattedBall.buoyancy = 3  + batted_speed * 0.25 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/4;
-					if(BattedBall.buoyancy < 0.5)BattedBall.buoyancy = 0.5;
-
+					if(BattedBall.buoyancy < 0.5){
+						BattedBall.buoyancy = 0.5;
+					}
 					console.log('tate:'+(Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/3);
 					console.log('buoyancy:'+BattedBall.buoyancy);
 					//飛距離（得点）
@@ -588,50 +577,39 @@ window.onload = function mogura() {
 								//飛距離でスコア計算されるように修正
 								this.flown += batted_speed * 0.05;
 							}
-
 							//カメラ追従
 							if(this.y >= CAMERA_BATTING_Y){
 								Camera.speed = 4;
 								Camera.target_x = Camera.target_x + this.speed_x
 								Camera.target_y = Camera.target_y + this.speed_y;
 							}
-						
-
 
 						}
-
-
 						if(this.h < 0){
-
-						this.buoyancy *= -0.25;
-						if(parseInt(this.bouyancy) == 0) this.bouyancy =0;
-						this.h =this.buoyancy;
-					batted_speed *= 0.6;
-					BattedBall.speed_x = batted_speed * Math.cos(angle * Math.PI/180);
-					BattedBall.speed_y = batted_speed * Math.sin(angle * Math.PI/180);
+							this.buoyancy *= -0.25;
+							if(parseInt(this.bouyancy) == 0){
+								this.bouyancy =0;
+							}
+								this.h =this.buoyancy;
+								batted_speed *= 0.6;
+								BattedBall.speed_x = batted_speed * Math.cos(angle * Math.PI/180);
+								BattedBall.speed_y = batted_speed * Math.sin(angle * Math.PI/180);
 						}
 
 					});
 
-				  var BattedBallHop = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
+					var BattedBallHop = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
 					BattedBallHop.image = game.assets['img/ball.gif'];
 					BattedBallHop.x = 0;
 					BattedBallHop.y = 0;
-
 					BattedBallHop.addEventListener('enterframe', function(){
-					BattedBallHop.x = BattedBall.x  - BattedBall.speed_x;
-					BattedBallHop.y = BattedBall.y -BattedBall.speed_y- BattedBall.h - BALL_SIZE_Y/3;
-
-
+						BattedBallHop.x = BattedBall.x  - BattedBall.speed_x;
+						BattedBallHop.y = BattedBall.y -BattedBall.speed_y- BattedBall.h - BALL_SIZE_Y/3;
 					});
-
 					Camera.addChild(BattedBall);
 					Camera.addChild(BattedBallHop);
-
-
 					BattedBall._element.style.zIndex = 2;
 					BattedBallHop._element.style.zIndex = 2;
-					Batter._element.style.zIndex = 3;
 
 			    }else if(MeetCursor.hit_flag == true){
 					console.log('スカ');
@@ -640,7 +618,6 @@ window.onload = function mogura() {
 			//移動 バッターの位置についていく
 			MeetCursor.x = Batter.x + 110;
 			MeetCursor.y = Batter.y + 60;
-
 		});
 		
 	//*カメラ*
