@@ -13,8 +13,10 @@ window.onload = function mogura() {
 		'img/meetcursor.png',
 		'img/ball.gif',
 		'img/ball_shadow.gif',
-		'img/swing_button.png'
+		'img/swing_button.png',
+		'sound/bgm_batting.mp3'
 	);
+
 
 //**********
 //コンフィグ定数（モード別にするならここをいじる）
@@ -669,13 +671,17 @@ window.onload = function mogura() {
 		Camera.speed = 5; //目的に対する追従速度
 
 		Camera.addEventListener('enterframe', function(){
-		Camera.x = parseInt(Camera.x - (Camera.x - Camera.target_x)/Camera.speed);
-		Camera.y = parseInt(Camera.y -(Camera.y - Camera.target_y)/Camera.speed);
-
+			Camera.x = parseInt(Camera.x - (Camera.x - Camera.target_x)/Camera.speed);
+			Camera.y = parseInt(Camera.y -(Camera.y - Camera.target_y)/Camera.speed);
 		});
 
 	//add
 		SceneBatting.addChild(Camera);
+		// シーン更新処理
+ 		SceneBatting.onenterframe = function() {
+            // BGM ループ再生
+            game.assets['sound/bgm_batting.mp3'].play();
+        };
 
 
 
