@@ -537,8 +537,7 @@ window.onload = function mogura() {
 					//打球が着地したらtrue
 					BattedBall.stop_flag = false;
 					//浮力
-					BattedBall.buoyancy = 1  + batted_speed * 0.35 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/3;
-
+					BattedBall.buoyancy = 3  + batted_speed * 0.25 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/4;
 					if(BattedBall.buoyancy < 0.5)BattedBall.buoyancy = 0.5;
 
 					console.log('tate:'+(Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/3);
