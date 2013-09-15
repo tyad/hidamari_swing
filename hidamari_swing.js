@@ -14,7 +14,7 @@ window.onload = function mogura() {
 		'img/ball.gif',
 		'img/ball_shadow.gif',
 		'img/swing_button.png',
-		'sound/bgm_batting.mp3'
+		'sound/bgm_batting.wav'
 	);
 
 
@@ -680,7 +680,7 @@ window.onload = function mogura() {
 		// シーン更新処理
  		SceneBatting.onenterframe = function() {
             // BGM ループ再生
-            game.assets['sound/bgm_batting.mp3'].play();
+            game.assets['sound/bgm_batting.wav'].play();
         };
 
 
