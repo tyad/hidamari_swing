@@ -160,11 +160,15 @@ window.onload = function mogura() {
 			this.num--;
 			this.text = "<div class='label'>残り"+this.num+"球</div>";
 			if(this.num == 0){
-				ResultPoint.text = "<h1>得点"+Point.num+"点</h1>";
-				SceneResult.addChild(ResultPoint);
-				game.popScene(SceneBatting);
-				game.pushScene(SceneResult);
+				setTimeout(function(){
+					ResultPoint.text = "<h1>得点"+Point.num+"点</h1>";
+					SceneResult.addChild(ResultPoint);
+					game.popScene(SceneBatting);
+					game.pushScene(SceneResult);
+				},3000);
 			}
+
+
 		}
 
 	//*得点*
@@ -207,7 +211,6 @@ window.onload = function mogura() {
 					break;
 
 				case　1: //デバック用ど真ん中スローボール
-					//投球（ミートカーソルの判定用にここで定義、詳細はthrow_ballの中で設定）
 					Ball.speed_x = 0;
 					Ball.speed_y = 2;
 					//フレーム処理
@@ -225,7 +228,7 @@ window.onload = function mogura() {
 					Ball.direction_x = (Math.random() - Math.random()) * 0.8;//1:右、-1:左
 					Ball.direction_y = 1;//1:前、-1:後
 					Ball.speed_x = 1;
-					Ball.speed_y = 10 + Math.random() * 5;
+					Ball.speed_y = 10 + Math.random() * 3;
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
@@ -261,7 +264,7 @@ window.onload = function mogura() {
 
 				case　4: //ナックル ぶれる 見切りづらいボール
 					Ball.speed_x = (Math.random() - Math.random()) * 0.8;
-					Ball.speed_y = 10 + Math.random() * 2;
+					Ball.speed_y = 9 + Math.random() * 2;
 					Ball.bure = 30;
 					Ball.throw_frame = 0;
 					//フレーム処理
@@ -319,7 +322,7 @@ window.onload = function mogura() {
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.throw_frame ++;
-						Ball.buoyancy += 0.5
+						Ball.buoyancy += 0.4
 						
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y + Ball.buoyancy;
@@ -366,7 +369,7 @@ window.onload = function mogura() {
 					this.throw_flag = false;
 					this.throw_interval_count = 0;
 					//(予定)ここで球種、コース選定する
-					this.ball_type = parseInt((Math.random()*10) %6 +2); //とりあえずデバッグ以外の6種からランダム
+					this.ball_type = parseInt((Math.random()*10) %5 +2); //6種からランダム
 					console.log('ball_type:'+this.ball_type);
 					this.throw_ball(this.ball_type);
 				}
@@ -377,7 +380,7 @@ window.onload = function mogura() {
 		        	}
 				}
 				//インターバルカウント
-				else if ((this.frame < 9)) {
+				else if ((this.frame < 9) && (LastBall.num > 0)) {
 					if((game.frame % game.fps) == 0){
 						this.throw_interval_count++;
 						console.log(this.throw_interval_count);//for debug
@@ -402,6 +405,7 @@ window.onload = function mogura() {
 		Bat.x = BATTER_DEFAULT_X + BATTER_SIZE_X/2 + 10;
 		Bat.y = BATTER_DEFAULT_Y + BATTER_SIZE_Y/2;
 		Bat.swing_frame = 0; //スイングした時のフレームカウント
+		Bat._element.style.zIndex = 3;
 		Bat.image = game.assets['img/bat.gif'];
 		//**************要調整*************
     	Bat.rotation = 0;
@@ -561,7 +565,7 @@ window.onload = function mogura() {
 								setTimeout(function(){
 									Camera.removeChild(this);
 									Camera.removeChild(NowPoint);
-									LastBall.decrement();
+
 									Pitcher.throw_flag = true;
 									Point.addition(parseInt(BattedBall.flown)); 
 									LastBall.visible = true;
@@ -572,6 +576,10 @@ window.onload = function mogura() {
 									Camera.target_y = CAMERA_BATTING_Y;
 
 									Camera.removeChild(BattedBall);
+
+
+									LastBall.decrement();
+
 								},3000);
 							}else{
 								//飛距離でスコア計算されるように修正
@@ -640,6 +648,22 @@ window.onload = function mogura() {
 		Camera.addEventListener('enterframe', function(){
 			Camera.x = parseInt(Camera.x - (Camera.x - Camera.target_x)/Camera.speed);
 			Camera.y = parseInt(Camera.y -(Camera.y - Camera.target_y)/Camera.speed);
+
+
+			if(Camera.x >  Camera.target_x){
+				Camera.x--;
+			}else if(Camera.x <  Camera.target_x){
+				Camera.x++;
+			}
+
+
+			if(Camera.y >  Camera.target_y){
+				Camera.y--;
+			}else if(Camera.y <  Camera.target_y){
+				Camera.y++;
+			}
+
+
 		});
 
 	//add
