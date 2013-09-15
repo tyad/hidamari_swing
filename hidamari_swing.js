@@ -22,7 +22,7 @@ window.onload = function mogura() {
 	var SCREEN_SIZE_Y = 480;
 	//グラウンド全体サイズ
 	var GROUND_SIZE_X = 2400;
-	var GROUND_SIZE_Y = 2400;
+	var GROUND_SIZE_Y = 1600;
 	//タイトル画面-スタートボタン位置
 	var STARTBUTTON_X = 100;
 	var STARTBUTTON_Y = 300;
@@ -41,7 +41,7 @@ window.onload = function mogura() {
 	var PITCHER_SIZE_X = 96;
 	var PITCHER_SIZE_Y = 96;
 	//ピッチャー-位置
-	var PITCHER_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2;
+	var PITCHER_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 + 10;
 	var PITCHER_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 - 190;
 	//ピッチャー-モーション数
 	var PITCHER_MOTION_NUM = 10-1; //0,1,2,3,4,5,6,7,9
@@ -60,14 +60,14 @@ window.onload = function mogura() {
 	var MEETCURSOR_SIZE_X = 64;
 	var MEETCURSOR_SIZE_Y = 50;	
 	//ミートカーソル-位置
-	var MEETCURSOR_DEFAULT_X = BATTER_DEFAULT_X + 100;
+	var MEETCURSOR_DEFAULT_X = BATTER_DEFAULT_X + 110;
 	var MEETCURSOR_DEFAULT_Y = BATTER_DEFAULT_Y + 60;
 	//ボール-サイズ
 	var BALL_SIZE_X = 15;
 	var BALL_SIZE_Y = 15;
 	//ボール-投球直後のデフォルト位置
-	var BALL_DEFAULT_X = PITCHER_X + PITCHER_SIZE_X/2 - BALL_SIZE_X/2;
-	var BALL_DEFAULT_Y = PITCHER_Y + 50;
+	var BALL_DEFAULT_X = PITCHER_X + PITCHER_SIZE_X/2 - BALL_SIZE_X/2 -5;
+	var BALL_DEFAULT_Y = PITCHER_Y + 40;
 
 	game.onload = function () {
 		var SceneTitle = new Scene(); //タイトル画面
@@ -147,7 +147,10 @@ window.onload = function mogura() {
 		BackgroundBatting = new Sprite(GROUND_SIZE_X,GROUND_SIZE_Y);
 		BackgroundBatting.image = game.assets['img/background_batting.jpg'];
 		BackgroundBatting.x = 0;
-		BackgroundBatting.y = 0;
+		BackgroundBatting.y = -800;
+		BackgroundBatting.scaleX = 2;
+		BackgroundBatting.scaleY = 2;
+
 	
 	//*投球（ミートカーソルのあたり判定用にここで変数定義）*
 		var Ball;
@@ -348,7 +351,7 @@ window.onload = function mogura() {
 
 					this.ball_type = parseInt((Math.random()*10) %6 +2); //とりあえずデバッグ以外の6種からランダム
 					console.log('ball_type:'+this.ball_type)
-					this.throw_ball(	this.ball_type);
+					this.throw_ball(this.ball_type);
 				}
 				//投球モーション
 				else if(this.throw_interval_count == PITCH_INTERVAL){
@@ -517,7 +520,7 @@ window.onload = function mogura() {
 				    //真芯値
 				    var meetpoint = 30;
 				    //打球スピード
-				    var batted_speed = (meetpoint - distance)* 0.6 + 3;
+				    var batted_speed = (meetpoint - distance)* 0.7 + 2;
 						
 						if(batted_speed < 3) batted_speed = 3;
 						
@@ -534,7 +537,7 @@ window.onload = function mogura() {
 					//打球が着地したらtrue
 					BattedBall.stop_flag = false;
 					//浮力
-					BattedBall.buoyancy = 3  + batted_speed * 0.4 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/4;
+					BattedBall.buoyancy = 1  + batted_speed * 0.35 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/3;
 
 					if(BattedBall.buoyancy < 0.5)BattedBall.buoyancy = 0.5;
 
@@ -588,7 +591,7 @@ console.log('buoyancy:'+BattedBall.buoyancy);
 				}
 			}
 			//移動 バッターの位置についていく
-			MeetCursor.x = Batter.x + 100;
+			MeetCursor.x = Batter.x + 110;
 			MeetCursor.y = Batter.y + 60;
 
 		});
