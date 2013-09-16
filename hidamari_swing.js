@@ -689,7 +689,7 @@ window.onload = function mogura() {
 				else if ((this.frame < 9) && (LastBall.num > 0)) {
 					if((game.frame % game.fps) == 0){
 						this.throw_interval_count++;
-						console.log(this.throw_interval_count);//for debug
+
 					}
 				}
 				//セットモーション
@@ -818,7 +818,7 @@ window.onload = function mogura() {
 				    var angle = 90 - ((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2)) * 2.5 * -1;
 				    console.log('angle:'+angle);//for debug
 				    //ミートカーソルとボールの距離計算
-				    var distance = Math.sqrt(Math.pow((Ball.x + BALL_SIZE_X/2) - (MeetCursor.x + MEETCURSOR_SIZE_X/2), 2) + Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2));
+				    var distance = Math.sqrt(Math.pow((Ball.x + BALL_SIZE_X/2) - (MeetCursor.x + MEETCURSOR_SIZE_X/2), 2) + Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2) * 0.6);
 					console.log('distance:'+distance);//for debug
 				    //真芯値
 				    var meetpoint = 30;
@@ -857,7 +857,7 @@ window.onload = function mogura() {
 					//打球が着地したらtrue
 					BattedBall.stop_flag = false;
 					//浮力
-					BattedBall.buoyancy = 3  + batted_speed * 0.25 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/4;
+					BattedBall.buoyancy = 3  + batted_speed * 0.25 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/6;
 					if(BattedBall.buoyancy < 0.5){
 						BattedBall.buoyancy = 0.5;
 					}
