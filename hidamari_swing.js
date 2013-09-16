@@ -16,10 +16,12 @@ window.onload = function mogura() {
 		'img/swing_button.png',
 		'sound/bgm_easy.mp3',
 		'sound/bgm_normal.mp3',
-		'sound/bgm_hard.mp3'
+		'sound/bgm_hard.mp3',
+		'sound/hit_1.wav',
+		'sound/hit_2.wav',
+		'sound/hit_3.wav',
+		'sound/hit_4.wav'
 	);
-
-
 //**********
 //コンフィグ定数（モード別にするならここをいじる）
 //**********
@@ -126,6 +128,8 @@ window.onload = function mogura() {
 		StartButtonEasy.addEventListener('touchstart', function (e) {
 			GameMode = 1;
 			BattingBgmFile = BATTING_BGM_EASY;
+			var se = game.assets['sound/hit_1.wav'];
+			se.play();
 			game.popScene(SceneTitle);
 			game.pushScene(SceneBatting);
 		});
@@ -137,6 +141,8 @@ window.onload = function mogura() {
 		StartButtonNormal.addEventListener('touchstart', function (e) {
 			GameMode = 2;
 			BattingBgmFile = BATTING_BGM_NORMAL;
+			var se = game.assets['sound/hit_1.wav'];
+			se.play();
 			game.popScene(SceneTitle);
 			game.pushScene(SceneBatting);
 		});
@@ -148,6 +154,8 @@ window.onload = function mogura() {
 		StartButtonHard.addEventListener('touchstart', function (e) {
 			GameMode = 3;
 			BattingBgmFile = BATTING_BGM_HARD;
+			var se = game.assets['sound/hit_1.wav'];
+			se.play();
 			game.popScene(SceneTitle);
 			game.pushScene(SceneBatting);
 		});
@@ -264,7 +272,7 @@ window.onload = function mogura() {
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -282,7 +290,7 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -300,7 +308,7 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -321,7 +329,7 @@ window.onload = function mogura() {
 						this.speed_x -=  Ball.carve/21;
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -352,7 +360,7 @@ window.onload = function mogura() {
 
 						this.x = this.x + this.speed_x+this.plus_x;
 						this.y = this.y + this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -372,7 +380,7 @@ window.onload = function mogura() {
 						Ball.buoyancy += 0.3
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y + Ball.buoyancy;
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -390,7 +398,7 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -413,7 +421,7 @@ window.onload = function mogura() {
 						}
 						this.x = this.x + this.speed_x + this.speed_x + this.speed_ex_x;
 						this.y = this.y + this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -434,7 +442,7 @@ window.onload = function mogura() {
 						
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y + Ball.buoyancy;
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -465,7 +473,7 @@ window.onload = function mogura() {
 
 						this.x = this.x + this.speed_x+this.plus_x;
 						this.y = this.y + this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -499,7 +507,7 @@ window.onload = function mogura() {
 							this.visible = false;
 						}
 					
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -520,7 +528,7 @@ window.onload = function mogura() {
 						this.speed_x -=  Ball.carve/13;
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -543,7 +551,7 @@ window.onload = function mogura() {
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y;
 
-						if ( this.y >= GROUND_SIZE_Y-15 ) {
+						if ( this.y >= GROUND_SIZE_Y ) {
 							Camera.removeChild(this);
 							Pitcher.throw_flag = true;
 							LastBall.decrement();
@@ -579,8 +587,6 @@ window.onload = function mogura() {
 					});
 					break;
 
-
-
 			}
 			console.log('throw')
 			Camera.addChild(Ball);
@@ -592,7 +598,6 @@ window.onload = function mogura() {
 				if((this.frame == 9) && (this.throw_interval_count == PITCH_INTERVAL)){
 					this.throw_flag = false;
 					this.throw_interval_count = 0;
-
 
 					//球種を選定する
 
@@ -614,9 +619,6 @@ window.onload = function mogura() {
 						//常に変化球も投げる
 						this.ball_type += parseInt(Math.random()*10%8);
 					}
-
-
-
 
 					console.log('ball_type:'+this.ball_type);
 					this.throw_ball(this.ball_type);
@@ -769,6 +771,21 @@ window.onload = function mogura() {
 					if(batted_speed < 3){
 						batted_speed = 3;	
 				    }
+
+					if(batted_speed>15){
+						var se = game.assets['sound/hit_1.wav'];
+						se.play();
+
+					}else if(batted_speed > 10){
+						var se = game.assets['sound/hit_2.wav'];
+						se.play();
+					}else if(batted_speed > 6){
+						var se = game.assets['sound/hit_3.wav'];
+						se.play();
+					}else if(batted_speed > 0){
+						var se = game.assets['sound/hit_4.wav'];
+						se.play();
+					}
 				    console.log('batted_speed:'+batted_speed);//for debug
 				//*打球*
 					var BattedBall = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
@@ -824,7 +841,6 @@ window.onload = function mogura() {
 									Camera.target_y = CAMERA_BATTING_Y;
 
 									Camera.removeChild(BattedBall);
-
 
 									LastBall.decrement();
 
@@ -897,21 +913,17 @@ window.onload = function mogura() {
 			Camera.x = parseInt(Camera.x - (Camera.x - Camera.target_x)/Camera.speed);
 			Camera.y = parseInt(Camera.y -(Camera.y - Camera.target_y)/Camera.speed);
 
-
 			if(Camera.x >  Camera.target_x){
 				Camera.x--;
 			}else if(Camera.x <  Camera.target_x){
 				Camera.x++;
 			}
 
-
 			if(Camera.y >  Camera.target_y){
 				Camera.y--;
 			}else if(Camera.y <  Camera.target_y){
 				Camera.y++;
 			}
-
-
 		});
 
 	//add
