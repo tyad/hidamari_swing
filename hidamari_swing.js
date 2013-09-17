@@ -14,10 +14,13 @@ window.onload = function mogura() {
 		'img/ball.gif',
 		'img/ball_shadow.gif',
 		'img/swing_button.png',
+		'img/effect_line.gif',
 		'sound/bgm_easy.mp3',
 		'sound/bgm_normal.mp3',
 		'sound/bgm_hard.mp3',
 		'sound/bgm_extra1.mp3',
+		'sound/bgm_result.mp3',
+		'sound/hit_ex.wav',
 		'sound/hit_1.wav',
 		'sound/hit_2.wav',
 		'sound/hit_3.wav',
@@ -53,6 +56,9 @@ window.onload = function mogura() {
 	var BATTING_BGM_NORMAL = 'sound/bgm_normal.mp3';
 	var BATTING_BGM_HARD = 'sound/bgm_hard.mp3';
 	var BATTING_BGM_EXTRA1 = 'sound/bgm_extra1.mp3';
+
+	var RESULT_BGM = 'sound/bgm_result.mp3';
+
 	//バッティング画面-デフォルトカメラ位置
 	var CAMERA_BATTING_X = -(GROUND_SIZE_X/2 - SCREEN_SIZE_X/2);
 	var CAMERA_BATTING_Y = -(GROUND_SIZE_Y - SCREEN_SIZE_Y);
@@ -245,11 +251,15 @@ window.onload = function mogura() {
 			this.num--;
 			this.text = "<div class='label'>残り"+this.num+"球</div>";
 			if(this.num == 0){
+				SceneBatting.bgm_fadeout = true;
+				
 				setTimeout(function(){
 					ResultPoint.text = "<h1>得点"+Point.num+"点</h1>";
 					SceneResult.addChild(ResultPoint);
 					game.popScene(SceneBatting);
 					game.pushScene(SceneResult);
+					game.assets[RESULT_BGM].play();
+					game.assets[RESULT_BGM].volume = 0.4;
 				},3000);
 			}
 
@@ -677,7 +687,7 @@ window.onload = function mogura() {
 
 
 
-
+						//投球
 						console.log('ball_type:'+this.ball_type);
 						this.throw_ball(this.ball_type);
 					}
@@ -829,13 +839,16 @@ window.onload = function mogura() {
 					    var distance = Math.sqrt(Math.pow((Ball.x + BALL_SIZE_X/2) - (MeetCursor.x + MEETCURSOR_SIZE_X/2), 2) + Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2) * 0.6);
 						console.log('distance:'+distance);//for debug
 					    //真芯値
-					    var meetpoint = 30;
+					    var meetpoint = 32;
 					    //打球スピード
-					    var batted_speed = (meetpoint - distance)* 0.7 + 2;
+					    var batted_speed = (meetpoint - distance)* 0.7;
 
 
-							if(batted_speed > 20){
-								Camera.timestop = 15;
+							//真芯演出
+							if(batted_speed > 19.5){
+								Camera.timestop = 10;
+								console.log(CAMERA_BATTING_X);
+								Effect.add(1, - CAMERA_BATTING_X ,  - CAMERA_BATTING_Y)
 							}
 
 							if(batted_speed < 3){
@@ -843,8 +856,10 @@ window.onload = function mogura() {
 					    }
 
 							
-
-							if(batted_speed>15){
+							if(batted_speed > 19.5){
+								var se = game.assets['sound/hit_ex.wav'];
+								se.play();
+							}else if(batted_speed>14){
 								var se = game.assets['sound/hit_1.wav'];
 								se.play();
 
@@ -872,7 +887,7 @@ window.onload = function mogura() {
 						//打球が着地したらtrue
 						BattedBall.stop_flag = false;
 						//浮力
-						BattedBall.buoyancy = 3  + batted_speed * 0.25 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/6;
+						BattedBall.buoyancy = 2  + batted_speed * 0.25 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/6;
 						if(BattedBall.buoyancy < 0.5){
 							BattedBall.buoyancy = 0.5;
 						}
@@ -911,11 +926,13 @@ window.onload = function mogura() {
 											LastBall.visible = true;
 											Point.visible = true;
 
+											if(LastBall.num > 1){
 											Camera.speed = 12;
 											Camera.target_x = CAMERA_BATTING_X;
 											Camera.target_y = CAMERA_BATTING_Y;
+											}
 
-											Camera.removeChild(BattedBall);
+											//Camera.removeChild(BattedBall);
 
 
 											LastBall.decrement();
@@ -933,7 +950,7 @@ window.onload = function mogura() {
 									}
 
 								}
-								if(this.h < 0){
+								if(this.h < 0 && this.buoyancy <= 0){
 									this.buoyancy *= -0.25;
 									if(parseInt(this.bouyancy) == 0){
 										this.bouyancy =0;
@@ -952,8 +969,8 @@ window.onload = function mogura() {
 						BattedBallHop.y = Ball.y;
 						BattedBallHop.addEventListener('enterframe', function(){
 							if(Camera.timestart){
-								BattedBallHop.x = BattedBall.x  - BattedBall.speed_x;
-								BattedBallHop.y = BattedBall.y -BattedBall.speed_y- BattedBall.h - BALL_SIZE_Y/3;
+								BattedBallHop.x = parseInt(BattedBall.x  - BattedBall.speed_x);
+								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y- BattedBall.h - BALL_SIZE_Y/3);
 							}
 						});
 						Camera.addChild(BattedBall);
@@ -972,6 +989,41 @@ window.onload = function mogura() {
 			}
 		});
 		
+	//*エフェクト*
+		var Effect = new Group();
+
+
+		Effect.add = function(effect_num, input_x , input_y){
+
+		var EffectChild = new Sprite(0, 0);
+			EffectChild.x = input_x;
+			EffectChild.y = input_y;
+			EffectChild.animation_frame = 0;
+			Effect.addChild(EffectChild);
+			switch(effect_num){
+				//集中線
+				case 1:
+					EffectChild.width = 480;
+					EffectChild.height = 480;
+					EffectChild.image = game.assets['img/effect_line.gif'];
+					EffectChild.addEventListener('enterframe', function(){
+					this.animation_frame++;
+						if(this.animation_frame%2 == 1){
+							this.visible = true;
+						}else{
+							this.visible = false;
+						}
+
+						if(this.animation_frame > 3){
+							Effect.removeChild(this);
+						}
+					});					
+					break;
+
+			}
+		}
+
+
 	//*カメラ*
 		var Camera = new Group();
 		Camera.x = CAMERA_BATTING_X;
@@ -986,6 +1038,7 @@ window.onload = function mogura() {
 		Camera.addChild(Batter);
 		Camera.addChild(KeyPad);
 		Camera.addChild(SwingButton);
+		Camera.addChild(Effect);
 
 		Camera.speed = 5; //目的に対する追従速度
 
@@ -1018,18 +1071,28 @@ window.onload = function mogura() {
 				this.y++;
 			}
 
+			if(SceneBatting.bgm_fadeout&& game.assets[BattingBgmFile].volume > 0){
+				game.assets[BattingBgmFile].volume -= 0.005;
+				if(game.assets[BattingBgmFile].volume < 0.01){
+					game.assets[BattingBgmFile].volume = 0;
+				}
+			}
 
 		});
 
 	//add
 		SceneBatting.addChild(Camera);
 		// シーン更新処理
+		SceneBatting.bgm_fadeout = false;
  		SceneBatting.onenterframe = function() {
 
             // BGM ループ再生
+						if(!SceneBatting.bgm_fadeout){
             game.assets[BattingBgmFile].play();
             game.assets[BattingBgmFile].volume = 0.4;
+						}
     };
+
 
 	
 //******************
