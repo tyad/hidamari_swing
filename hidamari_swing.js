@@ -1000,7 +1000,7 @@ window.onload = function mogura() {
 											LastBall.visible = true;
 											Point.visible = true;
 
-											if(LastBall.num > 1){
+											if(LastBall.num > 0){
 											Camera.speed = 12;
 											Camera.target_x = CAMERA_BATTING_X;
 											Camera.target_y = CAMERA_BATTING_Y;
