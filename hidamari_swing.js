@@ -376,9 +376,6 @@ window.onload = function mogura() {
 			if(this.num == 0 && this.battedball_num == 0 && Pitcher.throw_flag == true){
 				SceneBatting.bgm_fadeout = true;
 				setTimeout(function(){
-					ResultPoint.text = "<h1>得点"+Point.num+"点</h1>";
-					SceneResult.addChild(ResultPoint);
-					game.popScene(SceneBatting);
 					game.pushScene(SceneResult);
 					game.assets[RESULT_BGM].play();
 					game.assets[RESULT_BGM].volume = 0.4;
@@ -391,10 +388,18 @@ window.onload = function mogura() {
 		Point.x = POINT_X;
 		Point.y = POINT_Y;
 		Point.num = 0;
-		Point.text = "<div class='label'>得点"+Point.num+"点</div>";
-		Point.addition = function(point){
+		Point.ball =  new Array();
+		Point.text = "<div class='label'>合計"+Point.num+"m</div>";
+		Point.addition = function(point, hit_se){
 			this.num += point;
-			Point.text = "<div class='label'>得点"+this.num+"点</div>";
+			Point.text = "<div class='label'>合計"+this.num+"m</div>";
+
+			this.obj = new Object();
+			this.obj['hit_se'] = hit_se;
+			this.obj['score'] = point;
+
+			this.ball.push(this.obj);
+
 		}
 
 	//*投球（ミートカーソルのあたり判定用にここで変数定義）*
@@ -439,11 +444,6 @@ window.onload = function mogura() {
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
 					});
 					break;
 
@@ -457,11 +457,7 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -475,11 +471,7 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -496,11 +488,7 @@ window.onload = function mogura() {
 						this.speed_x -=  Ball.carve/21;
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -527,11 +515,7 @@ window.onload = function mogura() {
 
 						this.x = this.x + this.speed_x+this.plus_x;
 						this.y = this.y + this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+					
 					});
 					break;
 
@@ -547,11 +531,7 @@ window.onload = function mogura() {
 						Ball.buoyancy += 0.3
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y + Ball.buoyancy;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -565,11 +545,7 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -588,11 +564,7 @@ window.onload = function mogura() {
 						}
 						this.x = this.x + this.speed_x + this.speed_x + this.speed_ex_x;
 						this.y = this.y + this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -609,11 +581,7 @@ window.onload = function mogura() {
 						
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y + Ball.buoyancy;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -640,11 +608,7 @@ window.onload = function mogura() {
 
 						this.x = this.x + this.speed_x+this.plus_x;
 						this.y = this.y + this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -674,11 +638,7 @@ window.onload = function mogura() {
 							this.visible = false;
 						}
 					
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -695,11 +655,7 @@ window.onload = function mogura() {
 						this.speed_x -=  Ball.carve/13;
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -718,11 +674,7 @@ window.onload = function mogura() {
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y;
 
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -746,11 +698,7 @@ window.onload = function mogura() {
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y;
 
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -764,11 +712,7 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
@@ -782,15 +726,22 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						if ( this.y >= GROUND_SIZE_Y ) {
-							Camera.removeChild(this);
-							Pitcher.throw_flag = true;
-							LastBall.decrement();
-						}
+						
 					});
 					break;
 
 			}
+
+			//空振り処理
+			Ball.addEventListener('enterframe', function(){
+				if ( this.y >= GROUND_SIZE_Y ) {
+					Camera.removeChild(this);
+					Pitcher.throw_flag = true;
+					LastBall.decrement();
+					Point.addition(0, -1); //空振りスコアの追加
+				}
+			});
+
 			console.log('throw')
 			Camera.addChild(Ball);
 		};
@@ -976,7 +927,9 @@ window.onload = function mogura() {
 			if(Camera.timestart){
 				if(Pitcher.throw_flag == false){
 					if(MeetCursor.intersect(Ball) && Bat.swing_frame == 3){
+
 						LastBall.battedball_num++;
+
 						if(GameMode != 5){
 							LastBall.visible = false;
 							Point.visible = false;
@@ -1006,29 +959,34 @@ window.onload = function mogura() {
 						if(batted_speed < 3){
 							batted_speed = 3;	
 					    }
+							
+						var hit_se = 0;
 						if(batted_speed > 19.5){
 							var se = game.assets['sound/hit_ex.wav'];
 							se.play();
+							hit_se = 0;
 						}else if(batted_speed>14){
 							var se = game.assets['sound/hit_1.wav'];
 							se.play();
-
+							hit_se = 1;
 						}else if(batted_speed > 10){
 							var se = game.assets['sound/hit_2.wav'];
 							se.play();
+							hit_se = 2;
 						}else if(batted_speed > 6){
 							var se = game.assets['sound/hit_3.wav'];
 							se.play();
+							hit_se = 3;
 						}else if(batted_speed > 0){
 							var se = game.assets['sound/hit_4.wav'];
 							se.play();
+							hit_se = 4;
 						}
-
 					    console.log('batted_speed:'+batted_speed);//for debug
 					//*打球*
 						var BattedBall = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
 						BattedBall.x = Ball.x;
-						BattedBall.y = Ball.y;					
+						BattedBall.y = Ball.y;			
 						BattedBall.image = game.assets['img/ball_shadow.gif'];
 						BattedBall.speed_x = batted_speed * Math.cos(angle * Math.PI/180);
 						BattedBall.speed_y = batted_speed * Math.sin(angle * Math.PI/180);
@@ -1051,6 +1009,7 @@ window.onload = function mogura() {
 								this.x = this.x - this.speed_x;
 								this.y = this.y - this.speed_y;
 								this.h =  this.h + this.buoyancy;
+
 								if(batted_speed > 0){
 									this.buoyancy -= 0.1;
 								}
@@ -1060,6 +1019,7 @@ window.onload = function mogura() {
 										BattedBall._element.style.zIndex = 1;
 										BattedBallHop._element.style.zIndex = 1;
 										this.stop_flag = true;
+
 										LastBall.battedball_num--;
 
 									//*取得点*
@@ -1068,7 +1028,7 @@ window.onload = function mogura() {
 											NowPoint.x = (Camera.x * -1) + SCREEN_SIZE_X/2;
 											NowPoint.y = (Camera.y * -1) + SCREEN_SIZE_Y/2;
 											console.log(NowPoint.x);
-											NowPoint.text = "<h1 class='label'>飛距離:"+parseInt(BattedBall.flown)+"点</h1>";
+											NowPoint.text = "<h1 class='label'>飛距離:"+parseInt(BattedBall.flown)+"m</h1>";
 											Camera.addChild(NowPoint);
 										}
 
@@ -1079,8 +1039,8 @@ window.onload = function mogura() {
 											if(GameMode != 5){
 												Pitcher.throw_flag = true;
 											}
-
-											Point.addition(parseInt(BattedBall.flown)); 
+											console.log('hit_se'+hit_se);
+											Point.addition(parseInt(BattedBall.flown), hit_se); 
 											LastBall.visible = true;
 											Point.visible = true;
 
@@ -1089,10 +1049,8 @@ window.onload = function mogura() {
 												Camera.target_x = CAMERA_BATTING_X;
 												Camera.target_y = CAMERA_BATTING_Y;
 											}
-
 											//Camera.removeChild(BattedBall);
 											LastBall.decrement();
-
 										},3000);
 									}else{
 										//飛距離でスコア計算されるように修正
@@ -1104,22 +1062,23 @@ window.onload = function mogura() {
 										Camera.target_x = Camera.target_x + this.speed_x;
 										Camera.target_y = Camera.target_y + this.speed_y;
 									}
+
 								}
 								if(this.h <= 0 && this.buoyancy <= 0){
 									this.buoyancy *= -0.25;
 									if(parseInt(this.bouyancy) > -1){
 										this.bouyancy =0;
 									}
-										this.h = 0;
-										batted_speed *= 0.6;
-										
-										if(batted_speed < 0.5){
-											batted_speed = 0;
-											this.buoyancy = 0;
-										}
-										
-										BattedBall.speed_x = batted_speed * Math.cos(angle * Math.PI/180);
-										BattedBall.speed_y = batted_speed * Math.sin(angle * Math.PI/180);
+									this.h = 0;
+									batted_speed *= 0.6;
+									
+									if(batted_speed < 0.5){
+										batted_speed = 0;
+										this.buoyancy = 0;
+									}
+									
+									BattedBall.speed_x = batted_speed * Math.cos(angle * Math.PI/180);
+									BattedBall.speed_y = batted_speed * Math.sin(angle * Math.PI/180);
 								}
 							}
 						});
@@ -1132,6 +1091,7 @@ window.onload = function mogura() {
 							if(Camera.timestart){
 								BattedBallHop.x = parseInt(BattedBall.x  - BattedBall.speed_x);
 								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y- BattedBall.h - BALL_SIZE_Y/3);
+
 							}
 						});
 						Camera.addChild(BattedBall);
@@ -1141,7 +1101,10 @@ window.onload = function mogura() {
 
 						if(GameMode == 5){
 							Pitcher.throw_flag = true;
+
 						}
+
+
 				    }else if(MeetCursor.hit_flag == true){
 						console.log('スカ');
 					}
@@ -1149,6 +1112,7 @@ window.onload = function mogura() {
 				//移動 バッターの位置についていく
 				MeetCursor.x = Batter.x + 110;
 				MeetCursor.y = Batter.y + 60;
+
 			}
 		});
 		
@@ -1252,16 +1216,88 @@ window.onload = function mogura() {
 //****************
 	//*背景*
 		var BackgroundResult = new Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y);
-		BackgroundResult.image = game.assets['img/background_title.png'];
+		BackgroundResult.opacity = 0;
+		BackgroundResult.backgroundColor = "black";
 
 	//*得点*
 		var ResultPoint = new Label();
-		ResultPoint.x = 240;
-		ResultPoint.y = 240;
+		ResultTitle.x = 180;
+		ResultTitle.y = 20;
+		ResultTitle.opacity = 0;
+		ResultTitle.text = "";
 
 	//add
 		SceneResult.addChild(BackgroundResult);
 		SceneResult.addChild(ResultPoint);
+		
+		SceneResult.animation_frame = 0;
+		SceneResult.score_ball_num = 1;
+		SceneResult.addEventListener('enterframe', function(){
+			this.animation_frame++;
+			if(BackgroundResult.opacity < 0.7){
+				BackgroundResult.opacity += 0.03;
+			}
+			if(this.animation_frame == 10){
+				ResultTitle.text = "<div id=\"result_title\">結果発表</div>";
+			}
+			if(ResultTitle.opacity < 1){
+				ResultTitle.opacity += 0.05;
+			}
+			if(this.animation_frame > 50){
+				if(this.animation_frame %10 == 0 && this.score_ball_num < 11){
+					var ResultBallNum = new Label();
+					ResultBallNum.x = 120;
+					ResultBallNum.y = 60 + this.score_ball_num*20;
+					ResultBallNum.text = "<div class=\"result_score\">"+this.score_ball_num+"球目</div>";
+					SceneResult.addChild(ResultBallNum);
+					var ResultBallNum = new Label();
+					ResultBallNum.x = 220;
+					ResultBallNum.y = 60 + this.score_ball_num*20;
+					ResultBallNum.text = "<div class=\"result_ball\">"+Point.ball[this.score_ball_num-1]['score']+"m</div>";
+					SceneResult.addChild(ResultBallNum);				
+					console.log(Point.ball[this.score_ball_num-1]['hit_se']);
+					switch(Point.ball[this.score_ball_num-1]['hit_se']){
+						case 0:
+							var se = game.assets['sound/hit_ex.wav'];
+							se.stop();
+							se.play();
+							break;
+						case 1:
+							var se = game.assets['sound/hit_1.wav'];
+							se.stop();
+							se.play();
+							break;
+						case 2:
+							var se = game.assets['sound/hit_2.wav'];
+							se.stop();
+							se.play();
+							break;
+						case 3:
+							var se = game.assets['sound/hit_3.wav'];
+							se.stop();
+							se.play();
+							break;
+						case 4:
+							var se = game.assets['sound/hit_4.wav'];
+							se.stop();
+							se.play();
+							break;
+					}
+					this.score_ball_num++;
+				}
+			}
+
+			if(this.animation_frame == 160){
+					var ResultBallNum = new Label();
+					ResultBallNum.x = 240;
+					ResultBallNum.y = 70 + this.score_ball_num*20;
+					ResultBallNum.text = "<div class=\"result_score\">合計"+Point.num+"m</div>";
+					SceneResult.addChild(ResultBallNum);
+					var se = game.assets['sound/hit_1.wav'];
+					se.stop();
+					se.play();
+			}
+		});
 
 //##########
 //ゲーム管理

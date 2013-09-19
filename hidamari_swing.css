@@ -22,3 +22,26 @@
 	width: 430px;
 	height: 430px;
 }
+#result_title{
+	font-size:32px;
+	color:#fff;
+}
+
+.result_score{
+	font-size:20px;
+	color:#fff;
+	width:120px;
+	text-align:center;
+}
+.result_ball{
+	font-size:20px;
+	color:#fff;
+	width:120px;
+	text-align:right;
+}
+.result_all{
+	font-size:32px;
+	color:#fff;
+	width:320px;
+	text-align:center;
+}
