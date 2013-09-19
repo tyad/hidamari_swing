@@ -6,6 +6,7 @@ window.onload = function mogura() {
 	game.preload(
 		'img/background_title.png',
 		'img/logo.png',
+		'img/direction.gif',
 		'img/background_batting.jpg',
 		'img/yuno.gif',
 		'img/bat.gif',
@@ -38,24 +39,10 @@ window.onload = function mogura() {
 	var GROUND_SIZE_Y = 1600;
 
 	//タイトル画面-スタートボタン イージーモード位置
-	var STARTBUTTON_EASY_X = 100;
-	var STARTBUTTON_EASY_Y = 220;
+	var STARTBUTTON_X = 90;
+	var STARTBUTTON_MODE_Y = 230;
 	//タイトル画面-スタートボタン ノーマルモード位置
-	var STARTBUTTON_NORMAL_X = 100;
-	var STARTBUTTON_NORMAL_Y = 270;
-
-	//タイトル画面-スタートボタン ハードモード位置
-	var STARTBUTTON_HARD_X = 100;
-	var STARTBUTTON_HARD_Y = 370;
-
-	//タイトル画面-スタートボタン 追加モード1位置
-	var STARTBUTTON_EXTRA1_X = 100;
-	var STARTBUTTON_EXTRA1_Y = 320;
-
-
-	//タイトル画面-スタートボタン 追加モード2位置
-	var STARTBUTTON_EXTRA2_X = 100;
-	var STARTBUTTON_EXTRA2_Y = 420;
+	var STARTBUTTON_EXTRA_Y = 300;
 
 	//BGM
 	var BATTING_BGM_EASY = 'sound/bgm_easy.mp3';
@@ -118,10 +105,9 @@ window.onload = function mogura() {
 	var SWINGBUTTON_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X - SWINGBUTTON_SIZE_X;
 	var SWINGBUTTON_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X - SWINGBUTTON_SIZE_Y;
 
-	game.onload = function () {
+	game.onload = function(){
 		var GameMode = 0;
 		var BattingBgmFile = '';
-
 		var SceneTitle = new Scene(); //タイトル画面
 		var SceneBatting = new Scene(); //バッティング画面
 		var SceneChaseBall = new Scene(); //打球追跡画面
@@ -140,98 +126,178 @@ window.onload = function mogura() {
 		TitleLogo.y = 20;
 		TitleLogo.image = game.assets['img/logo.png'];
 
-	//*スタートボタン*
+	//*矢印*
+		var ModeLeftButton = new Sprite(60, 60);
+		ModeLeftButton.image = game.assets['img/direction.gif'];
+		ModeLeftButton.x = 20;
+		ModeLeftButton.y = STARTBUTTON_MODE_Y+10;
+		ModeLeftButton.addEventListener('touchstart', function (e) {
+			ModeStartButton.decrement();
+		});
 
-		var StartButtonEasy = new Label();
-		StartButtonEasy.x = STARTBUTTON_EASY_X;
-		StartButtonEasy.y = STARTBUTTON_EASY_Y;
-		StartButtonEasy.text = "<h1 class='button'>ほのぼのコース</h1>";
-		StartButtonEasy.addEventListener('touchstart', function (e) {
-			GameMode = 1;
-			BattingBgmFile = BATTING_BGM_EASY;
+		var ModeRightButton = new Sprite(60, 60);
+		ModeRightButton.image = game.assets['img/direction.gif'];
+		ModeRightButton.x = SCREEN_SIZE_X-80;
+		ModeRightButton.y = STARTBUTTON_MODE_Y+10;
+		ModeRightButton.rotation = 180;
+		ModeRightButton.addEventListener('touchstart', function (e) {
+			ModeStartButton.increment();
+		});
 
+		var ExtraLeftButton = new Sprite(60, 60);
+		ExtraLeftButton.image = game.assets['img/direction.gif'];
+		ExtraLeftButton.x = 20;
+		ExtraLeftButton.y = STARTBUTTON_EXTRA_Y+10;
+		ExtraLeftButton.addEventListener('touchstart', function (e) {
+			ExtraStartButton.decrement();
+		});
+
+		var ExtraRightButton = new Sprite(60, 60);
+		ExtraRightButton.image = game.assets['img/direction.gif'];
+		ExtraRightButton.x = SCREEN_SIZE_X-80;
+		ExtraRightButton.y = STARTBUTTON_EXTRA_Y+10;
+		ExtraRightButton.rotation = 180;
+		ExtraRightButton.addEventListener('touchstart', function (e) {
+			ExtraStartButton.increment();
+		});
+
+	//*通常モードスタートボタン*
+		var ModeStartButton = new Label();
+		ModeStartButton.num = 2;//デフォはNORMAL
+		ModeStartButton.x = STARTBUTTON_X;
+		ModeStartButton.y = STARTBUTTON_MODE_Y;
+		ModeStartButton.text = "<h1 class='button'>わくわくコース</h1>";
+		ModeStartButton.decrement = function(){
+			if(ModeStartButton.num > 1){
+				ModeStartButton.num--;
+				ModeStartButton.update();
+			}
+		};
+		ModeStartButton.increment = function(){
+			if(ModeStartButton.num < 3){
+				ModeStartButton.num++;
+				ModeStartButton.update();
+			}
+		};
+		ModeStartButton.update = function(){
+			switch(ModeStartButton.num){
+				case 1:
+					ModeStartButton.text = "<h1 class='button'>ほのぼのコース</h1>";
+					break;
+				case 2:
+					ModeStartButton.text = "<h1 class='button'>わくわくコース</h1>";
+					break;
+				case 3:
+					ModeStartButton.text = "<h1 class='button'>ゆのさま</h1>";
+					break;
+			}
+		};
+		ModeStartButton.addEventListener('touchstart', function (e) {
+			switch(ModeStartButton.num){
+				case 1:
+					GameMode = 1;
+					BattingBgmFile = BATTING_BGM_EASY;
+					break;
+				case 2:
+					GameMode = 2;
+					BattingBgmFile = BATTING_BGM_NORMAL;
+					break;
+				case 3:
+					GameMode = 3;
+					BattingBgmFile = BATTING_BGM_HARD;
+					break;
+			}
 			var se = game.assets['sound/hit_1.wav'];
 			se.play();
-
 			game.popScene(SceneTitle);
 			game.pushScene(SceneBatting);
 		});
 
-		var StartButtonNormal = new Label();
-		StartButtonNormal.x = STARTBUTTON_NORMAL_X;
-		StartButtonNormal.y = STARTBUTTON_NORMAL_Y;
-		StartButtonNormal.text = "<h1 class='button'>わくわくコース</h1>";
-		StartButtonNormal.addEventListener('touchstart', function (e) {
-			GameMode = 2;
-			BattingBgmFile = BATTING_BGM_NORMAL;
-
+	//*エクストラモードスタートボタン*
+		var ExtraStartButton = new Label();
+		ExtraStartButton.num = 4;//デフォはまっすぐ
+		ExtraStartButton.x = STARTBUTTON_X;
+		ExtraStartButton.y = STARTBUTTON_EXTRA_Y;
+		ExtraStartButton.text = "<h1 class='button'>まっすぐコース</h1>";
+		ExtraStartButton.decrement = function(){
+			if(ExtraStartButton.num > 4){
+				ExtraStartButton.num--;
+				ExtraStartButton.update();
+			}
+		};
+		ExtraStartButton.increment = function(){
+			if(ExtraStartButton.num < 5){
+				ExtraStartButton.num++;
+				ExtraStartButton.update();
+			}
+		};
+		ExtraStartButton.update = function(){
+			switch(ExtraStartButton.num){
+				case 4:
+					ExtraStartButton.text = "<h1 class='button'>まっすぐコース</h1>";
+					break;
+				case 5:
+					ExtraStartButton.text = "<h1 class='button'>100本ノック</h1>";
+					break;
+			}
+		};
+		ExtraStartButton.addEventListener('touchstart', function (e) {
+			switch(ExtraStartButton.num){
+				case 4:
+					GameMode = 4;
+					BattingBgmFile = BATTING_BGM_EXTRA1;
+					break;
+				case 5:
+					GameMode = 5;
+					BattingBgmFile = BATTING_BGM_EXTRA2;
+					LastBall.num =BALL_KNOCK_NUM;
+					LastBall.decrement();
+					break;
+			}
 			var se = game.assets['sound/hit_1.wav'];
 			se.play();
-
 			game.popScene(SceneTitle);
 			game.pushScene(SceneBatting);
 		});
 
-
-		var StartButtonExtra1 = new Label();
-		StartButtonExtra1.x = STARTBUTTON_EXTRA1_X;
-		StartButtonExtra1.y = STARTBUTTON_EXTRA1_Y;
-		StartButtonExtra1.text = "<h1 class='button'>まっすぐコース</h1>";
-		StartButtonExtra1.addEventListener('touchstart', function (e) {
-			GameMode = 4;
-			BattingBgmFile = BATTING_BGM_EXTRA1;
-
-			var se = game.assets['sound/hit_1.wav'];
-			se.play();
-
-			game.popScene(SceneTitle);
-			game.pushScene(SceneBatting);
+	//*操作説明ボタン*
+		var HelpButton = new Label();
+		HelpButton.x = STARTBUTTON_X;
+		HelpButton.y = STARTBUTTON_MODE_Y+150;
+		HelpButton.text = "<h1 id='helpbutton' class='button'>操作説明</h1>";
+		HelpButton.addEventListener('touchstart', function (e) {
+			console.log('ヘルプ');
+			var scale = $('#enchant-stage').find('div').css('-webkit-transform');
+			$('#help').css({
+				'display':'block',
+				'-webkit-transform-origin':'0px 0px',
+				'-webkit-transform':scale,
+			});
+			$('#help').animate(
+				{'opacity':'1'},
+				'fast'
+			);
+			$('#help').click(function(){
+				$('#help').animate({opacity:0,},
+					{duration:'fast',complete:
+					function(){
+							$('#help').css({'display':'none'});
+					},
+				});
+			});
 		});
-
-		var StartButtonHard = new Label();
-		StartButtonHard.x = STARTBUTTON_HARD_X;
-		StartButtonHard.y = STARTBUTTON_HARD_Y;
-		StartButtonHard.text = "<h1 class='button'>ゆのさま</h1>";
-		StartButtonHard.addEventListener('touchstart', function (e) {
-			GameMode = 3;
-			BattingBgmFile = BATTING_BGM_HARD;
-
-			var se = game.assets['sound/hit_1.wav'];
-			se.play();
-
-			game.popScene(SceneTitle);
-			game.pushScene(SceneBatting);
-		});
-
-		var StartButtonExtra2 = new Label();
-		StartButtonExtra2.x = STARTBUTTON_EXTRA2_X;
-		StartButtonExtra2.y = STARTBUTTON_EXTRA2_Y;
-		StartButtonExtra2.text = "<h1 class='button'>100本ノック</h1>";
-		StartButtonExtra2.addEventListener('touchstart', function (e) {
-			GameMode = 5;
-			BattingBgmFile = BATTING_BGM_EXTRA2;
-
-			var se = game.assets['sound/hit_1.wav'];
-			se.play();
-
-
-
-			game.popScene(SceneTitle);
-			game.pushScene(SceneBatting);
-			LastBall.num =BALL_KNOCK_NUM;
-			LastBall.decrement();
-		});
-
-
 
 	//add
 		SceneTitle.addChild(BackgroundTitle);
 		SceneTitle.addChild(TitleLogo);
-		SceneTitle.addChild(StartButtonEasy);
-		SceneTitle.addChild(StartButtonNormal);
-		SceneTitle.addChild(StartButtonHard);
-		SceneTitle.addChild(StartButtonExtra1);
-		SceneTitle.addChild(StartButtonExtra2);
+		SceneTitle.addChild(ModeStartButton);
+		SceneTitle.addChild(ExtraStartButton);
+		SceneTitle.addChild(ModeLeftButton);
+		SceneTitle.addChild(ModeRightButton);
+		SceneTitle.addChild(ExtraLeftButton);
+		SceneTitle.addChild(ExtraRightButton);
+		SceneTitle.addChild(HelpButton);
+
 
 //*********************
 //バッティング画面
@@ -276,11 +342,9 @@ window.onload = function mogura() {
 
 		LastBall.text = "<div class='label'>残り"+LastBall.num+"球</div>";
 		LastBall.decrement = function(){
-
 			this.text = "<div class='label'>残り"+this.num+"球</div>";
 			if(this.num == 0 && this.battedball_num == 0 && Pitcher.throw_flag == true){
 				SceneBatting.bgm_fadeout = true;
-				
 				setTimeout(function(){
 					ResultPoint.text = "<h1>得点"+Point.num+"点</h1>";
 					SceneResult.addChild(ResultPoint);
@@ -290,7 +354,6 @@ window.onload = function mogura() {
 					game.assets[RESULT_BGM].volume = 0.4;
 				},3000);
 			}
-
 		}
 
 	//*得点*
@@ -786,7 +849,6 @@ window.onload = function mogura() {
 		Bat.swing_frame = 0; //スイングした時のフレームカウント
 		Bat._element.style.zIndex = 3;
 		Bat.image = game.assets['img/bat.gif'];
-		//**************要調整*************
     	Bat.rotation = 0;
 		Bat.addEventListener('enterframe', function(){
 			if(Camera.timestart){
@@ -828,8 +890,6 @@ window.onload = function mogura() {
 				}
 			}
 		});
-		//***************************
-
  
 	//*バッター*
 		var Batter = new Sprite(BATTER_SIZE_X, BATTER_SIZE_Y);
@@ -886,9 +946,7 @@ window.onload = function mogura() {
 			if(Camera.timestart){
 				if(Pitcher.throw_flag == false){
 					if(MeetCursor.intersect(Ball) && Bat.swing_frame == 3){
-
 						LastBall.battedball_num++;
-
 						if(GameMode != 5){
 							LastBall.visible = false;
 							Point.visible = false;
@@ -908,34 +966,33 @@ window.onload = function mogura() {
 					    //打球スピード
 					    var batted_speed = (meetpoint - distance)* 0.7;
 
-							//真芯演出
-							if(batted_speed > 19.5){
-								Camera.timestop = 10;
-								console.log(CAMERA_BATTING_X);
-								Effect.add(1, - CAMERA_BATTING_X ,  - CAMERA_BATTING_Y)
-							}
+						//真芯演出
+						if(batted_speed > 19.5){
+							Camera.timestop = 10;
+							console.log(CAMERA_BATTING_X);
+							Effect.add(1, - CAMERA_BATTING_X ,  - CAMERA_BATTING_Y)
+						}
 
-							if(batted_speed < 3){
-								batted_speed = 3;	
+						if(batted_speed < 3){
+							batted_speed = 3;	
 					    }
-							
-							if(batted_speed > 19.5){
-								var se = game.assets['sound/hit_ex.wav'];
-								se.play();
-							}else if(batted_speed>14){
-								var se = game.assets['sound/hit_1.wav'];
-								se.play();
+						if(batted_speed > 19.5){
+							var se = game.assets['sound/hit_ex.wav'];
+							se.play();
+						}else if(batted_speed>14){
+							var se = game.assets['sound/hit_1.wav'];
+							se.play();
 
-							}else if(batted_speed > 10){
-								var se = game.assets['sound/hit_2.wav'];
-								se.play();
-							}else if(batted_speed > 6){
-								var se = game.assets['sound/hit_3.wav'];
-								se.play();
-							}else if(batted_speed > 0){
-								var se = game.assets['sound/hit_4.wav'];
-								se.play();
-							}
+						}else if(batted_speed > 10){
+							var se = game.assets['sound/hit_2.wav'];
+							se.play();
+						}else if(batted_speed > 6){
+							var se = game.assets['sound/hit_3.wav'];
+							se.play();
+						}else if(batted_speed > 0){
+							var se = game.assets['sound/hit_4.wav'];
+							se.play();
+						}
 
 					    console.log('batted_speed:'+batted_speed);//for debug
 					//*打球*
@@ -960,33 +1017,29 @@ window.onload = function mogura() {
 						BattedBall.flown = 0;
 						//フレーム処理
 						BattedBall.addEventListener('enterframe', function(){
-
-
 							if(Camera.timestart){
-									this.x = this.x - this.speed_x;
-									this.y = this.y - this.speed_y;
-									this.h =  this.h + this.buoyancy;
-
-									if(batted_speed > 0){
-										this.buoyancy -= 0.1;
-									}
+								this.x = this.x - this.speed_x;
+								this.y = this.y - this.speed_y;
+								this.h =  this.h + this.buoyancy;
+								if(batted_speed > 0){
+									this.buoyancy -= 0.1;
+								}
 								if(this.stop_flag == false){
 									if(this.h <= 0){
 										console.log('落下');
 										BattedBall._element.style.zIndex = 1;
 										BattedBallHop._element.style.zIndex = 1;
 										this.stop_flag = true;
-
 										LastBall.battedball_num--;
 
 									//*取得点*
 										if(GameMode != 5){
-										var NowPoint = new Label();
-										NowPoint.x = (Camera.x * -1) + SCREEN_SIZE_X/2;
-										NowPoint.y = (Camera.y * -1) + SCREEN_SIZE_Y/2;
-										console.log(NowPoint.x);
-										NowPoint.text = "<h1 class='label'>飛距離:"+parseInt(BattedBall.flown)+"点</h1>";
-										Camera.addChild(NowPoint);
+											var NowPoint = new Label();
+											NowPoint.x = (Camera.x * -1) + SCREEN_SIZE_X/2;
+											NowPoint.y = (Camera.y * -1) + SCREEN_SIZE_Y/2;
+											console.log(NowPoint.x);
+											NowPoint.text = "<h1 class='label'>飛距離:"+parseInt(BattedBall.flown)+"点</h1>";
+											Camera.addChild(NowPoint);
 										}
 
 										setTimeout(function(){
@@ -1002,14 +1055,12 @@ window.onload = function mogura() {
 											Point.visible = true;
 
 											if(LastBall.num > 0){
-											Camera.speed = 12;
-											Camera.target_x = CAMERA_BATTING_X;
-											Camera.target_y = CAMERA_BATTING_Y;
+												Camera.speed = 12;
+												Camera.target_x = CAMERA_BATTING_X;
+												Camera.target_y = CAMERA_BATTING_Y;
 											}
 
 											//Camera.removeChild(BattedBall);
-
-
 											LastBall.decrement();
 
 										},3000);
@@ -1023,7 +1074,6 @@ window.onload = function mogura() {
 										Camera.target_x = Camera.target_x + this.speed_x;
 										Camera.target_y = Camera.target_y + this.speed_y;
 									}
-
 								}
 								if(this.h <= 0 && this.buoyancy <= 0){
 									this.buoyancy *= -0.25;
@@ -1052,7 +1102,6 @@ window.onload = function mogura() {
 							if(Camera.timestart){
 								BattedBallHop.x = parseInt(BattedBall.x  - BattedBall.speed_x);
 								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y- BattedBall.h - BALL_SIZE_Y/3);
-
 							}
 						});
 						Camera.addChild(BattedBall);
@@ -1062,10 +1111,7 @@ window.onload = function mogura() {
 
 						if(GameMode == 5){
 							Pitcher.throw_flag = true;
-
 						}
-
-
 				    }else if(MeetCursor.hit_flag == true){
 						console.log('スカ');
 					}
@@ -1073,17 +1119,13 @@ window.onload = function mogura() {
 				//移動 バッターの位置についていく
 				MeetCursor.x = Batter.x + 110;
 				MeetCursor.y = Batter.y + 60;
-
 			}
 		});
 		
 	//*エフェクト*
 		var Effect = new Group();
-
-
 		Effect.add = function(effect_num, input_x , input_y){
-
-		var EffectChild = new Sprite(0, 0);
+			var EffectChild = new Sprite(0, 0);
 			EffectChild.x = input_x;
 			EffectChild.y = input_y;
 			EffectChild.animation_frame = 0;
@@ -1095,22 +1137,19 @@ window.onload = function mogura() {
 					EffectChild.height = 480;
 					EffectChild.image = game.assets['img/effect_line.gif'];
 					EffectChild.addEventListener('enterframe', function(){
-					this.animation_frame++;
+						this.animation_frame++;
 						if(this.animation_frame%2 == 1){
 							this.visible = true;
 						}else{
 							this.visible = false;
 						}
-
 						if(this.animation_frame > 3){
 							Effect.removeChild(this);
 						}
 					});					
 					break;
-
-			}
+				}
 		}
-
 
 	//*カメラ*
 		var Camera = new Group();
@@ -1133,10 +1172,8 @@ window.onload = function mogura() {
 		Camera.timestop_frame = 0; //時を止めるフレーム
 		Camera.timestart = true;
 
-			Camera.frame_test= 0;
-		Camera.addEventListener('enterframe', function(){
-
-			
+		Camera.frame_test= 0;
+		Camera.addEventListener('enterframe', function(){	
 			if(this.timestop > 0){
 				this.timestop--;
 				this.timestart = false;
@@ -1173,14 +1210,12 @@ window.onload = function mogura() {
 		// シーン更新処理
 		SceneBatting.bgm_fadeout = false;
  		SceneBatting.onenterframe = function() {
-
             // BGM ループ再生
-						if(!SceneBatting.bgm_fadeout){
-            game.assets[BattingBgmFile].play();
-            game.assets[BattingBgmFile].volume = 0.4;
-						}
-
-    };
+			if(!SceneBatting.bgm_fadeout){
+	            game.assets[BattingBgmFile].play();
+    	        game.assets[BattingBgmFile].volume = 0.4;
+			}
+	    };
 	
 //******************
 //リザルト画面
