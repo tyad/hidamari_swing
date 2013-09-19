@@ -1220,7 +1220,7 @@ window.onload = function mogura() {
 		BackgroundResult.backgroundColor = "black";
 
 	//*得点*
-		var ResultPoint = new Label();
+		var ResultTitle = new Label();
 		ResultTitle.x = 180;
 		ResultTitle.y = 20;
 		ResultTitle.opacity = 0;
@@ -1228,7 +1228,7 @@ window.onload = function mogura() {
 
 	//add
 		SceneResult.addChild(BackgroundResult);
-		SceneResult.addChild(ResultPoint);
+		SceneResult.addChild(ResultTitle);
 		
 		SceneResult.animation_frame = 0;
 		SceneResult.score_ball_num = 1;
