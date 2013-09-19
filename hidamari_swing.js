@@ -7,6 +7,7 @@ window.onload = function mogura() {
 		'img/background_title.png',
 		'img/logo.png',
 		'img/direction.gif',
+		'img/direction_n.gif',
 		'img/background_batting.jpg',
 		'img/yuno.gif',
 		'img/bat.gif',
@@ -133,6 +134,10 @@ window.onload = function mogura() {
 		ModeLeftButton.y = STARTBUTTON_MODE_Y+10;
 		ModeLeftButton.addEventListener('touchstart', function (e) {
 			ModeStartButton.decrement();
+			if(ModeStartButton.num == 1){
+				ModeLeftButton.image = game.assets['img/direction_n.gif'];//左押せない
+			}
+			ModeRightButton.image = game.assets['img/direction.gif'];//右復活
 		});
 
 		var ModeRightButton = new Sprite(60, 60);
@@ -142,14 +147,22 @@ window.onload = function mogura() {
 		ModeRightButton.rotation = 180;
 		ModeRightButton.addEventListener('touchstart', function (e) {
 			ModeStartButton.increment();
+			if(ModeStartButton.num == 3){
+				ModeRightButton.image = game.assets['img/direction_n.gif'];//右押せない
+			}
+			ModeLeftButton.image = game.assets['img/direction.gif'];//左復活
 		});
 
 		var ExtraLeftButton = new Sprite(60, 60);
-		ExtraLeftButton.image = game.assets['img/direction.gif'];
+		ExtraLeftButton.image = game.assets['img/direction_n.gif'];
 		ExtraLeftButton.x = 20;
 		ExtraLeftButton.y = STARTBUTTON_EXTRA_Y+10;
 		ExtraLeftButton.addEventListener('touchstart', function (e) {
 			ExtraStartButton.decrement();
+			if(ExtraStartButton.num == 4){
+				ExtraLeftButton.image = game.assets['img/direction_n.gif'];//左押せない
+			}
+			ExtraRightButton.image = game.assets['img/direction.gif'];//右復活
 		});
 
 		var ExtraRightButton = new Sprite(60, 60);
@@ -159,6 +172,10 @@ window.onload = function mogura() {
 		ExtraRightButton.rotation = 180;
 		ExtraRightButton.addEventListener('touchstart', function (e) {
 			ExtraStartButton.increment();
+			if(ExtraStartButton.num == 5){
+				ExtraRightButton.image = game.assets['img/direction_n.gif'];//右押せない
+			}
+			ExtraLeftButton.image = game.assets['img/direction.gif'];//左復活
 		});
 
 	//*通常モードスタートボタン*
