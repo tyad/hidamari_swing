@@ -734,7 +734,7 @@ window.onload = function mogura() {
 						}
 
 						//投球
-						console.log('ball_type:'+this.ball_type);
+						console.log('ball_type:' + this.ball_type);
 						this.throw_ball(this.ball_type);
 					}
 					//投球モーション
@@ -796,21 +796,21 @@ window.onload = function mogura() {
 						Bat.x = -9999; //再表示で不自然にならないように退ける
 	    			Bat.rotation = 33;
 						Batter.frame = 2; //振る前の中割を設定
-					}else if(this.swing_frame < 7){
+					}else if(this.swing_frame < 6){
 						Batter.frame = 3; //振るアニメ
-						Bat.rotation -= 11; 
+						Bat.rotation -= 15; 
 						//回転と位置が同期するように差分を取る
 						Bat.distance_x = -48 * Math.cos((Bat.rotation + 180) * Math.PI/180);
 						Bat.distance_y = -48 * Math.sin((Bat.rotation + 180) * Math.PI/180);
 						//差分を利用してバッターの腕にくっつける
 						Bat.x = Batter.x + Bat.distance_x + 22;
 						Bat.y = Batter.y + BATTER_SIZE_Y/2 + Bat.distance_y + 2;
-					}else if(this.swing_frame == 7){
+					}else if(this.swing_frame == 6){
 						Batter.frame = 4; //振るアニメ
 						Bat.x = -9999; //表示が不自然にならないように退ける
-					}else if(this.swing_frame == 8){
+					}else if(this.swing_frame == 7){
 						Batter.frame = 5; //振るアニメ
-					}else if(this.swing_frame == 9){
+					}else if(this.swing_frame == 8){
 						Batter.frame = 6; //振るアニメ
 					}else if(this.swing_frame == 14){
 						Batter.frame = 5; //振るアニメ
@@ -885,7 +885,7 @@ window.onload = function mogura() {
 		MeetCursor.addEventListener('enterframe', function(){
 			if(Camera.timestart){
 				if(Pitcher.throw_flag == false){
-					if(MeetCursor.intersect(Ball) && Bat.swing_frame == 4){
+					if(MeetCursor.intersect(Ball) && Bat.swing_frame == 3){
 
 						LastBall.battedball_num++;
 
@@ -967,8 +967,9 @@ window.onload = function mogura() {
 									this.y = this.y - this.speed_y;
 									this.h =  this.h + this.buoyancy;
 
-									this.buoyancy -= 0.1;
-
+									if(batted_speed > 0){
+										this.buoyancy -= 0.1;
+									}
 								if(this.stop_flag == false){
 									if(this.h <= 0){
 										console.log('落下');
@@ -1026,11 +1027,17 @@ window.onload = function mogura() {
 								}
 								if(this.h <= 0 && this.buoyancy <= 0){
 									this.buoyancy *= -0.25;
-									if(parseInt(this.bouyancy) == 0){
+									if(parseInt(this.bouyancy) > -1){
 										this.bouyancy =0;
 									}
 										this.h = 0;
 										batted_speed *= 0.6;
+										
+										if(batted_speed < 0.5){
+											batted_speed = 0;
+											this.buoyancy = 0;
+										}
+										
 										BattedBall.speed_x = batted_speed * Math.cos(angle * Math.PI/180);
 										BattedBall.speed_y = batted_speed * Math.sin(angle * Math.PI/180);
 								}
