@@ -178,6 +178,17 @@ window.onload = function mogura() {
 			ExtraLeftButton.image = game.assets['img/direction.gif'];//左復活
 		});
 
+	//*通常モードラベル*
+		var ModeLabel = new Label();
+		ModeLabel.x = STARTBUTTON_X;
+		ModeLabel.y = STARTBUTTON_MODE_Y-1;
+		ModeLabel.text = "<div>モード</div>";
+
+	//*エクストラモードラベル*
+		var ExtraLabel = new Label();
+		ExtraLabel.x = STARTBUTTON_X;
+		ExtraLabel.y = STARTBUTTON_EXTRA_Y-1;
+		ExtraLabel.text = "<div>エクストラ</div>";
 	//*通常モードスタートボタン*
 		var ModeStartButton = new Label();
 		ModeStartButton.num = 2;//デフォはNORMAL
@@ -307,7 +318,9 @@ window.onload = function mogura() {
 	//add
 		SceneTitle.addChild(BackgroundTitle);
 		SceneTitle.addChild(TitleLogo);
+		SceneTitle.addChild(ModeLabel);
 		SceneTitle.addChild(ModeStartButton);
+		SceneTitle.addChild(ExtraLabel);
 		SceneTitle.addChild(ExtraStartButton);
 		SceneTitle.addChild(ModeLeftButton);
 		SceneTitle.addChild(ModeRightButton);
