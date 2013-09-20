@@ -388,7 +388,10 @@ window.onload = function mogura() {
 		Point.x = POINT_X;
 		Point.y = POINT_Y;
 		Point.num = 0;
-		Point.ball =  new Array();
+		Point.ball =  new Array(); //ボール別のスコア
+		Point.miss = 0; //空振り率
+		Point.max = 0; //最高飛距離
+		Point.super_hit = 0; //真芯率
 		Point.text = "<div class='label'>合計"+Point.num+"m</div>";
 		Point.addition = function(point, hit_se){
 			this.num += point;
@@ -399,6 +402,21 @@ window.onload = function mogura() {
 			this.obj['score'] = point;
 
 			this.ball.push(this.obj);
+
+			//真芯カウントの追加
+			if(hit_se == 0){
+				this.super_hit++;
+			}
+
+			//飛距離0なら空振り
+			if(point == 0){
+				this.miss++;
+			}
+
+			//最高飛距離の更新
+			if(this.max < point){
+				this.max = point;
+			}
 
 		}
 
@@ -551,15 +569,15 @@ window.onload = function mogura() {
 
 				case　302: //オウルボール
 
-					Ball.speed_x = (Math.random() - Math.random()) * 0.5;
-					Ball.speed_ex_x = 40;
-					Ball.speed_y = 8 + Math.random() * 3;
-					Ball.throw_frame = 2;
+					Ball.speed_x = (Math.random() - Math.random()) * 0.3;
+					Ball.speed_ex_x = 9;
+					Ball.speed_y =5 + Math.random() * 3;
+					Ball.throw_frame = 4;
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.throw_frame ++;
 
-						if(this.throw_frame % 2 == 0){
+						if(this.throw_frame % 8 == 0){
 							Ball.speed_ex_x *= -1;
 						}
 						this.x = this.x + this.speed_x + this.speed_x + this.speed_ex_x;
@@ -1237,66 +1255,143 @@ window.onload = function mogura() {
 			if(BackgroundResult.opacity < 0.7){
 				BackgroundResult.opacity += 0.03;
 			}
-			if(this.animation_frame == 10){
-				ResultTitle.text = "<div id=\"result_title\">結果発表</div>";
-			}
-			if(ResultTitle.opacity < 1){
-				ResultTitle.opacity += 0.05;
-			}
-			if(this.animation_frame > 50){
-				if(this.animation_frame %10 == 0 && this.score_ball_num < 11){
-					var ResultBallNum = new Label();
-					ResultBallNum.x = 120;
-					ResultBallNum.y = 60 + this.score_ball_num*20;
-					ResultBallNum.text = "<div class=\"result_score\">"+this.score_ball_num+"球目</div>";
-					SceneResult.addChild(ResultBallNum);
-					var ResultBallNum = new Label();
-					ResultBallNum.x = 220;
-					ResultBallNum.y = 60 + this.score_ball_num*20;
-					ResultBallNum.text = "<div class=\"result_ball\">"+Point.ball[this.score_ball_num-1]['score']+"m</div>";
-					SceneResult.addChild(ResultBallNum);				
-					console.log(Point.ball[this.score_ball_num-1]['hit_se']);
-					switch(Point.ball[this.score_ball_num-1]['hit_se']){
-						case 0:
-							var se = game.assets['sound/hit_ex.wav'];
-							se.stop();
-							se.play();
-							break;
-						case 1:
-							var se = game.assets['sound/hit_1.wav'];
-							se.stop();
-							se.play();
-							break;
-						case 2:
-							var se = game.assets['sound/hit_2.wav'];
-							se.stop();
-							se.play();
-							break;
-						case 3:
-							var se = game.assets['sound/hit_3.wav'];
-							se.stop();
-							se.play();
-							break;
-						case 4:
-							var se = game.assets['sound/hit_4.wav'];
-							se.stop();
-							se.play();
-							break;
+
+
+				if(this.animation_frame == 10){
+					ResultTitle.text = "<div id=\"result_title\">結果発表</div>";
+				}
+				if(ResultTitle.opacity < 1){
+					ResultTitle.opacity += 0.05;
+				}
+
+			if(GameMode != 5){
+
+
+				if(this.animation_frame > 50){
+					if(this.animation_frame %10 == 0 && this.score_ball_num < 11){
+						var ResultBallNum = new Label();
+						ResultBallNum.x = 100;
+						ResultBallNum.y = 60 + this.score_ball_num*20;
+						ResultBallNum.text = "<div class=\"result_num\">"+this.score_ball_num+"球目</div>";
+						SceneResult.addChild(ResultBallNum);
+						var ResultBallNum = new Label();
+						ResultBallNum.x = 220;
+						ResultBallNum.y = 60 + this.score_ball_num*20;
+						ResultBallNum.text = "<div class=\"result_score\">"+Point.ball[this.score_ball_num-1]['score']+"m</div>";
+						SceneResult.addChild(ResultBallNum);				
+						console.log(Point.ball[this.score_ball_num-1]['hit_se']);
+						switch(Point.ball[this.score_ball_num-1]['hit_se']){
+							case 0:
+								var se = game.assets['sound/hit_ex.wav'];
+								se.stop();
+								se.play();
+								break;
+							case 1:
+								var se = game.assets['sound/hit_1.wav'];
+								se.stop();
+								se.play();
+								break;
+							case 2:
+								var se = game.assets['sound/hit_2.wav'];
+								se.stop();
+								se.play();
+								break;
+							case 3:
+								var se = game.assets['sound/hit_3.wav'];
+								se.stop();
+								se.play();
+								break;
+							case 4:
+								var se = game.assets['sound/hit_4.wav'];
+								se.stop();
+								se.play();
+								break;
+						}
+						this.score_ball_num++;
 					}
-					this.score_ball_num++;
+				}
+
+				if(this.animation_frame == 160){
+						var ResultBallNum = new Label();
+						ResultBallNum.x = 120;
+						ResultBallNum.y = 70 + this.score_ball_num*20;
+						ResultBallNum.text = "<div class=\"result_all\">合計"+Point.num+"m</div>";
+						SceneResult.addChild(ResultBallNum);
+						var se = game.assets['sound/hit_1.wav'];
+						se.stop();
+						se.play();
 				}
 			}
 
-			if(this.animation_frame == 160){
+			if(GameMode == 5){
+				if(this.animation_frame == 50){
+					var ResultBallNum = new Label();
+					ResultBallNum.x = 120;
+					ResultBallNum.y = 70;
+					ResultBallNum.text = "<div class=\"result_type\">最高飛距離</div>";
+					SceneResult.addChild(ResultBallNum);
+
 					var ResultBallNum = new Label();
 					ResultBallNum.x = 240;
-					ResultBallNum.y = 70 + this.score_ball_num*20;
-					ResultBallNum.text = "<div class=\"result_score\">合計"+Point.num+"m</div>";
+					ResultBallNum.y = 70;
+					ResultBallNum.text = "<div class=\"result_score\">"+Point.max+"m</div>";
+					SceneResult.addChild(ResultBallNum);
+
+					var se = game.assets['sound/hit_1.wav'];
+					se.stop();
+					se.play();
+				}
+
+				if(this.animation_frame == 70){
+					var ResultBallNum = new Label();
+					ResultBallNum.x = 120;
+					ResultBallNum.y = 125;
+					ResultBallNum.text = "<div class=\"result_type\">真芯ヒット</div>";
+					SceneResult.addChild(ResultBallNum);
+
+					var ResultBallNum = new Label();
+					ResultBallNum.x = 240;
+					ResultBallNum.y = 125;
+					ResultBallNum.text = "<div class=\"result_score\">"+Point.super_hit+"回</div>";
+					SceneResult.addChild(ResultBallNum);
+
+					var se = game.assets['sound/hit_1.wav'];
+					se.stop();
+					se.play();
+				}
+
+				if(this.animation_frame == 90){
+					var ResultBallNum = new Label();
+					ResultBallNum.x = 120;
+					ResultBallNum.y = 180;
+					ResultBallNum.text = "<div class=\"result_type\">空振り</div>";
+					SceneResult.addChild(ResultBallNum);
+
+					var ResultBallNum = new Label();
+					ResultBallNum.x = 240;
+					ResultBallNum.y = 180;
+					ResultBallNum.text = "<div class=\"result_score\">"+Point.miss+"回</div>";
+					SceneResult.addChild(ResultBallNum);
+
+					var se = game.assets['sound/hit_1.wav'];
+					se.stop();
+					se.play();
+				}
+
+
+				if(this.animation_frame == 110){
+					var ResultBallNum = new Label();
+					ResultBallNum.x = 120;
+					ResultBallNum.y = 230;
+					ResultBallNum.text = "<div class=\"result_all\">合計"+Point.num+"m</div>";
 					SceneResult.addChild(ResultBallNum);
 					var se = game.assets['sound/hit_1.wav'];
 					se.stop();
 					se.play();
+				}
 			}
+
+
 		});
 
 //##########

@@ -27,21 +27,29 @@
 	color:#fff;
 }
 
-.result_score{
+.result_num{
 	font-size:20px;
 	color:#fff;
 	width:120px;
 	text-align:center;
 }
-.result_ball{
+
+.result_type{
+	font-size:20px;
+	color:#fff;
+	width:120px;
+	text-align:left;
+}
+
+.result_score{
 	font-size:20px;
 	color:#fff;
 	width:120px;
 	text-align:right;
 }
 .result_all{
-	font-size:32px;
+	font-size:26px;
 	color:#fff;
-	width:320px;
+	width:240px;
 	text-align:center;
 }
