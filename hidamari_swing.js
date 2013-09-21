@@ -230,11 +230,13 @@ window.onload = function mogura() {
 			ModeSwitching();
 			StartButton.label_update();
 			ModeDiscription.update();
+			ModeLabel.update();
 		});
 		SceneTitle.addEventListener('downbuttondown', function(){
 			ModeSwitching();
 			StartButton.label_update();
 			ModeDiscription.update();
+			ModeLabel.update();
 		});
 		SceneTitle.addEventListener('leftbuttondown', function(){
 			CourseDecrement();
@@ -307,17 +309,18 @@ window.onload = function mogura() {
 	//*モード切替ボタン*
 		var ModeSwitch = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
 		ModeSwitch.image = game.assets['img/switch.gif'];
-		ModeSwitch.x = SCREEN_SIZE_X/2 + DIRECTION_SIZE + 50;
+		ModeSwitch.x = SCREEN_SIZE_X/2 + DIRECTION_SIZE + 40;
 		ModeSwitch.y = STARTBUTTON_Y - DIRECTION_SIZE/2 - 10;
 		ModeSwitch.addEventListener('touchstart', function (e) {
 			ModeSwitching();
 			StartButton.label_update();
 			ModeDiscription.update();
+			ModeLabel.update();
 		});
 
 	//*モードラベル*
 		var ModeLabel = new Label();
-		ModeLabel.x = SCREEN_SIZE_X/2 + DIRECTION_SIZE + 100;
+		ModeLabel.x = SCREEN_SIZE_X/2 + DIRECTION_SIZE + 90;
 		ModeLabel.y = STARTBUTTON_Y - DIRECTION_SIZE/2 + 5;
 		ModeLabel.update = function(){
 			this.text = "<div class='label'>" + GameSet[Mode][Course]["mode"] + "</div>";
