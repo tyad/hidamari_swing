@@ -4,11 +4,13 @@ window.onload = function mogura() {
 	var game = new Game(480, 480);
 	game.keybind(32, "space");  // spaceキー
 	game.preload(
-		'img/background_title.png',
+		//Background
+		'img/background_title.png',	'img/background_batting.jpg',
+		//Charactor
 		'img/logo.png',
 		'img/direction.gif',
 		'img/direction_n.gif',
-		'img/background_batting.jpg',
+		'img/switch.gif',
 		'img/yuno.gif',
 		'img/bat.gif',
 		'img/miyako.gif',
@@ -17,20 +19,15 @@ window.onload = function mogura() {
 		'img/ball_shadow.gif',
 		'img/swing_button.png',
 		'img/effect_line.gif',
-		'sound/bgm_easy.mp3',
-		'sound/bgm_normal.mp3',
-		'sound/bgm_hard.mp3',
-		'sound/bgm_extra1.mp3',
-		'sound/bgm_extra2.mp3',
+		//BGM
+		'sound/bgm_easy.mp3', 'sound/bgm_normal.mp3',
+		'sound/bgm_hard.mp3', 'sound/bgm_extra1.mp3', 'sound/bgm_extra2.mp3',
 		'sound/bgm_result.mp3',
-		'sound/hit_ex.wav',
-		'sound/hit_1.wav',
-		'sound/hit_2.wav',
-		'sound/hit_3.wav',
-		'sound/hit_4.wav'
+		//SE
+		'sound/hit_ex.wav',	'sound/hit_1.wav', 'sound/hit_2.wav', 'sound/hit_3.wav', 'sound/hit_4.wav'
 	);
 //**********
-//コンフィグ定数（モード別にするならここをいじる）
+//コンフィグ定数
 //**********
 	//画面サイズ
 	var SCREEN_SIZE_X = 480;
@@ -38,13 +35,11 @@ window.onload = function mogura() {
 	//グラウンド全体サイズ
 	var GROUND_SIZE_X = 2400;
 	var GROUND_SIZE_Y = 1600;
-
-	//タイトル画面-スタートボタン イージーモード位置
+	//スタートボタン位置
 	var STARTBUTTON_X = 90;
-	var STARTBUTTON_MODE_Y = 230;
-	//タイトル画面-スタートボタン ノーマルモード位置
-	var STARTBUTTON_EXTRA_Y = 300;
-
+	var STARTBUTTON_Y = 260;
+	//矢印サイズ
+	var DIRECTION_SIZE = 40;
 	//BGM
 	var BATTING_BGM_EASY = 'sound/bgm_easy.mp3';
 	var BATTING_BGM_NORMAL = 'sound/bgm_normal.mp3';
@@ -109,14 +104,40 @@ window.onload = function mogura() {
 	game.onload = function(){
 		var GameMode = 0;
 		var BattingBgmFile = '';
-		var SceneTitle = new Scene(); //タイトル画面
-		var SceneBatting = new Scene(); //バッティング画面
-		var SceneChaseBall = new Scene(); //打球追跡画面
-		var SceneResult = new Scene(); //リザルト画面
+
+		//スペースが押されたとき呼ばれる関数ぶ）
+		function get_space(){
+			//タイトル画面ならゲームスタート
+			StartButton.game_start();
+			//バッティング画面ならスイング
+			if(game.currentScene === SceneBatting){
+				if(Batter.swing_flag == true){
+					Batter.swing();
+				}
+			}
+		}
 
 //*********************
 //タイトル画面
 //*******************
+ 	//*タイトルシーン*
+		var SceneTitle = new Scene();
+		//矢印キーによるモード選択
+		SceneTitle.addEventListener('upbuttondown', function(){
+			ModeSwitch.switching();
+		});
+		SceneTitle.addEventListener('downbuttondown', function(){
+			ModeSwitch.switching();
+		});
+		SceneTitle.addEventListener('leftbuttondown', function(){
+			StartButton.decrement();
+			ModeLeftButton.img_update();
+		});
+		SceneTitle.addEventListener('rightbuttondown', function(){
+			StartButton.increment();
+			ModeRightButton.img_update();	
+		});
+
 	//*背景*
 		var BackgroundTitle = new Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y);
 		BackgroundTitle.image = game.assets['img/background_title.png'];
@@ -126,102 +147,59 @@ window.onload = function mogura() {
 		TitleLogo.x = 50;
 		TitleLogo.y = 20;
 		TitleLogo.image = game.assets['img/logo.png'];
-
-	//*矢印*
-		var ModeLeftButton = new Sprite(60, 60);
-		ModeLeftButton.image = game.assets['img/direction.gif'];
-		ModeLeftButton.x = 20;
-		ModeLeftButton.y = STARTBUTTON_MODE_Y+10;
-		ModeLeftButton.addEventListener('touchstart', function (e) {
-			ModeStartButton.decrement();
-			if(ModeStartButton.num == 1){
-				ModeLeftButton.image = game.assets['img/direction_n.gif'];//左押せない
-			}
-			ModeRightButton.image = game.assets['img/direction.gif'];//右復活
-		});
-
-		var ModeRightButton = new Sprite(60, 60);
-		ModeRightButton.image = game.assets['img/direction.gif'];
-		ModeRightButton.x = SCREEN_SIZE_X-80;
-		ModeRightButton.y = STARTBUTTON_MODE_Y+10;
-		ModeRightButton.rotation = 180;
-		ModeRightButton.addEventListener('touchstart', function (e) {
-			ModeStartButton.increment();
-			if(ModeStartButton.num == 3){
-				ModeRightButton.image = game.assets['img/direction_n.gif'];//右押せない
-			}
-			ModeLeftButton.image = game.assets['img/direction.gif'];//左復活
-		});
-
-		var ExtraLeftButton = new Sprite(60, 60);
-		ExtraLeftButton.image = game.assets['img/direction_n.gif'];
-		ExtraLeftButton.x = 20;
-		ExtraLeftButton.y = STARTBUTTON_EXTRA_Y+10;
-		ExtraLeftButton.addEventListener('touchstart', function (e) {
-			ExtraStartButton.decrement();
-			if(ExtraStartButton.num == 4){
-				ExtraLeftButton.image = game.assets['img/direction_n.gif'];//左押せない
-			}
-			ExtraRightButton.image = game.assets['img/direction.gif'];//右復活
-		});
-
-		var ExtraRightButton = new Sprite(60, 60);
-		ExtraRightButton.image = game.assets['img/direction.gif'];
-		ExtraRightButton.x = SCREEN_SIZE_X-80;
-		ExtraRightButton.y = STARTBUTTON_EXTRA_Y+10;
-		ExtraRightButton.rotation = 180;
-		ExtraRightButton.addEventListener('touchstart', function (e) {
-			ExtraStartButton.increment();
-			if(ExtraStartButton.num == 5){
-				ExtraRightButton.image = game.assets['img/direction_n.gif'];//右押せない
-			}
-			ExtraLeftButton.image = game.assets['img/direction.gif'];//左復活
-		});
-
-	//*通常モードラベル*
-		var ModeLabel = new Label();
-		ModeLabel.x = STARTBUTTON_X;
-		ModeLabel.y = STARTBUTTON_MODE_Y-1;
-		ModeLabel.text = "<div>モード</div>";
-
-	//*エクストラモードラベル*
-		var ExtraLabel = new Label();
-		ExtraLabel.x = STARTBUTTON_X;
-		ExtraLabel.y = STARTBUTTON_EXTRA_Y-1;
-		ExtraLabel.text = "<div>エクストラ</div>";
-	//*通常モードスタートボタン*
-		var ModeStartButton = new Label();
-		ModeStartButton.num = 2;//デフォはNORMAL
-		ModeStartButton.x = STARTBUTTON_X;
-		ModeStartButton.y = STARTBUTTON_MODE_Y;
-		ModeStartButton.text = "<h1 class='button'>わくわくコース</h1>";
-		ModeStartButton.decrement = function(){
-			if(ModeStartButton.num > 1){
-				ModeStartButton.num--;
-				ModeStartButton.update();
+	
+	//*スタートボタン*
+		var StartButton = new Label();
+		StartButton.num = 2;//デフォはNORMAL
+		StartButton.x = STARTBUTTON_X;
+		StartButton.y = STARTBUTTON_Y;
+		StartButton.text = "<h1 class='button'>わくわくコース</h1>";
+		StartButton.switching = function(){
+			if(ModeSwitch.num == 1){
+				StartButton.num = 4;
+				StartButton.label_update();
+				ModeLabel.text = "<div>エクストラモード</div>";
+			}else{
+				StartButton.num = 2;
+				StartButton.label_update();
+				ModeLabel.text = "<div>通常モード</div>";
 			}
 		};
-		ModeStartButton.increment = function(){
-			if(ModeStartButton.num < 3){
-				ModeStartButton.num++;
-				ModeStartButton.update();
+		StartButton.decrement = function(){
+			if((ModeSwitch.num == 0 && StartButton.num > 1) || (ModeSwitch.num == 1 && StartButton.num > 3)){
+				console.log('decrement');
+				StartButton.num--;
+				StartButton.label_update();
 			}
 		};
-		ModeStartButton.update = function(){
-			switch(ModeStartButton.num){
+		StartButton.increment = function(){
+			if((ModeSwitch.num == 0 && StartButton.num < 2) || (ModeSwitch.num == 1 && StartButton.num < 5)){
+				console.log('increment');
+				StartButton.num++;
+				StartButton.label_update();
+			}
+		};
+		StartButton.label_update = function(){
+			switch(StartButton.num){
 				case 1:
-					ModeStartButton.text = "<h1 class='button'>ほのぼのコース</h1>";
+					StartButton.text = "<h1 class='button'>ほのぼのコース</h1>";
 					break;
 				case 2:
-					ModeStartButton.text = "<h1 class='button'>わくわくコース</h1>";
-					break;
+					StartButton.text = "<h1 class='button'>わくわくコース</h1>";
+					break;	
 				case 3:
-					ModeStartButton.text = "<h1 class='button'>ゆのさま</h1>";
+					StartButton.text = "<h1 class='button'>ゆのさま</h1>";
+					break;
+				case 4:
+					StartButton.text = "<h1 class='button'>まっすぐコース</h1>";
+					break;
+				case 5:
+					StartButton.text = "<h1 class='button'>100本ノック</h1>";
 					break;
 			}
 		};
-		ModeStartButton.addEventListener('touchstart', function (e) {
-			switch(ModeStartButton.num){
+		StartButton.game_start = function(){
+			switch(StartButton.num){
 				case 1:
 					GameMode = 1;
 					BattingBgmFile = BATTING_BGM_EASY;
@@ -234,43 +212,6 @@ window.onload = function mogura() {
 					GameMode = 3;
 					BattingBgmFile = BATTING_BGM_HARD;
 					break;
-			}
-			var se = game.assets['sound/hit_1.wav'];
-			se.play();
-			game.popScene(SceneTitle);
-			game.pushScene(SceneBatting);
-		});
-
-	//*エクストラモードスタートボタン*
-		var ExtraStartButton = new Label();
-		ExtraStartButton.num = 4;//デフォはまっすぐ
-		ExtraStartButton.x = STARTBUTTON_X;
-		ExtraStartButton.y = STARTBUTTON_EXTRA_Y;
-		ExtraStartButton.text = "<h1 class='button'>まっすぐコース</h1>";
-		ExtraStartButton.decrement = function(){
-			if(ExtraStartButton.num > 4){
-				ExtraStartButton.num--;
-				ExtraStartButton.update();
-			}
-		};
-		ExtraStartButton.increment = function(){
-			if(ExtraStartButton.num < 5){
-				ExtraStartButton.num++;
-				ExtraStartButton.update();
-			}
-		};
-		ExtraStartButton.update = function(){
-			switch(ExtraStartButton.num){
-				case 4:
-					ExtraStartButton.text = "<h1 class='button'>まっすぐコース</h1>";
-					break;
-				case 5:
-					ExtraStartButton.text = "<h1 class='button'>100本ノック</h1>";
-					break;
-			}
-		};
-		ExtraStartButton.addEventListener('touchstart', function (e) {
-			switch(ExtraStartButton.num){
 				case 4:
 					GameMode = 4;
 					BattingBgmFile = BATTING_BGM_EXTRA1;
@@ -279,19 +220,91 @@ window.onload = function mogura() {
 					GameMode = 5;
 					BattingBgmFile = BATTING_BGM_EXTRA2;
 					LastBall.num =BALL_KNOCK_NUM;
-					LastBall.decrement();
+					//LastBall.decrement();
 					break;
 			}
 			var se = game.assets['sound/hit_1.wav'];
 			se.play();
 			game.popScene(SceneTitle);
 			game.pushScene(SceneBatting);
+		}
+		StartButton.addEventListener('touchstart', function (e) {
+			this.game_start();
 		});
+
+	//*矢印*
+		var ModeLeftButton = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
+		ModeLeftButton.image = game.assets['img/direction.gif'];
+		ModeLeftButton.x = 40;
+		ModeLeftButton.y = STARTBUTTON_Y + DIRECTION_SIZE/2;
+		ModeLeftButton.img_update = function(){
+			if((ModeSwitch.num == 0 && StartButton.num == 1) || (ModeSwitch.num == 1 && StartButton.num == 3)){
+				ModeLeftButton.image = game.assets['img/direction_n.gif'];//左押せない
+			}
+				ModeRightButton.image = game.assets['img/direction.gif'];//右復活
+			
+		}
+		ModeLeftButton.addEventListener('touchstart', function (e) {
+			StartButton.decrement();
+			ModeLeftButton.img_update();
+		});
+
+		var ModeRightButton = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
+		ModeRightButton.image = game.assets['img/direction_n.gif'];
+		ModeRightButton.x = SCREEN_SIZE_X - DIRECTION_SIZE - 40;
+		ModeRightButton.y = STARTBUTTON_Y + DIRECTION_SIZE/2;
+		ModeRightButton.rotation = 180;
+		ModeRightButton.img_update = function(){
+			if((ModeSwitch.num == 0 && StartButton.num == 2) || (ModeSwitch.num == 1 && StartButton.num == 5)){
+				ModeRightButton.image = game.assets['img/direction_n.gif'];//右押せない
+			}
+				ModeLeftButton.image = game.assets['img/direction.gif'];//左復活
+		}
+		ModeRightButton.addEventListener('touchstart', function (e) {
+			StartButton.increment();
+			ModeRightButton.img_update();
+		});
+
+		var ModeSwitch = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
+		ModeSwitch.image = game.assets['img/switch.gif'];
+		ModeSwitch.x = SCREEN_SIZE_X/2 - DIRECTION_SIZE/2 - STARTBUTTON_X/2;
+		ModeSwitch.y = STARTBUTTON_Y - DIRECTION_SIZE/2 -10;
+		ModeSwitch.num = 0; // 0 or 1
+		ModeSwitch.switching = function(){
+			if(ModeSwitch.num == 0){
+				ModeSwitch.num = 1;
+			}else{
+				ModeSwitch.num = 0;
+			}
+			StartButton.switching();
+			ModeLeftButton.img_update();
+			ModeRightButton.img_update();
+			console.log('ModeSwitch.num: '+ ModeSwitch.num);
+			console.log('StartButton.num: '+ StartButton.num);
+		}
+		ModeSwitch.addEventListener('touchstart', function (e) {
+			this.switching();
+		});
+
+	//*モードラベル*
+		var ModeLabel = new Label();
+		ModeLabel.x = SCREEN_SIZE_X/2 - DIRECTION_SIZE/2;
+		ModeLabel.y = STARTBUTTON_Y - DIRECTION_SIZE/2 + 5;
+		ModeLabel.text = "<div>通常モード</div>";
+
+	//*モードラベル*
+		var ModeDiscription = new Label();
+		ModeDiscription.x = STARTBUTTON_X;
+		ModeDiscription.y = STARTBUTTON_Y+100;
+		ModeDiscription.text = "<div>モード説明</div>";
+		ModeDiscription.update = function(){
+
+		}
 
 	//*操作説明ボタン*
 		var HelpButton = new Label();
 		HelpButton.x = STARTBUTTON_X;
-		HelpButton.y = STARTBUTTON_MODE_Y+150;
+		HelpButton.y = STARTBUTTON_Y+130;
 		HelpButton.text = "<h1 id='helpbutton' class='button'>操作説明</h1>";
 		HelpButton.addEventListener('touchstart', function (e) {
 			console.log('ヘルプ');
@@ -319,26 +332,28 @@ window.onload = function mogura() {
 		SceneTitle.addChild(BackgroundTitle);
 		SceneTitle.addChild(TitleLogo);
 		SceneTitle.addChild(ModeLabel);
-		SceneTitle.addChild(ModeStartButton);
-		SceneTitle.addChild(ExtraLabel);
-		SceneTitle.addChild(ExtraStartButton);
+		SceneTitle.addChild(StartButton);
 		SceneTitle.addChild(ModeLeftButton);
 		SceneTitle.addChild(ModeRightButton);
-		SceneTitle.addChild(ExtraLeftButton);
-		SceneTitle.addChild(ExtraRightButton);
+		SceneTitle.addChild(ModeSwitch);
 		SceneTitle.addChild(HelpButton);
 
 
 //*********************
 //バッティング画面
 //*********************
-
-	//スペースが押されたとき呼ばれる関数（バッターとミートカーソルのswing関数を呼ぶ）
-		function get_space(){
-			if(Batter.swing_flag == true){
-				Batter.swing();
+	//*バッティングシーン*
+		var SceneBatting = new Scene();
+		//BGMループ用
+		SceneBatting.bgm_fadeout = false;
+		//フレーム更新処理
+ 		SceneBatting.addEventListener('enterframe', function(){	
+            //BGM ループ再生
+			if(!SceneBatting.bgm_fadeout){
+	            game.assets[BattingBgmFile].play();
+    	        game.assets[BattingBgmFile].volume = 0.4;
 			}
-		}
+	    });
 
 	//*背景*
 		BackgroundBatting = new Sprite(GROUND_SIZE_X, GROUND_SIZE_Y);
@@ -764,7 +779,6 @@ window.onload = function mogura() {
 			Camera.addChild(Ball);
 		};
 		//フレーム処理
-
 		Pitcher.addEventListener('enterframe', function(){
 			if(Camera.timestart){
 				if(this.throw_flag == true){
@@ -772,10 +786,7 @@ window.onload = function mogura() {
 					if((this.frame == 9) && (this.throw_interval_count == PITCH_INTERVAL)){
 						this.throw_flag = false;
 						this.throw_interval_count = 0;
-
-
 						//球種を選定する
-
 						//ストレートを設定
 						this.ball_type = GameMode*100 + 1;
 
@@ -1219,19 +1230,13 @@ window.onload = function mogura() {
 
 	//add
 		SceneBatting.addChild(Camera);
-		// シーン更新処理
-		SceneBatting.bgm_fadeout = false;
- 		SceneBatting.onenterframe = function() {
-            // BGM ループ再生
-			if(!SceneBatting.bgm_fadeout){
-	            game.assets[BattingBgmFile].play();
-    	        game.assets[BattingBgmFile].volume = 0.4;
-			}
-	    };
 	
 //******************
 //リザルト画面
 //****************
+	//*リザルトシーン*
+		var SceneResult = new Scene();
+
 	//*背景*
 		var BackgroundResult = new Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y);
 		BackgroundResult.opacity = 0;
