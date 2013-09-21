@@ -9,7 +9,6 @@ window.onload = function mogura() {
 		//Charactor
 		'img/logo.png',
 		'img/direction.gif',
-		'img/direction_n.gif',
 		'img/switch.gif',
 		'img/yuno.gif',
 		'img/bat.gif',
@@ -228,16 +227,24 @@ window.onload = function mogura() {
 		var SceneTitle = new Scene();
 		//矢印キーによるモード選択
 		SceneTitle.addEventListener('upbuttondown', function(){
-			ModeSwitch.switching();
+			ModeSwitching();
+			StartButton.label_update();
+			ModeDiscription.update();
 		});
 		SceneTitle.addEventListener('downbuttondown', function(){
-			ModeSwitch.switching();
+			ModeSwitching();
+			StartButton.label_update();
+			ModeDiscription.update();
 		});
 		SceneTitle.addEventListener('leftbuttondown', function(){
-			StartButton.decrement();
+			CourseDecrement();
+			StartButton.label_update();
+			ModeDiscription.update();
 		});
 		SceneTitle.addEventListener('rightbuttondown', function(){
-			StartButton.increment();
+			CourseIncrement();
+			StartButton.label_update();
+			ModeDiscription.update();
 		});
 
 	//*背景*
