@@ -59,7 +59,7 @@ window.onload = function mogura() {
 	var LASTBALL_Y = (CAMERA_BATTING_Y * -1) + 10;
 	//得点表示位置
 	var POINT_X = (CAMERA_BATTING_X * -1) + 400;
-	var POINT_Y = (CAMERA_BATTING_Y * -1) + 20;
+	var POINT_Y = (CAMERA_BATTING_Y * -1) + 30;
 	//ピッチャー-サイズ
 	var PITCHER_SIZE_X = 96;
 	var PITCHER_SIZE_Y = 96;
@@ -100,6 +100,108 @@ window.onload = function mogura() {
 	//スイングボタン-位置
 	var SWINGBUTTON_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X - SWINGBUTTON_SIZE_X;
 	var SWINGBUTTON_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X - SWINGBUTTON_SIZE_Y;
+	
+	var CommonCourse = ["EASY","NORMAL","STRAIGHT"];
+	var ExtraCourse = ["YUNO","KNOCK"];
+	//
+	var GameSet = {	
+		"COMMON" : {
+			"EASY" : {
+				"mode" : "通常モード",
+				"course_name" : "ほのぼのコース",
+				"gamemode_number" : 1,
+				"ball_number" : 5,
+				"bgm" : 'sound/bgm_easy.mp3',
+				"discription" : "かんたんコースだよ"
+			},
+			"NORMAL" : {
+				"mode" : "通常モード",
+				"course_name" : "わくわくコース",
+				"gamemode_number" : 2,
+				"ball_number" : 10,
+				"bgm" : 'sound/bgm_normal.mp3',
+				"discription" : "ふつうの難しさのコース"
+			},
+			"STRAIGHT" : {
+				"mode" : "通常モード",
+				"course_name" : "まっすぐコース",
+				"gamemode_number" : 4,
+				"ball_number" : 10,
+				"bgm" : 'sound/bgm_extra1.mp3',
+				"discription" : "変化球を投げてこないコースだよ"
+			}
+		},
+		"EXTRA" : {
+			"YUNO" : {
+				"mode" : "エクストラモード",
+				"course_name" : "ゆのさま",
+				"gamemode_number" : 3,
+				"ball_number" : 10,
+				"bgm" : 'sound/bgm_hard.mp3',
+				"discription" : "†ゆのさま†"
+			},
+			"KNOCK" : {
+				"mode" : "エクストラモード",
+				"course_name" : "100本ノック",
+				"gamemode_number" : 5,
+				"ball_number" : 100,
+				"bgm" : 'sound/bgm_extra2.mp3',
+				"discription" : "100本打つまで終わらない"
+			}
+		}
+	};
+	//
+	var Mode = "COMMON";
+	var ModeSwitching = function(){
+		if(Mode == "COMMON"){
+			Mode = "EXTRA";
+			Course = "YUNO";
+		}else{
+			Mode = "COMMON";
+			Course = "NORMAL";
+		}
+	} 
+	var Course = "NORMAL";
+	var CommonCourseIndex = 1;
+	var ExtraCourseIndex = 0;
+	var CourseIncrement = function(){
+		//あとで配列番号処理する
+		if(Mode == "COMMON"){
+			if(CommonCourseIndex == CommonCourse.length-1){
+				CommonCourseIndex = 0;
+			}else{
+				CommonCourseIndex++;
+			}
+			Course = CommonCourse[CommonCourseIndex];
+		}else{
+			if(ExtraCourseIndex == ExtraCourse.length-1){
+				ExtraCourseIndex = 0;
+			}else{
+				ExtraCourseIndex++;
+			}
+			Course = ExtraCourse[ExtraCourseIndex];
+		}
+	}
+	var CourseDecrement = function(){
+		//あとで配列番号処理する
+		if(Mode == "COMMON"){
+			if(Course == "STRAIGHT"){
+				Course = "NORMAL";
+			}else if(Course == "NORMAL"){
+				Course = "EASY";
+			}else{
+				Course = "STRAIGHT";
+			}
+		}else{
+			if(Course == "YUNO"){
+				Course = "KNOCK";
+			}else{
+				Course = "YUNO";
+			}
+		}
+	}
+
+	console.log(GameSet[Mode][Course]["mode"]);
 
 	game.onload = function(){
 		var GameMode = 0;
@@ -133,11 +235,9 @@ window.onload = function mogura() {
 		});
 		SceneTitle.addEventListener('leftbuttondown', function(){
 			StartButton.decrement();
-			ModeLeftButton.img_update();
 		});
 		SceneTitle.addEventListener('rightbuttondown', function(){
 			StartButton.increment();
-			ModeRightButton.img_update();	
 		});
 
 	//*背景*
@@ -155,76 +255,17 @@ window.onload = function mogura() {
 		StartButton.num = 2;//デフォはNORMAL
 		StartButton.x = STARTBUTTON_X;
 		StartButton.y = STARTBUTTON_Y;
-		StartButton.text = "<h1 class='button'>わくわくコース</h1>";
-		StartButton.switching = function(){
-			if(ModeSwitch.num == 1){
-				StartButton.num = 4;
-				StartButton.label_update();
-				ModeLabel.text = "<div>エクストラモード</div>";
-			}else{
-				StartButton.num = 2;
-				StartButton.label_update();
-				ModeLabel.text = "<div>通常モード</div>";
-			}
-		};
-		StartButton.decrement = function(){
-			if((ModeSwitch.num == 0 && StartButton.num > 1) || (ModeSwitch.num == 1 && StartButton.num > 3)){
-				console.log('decrement');
-				StartButton.num--;
-				StartButton.label_update();
-			}
-		};
-		StartButton.increment = function(){
-			if((ModeSwitch.num == 0 && StartButton.num < 2) || (ModeSwitch.num == 1 && StartButton.num < 5)){
-				console.log('increment');
-				StartButton.num++;
-				StartButton.label_update();
-			}
-		};
 		StartButton.label_update = function(){
-			switch(StartButton.num){
-				case 1:
-					StartButton.text = "<h1 class='button'>ほのぼのコース</h1>";
-					break;
-				case 2:
-					StartButton.text = "<h1 class='button'>わくわくコース</h1>";
-					break;	
-				case 3:
-					StartButton.text = "<h1 class='button'>ゆのさま</h1>";
-					break;
-				case 4:
-					StartButton.text = "<h1 class='button'>まっすぐコース</h1>";
-					break;
-				case 5:
-					StartButton.text = "<h1 class='button'>100本ノック</h1>";
-					break;
-			}
+			this.text = "<h1 class='button'>" + GameSet[Mode][Course]["course_name"] + "</h1>"
 		};
+		StartButton.label_update();
 		StartButton.game_start = function(){
-			switch(StartButton.num){
-				case 1:
-					GameMode = 1;
-					BattingBgmFile = BATTING_BGM_EASY;
-					break;
-				case 2:
-					GameMode = 2;
-					BattingBgmFile = BATTING_BGM_NORMAL;
-					break;
-				case 3:
-					GameMode = 3;
-					BattingBgmFile = BATTING_BGM_HARD;
-					break;
-				case 4:
-					GameMode = 4;
-					BattingBgmFile = BATTING_BGM_EXTRA1;
-					break;
-				case 5:
-					GameMode = 5;
-					BattingBgmFile = BATTING_BGM_EXTRA2;
-					LastBall.num =BALL_KNOCK_NUM;
-					//LastBall.decrement();
-					break;
-			}
+			GameMode = GameSet[Mode][Course]["gamemode_number"];
+			BattingBgmFile = GameSet[Mode][Course]["bgm"];
+			LastBall.num = GameSet[Mode][Course]["ball_number"];
+			console.log("GameMode : " + GameSet[Mode][Course]["gamemode_number"]);
+			console.log("BGM : " + GameSet[Mode][Course]["bgm"]);
+			LastBall.update();
 			var se = game.assets['sound/hit_1.wav'];
 			se.play();
 			game.popScene(SceneTitle);
@@ -239,69 +280,51 @@ window.onload = function mogura() {
 		ModeLeftButton.image = game.assets['img/direction.gif'];
 		ModeLeftButton.x = 40;
 		ModeLeftButton.y = STARTBUTTON_Y + DIRECTION_SIZE/2;
-		ModeLeftButton.img_update = function(){
-			if((ModeSwitch.num == 0 && StartButton.num == 1) || (ModeSwitch.num == 1 && StartButton.num == 3)){
-				ModeLeftButton.image = game.assets['img/direction_n.gif'];//左押せない
-			}
-				ModeRightButton.image = game.assets['img/direction.gif'];//右復活
-			
-		}
 		ModeLeftButton.addEventListener('touchstart', function (e) {
-			StartButton.decrement();
-			ModeLeftButton.img_update();
+			CourseDecrement();
+			StartButton.label_update();
+			ModeDiscription.update();
 		});
 
 		var ModeRightButton = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
-		ModeRightButton.image = game.assets['img/direction_n.gif'];
+		ModeRightButton.image = game.assets['img/direction.gif'];
 		ModeRightButton.x = SCREEN_SIZE_X - DIRECTION_SIZE - 40;
 		ModeRightButton.y = STARTBUTTON_Y + DIRECTION_SIZE/2;
 		ModeRightButton.rotation = 180;
-		ModeRightButton.img_update = function(){
-			if((ModeSwitch.num == 0 && StartButton.num == 2) || (ModeSwitch.num == 1 && StartButton.num == 5)){
-				ModeRightButton.image = game.assets['img/direction_n.gif'];//右押せない
-			}
-				ModeLeftButton.image = game.assets['img/direction.gif'];//左復活
-		}
 		ModeRightButton.addEventListener('touchstart', function (e) {
-			StartButton.increment();
-			ModeRightButton.img_update();
+			CourseIncrement();
+			StartButton.label_update();
+			ModeDiscription.update();
 		});
 
+	//*モード切替ボタン*
 		var ModeSwitch = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
 		ModeSwitch.image = game.assets['img/switch.gif'];
-		ModeSwitch.x = SCREEN_SIZE_X/2 - DIRECTION_SIZE/2 - STARTBUTTON_X/2;
-		ModeSwitch.y = STARTBUTTON_Y - DIRECTION_SIZE/2 -10;
-		ModeSwitch.num = 0; // 0 or 1
-		ModeSwitch.switching = function(){
-			if(ModeSwitch.num == 0){
-				ModeSwitch.num = 1;
-			}else{
-				ModeSwitch.num = 0;
-			}
-			StartButton.switching();
-			ModeLeftButton.img_update();
-			ModeRightButton.img_update();
-			console.log('ModeSwitch.num: '+ ModeSwitch.num);
-			console.log('StartButton.num: '+ StartButton.num);
-		}
+		ModeSwitch.x = SCREEN_SIZE_X/2 + DIRECTION_SIZE + 50;
+		ModeSwitch.y = STARTBUTTON_Y - DIRECTION_SIZE/2 - 10;
 		ModeSwitch.addEventListener('touchstart', function (e) {
-			this.switching();
+			ModeSwitching();
+			StartButton.label_update();
+			ModeDiscription.update();
 		});
 
 	//*モードラベル*
 		var ModeLabel = new Label();
-		ModeLabel.x = SCREEN_SIZE_X/2 - DIRECTION_SIZE/2;
+		ModeLabel.x = SCREEN_SIZE_X/2 + DIRECTION_SIZE + 100;
 		ModeLabel.y = STARTBUTTON_Y - DIRECTION_SIZE/2 + 5;
-		ModeLabel.text = "<div>通常モード</div>";
+		ModeLabel.update = function(){
+			this.text = "<div class='label'>" + GameSet[Mode][Course]["mode"] + "</div>";
+		}
+		ModeLabel.update();
 
 	//*モード説明*
 		var ModeDiscription = new Label();
 		ModeDiscription.x = STARTBUTTON_X;
 		ModeDiscription.y = STARTBUTTON_Y+100;
-		ModeDiscription.text = "<div>モード説明</div>";
 		ModeDiscription.update = function(){
-
+			this.text = "<div id='discription' class='label'>" + GameSet[Mode][Course]["discription"] + "</div>";
 		}
+		ModeDiscription.update();
 
 	//*操作説明ボタン*
 		var HelpButton = new Label();
@@ -338,6 +361,7 @@ window.onload = function mogura() {
 		SceneTitle.addChild(ModeLeftButton);
 		SceneTitle.addChild(ModeRightButton);
 		SceneTitle.addChild(ModeSwitch);
+		SceneTitle.addChild(ModeDiscription);
 		SceneTitle.addChild(HelpButton);
 
 
@@ -386,10 +410,11 @@ window.onload = function mogura() {
 		LastBall.y = LASTBALL_Y;
 		LastBall.num = BALL_NUM;
 		LastBall.battedball_num = 0; //打球の数
-
-		LastBall.text = "<div class='label'>残り"+LastBall.num+"球</div>";
+		LastBall.update = function(){
+			this.text = "<div class='label'>残り<img src='img/ball.gif'>×"+this.num+"</div>";
+		}
 		LastBall.decrement = function(){
-			this.text = "<div class='label'>残り"+this.num+"球</div>";
+			this.update();
 			if(this.num == 0 && this.battedball_num == 0 && Pitcher.throw_flag == true){
 				SceneBatting.bgm_fadeout = true;
 				setTimeout(function(){

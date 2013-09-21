@@ -22,11 +22,16 @@
 	width: 430px;
 	height: 430px;
 }
+.label{
+	font-size: 16px;
+}
+#discription{
+	text-align: center;
+}
 #result_title{
 	font-size:32px;
 	color:#fff;
 }
-
 .result_num{
 	font-size:20px;
 	color:#fff;
