@@ -108,7 +108,9 @@ window.onload = function mogura() {
 		//スペースが押されたとき呼ばれる関数ぶ）
 		function get_space(){
 			//タイトル画面ならゲームスタート
-			StartButton.game_start();
+			if(game.currentScene === SceneTitle){
+				StartButton.game_start();
+			}
 			//バッティング画面ならスイング
 			if(game.currentScene === SceneBatting){
 				if(Batter.swing_flag == true){
@@ -292,7 +294,7 @@ window.onload = function mogura() {
 		ModeLabel.y = STARTBUTTON_Y - DIRECTION_SIZE/2 + 5;
 		ModeLabel.text = "<div>通常モード</div>";
 
-	//*モードラベル*
+	//*モード説明*
 		var ModeDiscription = new Label();
 		ModeDiscription.x = STARTBUTTON_X;
 		ModeDiscription.y = STARTBUTTON_Y+100;
