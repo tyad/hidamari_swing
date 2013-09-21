@@ -67,8 +67,8 @@ window.onload = function mogura() {
 	var PITCHER_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 - 190;
 	//ピッチャー-モーション数
 	var PITCHER_MOTION_NUM = 10-1; //0,1,2,3,4,5,6,7,9
-	//ピッチャー-投球間隔
-	var PITCH_INTERVAL = 3; //4くらいがいいかも（デバック用に1）
+	//ピッチャー-投球間隔(フレーム)
+	var PITCH_INTERVAL = 60;
 	//バッター-サイズ
 	var BATTER_SIZE_X = 128;
 	var BATTER_SIZE_Y = 128;
@@ -110,24 +110,27 @@ window.onload = function mogura() {
 				"course_name" : "ほのぼのコース",
 				"gamemode_number" : 1,
 				"ball_number" : 5,
+				"powerfilter": 0.85,
 				"bgm" : 'sound/bgm_easy.mp3',
-				"discription" : "かんたんコースだよ"
+				"discription" : "5球 / ボールを打ち返してみよう！"
 			},
 			"NORMAL" : {
 				"mode" : "通常モード",
 				"course_name" : "わくわくコース",
 				"gamemode_number" : 2,
+				"powerfilter": 0.9,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_normal.mp3',
-				"discription" : "ふつうの難しさのコース"
+				"discription" : "10球 / 変化球もある標準的なコース"
 			},
 			"STRAIGHT" : {
 				"mode" : "通常モード",
 				"course_name" : "まっすぐコース",
 				"gamemode_number" : 4,
+				"powerfilter": 0.95,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_extra1.mp3',
-				"discription" : "変化球を投げてこないコースだよ"
+				"discription" : "10球 / 直球勝負！"
 			}
 		},
 		"EXTRA" : {
@@ -136,16 +139,18 @@ window.onload = function mogura() {
 				"course_name" : "ゆのさま",
 				"gamemode_number" : 3,
 				"ball_number" : 10,
+				"powerfilter": 0.85,
 				"bgm" : 'sound/bgm_hard.mp3',
-				"discription" : "†ゆのさま†"
+				"discription" : "10球 / イライラしよう！"
 			},
 			"KNOCK" : {
 				"mode" : "エクストラモード",
 				"course_name" : "100本ノック",
 				"gamemode_number" : 5,
+				"powerfilter": 1.0,
 				"ball_number" : 100,
 				"bgm" : 'sound/bgm_extra2.mp3',
-				"discription" : "100本打つまで終わらない"
+				"discription" : "100本打ちまくれ！芯の判定が厳しめ"
 			}
 		}
 	};
@@ -160,8 +165,8 @@ window.onload = function mogura() {
 			Course = "NORMAL";
 		}
 	} 
-	var Course = "NORMAL";
-	var CommonCourseIndex = 1;
+	var Course = "EASY";
+	var CommonCourseIndex = 0;
 	var ExtraCourseIndex = 0;
 	var CourseIncrement = function(){
 		//あとで配列番号処理する
@@ -184,19 +189,19 @@ window.onload = function mogura() {
 	var CourseDecrement = function(){
 		//あとで配列番号処理する
 		if(Mode == "COMMON"){
-			if(Course == "STRAIGHT"){
-				Course = "NORMAL";
-			}else if(Course == "NORMAL"){
-				Course = "EASY";
+			if(CommonCourseIndex == 0){
+				CommonCourseIndex = CommonCourse.length-1;
 			}else{
-				Course = "STRAIGHT";
+				CommonCourseIndex--;
 			}
+			Course = CommonCourse[CommonCourseIndex];
 		}else{
-			if(Course == "YUNO"){
-				Course = "KNOCK";
+			if(ExtraCourseIndex == 0){
+				ExtraCourseIndex = ExtraCourse.length-1;
 			}else{
-				Course = "YUNO";
+				ExtraCourseIndex--;
 			}
+			Course = ExtraCourse[ExtraCourseIndex];
 		}
 	}
 
@@ -261,7 +266,7 @@ window.onload = function mogura() {
 	
 	//*スタートボタン*
 		var StartButton = new Label();
-		StartButton.num = 2;//デフォはNORMAL
+		StartButton.num = 1;
 		StartButton.x = STARTBUTTON_X;
 		StartButton.y = STARTBUTTON_Y;
 		StartButton.label_update = function(){
@@ -272,6 +277,8 @@ window.onload = function mogura() {
 			GameMode = GameSet[Mode][Course]["gamemode_number"];
 			BattingBgmFile = GameSet[Mode][Course]["bgm"];
 			LastBall.num = GameSet[Mode][Course]["ball_number"];
+			LastBall.max = GameSet[Mode][Course]["ball_number"];
+			MeetCursor.distance_powerfilter = GameSet[Mode][Course]["powerfilter"];
 			console.log("GameMode : " + GameSet[Mode][Course]["gamemode_number"]);
 			console.log("BGM : " + GameSet[Mode][Course]["bgm"]);
 			LastBall.update();
@@ -419,6 +426,7 @@ window.onload = function mogura() {
 		LastBall.x = LASTBALL_X;
 		LastBall.y = LASTBALL_Y;
 		LastBall.num = BALL_NUM;
+		LastBall.max = BALL_NUM;
 		LastBall.battedball_num = 0; //打球の数
 		LastBall.update = function(){
 			this.text = "<div class='label'>残り<img src='img/ball.gif'>×"+this.num+"</div>";
@@ -485,7 +493,7 @@ window.onload = function mogura() {
 		//投げるflag
 		Pitcher.throw_flag = true;
 		//投球間隔カウント変数
-		Pitcher.throw_interval_count = 0;
+		Pitcher.throw_interval_count = -30; //初回
 		//アニメーションフレーム
 		Pitcher.frame = 0;
 		//投球関数（引数で投球コース、スピードとか
@@ -519,10 +527,10 @@ window.onload = function mogura() {
 
 				//イージー用球種
 				case　101: //イージーモード用ストレート 左右に少し角度がつく
-					Ball.direction_x = (Math.random() - Math.random()) * 0.75;//1:右、-1:左
+					Ball.direction_x = (Math.random() - Math.random()) * 0.6;//1:右、-1:左
 					Ball.direction_y = 1;//1:前、-1:後
 					Ball.speed_x = 1;
-					Ball.speed_y = 7 + Math.random() * 3;
+					Ball.speed_y = 9 + Math.random() * 3;
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
@@ -832,9 +840,9 @@ window.onload = function mogura() {
 
 						//ノーマルモード
 						}else if(GameMode == 2){
-							//残り球数が奇数の時に変化球を混ぜる可能性を持たせる
+							//残り球数が奇数の時に変化球を混ぜる
 							if(LastBall.num %2 == 1){
-								this.ball_type += parseInt(Math.random()*10%4);
+								this.ball_type += 1 +  parseInt(Math.random()*10%3);
 							}
 
 						//ハードモード
@@ -848,21 +856,16 @@ window.onload = function mogura() {
 						this.throw_ball(this.ball_type);
 					}
 					//投球モーション
-					else if(this.throw_interval_count == PITCH_INTERVAL){
+					else if(this.throw_interval_count >= PITCH_INTERVAL){
 						if(game.frame % (game.fps/10) == 0){
 			            	this.frame++;
 			        	}
 					}
 					//インターバルカウント
 					else if ((this.frame < 9) && (LastBall.num > 0)) {
-
+							this.throw_interval_count++;
 						if(GameMode == 5 && LastBall.num != BALL_KNOCK_NUM){
 							this.throw_interval_count = PITCH_INTERVAL;
-						}
-
-						if((game.frame % game.fps) == 0){
-							this.throw_interval_count++;
-							console.log(this.throw_interval_count);//for debug
 						}
 
 					}
@@ -988,6 +991,8 @@ window.onload = function mogura() {
 		MeetCursor.image = game.assets['img/meetcursor.png'];
 		//ヒットフラグ
 		MeetCursor.hit_flag = false;
+		//芯からずれた際の減少補正
+		MeetCursor.distance_powerfilter = 1.0;
 		//フレーム処理
 		MeetCursor.addEventListener('enterframe', function(){
 			if(Camera.timestart){
@@ -1013,7 +1018,7 @@ window.onload = function mogura() {
 					    //真芯値
 					    var meetpoint = 32;
 					    //打球スピード
-					    var batted_speed = (meetpoint - distance)* 0.7;
+					    var batted_speed = (meetpoint - (distance * this.distance_powerfilter))* 0.7;
 
 						//真芯演出
 						if(batted_speed > 19.5){
@@ -1053,6 +1058,7 @@ window.onload = function mogura() {
 						var BattedBall = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
 						BattedBall.x = Ball.x;
 						BattedBall.y = Ball.y;			
+						BattedBall.timespeed =1.7;
 						BattedBall.image = game.assets['img/ball_shadow.gif'];
 						BattedBall.speed_x = batted_speed * Math.cos(angle * Math.PI/180);
 						BattedBall.speed_y = batted_speed * Math.sin(angle * Math.PI/180);
@@ -1072,12 +1078,12 @@ window.onload = function mogura() {
 						//フレーム処理
 						BattedBall.addEventListener('enterframe', function(){
 							if(Camera.timestart){
-								this.x = this.x - this.speed_x;
-								this.y = this.y - this.speed_y;
-								this.h =  this.h + this.buoyancy;
+								this.x = this.x - this.speed_x * this.timespeed;
+								this.y = this.y - this.speed_y * this.timespeed;
+								this.h =  this.h + this.buoyancy * this.timespeed;
 
 								if(batted_speed > 0){
-									this.buoyancy -= 0.1;
+									this.buoyancy -= 0.1 * this.timespeed;
 								}
 								if(this.stop_flag == false){
 									if(this.h <= 0){
@@ -1117,26 +1123,26 @@ window.onload = function mogura() {
 											}
 											//Camera.removeChild(BattedBall);
 											LastBall.decrement();
-										},3000);
+										},2000);
 									}else{
 										//飛距離でスコア計算されるように修正
-										this.flown += batted_speed * 0.05;
+										this.flown += batted_speed * 0.05 * this.timespeed;
 									}
 									//カメラ追従
 									if(GameMode != 5 && this.y >= CAMERA_BATTING_Y){
-										Camera.speed = 4;
-										Camera.target_x = Camera.target_x + this.speed_x;
-										Camera.target_y = Camera.target_y + this.speed_y;
+										Camera.speed = 2;
+										Camera.target_x = Camera.target_x + this.speed_x * this.timespeed;
+										Camera.target_y = Camera.target_y + this.speed_y * this.timespeed;
 									}
 
 								}
 								if(this.h <= 0 && this.buoyancy <= 0){
-									this.buoyancy *= -0.25;
+									this.buoyancy *= -0.4;
 									if(parseInt(this.bouyancy) > -1){
 										this.bouyancy =0;
 									}
 									this.h = 0;
-									batted_speed *= 0.6;
+									batted_speed *= 0.5;
 									
 									if(batted_speed < 0.5){
 										batted_speed = 0;
@@ -1155,9 +1161,10 @@ window.onload = function mogura() {
 						BattedBallHop.y = Ball.y;
 						BattedBallHop.addEventListener('enterframe', function(){
 							if(Camera.timestart){
-								BattedBallHop.x = parseInt(BattedBall.x  - BattedBall.speed_x);
-								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y- BattedBall.h - BALL_SIZE_Y/3);
-
+								BattedBallHop.x = parseInt(BattedBall.x  - BattedBall.speed_x * BattedBall.timespeed);
+								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y * BattedBall.timespeed - BattedBall.h - BALL_SIZE_Y/3);
+								BattedBallHop.scaleX = 1 + BattedBall.h/200;
+								BattedBallHop.scaleY = 1 + BattedBall.h/200;
 							}
 						});
 						Camera.addChild(BattedBall);
@@ -1227,7 +1234,7 @@ window.onload = function mogura() {
 		Camera.addChild(SwingButton);
 		Camera.addChild(Effect);
 
-		Camera.speed = 5; //目的に対する追従速度
+		Camera.speed = 10; //目的に対する追従速度
 
 		Camera.timestop_frame = 0; //時を止めるフレーム
 		Camera.timestart = true;
@@ -1310,7 +1317,7 @@ window.onload = function mogura() {
 
 
 				if(this.animation_frame > 50){
-					if(this.animation_frame %10 == 0 && this.score_ball_num < 11){
+					if(this.animation_frame %10 == 0 && this.score_ball_num <= LastBall.max){
 						var ResultBallNum = new Label();
 						ResultBallNum.x = 100;
 						ResultBallNum.y = 60 + this.score_ball_num*20;
@@ -1353,7 +1360,7 @@ window.onload = function mogura() {
 					}
 				}
 
-				if(this.animation_frame == 160){
+				if(this.animation_frame == 60 + LastBall.max *10){
 						var ResultBallNum = new Label();
 						ResultBallNum.x = 120;
 						ResultBallNum.y = 70 + this.score_ball_num*20;
