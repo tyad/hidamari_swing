@@ -1221,7 +1221,7 @@ window.onload = function mogura() {
 	//*カメラ*
 		var Camera = new Group();
 		Camera.x = CAMERA_BATTING_X;
-		Camera.y = CAMERA_BATTING_Y + 2000; //2000:グイーン用
+		Camera.y = CAMERA_BATTING_Y + 2000; //2000:カメラ初期位置
 		Camera.target_x = CAMERA_BATTING_X; //カメラが向かう位置
 		Camera.target_y = CAMERA_BATTING_Y; //カメラが向かう位置
 		Camera.addChild(BackgroundBatting);
