@@ -73,7 +73,7 @@ window.onload = function mogura() {
 	var BATTER_SIZE_X = 128;
 	var BATTER_SIZE_Y = 128;
 	//バッター-デフォルト位置
-	var BATTER_DEFAULT_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 - 100;
+	var BATTER_DEFAULT_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 - 85;
 	var BATTER_DEFAULT_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 + 130;
 	//バッターボックス制限
 	var BATTER_LIMIT_X = 40;
@@ -89,7 +89,7 @@ window.onload = function mogura() {
 	var BALL_SIZE_Y = 15;
 	//ボール-投球直後のデフォルト位置
 	var BALL_DEFAULT_X = PITCHER_X + PITCHER_SIZE_X/2 - BALL_SIZE_X/2 -5;
-	var BALL_DEFAULT_Y = PITCHER_Y + 40;
+	var BALL_DEFAULT_Y = PITCHER_Y + 55;
 	//十字パッド
 	var PAD_X = (CAMERA_BATTING_X * -1);
 	var PAD_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_Y - 100;
@@ -100,8 +100,9 @@ window.onload = function mogura() {
 	var SWINGBUTTON_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X - SWINGBUTTON_SIZE_X;
 	var SWINGBUTTON_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X - SWINGBUTTON_SIZE_Y;
 	
-	var CommonCourse = ["EASY","NORMAL","STRAIGHT"];
-	var ExtraCourse = ["YUNO","KNOCK"];
+	//メニューの設定
+	var CommonCourse = ["EASY","NORMAL","HARD","STRAIGHT"];
+	var ExtraCourse = ["KNOCK","YUNO","EASY_EX"];
 	//
 	var GameSet = {	
 		"COMMON" : {
@@ -112,7 +113,7 @@ window.onload = function mogura() {
 				"ball_number" : 5,
 				"powerfilter": 0.85,
 				"bgm" : 'sound/bgm_easy.mp3',
-				"discription" : "5球 / ボールを打ち返してみよう！"
+				"discription" : "5球 / 芯の大きさ：☆☆☆<br>ボールを打ち返してみよう！"
 			},
 			"NORMAL" : {
 				"mode" : "通常モード",
@@ -121,7 +122,16 @@ window.onload = function mogura() {
 				"powerfilter": 0.9,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_normal.mp3',
-				"discription" : "10球 / 変化球もある標準的なコース"
+				"discription" : "10球 / 芯の大きさ：☆☆<br> 変化球も投げてくるコース"
+			},
+			"HARD" : {
+				"mode" : "通常モード",
+				"course_name" : "どきどきコース",
+				"gamemode_number" : 6,
+				"powerfilter": 1.0,
+				"ball_number" : 10,
+				"bgm" : 'sound/bgm_hard.mp3',
+				"discription" : "10球 / 芯の大きさ：☆<br> 上手い人向けの難しめコース"
 			},
 			"STRAIGHT" : {
 				"mode" : "通常モード",
@@ -130,27 +140,36 @@ window.onload = function mogura() {
 				"powerfilter": 0.95,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_extra1.mp3',
-				"discription" : "10球 / 直球勝負！"
+				"discription" : "10球 / 芯の大きさ：☆<br>直球で真剣勝負！"
 			}
 		},
 		"EXTRA" : {
 			"YUNO" : {
-				"mode" : "エクストラモード",
+				"mode" : "おまけモード",
 				"course_name" : "ゆのさま",
 				"gamemode_number" : 3,
 				"ball_number" : 10,
 				"powerfilter": 0.85,
-				"bgm" : 'sound/bgm_hard.mp3',
-				"discription" : "10球 / イライラしよう！"
+				"bgm" : 'sound/bgm_easy.mp3',
+				"discription" : "10球 / 芯の大きさ：☆☆☆<br>理不尽な球をしっかり捉えて飛ばそう！"
 			},
 			"KNOCK" : {
-				"mode" : "エクストラモード",
+				"mode" : "おまけモード",
 				"course_name" : "100本ノック",
 				"gamemode_number" : 5,
 				"powerfilter": 1.0,
 				"ball_number" : 100,
 				"bgm" : 'sound/bgm_extra2.mp3',
-				"discription" : "100本打ちまくれ！芯の判定が厳しめ"
+				"discription" : "100球 / 芯の大きさ：☆<br> カメラ移動なし！テンポよく打ちまくれ！"
+			},
+			"EASY_EX" : {
+				"mode" : "おまけモード",
+				"course_name" : "ほのぼのコース×☆☆☆",
+				"gamemode_number" : 1,
+				"ball_number" : 5,
+				"powerfilter": 1.1,
+				"bgm" : 'sound/bgm_easy.mp3',
+				"discription" : "5球 / 芯の大きさ：☆<br>統一球になって帰ってきた！"
 			}
 		}
 	};
@@ -159,10 +178,10 @@ window.onload = function mogura() {
 	var ModeSwitching = function(){
 		if(Mode == "COMMON"){
 			Mode = "EXTRA";
-			Course = "YUNO";
+			Course = "KNOCK";
 		}else{
 			Mode = "COMMON";
-			Course = "NORMAL";
+			Course = "EASY";
 		}
 	} 
 	var Course = "EASY";
@@ -571,7 +590,7 @@ window.onload = function mogura() {
 					break;
 
 				case　203: //ナックル：ぶれて見切りづらいボール
-					Ball.speed_x = (Math.random() - Math.random()) * 0.8;
+					Ball.speed_x = (Math.random() - Math.random()) * 0.7;
 					Ball.speed_y = 9 + Math.random() * 2;
 					Ball.bure = 30;
 					Ball.throw_frame = 0;
@@ -613,7 +632,7 @@ window.onload = function mogura() {
 					});
 					break;
 
-				//ハード用球種
+				//ゆのさま用球種
 				case　301: //ハードモード用 ストレート 左右に少し角度がつく
 					Ball.direction_x = (Math.random() - Math.random());//1:右、-1:左
 					Ball.direction_y = 1;//1:前、-1:後
@@ -727,10 +746,10 @@ window.onload = function mogura() {
 						Ball.carve *= -1;
 					}
 					Ball.speed_x = 	Ball.carve;
-					Ball.speed_y = 13 + Math.random() * 3;
+					Ball.speed_y = 14;
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
-						this.speed_x -=  Ball.carve/13;
+						this.speed_x -=  Ball.carve/12.5;
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y;
 						
@@ -794,7 +813,7 @@ window.onload = function mogura() {
 					});
 					break;
 
-				//追加モードその2用球種
+				//ノックモードその2用球種
 				case　501: //ストレート 左右に少し角度がつく
 					Ball.direction_x = (Math.random() - Math.random()) * 1.0;//1:右、-1:左
 					Ball.direction_y = 1;//1:前、-1:後
@@ -807,6 +826,83 @@ window.onload = function mogura() {
 						
 					});
 					break;
+
+
+				//ハード用球種
+				case　601: //ノーマルモード用 ストレート 左右に少し角度がつく
+					Ball.direction_x = (Math.random() - Math.random()) * 0.9;//1:右、-1:左
+					Ball.direction_y = 1;//1:前、-1:後
+					Ball.speed_x = 1;
+					Ball.speed_y = 14 + Math.random() * 3;
+					//フレーム処理
+					Ball.addEventListener('enterframe', function(){
+						this.x = this.x + this.direction_x*this.speed_x;
+						this.y = this.y + this.direction_y*this.speed_y;
+						
+					});
+					break;
+
+				case　602: //カーブとシンカー：弧を描く
+					Ball.carve = Math.random() * 3 + 4;
+
+					if(parseInt(Math.random()*10)%2 == 1){
+						Ball.carve *= -1;
+					}
+					Ball.speed_x = 	Ball.carve;
+					Ball.speed_y = 11 + Math.random() * 2;
+					//フレーム処理
+					Ball.addEventListener('enterframe', function(){
+						this.speed_x -=  Ball.carve/16;
+						this.x = this.x + this.speed_x;
+						this.y = this.y + this.speed_y;
+						
+					});
+					break;
+
+				case　603: //ナックル：ぶれて見切りづらいボール
+					Ball.speed_x = (Math.random() - Math.random()) * 0.85;
+					Ball.speed_y = 11 + Math.random() * 2;
+					Ball.bure = 30;
+					Ball.throw_frame = 0;
+					//フレーム処理
+					Ball.addEventListener('enterframe', function(){
+						this.throw_frame ++;
+
+						if(Ball.throw_frame == 1){
+							this.x += Ball.bure/2;
+						}
+
+						if(this.bure > 0){
+							this.bure *= 0.85;
+						}
+						this.plus_x = this.bure;
+						if(this.throw_frame %2 == 1){
+							this.plus_x *= -1;
+						}
+
+						this.x = this.x + this.speed_x+this.plus_x;
+						this.y = this.y + this.speed_y;
+					
+					});
+					break;
+
+				case　604: //スローボール
+
+					Ball.speed_x = (Math.random() - Math.random()) * 0.8;
+					Ball.speed_y = 5 + Math.random() * 3;
+					Ball.buoyancy = -6;
+					Ball.throw_frame = 0;
+					//フレーム処理
+					Ball.addEventListener('enterframe', function(){
+						this.throw_frame ++;
+						Ball.buoyancy += 0.35;
+						this.x = this.x + this.speed_x;
+						this.y = this.y + this.speed_y + Ball.buoyancy;
+						
+					});
+					break;
+
+				
 
 			}
 
@@ -845,12 +941,17 @@ window.onload = function mogura() {
 								this.ball_type += 1 +  parseInt(Math.random()*10%3);
 							}
 
-						//ハードモード
+						//ゆのさまモード
 						}else if(GameMode == 3){
 							//常に変化球も投げる
 							this.ball_type += parseInt(Math.random()*10%8);
-						}
 
+						}else if(GameMode == 6){
+							//残り球数が奇数の時に変化球を混ぜる
+							if(LastBall.num %2 == 1){
+								this.ball_type += 1 +  parseInt(Math.random()*10%3);
+							}
+						}
 						//投球
 						console.log('ball_type:' + this.ball_type);
 						this.throw_ball(this.ball_type);
@@ -1081,6 +1182,9 @@ window.onload = function mogura() {
 								this.x = this.x - this.speed_x * this.timespeed;
 								this.y = this.y - this.speed_y * this.timespeed;
 								this.h =  this.h + this.buoyancy * this.timespeed;
+
+								this.scaleX = 1 - this.h/600;
+								this.scaleY = 1 - this.h/600;
 
 								if(batted_speed > 0){
 									this.buoyancy -= 0.1 * this.timespeed;
