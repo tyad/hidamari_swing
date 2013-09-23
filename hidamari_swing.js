@@ -242,6 +242,10 @@ window.onload = function mogura() {
 					Batter.swing();
 				}
 			}
+			//リザルト画面なら決定(選択しなければ発動しない)
+			if(game.currentScene === SceneResult){
+				SceneResult.decide();
+			}
 		}
 
 //*********************
@@ -302,6 +306,7 @@ window.onload = function mogura() {
 			console.log("BGM : " + GameSet[Mode][Course]["bgm"]);
 			LastBall.update();
 			var se = game.assets['sound/hit_1.wav'];
+			se.stop();
 			se.play();
 			game.popScene(SceneTitle);
 			game.pushScene(SceneBatting);
@@ -412,6 +417,7 @@ window.onload = function mogura() {
  		SceneBatting.addEventListener('enterframe', function(){	
             //BGM ループ再生
 			if(!SceneBatting.bgm_fadeout){
+
 	            game.assets[BattingBgmFile].play();
     	        game.assets[BattingBgmFile].volume = 0.4;
 			}
@@ -455,9 +461,10 @@ window.onload = function mogura() {
 			if(this.num == 0 && this.battedball_num == 0 && Pitcher.throw_flag == true){
 				SceneBatting.bgm_fadeout = true;
 				setTimeout(function(){
-					game.pushScene(SceneResult);
+					game.assets[RESULT_BGM].stop();
 					game.assets[RESULT_BGM].play();
 					game.assets[RESULT_BGM].volume = 0.4;
+					game.pushScene(SceneResult);
 				},3000);
 			}
 		}
@@ -472,6 +479,9 @@ window.onload = function mogura() {
 		Point.max = 0; //最高飛距離
 		Point.super_hit = 0; //真芯率
 		Point.text = "<div class='label'>合計"+Point.num+"m</div>";
+		Point.update = function(){
+			this.text = "<div class='label'>合計"+Point.num+"m</div>";
+		}
 		Point.addition = function(point, hit_se){
 			this.num += point;
 			Point.text = "<div class='label'>合計"+this.num+"m</div>";
@@ -499,6 +509,14 @@ window.onload = function mogura() {
 
 		}
 
+		Point.reset = function(){
+		Point.num = 0;
+		Point.ball =  null;
+		Point.ball =  new Array(); //ボール別のスコア
+		Point.miss = 0; //空振り率
+		Point.max = 0; //最高飛距離
+		Point.super_hit = 0; //真芯率
+		}
 	//*投球（ミートカーソルのあたり判定用にここで変数定義）*
 		var Ball;
 
@@ -1257,6 +1275,10 @@ window.onload = function mogura() {
 									BattedBall.speed_y = batted_speed * Math.sin(angle * Math.PI/180);
 								}
 							}
+
+							if(LastBall.num == LastBall.max){
+								Camera.removeChild(this);
+							}
 						});
 
 						var BattedBallHop = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
@@ -1269,6 +1291,10 @@ window.onload = function mogura() {
 								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y * BattedBall.timespeed - BattedBall.h - BALL_SIZE_Y/3);
 								BattedBallHop.scaleX = 1 + BattedBall.h/200;
 								BattedBallHop.scaleY = 1 + BattedBall.h/200;
+							}
+
+							if(LastBall.num == LastBall.max){
+								Camera.removeChild(this);
 							}
 						});
 						Camera.addChild(BattedBall);
@@ -1291,7 +1317,10 @@ window.onload = function mogura() {
 				MeetCursor.y = Batter.y + 60;
 
 			}
+
 		});
+
+
 		
 	//*エフェクト*
 		var Effect = new Group();
@@ -1371,10 +1400,19 @@ window.onload = function mogura() {
 				game.assets[BattingBgmFile].volume -= 0.005;
 				if(game.assets[BattingBgmFile].volume < 0.01){
 					game.assets[BattingBgmFile].volume = 0;
+					game.assets[BattingBgmFile].stop();
 				}
 			}
 
 		});
+
+		Camera.reset = function(){
+			SceneBatting.bgm_fadeout = false;
+			game.assets[BattingBgmFile].volume = 0.4;
+			Camera.speed = 10;
+			Camera.target_x = CAMERA_BATTING_X;
+			Camera.target_y = CAMERA_BATTING_Y;
+		}
 
 	//add
 		SceneBatting.addChild(Camera);
@@ -1384,7 +1422,8 @@ window.onload = function mogura() {
 //****************
 	//*リザルトシーン*
 		var SceneResult = new Scene();
-
+		SceneResult.animation_frame = 0;
+		SceneResult.score_ball_num = 1;
 	//*背景*
 		var BackgroundResult = new Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y);
 		BackgroundResult.opacity = 0;
@@ -1397,13 +1436,82 @@ window.onload = function mogura() {
 		ResultTitle.opacity = 0;
 		ResultTitle.text = "";
 
+	//リトライ・メニューボタン
+		var RetryButton = new Label();
+		RetryButton.num = 1;
+		RetryButton.x = 100;
+		RetryButton.y = 400;
+		RetryButton.opacity = 0.3;
+		RetryButton.text = "<div class='result_button'>もう一度</h1>";
+
+		var ResetButton = new Label();
+		ResetButton.num = 1;
+		ResetButton.x = 260;
+		ResetButton.y = 400;
+		ResetButton.opacity = 0.3;
+		ResetButton.text = "<div class='result_button'>メニューへ</h1>";
+
+		SceneResult.select_menu = 0;
+		SceneResult.addEventListener('leftbuttondown', function(){
+			SceneResult.select_menu = 1;
+			RetryButton.opacity = 0.8;
+		});
+		SceneResult.addEventListener('rightbuttondown', function(){
+			SceneResult.select_menu = 2;
+			ResetButton.opacity = 0.8;
+		});
+
+	//決定
+		SceneResult.decide = function(){
+			if(this.select_menu == 1){
+				BackgroundResult.opacity = 0;
+				SceneResult.animation_frame = 0;
+				SceneResult.score_ball_num = 1;
+				Pitcher.throw_interval_count = -30; //初回
+				game.assets[RESULT_BGM].stop();
+				game.assets[RESULT_BGM].volume = 0;
+				game.assets[BattingBgmFile].stop();
+				game.popScene(SceneResult);
+				game.popScene(SceneBatting);
+				game.pushScene(SceneBatting);
+				StartButton.game_start();
+				Point.reset();
+				Camera.reset();
+				Point.update();
+
+				for (var i =SceneResult.childNodes.length-1; i>=0; i--) {
+				SceneResult.removeChild(SceneResult.childNodes[i]);
+				}
+
+				SceneResult.addChild(BackgroundResult);
+				SceneResult.addChild(ResultTitle);
+				SceneResult.addChild(RetryButton);
+				SceneResult.addChild(ResetButton);
+
+				
+			}
+			if(this.select_menu == 2){
+				window.location.reload();
+			}
+		}
+
 	//add
 		SceneResult.addChild(BackgroundResult);
 		SceneResult.addChild(ResultTitle);
-		
-		SceneResult.animation_frame = 0;
-		SceneResult.score_ball_num = 1;
+		SceneResult.addChild(RetryButton);
+		SceneResult.addChild(ResetButton);
+
 		SceneResult.addEventListener('enterframe', function(){
+
+			//メニューのカラーチェンジ
+			if(this.select_menu != 1){
+				RetryButton.opacity = 0.3;
+			}
+
+			if(this.select_menu != 2){
+				ResetButton.opacity = 0.3;
+			}
+
 			this.animation_frame++;
 			if(BackgroundResult.opacity < 0.7){
 				BackgroundResult.opacity += 0.03;
