@@ -5,7 +5,7 @@ window.onload = function mogura() {
 	game.keybind(32, "space");  // spaceキー
 	game.preload(
 		//Background
-		'img/background_title.png',	'img/background_batting.jpg',
+		'img/background_title.jpg',	'img/background_batting.jpg',
 		//Charactor
 		'img/logo.png',
 		'img/direction.gif',
@@ -279,12 +279,14 @@ window.onload = function mogura() {
 
 	//*背景*
 		var BackgroundTitle = new Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y);
-		BackgroundTitle.image = game.assets['img/background_title.png'];
+		BackgroundTitle.image = game.assets['img/background_title.jpg'];
 
 	//*ロゴ*
-		var TitleLogo = new Sprite(332,200);
-		TitleLogo.x = 50;
-		TitleLogo.y = 20;
+		var TitleLogo = new Sprite(480,225);
+		TitleLogo.x = 0;
+		TitleLogo.y = 0;
+		TitleLogo.scaleY = 0.9;
+		TitleLogo.scaleX = 0.9;
 		TitleLogo.image = game.assets['img/logo.png'];
 	
 	//*スタートボタン*
