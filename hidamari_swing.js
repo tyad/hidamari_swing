@@ -1486,14 +1486,14 @@ window.onload = function mogura() {
 				Point.update();
 				//game.pushScene(SceneBatting);
 
-				/*for (var i =SceneResult.childNodes.length-1; i>=0; i--) {
+				for (var i =SceneResult.childNodes.length-1; i>=0; i--) {
 					SceneResult.removeChild(SceneResult.childNodes[i]);
-				}*/
+				}
 
-				//SceneResult.addChild(BackgroundResult);
-				//SceneResult.addChild(ResultTitle);
-				//SceneResult.addChild(RetryButton);
-				//SceneResult.addChild(ResetButton);
+				SceneResult.addChild(BackgroundResult);
+				SceneResult.addChild(ResultTitle);
+				SceneResult.addChild(RetryButton);
+				SceneResult.addChild(ResetButton);
 				
 				game.pushScene(SceneBatting);
 			}
