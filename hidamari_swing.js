@@ -158,7 +158,7 @@ window.onload = function mogura() {
 				"course_name" : "100本ノック",
 				"gamemode_number" : 5,
 				"powerfilter": 1.0,
-				"ball_number" : 5,
+				"ball_number" : 100,
 				"bgm" : 'sound/bgm_extra2.mp3',
 				"discription" : "100球 / 芯の大きさ：☆<br> カメラ移動なし！テンポよく打ちまくれ！"
 			},
@@ -458,12 +458,14 @@ window.onload = function mogura() {
 		}
 		LastBall.decrement = function(){
 			this.update();
-			if(this.num == 0 && this.battedball_num == 0 && Pitcher.throw_flag == true){
+			if(this.num == 0 && this.battedball_num == 0 && Pitcher.throw_flag == true && SceneBatting.bgm_fadeout == false){
 				SceneBatting.bgm_fadeout = true;
+				console.log("ゲーム終了");
 				setTimeout(function(){
 					game.assets[RESULT_BGM].stop();
 					game.assets[RESULT_BGM].play();
 					game.assets[RESULT_BGM].volume = 0.4;
+					game.pushScene(SceneBatting);
 					game.pushScene(SceneResult);
 				},3000);
 			}
@@ -1464,32 +1466,34 @@ window.onload = function mogura() {
 	//決定
 		SceneResult.decide = function(){
 			if(this.select_menu == 1){
+				SceneResult.select_menu = 0;
+				SceneResult.animation_frame = 0;
+				SceneResult.score_ball_num = 1;
+
 				BackgroundResult.opacity = 0;
 				Pitcher.throw_interval_count = -30; //初回
 				game.assets[RESULT_BGM].stop();
 				game.assets[RESULT_BGM].volume = 0;
 				game.assets[BattingBgmFile].stop();
 				game.popScene(SceneResult);
-				game.popScene(SceneBatting);
-				game.pushScene(SceneBatting);
+				//game.popScene(SceneBatting);
+				
 				StartButton.game_start();
 				Point.reset();
 				Camera.reset();
 				Point.update();
+				//game.pushScene(SceneBatting);
 
+				/*for (var i =SceneResult.childNodes.length-1; i>=0; i--) {
+					SceneResult.removeChild(SceneResult.childNodes[i]);
+				}*/
 
-				for (var i =SceneResult.childNodes.length-1; i>=0; i--) {
-				SceneResult.removeChild(SceneResult.childNodes[i]);
-				}
-
-				SceneResult.addChild(BackgroundResult);
-				SceneResult.addChild(ResultTitle);
-				SceneResult.addChild(RetryButton);
-				SceneResult.addChild(ResetButton);
-
-				SceneResult.animation_frame = 0;
-				SceneResult.score_ball_num = 1;
+				//SceneResult.addChild(BackgroundResult);
+				//SceneResult.addChild(ResultTitle);
+				//SceneResult.addChild(RetryButton);
+				//SceneResult.addChild(ResetButton);
 				
+				game.pushScene(SceneBatting);
 			}
 			if(this.select_menu == 2){
 				window.location.reload();
@@ -1497,11 +1501,12 @@ window.onload = function mogura() {
 		}
 
 	//add
+		
 		SceneResult.addChild(BackgroundResult);
 		SceneResult.addChild(ResultTitle);
 		SceneResult.addChild(RetryButton);
 		SceneResult.addChild(ResetButton);
-
+		
 		SceneResult.addEventListener('enterframe', function(){
 
 			//メニューのカラーチェンジ
@@ -1536,6 +1541,7 @@ window.onload = function mogura() {
 						ResultBallNum.y = 60 + this.score_ball_num*20;
 						ResultBallNum.text = "<div class=\"result_num\">"+this.score_ball_num+"球目</div>";
 						SceneResult.addChild(ResultBallNum);
+
 						var ResultBallNum = new Label();
 						ResultBallNum.x = 220;
 						ResultBallNum.y = 60 + this.score_ball_num*20;
