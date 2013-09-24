@@ -158,7 +158,7 @@ window.onload = function mogura() {
 				"course_name" : "100本ノック",
 				"gamemode_number" : 5,
 				"powerfilter": 1.0,
-				"ball_number" : 100,
+				"ball_number" : 5,
 				"bgm" : 'sound/bgm_extra2.mp3',
 				"discription" : "100球 / 芯の大きさ：☆<br> カメラ移動なし！テンポよく打ちまくれ！"
 			},
@@ -983,7 +983,7 @@ window.onload = function mogura() {
 					//インターバルカウント
 					else if ((this.frame < 9) && (LastBall.num > 0)) {
 							this.throw_interval_count++;
-						if(GameMode == 5 && LastBall.num != BALL_KNOCK_NUM){
+						if(GameMode == 5 && LastBall.num != LastBall.max){
 							this.throw_interval_count = PITCH_INTERVAL;
 						}
 
@@ -1465,8 +1465,6 @@ window.onload = function mogura() {
 		SceneResult.decide = function(){
 			if(this.select_menu == 1){
 				BackgroundResult.opacity = 0;
-				SceneResult.animation_frame = 0;
-				SceneResult.score_ball_num = 1;
 				Pitcher.throw_interval_count = -30; //初回
 				game.assets[RESULT_BGM].stop();
 				game.assets[RESULT_BGM].volume = 0;
@@ -1479,6 +1477,7 @@ window.onload = function mogura() {
 				Camera.reset();
 				Point.update();
 
+
 				for (var i =SceneResult.childNodes.length-1; i>=0; i--) {
 				SceneResult.removeChild(SceneResult.childNodes[i]);
 				}
@@ -1488,6 +1487,8 @@ window.onload = function mogura() {
 				SceneResult.addChild(RetryButton);
 				SceneResult.addChild(ResetButton);
 
+				SceneResult.animation_frame = 0;
+				SceneResult.score_ball_num = 1;
 				
 			}
 			if(this.select_menu == 2){
