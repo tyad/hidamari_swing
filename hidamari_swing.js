@@ -282,8 +282,8 @@ window.onload = function mogura() {
 		BackgroundTitle.image = game.assets['img/background_title.jpg'];
 
 	//*ロゴ*
-		var TitleLogo = new Sprite(480,225);
-		TitleLogo.x = 0;
+		var TitleLogo = new Sprite(450,300);
+		TitleLogo.x = 15;
 		TitleLogo.y = 0;
 		TitleLogo.scaleY = 0.9;
 		TitleLogo.scaleX = 0.9;
