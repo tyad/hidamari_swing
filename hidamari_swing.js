@@ -248,6 +248,12 @@ window.onload = function mogura() {
 			}
 		}
 
+		function play_se(file_pass){
+			var se = game.assets[file_pass];
+			se.stop();
+			se.play();
+		}
+
 //*********************
 //タイトル画面
 //*******************
@@ -307,9 +313,7 @@ window.onload = function mogura() {
 			console.log("GameMode : " + GameSet[Mode][Course]["gamemode_number"]);
 			console.log("BGM : " + GameSet[Mode][Course]["bgm"]);
 			LastBall.update();
-			var se = game.assets['sound/hit_1.wav'];
-			se.stop();
-			se.play();
+			play_se('sound/hit_1.wav');
 			game.popScene(SceneTitle);
 			game.pushScene(SceneBatting);
 		}
@@ -497,7 +501,7 @@ window.onload = function mogura() {
 			this.ball.push(this.obj);
 
 			//真芯カウントの追加
-			if(hit_se == 0){
+			if(hit_se == 'sound/hit_ex.wav'){
 				this.super_hit++;
 			}
 
@@ -514,12 +518,12 @@ window.onload = function mogura() {
 		}
 
 		Point.reset = function(){
-		Point.num = 0;
-		Point.ball =  null;
-		Point.ball =  new Array(); //ボール別のスコア
-		Point.miss = 0; //空振り率
-		Point.max = 0; //最高飛距離
-		Point.super_hit = 0; //真芯率
+			Point.num = 0;
+			Point.ball =  null;
+			Point.ball =  new Array(); //ボール別のスコア
+			Point.miss = 0; //空振り率
+			Point.max = 0; //最高飛距離
+			Point.super_hit = 0; //真芯率
 		}
 	//*投球（ミートカーソルのあたり判定用にここで変数定義）*
 		var Ball;
@@ -1000,7 +1004,7 @@ window.onload = function mogura() {
 						}
 
 						if(game.frame % (game.fps/10) == 0){
-							console.log(this.frame);//for debug
+							console.log('Pitcher.frame:'+this.frame);//for debug
 			            	if(this.frame == 11){
 			            		this.frame = 0;
 			            	}else{
@@ -1154,27 +1158,23 @@ window.onload = function mogura() {
 							batted_speed = 3;	
 					    }
 							
-						var hit_se = 0;
+						var hit_se ='';
+						//var hit_se = 0;
 						if(batted_speed > 19.5){
-							var se = game.assets['sound/hit_ex.wav'];
-							se.play();
-							hit_se = 0;
+							play_se('sound/hit_ex.wav');
+							hit_se = 'sound/hit_ex.wav';
 						}else if(batted_speed>14){
-							var se = game.assets['sound/hit_1.wav'];
-							se.play();
-							hit_se = 1;
+							play_se('sound/hit_1.wav');
+							hit_se = 'sound/hit_1.wav';
 						}else if(batted_speed > 10){
-							var se = game.assets['sound/hit_2.wav'];
-							se.play();
-							hit_se = 2;
+							play_se('sound/hit_2.wav');
+							hit_se = 'sound/hit_2.wav';
 						}else if(batted_speed > 6){
-							var se = game.assets['sound/hit_3.wav'];
-							se.play();
-							hit_se = 3;
+							play_se('sound/hit_3.wav');
+							hit_se = 'sound/hit_3.wav';
 						}else if(batted_speed > 0){
-							var se = game.assets['sound/hit_4.wav'];
-							se.play();
-							hit_se = 4;
+							play_se('sound/hit_4.wav');
+							hit_se = 'sound/hit_4.wav';
 						}
 					    console.log('batted_speed:'+batted_speed);//for debug
 					//*打球*
@@ -1237,7 +1237,7 @@ window.onload = function mogura() {
 											if(GameMode != 5){
 												Pitcher.throw_flag = true;
 											}
-											console.log('hit_se'+hit_se);
+											console.log('hit_se:'+hit_se);
 											Point.addition(parseInt(BattedBall.flown), hit_se); 
 											LastBall.visible = true;
 											Point.visible = true;
@@ -1428,60 +1428,24 @@ window.onload = function mogura() {
 		var SceneResult = new Scene();
 		SceneResult.animation_frame = 0;
 		SceneResult.score_ball_num = 1;
-	//*背景*
-		var BackgroundResult = new Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y);
-		BackgroundResult.opacity = 0;
-		BackgroundResult.backgroundColor = "black";
-
-	//*得点*
-		var ResultTitle = new Label();
-		ResultTitle.x = 180;
-		ResultTitle.y = 20;
-		ResultTitle.opacity = 0;
-		ResultTitle.text = "";
-
-	//リトライ・メニューボタン
-		var RetryButton = new Label();
-		RetryButton.num = 1;
-		RetryButton.x = 100;
-		RetryButton.y = 400;
-		RetryButton.opacity = 0.3;
-		RetryButton.text = "<div class='result_button'>もう一度</h1>";
-		RetryButton.addEventListener('touchstart', function (e) {
-			SceneResult.select_menu = 1;
-			RetryButton.opacity = 0.8;
-			SceneResult.decide();
-		});
-
-		var ResetButton = new Label();
-		ResetButton.num = 1;
-		ResetButton.x = 260;
-		ResetButton.y = 400;
-		ResetButton.opacity = 0.3;
-		ResetButton.text = "<div class='result_button'>メニューへ</h1>";
-		ResetButton.addEventListener('touchstart', function (e) {
-			SceneResult.select_menu = 2;
-			ResetButton.opacity = 0.8;
-			SceneResult.decide();
-		});
-
+		//リトライ=1, リセット=2
 		SceneResult.select_menu = 0;
 		SceneResult.addEventListener('leftbuttondown', function(){
 			SceneResult.select_menu = 1;
 			RetryButton.opacity = 0.8;
+			ResetButton.opacity = 0.3;
 		});
 		SceneResult.addEventListener('rightbuttondown', function(){
 			SceneResult.select_menu = 2;
 			ResetButton.opacity = 0.8;
+			RetryButton.opacity = 0.3;
 		});
-
-	//決定
+		//スペースを押したとき
 		SceneResult.decide = function(){
 			if(this.select_menu == 1){
 				SceneResult.select_menu = 0;
 				SceneResult.animation_frame = 0;
 				SceneResult.score_ball_num = 1;
-
 				BackgroundResult.opacity = 0;
 				Pitcher.throw_interval_count = -30; //初回
 				game.assets[RESULT_BGM].stop();
@@ -1511,81 +1475,53 @@ window.onload = function mogura() {
 				window.location.reload();
 			}
 		}
+		//ResultBallNum生成関数
+		function make_ResultBallNum(x, y, text){
+			var ResultBallNum = new Label();
+			ResultBallNum.x = x;
+			ResultBallNum.y = y;
+			ResultBallNum.text = "<div class=\"result_num\">"+text+"球目</div>";
+			
+			return ResultBallNum;
+		}
 
-	//add
-		
-		SceneResult.addChild(BackgroundResult);
-		SceneResult.addChild(ResultTitle);
-		SceneResult.addChild(RetryButton);
-		SceneResult.addChild(ResetButton);
-		
 		SceneResult.addEventListener('enterframe', function(){
-
-			//メニューのカラーチェンジ
-			if(this.select_menu != 1){
-				RetryButton.opacity = 0.3;
-			}
-
-			if(this.select_menu != 2){
-				ResetButton.opacity = 0.3;
-			}
-
 			this.animation_frame++;
 			if(BackgroundResult.opacity < 0.7){
 				BackgroundResult.opacity += 0.03;
 			}
-
-
-				if(this.animation_frame == 10){
-					ResultTitle.text = "<div id=\"result_title\">結果発表</div>";
-				}
-				if(ResultTitle.opacity < 1){
-					ResultTitle.opacity += 0.05;
-				}
-
+			if(this.animation_frame == 10){
+				ResultTitle.text = "<div id=\"result_title\">結果発表</div>";
+			}
+			if(ResultTitle.opacity < 1){
+				ResultTitle.opacity += 0.05;
+			}
 			if(GameMode != 5){
-
-
 				if(this.animation_frame > 50){
 					if(this.animation_frame %10 == 0 && this.score_ball_num <= LastBall.max){
+						//x球目
+						
+						var ResultBallNum = make_ResultBallNum(100, 60+this.score_ball_num*20, this.score_ball_num);
+						SceneResult.addChild(ResultBallNum);
+						/*
 						var ResultBallNum = new Label();
 						ResultBallNum.x = 100;
 						ResultBallNum.y = 60 + this.score_ball_num*20;
 						ResultBallNum.text = "<div class=\"result_num\">"+this.score_ball_num+"球目</div>";
 						SceneResult.addChild(ResultBallNum);
-
+						*/
+						
+						//xメートル
+						
 						var ResultBallNum = new Label();
 						ResultBallNum.x = 220;
 						ResultBallNum.y = 60 + this.score_ball_num*20;
 						ResultBallNum.text = "<div class=\"result_score\">"+Point.ball[this.score_ball_num-1]['score']+"m</div>";
 						SceneResult.addChild(ResultBallNum);				
 						console.log(Point.ball[this.score_ball_num-1]['hit_se']);
-						switch(Point.ball[this.score_ball_num-1]['hit_se']){
-							case 0:
-								var se = game.assets['sound/hit_ex.wav'];
-								se.stop();
-								se.play();
-								break;
-							case 1:
-								var se = game.assets['sound/hit_1.wav'];
-								se.stop();
-								se.play();
-								break;
-							case 2:
-								var se = game.assets['sound/hit_2.wav'];
-								se.stop();
-								se.play();
-								break;
-							case 3:
-								var se = game.assets['sound/hit_3.wav'];
-								se.stop();
-								se.play();
-								break;
-							case 4:
-								var se = game.assets['sound/hit_4.wav'];
-								se.stop();
-								se.play();
-								break;
+						//空振りでなければヒット音を鳴らす
+						if(Point.ball[this.score_ball_num-1]['hit_se'] != -1){
+							play_se(Point.ball[this.score_ball_num-1]['hit_se']);						
 						}
 						this.score_ball_num++;
 					}
@@ -1597,9 +1533,12 @@ window.onload = function mogura() {
 						ResultBallNum.y = 70 + this.score_ball_num*20;
 						ResultBallNum.text = "<div class=\"result_all\">合計"+Point.num+"m</div>";
 						SceneResult.addChild(ResultBallNum);
+						play_se('sound/hit_1.wav');
+						/*
 						var se = game.assets['sound/hit_1.wav'];
 						se.stop();
 						se.play();
+						*/
 				}
 			}
 
@@ -1616,10 +1555,7 @@ window.onload = function mogura() {
 					ResultBallNum.y = 70;
 					ResultBallNum.text = "<div class=\"result_score\">"+Point.max+"m</div>";
 					SceneResult.addChild(ResultBallNum);
-
-					var se = game.assets['sound/hit_1.wav'];
-					se.stop();
-					se.play();
+					play_se('sound/hit_1.wav');
 				}
 
 				if(this.animation_frame == 70){
@@ -1634,10 +1570,7 @@ window.onload = function mogura() {
 					ResultBallNum.y = 125;
 					ResultBallNum.text = "<div class=\"result_score\">"+Point.super_hit+"回</div>";
 					SceneResult.addChild(ResultBallNum);
-
-					var se = game.assets['sound/hit_1.wav'];
-					se.stop();
-					se.play();
+					play_se('sound/hit_1.wav');
 				}
 
 				if(this.animation_frame == 90){
@@ -1652,12 +1585,8 @@ window.onload = function mogura() {
 					ResultBallNum.y = 180;
 					ResultBallNum.text = "<div class=\"result_score\">"+Point.miss+"回</div>";
 					SceneResult.addChild(ResultBallNum);
-
-					var se = game.assets['sound/hit_1.wav'];
-					se.stop();
-					se.play();
+					play_se('sound/hit_1.wav');
 				}
-
 
 				if(this.animation_frame == 110){
 					var ResultBallNum = new Label();
@@ -1665,15 +1594,58 @@ window.onload = function mogura() {
 					ResultBallNum.y = 230;
 					ResultBallNum.text = "<div class=\"result_all\">合計"+Point.num+"m</div>";
 					SceneResult.addChild(ResultBallNum);
-					var se = game.assets['sound/hit_1.wav'];
-					se.stop();
-					se.play();
+					play_se('sound/hit_1.wav');
 				}
 			}
 
-
 		});
 
+
+	//*背景*
+		var BackgroundResult = new Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y);
+		BackgroundResult.opacity = 0;
+		BackgroundResult.backgroundColor = "black";
+
+	//*得点*
+		var ResultTitle = new Label();
+		ResultTitle.x = 180;
+		ResultTitle.y = 20;
+		ResultTitle.opacity = 0;
+		ResultTitle.text = "";
+
+	//*リトライボタン
+		var RetryButton = new Label();
+		//RetryButton.num = 1;
+		RetryButton.x = 100;
+		RetryButton.y = 400;
+		RetryButton.opacity = 0.3;
+		RetryButton.text = "<div class='result_button'>もう一度</h1>";
+		RetryButton.addEventListener('touchstart', function (e) {
+			SceneResult.select_menu = 1;
+			RetryButton.opacity = 0.8;
+			SceneResult.decide();
+		});
+
+	//*リセットボタン*
+		var ResetButton = new Label();
+		ResetButton.num = 1;
+		ResetButton.x = 260;
+		ResetButton.y = 400;
+		ResetButton.opacity = 0.3;
+		ResetButton.text = "<div class='result_button'>メニューへ</h1>";
+		ResetButton.addEventListener('touchstart', function (e) {
+			SceneResult.select_menu = 2;
+			ResetButton.opacity = 0.8;
+			SceneResult.decide();
+		});
+
+	//add
+		SceneResult.addChild(BackgroundResult);
+		SceneResult.addChild(ResultTitle);
+		SceneResult.addChild(RetryButton);
+		SceneResult.addChild(ResetButton);
+		
+		
 //##########
 //ゲーム管理
 //##########
