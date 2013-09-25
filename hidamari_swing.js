@@ -1447,6 +1447,11 @@ window.onload = function mogura() {
 		RetryButton.y = 400;
 		RetryButton.opacity = 0.3;
 		RetryButton.text = "<div class='result_button'>もう一度</h1>";
+		RetryButton.addEventListener('touchstart', function (e) {
+			SceneResult.select_menu = 1;
+			RetryButton.opacity = 0.8;
+			SceneResult.decide();
+		});
 
 		var ResetButton = new Label();
 		ResetButton.num = 1;
@@ -1454,6 +1459,11 @@ window.onload = function mogura() {
 		ResetButton.y = 400;
 		ResetButton.opacity = 0.3;
 		ResetButton.text = "<div class='result_button'>メニューへ</h1>";
+		ResetButton.addEventListener('touchstart', function (e) {
+			SceneResult.select_menu = 2;
+			ResetButton.opacity = 0.8;
+			SceneResult.decide();
+		});
 
 		SceneResult.select_menu = 0;
 		SceneResult.addEventListener('leftbuttondown', function(){
