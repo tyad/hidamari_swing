@@ -249,6 +249,7 @@ window.onload = function mogura() {
 		}
 
 		function play_se(file_pass){
+			console.log('play se :'+file_pass);
 			var se = game.assets[file_pass];
 			se.stop();
 			se.play();
@@ -423,7 +424,6 @@ window.onload = function mogura() {
  		SceneBatting.addEventListener('enterframe', function(){	
             //BGM ループ再生
 			if(!SceneBatting.bgm_fadeout){
-
 	            game.assets[BattingBgmFile].play();
     	        game.assets[BattingBgmFile].volume = 0.4;
 			}
@@ -504,17 +504,14 @@ window.onload = function mogura() {
 			if(hit_se == 'sound/hit_ex.wav'){
 				this.super_hit++;
 			}
-
 			//飛距離0なら空振り
 			if(point == 0){
 				this.miss++;
 			}
-
 			//最高飛距離の更新
 			if(this.max < point){
 				this.max = point;
 			}
-
 		}
 
 		Point.reset = function(){
@@ -580,7 +577,6 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						
 					});
 					break;
 
@@ -594,13 +590,11 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						
 					});
 					break;
 
 				case　202: //カーブとシンカー：弧を描く
 					Ball.carve = Math.random() * 3 + 2;
-
 					if(parseInt(Math.random()*10)%2 == 1){
 						Ball.carve *= -1;
 					}
@@ -638,12 +632,10 @@ window.onload = function mogura() {
 
 						this.x = this.x + this.speed_x+this.plus_x;
 						this.y = this.y + this.speed_y;
-					
 					});
 					break;
 
 				case　204: //スローボール
-
 					Ball.speed_x = (Math.random() - Math.random()) * 0.8;
 					Ball.speed_y = 5 + Math.random() * 3;
 					Ball.buoyancy = -6;
@@ -654,7 +646,6 @@ window.onload = function mogura() {
 						Ball.buoyancy += 0.3
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y + Ball.buoyancy;
-						
 					});
 					break;
 
@@ -668,7 +659,6 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
-						
 					});
 					break;
 
@@ -681,13 +671,11 @@ window.onload = function mogura() {
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.throw_frame ++;
-
 						if(this.throw_frame % 8 == 0){
 							Ball.speed_ex_x *= -1;
 						}
 						this.x = this.x + this.speed_x + this.speed_x + this.speed_ex_x;
 						this.y = this.y + this.speed_y;
-						
 					});
 					break;
 
@@ -701,10 +689,8 @@ window.onload = function mogura() {
 					Ball.addEventListener('enterframe', function(){
 						this.throw_frame ++;
 						Ball.buoyancy += 0.4
-						
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y + Ball.buoyancy;
-						
 					});
 					break;
 
@@ -716,11 +702,9 @@ window.onload = function mogura() {
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.throw_frame ++;
-
 						if(Ball.throw_frame == 1){
 							this.x += Ball.bure/2;
 						}
-
 						if(this.bure > 0){
 							this.bure *= 0.85;
 						}
@@ -728,10 +712,8 @@ window.onload = function mogura() {
 						if(this.throw_frame %2 == 1){
 							this.plus_x *= -1;
 						}
-
 						this.x = this.x + this.speed_x+this.plus_x;
 						this.y = this.y + this.speed_y;
-						
 					});
 					break;
 
@@ -760,8 +742,6 @@ window.onload = function mogura() {
 						}else if(this.y >= Pitcher.y + 330){
 							this.visible = false;
 						}
-					
-						
 					});
 					break;
 
@@ -870,7 +850,6 @@ window.onload = function mogura() {
 
 				case　602: //カーブとシンカー：弧を描く
 					Ball.carve = Math.random() * 3 + 4;
-
 					if(parseInt(Math.random()*10)%2 == 1){
 						Ball.carve *= -1;
 					}
@@ -893,11 +872,9 @@ window.onload = function mogura() {
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.throw_frame ++;
-
 						if(Ball.throw_frame == 1){
 							this.x += Ball.bure/2;
 						}
-
 						if(this.bure > 0){
 							this.bure *= 0.85;
 						}
@@ -905,7 +882,6 @@ window.onload = function mogura() {
 						if(this.throw_frame %2 == 1){
 							this.plus_x *= -1;
 						}
-
 						this.x = this.x + this.speed_x+this.plus_x;
 						this.y = this.y + this.speed_y;
 					
@@ -927,9 +903,6 @@ window.onload = function mogura() {
 						
 					});
 					break;
-
-				
-
 			}
 
 			//空振り処理
@@ -956,22 +929,16 @@ window.onload = function mogura() {
 						//球種を選定する
 						//ストレートを設定
 						this.ball_type = GameMode*100 + 1;
-
-						//イージーモード
-						if(GameMode == 1){
-
-						//ノーマルモード
-						}else if(GameMode == 2){
+						if(GameMode == 1){//イージーモード
+						
+						}else if(GameMode == 2){//ノーマルモード
 							//残り球数が奇数の時に変化球を混ぜる
 							if(LastBall.num %2 == 1){
 								this.ball_type += 1 +  parseInt(Math.random()*10%3);
 							}
-
-						//ゆのさまモード
-						}else if(GameMode == 3){
+						}else if(GameMode == 3){//ゆのさまモード
 							//常に変化球も投げる
 							this.ball_type += parseInt(Math.random()*10%8);
-
 						}else if(GameMode == 6){
 							//残り球数が奇数の時に変化球を混ぜる
 							if(LastBall.num %2 == 1){
@@ -994,15 +961,12 @@ window.onload = function mogura() {
 						if(GameMode == 5 && LastBall.num != LastBall.max){
 							this.throw_interval_count = PITCH_INTERVAL;
 						}
-
 					}
 					//セットモーション
 					else if((this.frame >= 9) && (this.throw_interval_count == 0)){
-
 						if(GameMode == 5 && LastBall.num > 0){
 							this.frame = 3;
 						}
-
 						if(game.frame % (game.fps/10) == 0){
 							console.log('Pitcher.frame:'+this.frame);//for debug
 			            	if(this.frame == 11){
@@ -1012,12 +976,9 @@ window.onload = function mogura() {
 							}
 			        	}
 					}
-
 				}
-
 			}
 		});
-		
 
 	//*バット*
 		var Bat = new Sprite(96,32);
@@ -1475,14 +1436,15 @@ window.onload = function mogura() {
 				window.location.reload();
 			}
 		}
-		//ResultBallNum生成関数
-		function make_ResultBallNum(x, y, text){
-			var ResultBallNum = new Label();
-			ResultBallNum.x = x;
-			ResultBallNum.y = y;
-			ResultBallNum.text = "<div class=\"result_num\">"+text+"球目</div>";
-			
-			return ResultBallNum;
+
+		//*ラベル生成関数*
+		function make_Label(x, y, class_name, text){
+			console.log('makelabel');
+			var TempLabel = new Label();
+			TempLabel.x = x;
+			TempLabel.y = y;
+			TempLabel.text = "<div class='"+class_name+"'>"+text+"</div>";
+			return TempLabel;
 		}
 
 		SceneResult.addEventListener('enterframe', function(){
@@ -1496,29 +1458,53 @@ window.onload = function mogura() {
 			if(ResultTitle.opacity < 1){
 				ResultTitle.opacity += 0.05;
 			}
-			if(GameMode != 5){
+			//100本モードとそれ以外のモードで結果表示を変化
+			if(GameMode == 5){
+				if(this.animation_frame == 50){
+					var MaxFlownHead = make_Label(120, 70, "result_type", "最高飛距離");
+					SceneResult.addChild(MaxFlownHead);
+
+					var MaxFlown = make_Label(240, 70, "result_score", Point.max+"m");
+					SceneResult.addChild(MaxFlown);
+
+					play_se('sound/hit_1.wav');
+				}
+
+				if(this.animation_frame == 70){
+					var SpuerHitHead = make_Label(120, 125, "result_type", "真芯ヒット数");
+					SceneResult.addChild(SpuerHitHead);
+
+					var SpuerHitNum = make_Label(240, 125, "result_score", Point.super_hit+"回");
+					SceneResult.addChild(SpuerHitNum);
+
+					play_se('sound/hit_1.wav');
+				}
+
+				if(this.animation_frame == 90){
+					var WhiffNumHead = make_Label(120, 180, "result_type", "空振り数");
+					SceneResult.addChild(WhiffNumHead);
+
+					var WhiffNum = make_Label(240, 180, "result_score", Point.miss+"回");
+					SceneResult.addChild(WhiffNum);
+
+					play_se('sound/hit_1.wav');
+				}
+
+				if(this.animation_frame == 110){
+					var TotalMeter = make_Label(120, 230, "result_total", "合計"+Point.num+"m");
+					SceneResult.addChild(TotalMeter);
+
+					play_se('sound/hit_1.wav');
+				}
+			}else{
 				if(this.animation_frame > 50){
 					if(this.animation_frame %10 == 0 && this.score_ball_num <= LastBall.max){
 						//x球目
-						
-						var ResultBallNum = make_ResultBallNum(100, 60+this.score_ball_num*20, this.score_ball_num);
-						SceneResult.addChild(ResultBallNum);
-						/*
-						var ResultBallNum = new Label();
-						ResultBallNum.x = 100;
-						ResultBallNum.y = 60 + this.score_ball_num*20;
-						ResultBallNum.text = "<div class=\"result_num\">"+this.score_ball_num+"球目</div>";
-						SceneResult.addChild(ResultBallNum);
-						*/
-						
+						var BallNum = make_Label(100, 60+this.score_ball_num*20, "result_num", this.score_ball_num+"球目");
+						SceneResult.addChild(BallNum);
 						//xメートル
-						
-						var ResultBallNum = new Label();
-						ResultBallNum.x = 220;
-						ResultBallNum.y = 60 + this.score_ball_num*20;
-						ResultBallNum.text = "<div class=\"result_score\">"+Point.ball[this.score_ball_num-1]['score']+"m</div>";
-						SceneResult.addChild(ResultBallNum);				
-						console.log(Point.ball[this.score_ball_num-1]['hit_se']);
+						var Meter = make_Label(220, 60+this.score_ball_num*20, "result_score", Point.ball[this.score_ball_num-1]['score']+"m");
+						SceneResult.addChild(Meter);
 						//空振りでなければヒット音を鳴らす
 						if(Point.ball[this.score_ball_num-1]['hit_se'] != -1){
 							play_se(Point.ball[this.score_ball_num-1]['hit_se']);						
@@ -1526,78 +1512,13 @@ window.onload = function mogura() {
 						this.score_ball_num++;
 					}
 				}
-
 				if(this.animation_frame == 60 + LastBall.max *10){
-						var ResultBallNum = new Label();
-						ResultBallNum.x = 120;
-						ResultBallNum.y = 70 + this.score_ball_num*20;
-						ResultBallNum.text = "<div class=\"result_all\">合計"+Point.num+"m</div>";
-						SceneResult.addChild(ResultBallNum);
+						var TotalMeter = make_Label(120, 70+this.score_ball_num*20, "result_total", "合計"+Point.num+"m");
+						SceneResult.addChild(TotalMeter);
+
 						play_se('sound/hit_1.wav');
-						/*
-						var se = game.assets['sound/hit_1.wav'];
-						se.stop();
-						se.play();
-						*/
 				}
 			}
-
-			if(GameMode == 5){
-				if(this.animation_frame == 50){
-					var ResultBallNum = new Label();
-					ResultBallNum.x = 120;
-					ResultBallNum.y = 70;
-					ResultBallNum.text = "<div class=\"result_type\">最高飛距離</div>";
-					SceneResult.addChild(ResultBallNum);
-
-					var ResultBallNum = new Label();
-					ResultBallNum.x = 240;
-					ResultBallNum.y = 70;
-					ResultBallNum.text = "<div class=\"result_score\">"+Point.max+"m</div>";
-					SceneResult.addChild(ResultBallNum);
-					play_se('sound/hit_1.wav');
-				}
-
-				if(this.animation_frame == 70){
-					var ResultBallNum = new Label();
-					ResultBallNum.x = 120;
-					ResultBallNum.y = 125;
-					ResultBallNum.text = "<div class=\"result_type\">真芯ヒット</div>";
-					SceneResult.addChild(ResultBallNum);
-
-					var ResultBallNum = new Label();
-					ResultBallNum.x = 240;
-					ResultBallNum.y = 125;
-					ResultBallNum.text = "<div class=\"result_score\">"+Point.super_hit+"回</div>";
-					SceneResult.addChild(ResultBallNum);
-					play_se('sound/hit_1.wav');
-				}
-
-				if(this.animation_frame == 90){
-					var ResultBallNum = new Label();
-					ResultBallNum.x = 120;
-					ResultBallNum.y = 180;
-					ResultBallNum.text = "<div class=\"result_type\">空振り</div>";
-					SceneResult.addChild(ResultBallNum);
-
-					var ResultBallNum = new Label();
-					ResultBallNum.x = 240;
-					ResultBallNum.y = 180;
-					ResultBallNum.text = "<div class=\"result_score\">"+Point.miss+"回</div>";
-					SceneResult.addChild(ResultBallNum);
-					play_se('sound/hit_1.wav');
-				}
-
-				if(this.animation_frame == 110){
-					var ResultBallNum = new Label();
-					ResultBallNum.x = 120;
-					ResultBallNum.y = 230;
-					ResultBallNum.text = "<div class=\"result_all\">合計"+Point.num+"m</div>";
-					SceneResult.addChild(ResultBallNum);
-					play_se('sound/hit_1.wav');
-				}
-			}
-
 		});
 
 
