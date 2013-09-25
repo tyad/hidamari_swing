@@ -14,10 +14,10 @@ window.onload = function mogura() {
 		'img/bat.gif',
 		'img/miyako.gif',
 		'img/meetcursor.png',
-		'img/ball.gif',
-		'img/ball_shadow.gif',
+		'img/ball.gif',	'img/ball_shadow.gif',
 		'img/swing_button.png',
 		'img/effect_line.gif',
+		'img/sound.gif', 'img/sound_n.gif',
 		//BGM
 		'sound/bgm_easy.mp3', 'sound/bgm_normal.mp3',
 		'sound/bgm_hard.mp3', 'sound/bgm_extra1.mp3', 'sound/bgm_extra2.mp3',
@@ -54,10 +54,10 @@ window.onload = function mogura() {
 	var BALL_NUM = 10;
 	var BALL_KNOCK_NUM = 100; //100本ノック
 	//残り球数表示位置
-	var LASTBALL_X = (CAMERA_BATTING_X * -1) + 400;
+	var LASTBALL_X = (CAMERA_BATTING_X * -1) + 395;
 	var LASTBALL_Y = (CAMERA_BATTING_Y * -1) + 10;
 	//得点表示位置
-	var POINT_X = (CAMERA_BATTING_X * -1) + 400;
+	var POINT_X = (CAMERA_BATTING_X * -1) + 395;
 	var POINT_Y = (CAMERA_BATTING_Y * -1) + 30;
 	//ピッチャー-サイズ
 	var PITCHER_SIZE_X = 96;
@@ -223,8 +223,14 @@ window.onload = function mogura() {
 			Course = ExtraCourse[ExtraCourseIndex];
 		}
 	}
+	console.log(GameSet[Mode][Course]["mode"]);//for debug
 
-	console.log(GameSet[Mode][Course]["mode"]);
+	//音ON/OFF用フラグ
+	var SoundFlag = true;
+	function SoundFlagSwitching () {
+		SoundFlag = !SoundFlag;
+		console.log("SoundFlag:"+SoundFlag);
+	}
 
 	game.onload = function(){
 		var GameMode = 0;
@@ -249,10 +255,12 @@ window.onload = function mogura() {
 		}
 
 		function play_se(file_pass){
-			console.log('play se :'+file_pass);
-			var se = game.assets[file_pass];
-			se.stop();
-			se.play();
+			if(SoundFlag){
+				console.log('play se :'+file_pass);
+				var se = game.assets[file_pass];
+				se.stop();
+				se.play();
+			}
 		}
 
 //*********************
@@ -401,6 +409,20 @@ window.onload = function mogura() {
 			});
 		});
 
+	//*音ボタン*
+		var SoundButton = new Sprite(40, 40);
+		SoundButton.x = SCREEN_SIZE_X-50;
+		SoundButton.y = 10;
+		SoundButton.image = game.assets['img/sound.gif'];
+		SoundButton.addEventListener('touchstart', function (e) {
+			SoundFlagSwitching();
+			if(SoundFlag){
+				this.image = game.assets['img/sound.gif'];
+			}else{
+				this.image = game.assets['img/sound_n.gif'];
+			}
+		});
+
 	//add
 		SceneTitle.addChild(BackgroundTitle);
 		SceneTitle.addChild(TitleLogo);
@@ -411,6 +433,7 @@ window.onload = function mogura() {
 		SceneTitle.addChild(ModeSwitch);
 		SceneTitle.addChild(ModeDiscription);
 		SceneTitle.addChild(HelpButton);
+		SceneTitle.addChild(SoundButton);
 
 
 //*********************
@@ -423,7 +446,7 @@ window.onload = function mogura() {
 		//フレーム更新処理
  		SceneBatting.addEventListener('enterframe', function(){	
             //BGM ループ再生
-			if(!SceneBatting.bgm_fadeout){
+			if(!SceneBatting.bgm_fadeout && SoundFlag){
 	            game.assets[BattingBgmFile].play();
     	        game.assets[BattingBgmFile].volume = 0.4;
 			}
@@ -468,9 +491,11 @@ window.onload = function mogura() {
 				SceneBatting.bgm_fadeout = true;
 				console.log("ゲーム終了");
 				setTimeout(function(){
-					game.assets[RESULT_BGM].stop();
-					game.assets[RESULT_BGM].play();
-					game.assets[RESULT_BGM].volume = 0.4;
+					if(SoundFlag){
+						game.assets[RESULT_BGM].stop();
+						game.assets[RESULT_BGM].play();
+						game.assets[RESULT_BGM].volume = 0.4;
+					}
 					game.pushScene(SceneBatting);
 					game.pushScene(SceneResult);
 				},3000);
@@ -1409,9 +1434,11 @@ window.onload = function mogura() {
 				SceneResult.score_ball_num = 1;
 				BackgroundResult.opacity = 0;
 				Pitcher.throw_interval_count = -30; //初回
-				game.assets[RESULT_BGM].stop();
-				game.assets[RESULT_BGM].volume = 0;
-				game.assets[BattingBgmFile].stop();
+				if(SoundFlag){
+					game.assets[RESULT_BGM].stop();
+					game.assets[RESULT_BGM].volume = 0;
+					game.assets[BattingBgmFile].stop();
+				}
 				game.popScene(SceneResult);
 				//game.popScene(SceneBatting);
 				
@@ -1565,7 +1592,7 @@ window.onload = function mogura() {
 		SceneResult.addChild(ResultTitle);
 		SceneResult.addChild(RetryButton);
 		SceneResult.addChild(ResetButton);
-		
+		 
 		
 //##########
 //ゲーム管理
