@@ -70,3 +70,10 @@
 	opacity:1;
 	border-radius: 3px;
 }
+.copyright{
+	position: absolute;
+	font-size: 5px;
+	right: 10px;
+	bottom: 10px;
+	text-align: left;
+}
