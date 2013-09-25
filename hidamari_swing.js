@@ -178,10 +178,10 @@ window.onload = function mogura() {
 	var ModeSwitching = function(){
 		if(Mode == "COMMON"){
 			Mode = "EXTRA";
-			Course = "KNOCK";
+			Course = ExtraCourse[ExtraCourseIndex];
 		}else{
 			Mode = "COMMON";
-			Course = "EASY";
+			Course = CommonCourse[CommonCourseIndex];
 		}
 	} 
 	var Course = "EASY";
