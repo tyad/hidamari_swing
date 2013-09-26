@@ -191,7 +191,6 @@ window.onload = function mogura() {
 	var CommonCourseIndex = 0;
 	var ExtraCourseIndex = 0;
 	var CourseIncrement = function(){
-		//あとで配列番号処理する
 		if(Mode == "COMMON"){
 			if(CommonCourseIndex == CommonCourse.length-1){
 				CommonCourseIndex = 0;
@@ -209,7 +208,6 @@ window.onload = function mogura() {
 		}
 	}
 	var CourseDecrement = function(){
-		//あとで配列番号処理する
 		if(Mode == "COMMON"){
 			if(CommonCourseIndex == 0){
 				CommonCourseIndex = CommonCourse.length-1;
@@ -226,6 +224,7 @@ window.onload = function mogura() {
 			Course = ExtraCourse[ExtraCourseIndex];
 		}
 	}
+
 	console.log(GameSet[Mode][Course]["mode"]);//for debug
 
 	//音ON/OFF用フラグ
@@ -338,7 +337,6 @@ window.onload = function mogura() {
 		BackFrame.x = 20;
 		BackFrame.y = SCREEN_SIZE_Y/2 + 60;
 		BackFrame.text = "<div class='backframe'></div>";
-
 
 	//*矢印*
 		var ModeLeftButton = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
@@ -1122,7 +1120,7 @@ window.onload = function mogura() {
 					if(MeetCursor.intersect(Ball) && Bat.swing_frame == 3){
 						LastBall.battedball_num++;
 						Camera.removeChild(Ball);
-						console.log('hit'); //for debag
+						console.log('ヒット'); //for debag
 						MeetCursor.hit_flag = false;
 						//打球角度
 						var angle = 90 - ((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2)) * 2.5 * -1;
@@ -1289,11 +1287,10 @@ window.onload = function mogura() {
 						Camera.addChild(BattedBallHop);
 						BattedBall._element.style.zIndex = 2;
 						BattedBallHop._element.style.zIndex = 2;
-
 						if(GameMode == 5){
 							Pitcher.throw_flag = true;
-
 						}
+
 					}else if(MeetCursor.hit_flag == true){
 						console.log('スカ');
 					}
@@ -1339,20 +1336,17 @@ window.onload = function mogura() {
 		Camera.y = CAMERA_BATTING_Y + 2000; //2000:カメラ初期位置
 		Camera.target_x = CAMERA_BATTING_X; //カメラが向かう位置
 		Camera.target_y = CAMERA_BATTING_Y; //カメラが向かう位置
-		Camera.addChild(BackgroundBatting);
-		Camera.addChild(MeetCursor);
-		Camera.addChild(Pitcher);
-		Camera.addChild(Batter);
-		Camera.addChild(KeyPad);
-		Camera.addChild(SwingButton);
-		Camera.addChild(Effect);
-
 		Camera.speed = 10; //目的に対する追従速度
-
 		Camera.timestop_frame = 0; //時を止めるフレーム
 		Camera.timestart = true;
-
 		Camera.frame_test= 0;
+		Camera.reset = function(){
+			SceneBatting.bgm_fadeout = false;
+			game.assets[BattingBgmFile].volume = 0.4;
+			Camera.speed = 10;
+			Camera.target_x = CAMERA_BATTING_X;
+			Camera.target_y = CAMERA_BATTING_Y;
+		}
 		Camera.addEventListener('enterframe', function(){	
 			if(this.timestop > 0){
 				this.timestop--;
@@ -1360,7 +1354,6 @@ window.onload = function mogura() {
 			}else{
 				this.timestart = true;
 			}
-			
 			this.x = parseInt(this.x - (this.x - this.target_x)/this.speed);
 			this.y = parseInt(this.y -(this.y - this.target_y)/this.speed);
 			//states
@@ -1394,16 +1387,15 @@ window.onload = function mogura() {
 					game.assets[BattingBgmFile].stop();
 				}
 			}
-
 		});
-
-		Camera.reset = function(){
-			SceneBatting.bgm_fadeout = false;
-			game.assets[BattingBgmFile].volume = 0.4;
-			Camera.speed = 10;
-			Camera.target_x = CAMERA_BATTING_X;
-			Camera.target_y = CAMERA_BATTING_Y;
-		}
+		//カメラグループへのadd
+		Camera.addChild(BackgroundBatting);
+		Camera.addChild(MeetCursor);
+		Camera.addChild(Pitcher);
+		Camera.addChild(Batter);
+		Camera.addChild(KeyPad);
+		Camera.addChild(SwingButton);
+		Camera.addChild(Effect);
 
 	//add
 		SceneBatting.addChild(Camera);
