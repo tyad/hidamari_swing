@@ -8,6 +8,16 @@ body{
 	opacity: 0.6;
 	border-radius: 10px;
 }
+.stateframe{
+	width: 100px;
+	height: 100px;
+	background: #FFFFFF;
+	border-radius: 10px;
+}
+.statelabel{
+	color: #000000;
+	font-size: 16px;
+}
 .button{
 	color: white;
 	text-align:center;

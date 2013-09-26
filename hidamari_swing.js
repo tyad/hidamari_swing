@@ -50,15 +50,18 @@ window.onload = function mogura() {
 	//バッティング画面-デフォルトカメラ位置
 	var CAMERA_BATTING_X = -(GROUND_SIZE_X/2 - SCREEN_SIZE_X/2);
 	var CAMERA_BATTING_Y = -(GROUND_SIZE_Y - SCREEN_SIZE_Y);
+	//表示系の枠
+	var STATES_X = 375;
+	var STATES_Y = 10;
 	//残り球数
 	var BALL_NUM = 10;
 	var BALL_KNOCK_NUM = 100; //100本ノック
 	//残り球数表示位置
-	var LASTBALL_X = (CAMERA_BATTING_X * -1) + 395;
-	var LASTBALL_Y = (CAMERA_BATTING_Y * -1) + 10;
+	var LASTBALL_X = 5;
+	var LASTBALL_Y = 10;
 	//得点表示位置
-	var POINT_X = (CAMERA_BATTING_X * -1) + 395;
-	var POINT_Y = (CAMERA_BATTING_Y * -1) + 30;
+	var POINT_X = 5;
+	var POINT_Y = 30;
 	//ピッチャー-サイズ
 	var PITCHER_SIZE_X = 96;
 	var PITCHER_SIZE_Y = 96;
@@ -482,7 +485,7 @@ window.onload = function mogura() {
 		SwingButton.ontouchstart = function() {
 			get_space();
         };
-
+	
 	//*残り球数*
 		var LastBall = new Label();
 		LastBall.x = LASTBALL_X;
@@ -491,7 +494,7 @@ window.onload = function mogura() {
 		LastBall.max = BALL_NUM;
 		LastBall.battedball_num = 0; //打球の数
 		LastBall.update = function(){
-			this.text = "<div class='label'>残り<img src='img/ball.gif'>×"+this.num+"</div>";
+			this.text = "<div class='statelabel'>残り<img src='img/ball.gif'>×"+this.num+"</div>";
 		}
 		LastBall.decrement = function(){
 			this.update();
@@ -519,18 +522,16 @@ window.onload = function mogura() {
 		Point.miss = 0; //空振り率
 		Point.max = 0; //最高飛距離
 		Point.super_hit = 0; //真芯率
-		Point.text = "<div class='label'>合計"+Point.num+"m</div>";
 		Point.update = function(){
-			this.text = "<div class='label'>合計"+Point.num+"m</div>";
+			this.text = "<div class='statelabel'>合計"+this.num+"m</div>";
 		}
+		Point.update();
 		Point.addition = function(point, hit_se){
 			this.num += point;
-			Point.text = "<div class='label'>合計"+this.num+"m</div>";
-
+			this.update();
 			this.obj = new Object();
 			this.obj['hit_se'] = hit_se;
 			this.obj['score'] = point;
-
 			this.ball.push(this.obj);
 
 			//真芯カウントの追加
@@ -546,7 +547,6 @@ window.onload = function mogura() {
 				this.max = point;
 			}
 		}
-
 		Point.reset = function(){
 			Point.num = 0;
 			Point.ball =  null;
@@ -555,6 +555,19 @@ window.onload = function mogura() {
 			Point.max = 0; //最高飛距離
 			Point.super_hit = 0; //真芯率
 		}
+
+	//*表示系枠*
+		var StateFrame = new Label();
+		StateFrame.text = "<div class='stateframe'></div>";
+		
+	//*表示系グループ*
+		var States = new Group();
+		States.x = STATES_X;
+		States.y = STATES_Y+2000;
+		States.addChild(StateFrame);
+		States.addChild(LastBall);
+		States.addChild(Point);
+
 
 	//*投球（ミートカーソルのあたり判定用にここで変数定義）*
 		var Ball;
@@ -1109,10 +1122,6 @@ window.onload = function mogura() {
 				if(Pitcher.throw_flag == false){
 					if(MeetCursor.intersect(Ball) && Bat.swing_frame == 3){
 						LastBall.battedball_num++;
-						if(GameMode != 5){
-							LastBall.visible = false;
-							Point.visible = false;
-						}
 						Camera.removeChild(Ball);
 						console.log('hit'); //for debag
 						MeetCursor.hit_flag = false;
@@ -1218,9 +1227,6 @@ window.onload = function mogura() {
 											}
 											console.log('hit_se:'+hit_se);
 											Point.addition(parseInt(BattedBall.flown), hit_se); 
-											LastBall.visible = true;
-											Point.visible = true;
-
 											if(LastBall.num > 0){
 												Camera.speed = 12;
 												Camera.target_x = CAMERA_BATTING_X;
@@ -1335,8 +1341,6 @@ window.onload = function mogura() {
 		Camera.target_x = CAMERA_BATTING_X; //カメラが向かう位置
 		Camera.target_y = CAMERA_BATTING_Y; //カメラが向かう位置
 		Camera.addChild(BackgroundBatting);
-		Camera.addChild(LastBall);
-		Camera.addChild(Point);
 		Camera.addChild(MeetCursor);
 		Camera.addChild(Pitcher);
 		Camera.addChild(Batter);
@@ -1360,17 +1364,28 @@ window.onload = function mogura() {
 			
 			this.x = parseInt(this.x - (this.x - this.target_x)/this.speed);
 			this.y = parseInt(this.y -(this.y - this.target_y)/this.speed);
+			//states
+			States.x = parseInt(States.x - (States.x - STATES_X)/this.speed);
+			States.y = parseInt(States.y - (States.y - STATES_Y)/this.speed);
 
 			if(this.x >  this.target_x){
-				Camera.x--;
+				this.x--;
+				//states
+				States.x--;
 			}else if(this.x <  this.target_x){
 				this.x++;
+				//states
+				States.x++;
 			}
 
 			if(this.y >  this.target_y){
 				this.y--;
+				//states
+				States.y--;
 			}else if(this.y <  this.target_y){
 				this.y++;
+				//states
+				States.y++;
 			}
 
 			if(SceneBatting.bgm_fadeout&& game.assets[BattingBgmFile].volume > 0){
@@ -1393,6 +1408,7 @@ window.onload = function mogura() {
 
 	//add
 		SceneBatting.addChild(Camera);
+		SceneBatting.addChild(States);
 	
 //******************
 //リザルト画面
