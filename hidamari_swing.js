@@ -568,7 +568,6 @@ window.onload = function mogura() {
 		States.addChild(LastBall);
 		States.addChild(Point);
 
-
 	//*投球（ミートカーソルのあたり判定用にここで変数定義）*
 		var Ball;
 
