@@ -36,7 +36,7 @@ window.onload = function mogura() {
 	var GROUND_SIZE_Y = 1600;
 	//スタートボタン位置
 	var STARTBUTTON_X = 90;
-	var STARTBUTTON_Y = 260;
+	var STARTBUTTON_Y = 300;
 	//矢印サイズ
 	var DIRECTION_SIZE = 40;
 	//BGM
@@ -330,6 +330,13 @@ window.onload = function mogura() {
 			this.game_start();
 		});
 
+	//*枠*
+		var BackFrame = new Label();
+		BackFrame.x = 20;
+		BackFrame.y = SCREEN_SIZE_Y/2 + 60;
+		BackFrame.text = "<div class='backframe'></div>";
+
+
 	//*矢印*
 		var ModeLeftButton = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
 		ModeLeftButton.image = game.assets['img/direction.gif'];
@@ -356,7 +363,7 @@ window.onload = function mogura() {
 		var ModeSwitch = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
 		ModeSwitch.image = game.assets['img/switch.gif'];
 		ModeSwitch.x = SCREEN_SIZE_X/2 + DIRECTION_SIZE + 40;
-		ModeSwitch.y = STARTBUTTON_Y - DIRECTION_SIZE/2 - 10;
+		ModeSwitch.y = STARTBUTTON_Y - DIRECTION_SIZE/2 - 25;
 		ModeSwitch.addEventListener('touchstart', function (e) {
 			ModeSwitching();
 			StartButton.label_update();
@@ -367,7 +374,7 @@ window.onload = function mogura() {
 	//*モードラベル*
 		var ModeLabel = new Label();
 		ModeLabel.x = SCREEN_SIZE_X/2 + DIRECTION_SIZE + 90;
-		ModeLabel.y = STARTBUTTON_Y - DIRECTION_SIZE/2 + 5;
+		ModeLabel.y = STARTBUTTON_Y - DIRECTION_SIZE/2 - 15;
 		ModeLabel.update = function(){
 			this.text = "<div class='label'>" + GameSet[Mode][Course]["mode"] + "</div>";
 		}
@@ -375,17 +382,17 @@ window.onload = function mogura() {
 
 	//*モード説明*
 		var ModeDiscription = new Label();
-		ModeDiscription.x = STARTBUTTON_X;
-		ModeDiscription.y = STARTBUTTON_Y+100;
+		ModeDiscription.x = 0;
+		ModeDiscription.y = STARTBUTTON_Y+70;
 		ModeDiscription.update = function(){
-			this.text = "<div id='discription' class='label'>" + GameSet[Mode][Course]["discription"] + "</div>";
+			this.text = "<div id='discription'>" + GameSet[Mode][Course]["discription"] + "</div>";
 		}
 		ModeDiscription.update();
 
 	//*操作説明ボタン*
 		var HelpButton = new Label();
-		HelpButton.x = STARTBUTTON_X;
-		HelpButton.y = STARTBUTTON_Y+130;
+		HelpButton.x = SCREEN_SIZE_X-130;
+		HelpButton.y = SCREEN_SIZE_Y-60;
 		HelpButton.text = "<h1 id='helpbutton' class='button'>操作説明</h1>";
 		HelpButton.addEventListener('touchstart', function (e) {
 			console.log('ヘルプ');
@@ -426,6 +433,7 @@ window.onload = function mogura() {
 	//add
 		SceneTitle.addChild(BackgroundTitle);
 		SceneTitle.addChild(TitleLogo);
+		SceneTitle.addChild(BackFrame);
 		SceneTitle.addChild(ModeLabel);
 		SceneTitle.addChild(StartButton);
 		SceneTitle.addChild(ModeLeftButton);

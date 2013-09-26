@@ -1,16 +1,33 @@
+body{
+	font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,Arial,Verdana,"ＭＳ Ｐゴシック",sans-serif;
+}
+.backframe{
+	width: 440px;
+	height: 160px;
+	background: #225599;
+	opacity: 0.6;
+	border-radius: 10px;
+}
 .button{
+	color: white;
 	text-align:center;
-	border: 2px solid #FF0000;
-
-	background: #FFAA00;
-	padding: 10px;
+	border: 2px solid #FFFFFF;
+	background: #FF8800;
+	padding: 0px;
+	font-size: 26px;
+	line-height: 40px;
 }
 #helpbutton{
-	border: 2px solid #FF0000;
+	color: white;
+	border: 2px solid #FFFFFF;
 	border-radius: 20px;
-	background: #AAFF11;
+	background: #666666;
+	font-size: 20px;
+	line-height: 36px;
+	width: 120px;
 }
 #help{
+	font-size: 14px;
 	text-align:center;
 	position: absolute;
 	display: none;
@@ -23,10 +40,14 @@
 	height: 430px;
 }
 .label{
+	color: #222299;
 	font-size: 16px;
 }
 #discription{
+	color: white;
+	font-size: 16px;
 	text-align: center;
+	width: 480px;
 }
 #result_title{
 	font-size:32px;
