@@ -51,7 +51,7 @@ window.onload = function mogura() {
 	var CAMERA_BATTING_X = -(GROUND_SIZE_X/2 - SCREEN_SIZE_X/2);
 	var CAMERA_BATTING_Y = -(GROUND_SIZE_Y - SCREEN_SIZE_Y);
 	//表示系の枠
-	var STATES_X = 375;
+	var STATES_X = 370;
 	var STATES_Y = 10;
 	//残り球数
 	var BALL_NUM = 10;
@@ -1136,7 +1136,7 @@ window.onload = function mogura() {
 						if(batted_speed > 19.5){
 							Camera.timestop = 10;
 							console.log(CAMERA_BATTING_X);
-							Effect.add(1, - CAMERA_BATTING_X ,  - CAMERA_BATTING_Y)
+							Effect.add(1, - Camera.x ,  - Camera.y)
 						}
 
 						if(batted_speed < 3){
@@ -1205,6 +1205,10 @@ window.onload = function mogura() {
 
 										LastBall.battedball_num--;
 
+										console.log('hit_se:'+hit_se);
+										Point.addition(parseInt(BattedBall.flown), hit_se); 
+										Point.update();
+
 									//*取得点*
 										if(GameMode != 5){
 											var NowPoint = new Label();
@@ -1222,8 +1226,6 @@ window.onload = function mogura() {
 											if(GameMode != 5){
 												Pitcher.throw_flag = true;
 											}
-											console.log('hit_se:'+hit_se);
-											Point.addition(parseInt(BattedBall.flown), hit_se); 
 											if(LastBall.num > 0){
 												Camera.speed = 12;
 												Camera.target_x = CAMERA_BATTING_X;
@@ -1237,11 +1239,10 @@ window.onload = function mogura() {
 										this.flown += batted_speed * 0.05 * this.timespeed;
 									}
 									//カメラ追従
-									if(GameMode != 5 && this.y >= CAMERA_BATTING_Y){
-										Camera.speed = 2;
+									if(GameMode != 5 && this.y >= CAMERA_BATTING_Y && Camera.timestop == 0){
+										Camera.speed = 3;
 										Camera.target_x = Camera.target_x + this.speed_x * this.timespeed;
-										Camera.target_y = Camera.target_y + this.speed_y * this.timespeed;
-									}
+										Camera.target_y = Camera.target_y + this.speed_y * this.timespeed;									}
 
 								}
 								if(this.h <= 0 && this.buoyancy <= 0){
@@ -1316,6 +1317,9 @@ window.onload = function mogura() {
 					EffectChild.height = 480;
 					EffectChild.image = game.assets['img/effect_line.gif'];
 					EffectChild.addEventListener('enterframe', function(){
+						this.x = - Camera.x;
+						this.y = - Camera.y;
+
 						this.animation_frame++;
 						if(this.animation_frame%2 == 1){
 							this.visible = true;
@@ -1354,31 +1358,16 @@ window.onload = function mogura() {
 			}else{
 				this.timestart = true;
 			}
+
+			if(this.timestart){
 			this.x = parseInt(this.x - (this.x - this.target_x)/this.speed);
 			this.y = parseInt(this.y -(this.y - this.target_y)/this.speed);
+			}
 			//states
-			States.x = parseInt(States.x - (States.x - STATES_X)/this.speed);
-			States.y = parseInt(States.y - (States.y - STATES_Y)/this.speed);
+			States.x = STATES_X;
+			States.y = STATES_Y;
 
-			if(this.x >  this.target_x){
-				this.x--;
-				//states
-				States.x--;
-			}else if(this.x <  this.target_x){
-				this.x++;
-				//states
-				States.x++;
-			}
 
-			if(this.y >  this.target_y){
-				this.y--;
-				//states
-				States.y--;
-			}else if(this.y <  this.target_y){
-				this.y++;
-				//states
-				States.y++;
-			}
 
 			if(SceneBatting.bgm_fadeout&& game.assets[BattingBgmFile].volume > 0){
 				game.assets[BattingBgmFile].volume -= 0.005;
