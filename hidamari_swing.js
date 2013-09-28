@@ -94,14 +94,14 @@ window.onload = function mogura() {
 	var BALL_DEFAULT_X = PITCHER_X + PITCHER_SIZE_X/2 - BALL_SIZE_X/2 -5;
 	var BALL_DEFAULT_Y = PITCHER_Y + 55;
 	//十字パッド
-	var PAD_X = (CAMERA_BATTING_X * -1);
-	var PAD_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_Y - 100;
+	var PAD_X = 0;
+	var PAD_Y = SCREEN_SIZE_Y - 100;
 	//スイングボタン-サイズ
 	var SWINGBUTTON_SIZE_X = 80;
 	var SWINGBUTTON_SIZE_Y = 80;
 	//スイングボタン-位置
-	var SWINGBUTTON_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X - SWINGBUTTON_SIZE_X;
-	var SWINGBUTTON_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X - SWINGBUTTON_SIZE_Y;
+	var SWINGBUTTON_X = SCREEN_SIZE_X - SWINGBUTTON_SIZE_X;
+	var SWINGBUTTON_Y = SCREEN_SIZE_X - SWINGBUTTON_SIZE_Y;
 	
 	//メニューの設定
 	var CommonCourse = ["EASY","NORMAL","HARD","STRAIGHT"];
@@ -1392,13 +1392,15 @@ window.onload = function mogura() {
 		Camera.addChild(MeetCursor);
 		Camera.addChild(Pitcher);
 		Camera.addChild(Batter);
-		Camera.addChild(KeyPad);
-		Camera.addChild(SwingButton);
+		//Camera.addChild(KeyPad);
+		//Camera.addChild(SwingButton);
 		Camera.addChild(Effect);
 
 	//add
 		SceneBatting.addChild(Camera);
 		SceneBatting.addChild(States);
+		SceneBatting.addChild(KeyPad);
+		SceneBatting.addChild(SwingButton);
 	
 //******************
 //リザルト画面
