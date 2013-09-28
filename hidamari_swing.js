@@ -1360,12 +1360,23 @@ window.onload = function mogura() {
 			}
 
 			if(this.timestart){
-			this.x = parseInt(this.x - (this.x - this.target_x)/this.speed);
-			this.y = parseInt(this.y -(this.y - this.target_y)/this.speed);
+				this.x = parseInt(this.x - (this.x - this.target_x)/this.speed);
+				this.y = parseInt(this.y -(this.y - this.target_y)/this.speed);
+
+
+				if(this.x >  this.target_x){
+					Camera.x--;
+				}else if(this.x <  this.target_x){
+					this.x++;
+				}
+
+				if(this.y >  this.target_y){
+					this.y--;
+				}else if(this.y <  this.target_y){
+					this.y++;
+				}
+
 			}
-			//states
-			States.x = STATES_X;
-			States.y = STATES_Y;
 
 
 
