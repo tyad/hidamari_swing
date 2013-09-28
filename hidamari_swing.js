@@ -561,7 +561,7 @@ window.onload = function mogura() {
 	//*表示系グループ*
 		var States = new Group();
 		States.x = STATES_X;
-		States.y = STATES_Y+2000;
+		States.y = STATES_Y;
 		States.addChild(StateFrame);
 		States.addChild(LastBall);
 		States.addChild(Point);
@@ -1377,7 +1377,6 @@ window.onload = function mogura() {
 				}
 
 			}
-
 
 
 			if(SceneBatting.bgm_fadeout&& game.assets[BattingBgmFile].volume > 0){
