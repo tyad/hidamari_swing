@@ -1009,7 +1009,7 @@ window.onload = function mogura() {
 							this.frame = 3;
 						}
 						if(game.frame % (game.fps/10) == 0){
-							console.log('Pitcher.frame:'+this.frame);//for debug
+							//console.log('Pitcher.frame:'+this.frame);//for debug
 							if(this.frame == 11){
 								this.frame = 0;
 							}else{
