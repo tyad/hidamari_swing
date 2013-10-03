@@ -984,7 +984,7 @@ window.onload = function mogura() {
 						}
 						//投球
 						console.log('ball_type:' + this.ball_type);
-						this.throw_ball(1);
+						this.throw_ball(this.ball_type);
 					}
 					//投球モーション
 					else if(this.throw_interval_count >= PITCH_INTERVAL){
