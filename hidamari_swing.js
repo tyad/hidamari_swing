@@ -943,9 +943,9 @@ window.onload = function mogura() {
 
 			//空振り処理
 			Ball.addEventListener('enterframe', function(){
-				this.frame++;
-				if(this.frame >6){
-					this.frame = 0;
+				Ball.frame++;
+				if(Ball.frame > 6){
+					Ball.frame = 0;
 				}
 					
 				if ( this.y >= GROUND_SIZE_Y ) {
