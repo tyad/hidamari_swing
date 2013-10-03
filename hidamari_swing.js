@@ -947,6 +947,7 @@ window.onload = function mogura() {
 					Pitcher.throw_flag = true;
 					LastBall.decrement();
 					Point.addition(0, -1); //空振りスコアの追加
+					Ball.clearEventListener();//一応
 				}else{
 					Ball.frame++;
 					if(Ball.frame > 6){
@@ -1264,6 +1265,7 @@ window.onload = function mogura() {
 									if(batted_speed < 0.5){
 										batted_speed = 0;
 										this.buoyancy = 0;
+										BattedBall.clearEventListener();
 									}
 									
 									BattedBall.speed_x = batted_speed * Math.cos(angle * Math.PI/180);
