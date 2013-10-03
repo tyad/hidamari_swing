@@ -491,6 +491,8 @@ window.onload = function mogura() {
 		LastBall.num = BALL_NUM;
 		LastBall.max = BALL_NUM;
 		LastBall.battedball_num = 0; //打球の数
+		LastBall._element.style.zIndex = 5;
+
 		LastBall.update = function(){
 			this.text = "<div class='statelabel'>残り<img src='img/ball_thum.gif'>×"+this.num+"</div>";
 		}
@@ -520,6 +522,8 @@ window.onload = function mogura() {
 		Point.miss = 0; //空振り率
 		Point.max = 0; //最高飛距離
 		Point.super_hit = 0; //真芯率
+		Point._element.style.zIndex = 5;
+
 		Point.update = function(){
 			this.text = "<div class='statelabel'>合計"+this.num+"m</div>";
 		}
@@ -557,7 +561,7 @@ window.onload = function mogura() {
 	//*表示系枠*
 		var StateFrame = new Label();
 		StateFrame.text = "<div class='stateframe'></div>";
-		
+		StateFrame._element.style.zIndex = 5;
 	//*表示系グループ*
 		var States = new Group();
 		States.x = STATES_X;
@@ -1284,7 +1288,7 @@ window.onload = function mogura() {
 						BattedBallHop.addEventListener('enterframe', function(){
 							if(Camera.timestart){
 								BattedBallHop.x = parseInt(BattedBall.x  - BattedBall.speed_x * BattedBall.timespeed)  - BALL_SIZE_X/4;
-								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y * BattedBall.timespeed - BattedBall.h - BALL_SIZE_Y/3);
+								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y * BattedBall.timespeed - BattedBall.h - BALL_SIZE_Y/3 - 2);
 								BattedBallHop.scaleX = 0.5 + BattedBall.h/400;
 								BattedBallHop.scaleY = 0.5 + BattedBall.h/400;
 
@@ -1294,7 +1298,7 @@ window.onload = function mogura() {
 								}
 
 								//ボールのアニメのはやさ
-								this.anime_speed = 10 - batted_speed;
+								this.anime_speed = 7 - batted_speed/2;
 								
 								if(this.anime_speed < 0){
 									this.anime_speed = 0;
