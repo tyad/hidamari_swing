@@ -14,7 +14,7 @@ window.onload = function mogura() {
 		'img/bat.gif',
 		'img/miyako.gif',
 		'img/meetcursor.png',
-		'img/ball.gif',	'img/ball_shadow.gif',
+		'img/ball.gif',	'img/throw_ball.gif', 'img/ball_shadow.gif',
 		'img/swing_button.png',
 		'img/effect_line.gif',
 		'img/sound.gif', 'img/sound_n.gif',
@@ -588,12 +588,11 @@ window.onload = function mogura() {
 		Pitcher.frame = 0;
 		//投球関数（引数で投球コース、スピードとか
 		Pitcher.throw_ball = function(template_num){
-			Ball = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
-			Ball.image = game.assets['img/ball.gif'];
-			Ball.x = BALL_DEFAULT_X;
+			Ball = new Sprite(BALL_SIZE_X/2, BALL_SIZE_Y/2);
+			Ball.image = game.assets['img/throw_ball.gif'];
+			Ball.x = BALL_DEFAULT_X + BALL_SIZE_X/2;
 			Ball.y = BALL_DEFAULT_Y;
 			Ball._element.style.zIndex = 4;
-			Ball.scale(0.5,0.5);
 			LastBall.num--;
 			LastBall.decrement();
 
@@ -943,16 +942,16 @@ window.onload = function mogura() {
 
 			//空振り処理
 			Ball.addEventListener('enterframe', function(){
-				Ball.frame++;
-				if(Ball.frame > 6){
-					Ball.frame = 0;
-				}
-					
 				if ( this.y >= GROUND_SIZE_Y ) {
 					Camera.removeChild(this);
 					Pitcher.throw_flag = true;
 					LastBall.decrement();
 					Point.addition(0, -1); //空振りスコアの追加
+				}else{
+					Ball.frame++;
+					if(Ball.frame > 6){
+						Ball.frame = 0;
+					}
 				}
 			});
 
