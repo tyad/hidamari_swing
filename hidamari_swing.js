@@ -945,7 +945,7 @@ window.onload = function mogura() {
 			Ball.addEventListener('enterframe', function(){
 				this.frame++;
 				if(this.frame >6){
-					this.frame = -1;
+					this.frame = 0;
 				}
 					
 				if ( this.y >= GROUND_SIZE_Y ) {
