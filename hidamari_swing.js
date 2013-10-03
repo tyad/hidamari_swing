@@ -14,7 +14,7 @@ window.onload = function mogura() {
 		'img/bat.gif',
 		'img/miyako.gif',
 		'img/meetcursor.png',
-		'img/ball.gif',	'img/ball_shadow.gif', 'img/ball_thum.gif',
+		'img/ball.gif',	'img/ball_shadow.gif',
 		'img/swing_button.png',
 		'img/effect_line.gif',
 		'img/sound.gif', 'img/sound_n.gif',
