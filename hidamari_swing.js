@@ -225,13 +225,13 @@ window.onload = function mogura() {
 		}
 	}
 
-	console.log(GameSet[Mode][Course]["mode"]);//for debug
+	//console.log(GameSet[Mode][Course]["mode"]);//for debug
 
 	//音ON/OFF用フラグ
 	var SoundFlag = true;
 	function SoundFlagSwitching () {
 		SoundFlag = !SoundFlag;
-		console.log("SoundFlag:"+SoundFlag);
+		//console.log("SoundFlag:"+SoundFlag);
 	}
 
 	game.onload = function(){
@@ -258,7 +258,7 @@ window.onload = function mogura() {
 
 		function play_se(file_pass){
 			if(SoundFlag){
-				console.log('play se :'+file_pass);
+				//console.log('play se :'+file_pass);
 				var se = game.assets[file_pass];
 				se.stop();
 				se.play();
@@ -321,8 +321,8 @@ window.onload = function mogura() {
 			LastBall.num = GameSet[Mode][Course]["ball_number"];
 			LastBall.max = GameSet[Mode][Course]["ball_number"];
 			MeetCursor.distance_powerfilter = GameSet[Mode][Course]["powerfilter"];
-			console.log("GameMode : " + GameSet[Mode][Course]["gamemode_number"]);
-			console.log("BGM : " + GameSet[Mode][Course]["bgm"]);
+			//console.log("GameMode : " + GameSet[Mode][Course]["gamemode_number"]);
+			//console.log("BGM : " + GameSet[Mode][Course]["bgm"]);
 			LastBall.update();
 			play_se('sound/hit_1.wav');
 			game.popScene(SceneTitle);
@@ -396,7 +396,7 @@ window.onload = function mogura() {
 		HelpButton.y = SCREEN_SIZE_Y-60;
 		HelpButton.text = "<h1 id='helpbutton' class='button'>操作説明</h1>";
 		HelpButton.addEventListener('touchstart', function (e) {
-			console.log('ヘルプ');
+			//console.log('ヘルプ');
 			var scale = $('#enchant-stage').find('div').css('-webkit-transform');
 			$('#help').css({
 				'display':'block',
@@ -500,7 +500,7 @@ window.onload = function mogura() {
 			this.update();
 			if(this.num == 0 && this.battedball_num == 0 && Pitcher.throw_flag == true && SceneBatting.bgm_fadeout == false){
 				SceneBatting.bgm_fadeout = true;
-				console.log("ゲーム終了");
+				//console.log("ゲーム終了");
 				setTimeout(function(){
 					if(SoundFlag){
 						game.assets[RESULT_BGM].stop();
@@ -956,7 +956,7 @@ window.onload = function mogura() {
 				}
 			});
 
-			console.log('throw')
+			//console.log('throw')
 			Camera.addChild(Ball);
 		};
 		//フレーム処理
@@ -987,7 +987,7 @@ window.onload = function mogura() {
 							}
 						}
 						//投球
-						console.log('ball_type:' + this.ball_type);
+						//console.log('ball_type:' + this.ball_type);
 						this.throw_ball(this.ball_type);
 					}
 					//投球モーション
@@ -1080,7 +1080,7 @@ window.onload = function mogura() {
 		Batter._element.style.zIndex = 3;
 		//スイング（スペース押したときの）処理
 		Batter.swing = function(){
-			console.log('swing'); //for debug
+			//console.log('swing'); //for debug
 			this.swing_flag = false;	
 			Camera.addChild(Bat);
 		}
@@ -1129,14 +1129,14 @@ window.onload = function mogura() {
 					if(MeetCursor.intersect(Ball) && Bat.swing_frame == 3){
 						LastBall.battedball_num++;
 						Camera.removeChild(Ball);
-						console.log('ヒット'); //for debag
+						//console.log('ヒット'); //for debag
 						MeetCursor.hit_flag = false;
 						//打球角度
 						var angle = 90 - ((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2)) * 2.5 * -1;
-						console.log('angle:'+angle);//for debug
+						//console.log('angle:'+angle);//for debug
 						//ミートカーソルとボールの距離計算
 						var distance = Math.sqrt(Math.pow((Ball.x + BALL_SIZE_X/2) - (MeetCursor.x + MEETCURSOR_SIZE_X/2), 2) + Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2) * 0.6);
-						console.log('distance:'+distance);//for debug
+						//console.log('distance:'+distance);//for debug
 						//真芯値
 						var meetpoint = 32;
 						//打球スピード
@@ -1144,7 +1144,7 @@ window.onload = function mogura() {
 						//真芯演出
 						if(batted_speed > 19.5){
 							Camera.timestop = 10;
-							console.log(CAMERA_BATTING_X);
+							//console.log(CAMERA_BATTING_X);
 							Effect.add(1, - Camera.x ,  - Camera.y)
 						}
 
@@ -1170,7 +1170,7 @@ window.onload = function mogura() {
 							play_se('sound/hit_4.wav');
 							hit_se = 'sound/hit_4.wav';
 						}
-						console.log('batted_speed:'+batted_speed);//for debug
+						//console.log('batted_speed:'+batted_speed);//for debug
 					//*打球*
 						var BattedBall = new Sprite(BALL_SIZE_X/2, BALL_SIZE_Y/2);
 						BattedBall.x = Ball.x + BALL_SIZE_X/2;
@@ -1188,8 +1188,8 @@ window.onload = function mogura() {
 						if(BattedBall.buoyancy < 0.5){
 							BattedBall.buoyancy = 0.5;
 						}
-						console.log('tate:'+(Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/3);
-						console.log('buoyancy:'+BattedBall.buoyancy);
+						//console.log('tate:'+(Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/3);
+						//console.log('buoyancy:'+BattedBall.buoyancy);
 						//飛距離（得点）
 						BattedBall.flown = 0;
 						//フレーム処理
@@ -1207,14 +1207,14 @@ window.onload = function mogura() {
 								}
 								if(this.stop_flag == false){
 									if(this.h <= 0){
-										console.log('落下');
+										//console.log('落下');
 										BattedBall._element.style.zIndex = 1;
 										BattedBallHop._element.style.zIndex = 1;
 										this.stop_flag = true;
 
 										LastBall.battedball_num--;
 
-										console.log('hit_se:'+hit_se);
+										//console.log('hit_se:'+hit_se);
 										Point.addition(parseInt(BattedBall.flown), hit_se); 
 										Point.update();
 
@@ -1223,7 +1223,7 @@ window.onload = function mogura() {
 											var NowPoint = new Label();
 											NowPoint.x = (Camera.x * -1) + SCREEN_SIZE_X/2;
 											NowPoint.y = (Camera.y * -1) + SCREEN_SIZE_Y/2;
-											console.log(NowPoint.x);
+											//console.log(NowPoint.x);
 											NowPoint.text = "<h1 class='label'>飛距離:"+parseInt(BattedBall.flown)+"m</h1>";
 											Camera.addChild(NowPoint);
 										}
@@ -1324,7 +1324,7 @@ window.onload = function mogura() {
 						}
 
 					}else if(MeetCursor.hit_flag == true){
-						console.log('スカ');
+						//console.log('スカ');
 					}
 				}
 				//移動 バッターの位置についていく
@@ -1492,7 +1492,7 @@ window.onload = function mogura() {
 
 		//*ラベル生成関数*
 		function make_Label(x, y, class_name, text){
-			console.log('makelabel');
+			//console.log('makelabel');
 			var TempLabel = new Label();
 			TempLabel.x = x;
 			TempLabel.y = y;
