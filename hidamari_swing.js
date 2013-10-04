@@ -88,8 +88,8 @@ window.onload = function mogura() {
 	var MEETCURSOR_DEFAULT_X = BATTER_DEFAULT_X + 110;
 	var MEETCURSOR_DEFAULT_Y = BATTER_DEFAULT_Y + 60;
 	//ボール-サイズ
-	var BALL_SIZE_X = 30;
-	var BALL_SIZE_Y = 30;
+	var BALL_SIZE_X = 15;
+	var BALL_SIZE_Y = 15;
 	//ボール-投球直後のデフォルト位置
 	var BALL_DEFAULT_X = PITCHER_X + PITCHER_SIZE_X/2 - BALL_SIZE_X/2 -5;
 	var BALL_DEFAULT_Y = PITCHER_Y + 55;
@@ -588,7 +588,7 @@ window.onload = function mogura() {
 		Pitcher.frame_num = 0;
 		//投球関数（引数で投球コース、スピードとか
 		Pitcher.throw_ball = function(template_num){
-			Ball = new Sprite(BALL_SIZE_X/2, BALL_SIZE_Y/2);
+			Ball = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
 			Ball.image = game.assets['img/throw_ball.gif'];
 			Ball.x = BALL_DEFAULT_X + BALL_SIZE_X/2;
 			Ball.y = BALL_DEFAULT_Y;
@@ -1174,7 +1174,7 @@ window.onload = function mogura() {
 						}
 						//console.log('batted_speed:'+batted_speed);//for debug
 					//*打球*
-						var BattedBall = new Sprite(BALL_SIZE_X/2, BALL_SIZE_Y/2);
+						var BattedBall = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
 						BattedBall.x = Ball.x;
 						BattedBall.y = Ball.y;			
 						BattedBall.timespeed =1.7;
@@ -1279,18 +1279,19 @@ window.onload = function mogura() {
 							}
 						});
 
-						var BattedBallHop = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
+						var BattedBallHop = new Sprite(BALL_SIZE_X*2, BALL_SIZE_Y*2);
 						BattedBallHop.image = game.assets['img/ball.gif'];
-						BattedBallHop.x = Ball.x - BALL_SIZE_Y/4;
-						BattedBallHop.y = Ball.y - BALL_SIZE_Y/4;
+						BattedBallHop.x = Ball.x - BALL_SIZE_X/2;
+						BattedBallHop.y = Ball.y - BALL_SIZE_Y/2;
 						BattedBallHop.scaleX = 0.5 + BattedBall.h/400;
 						BattedBallHop.scaleY = 0.5 + BattedBall.h/400;
 						BattedBallHop.anime_frame = 0;
 						BattedBallHop.anime_speed = 0;
+						BattedBallHop.frame_num = Ball.frame_num;
 						BattedBallHop.addEventListener('enterframe', function(){
 							if(Camera.timestart && batted_speed > 0){
-								BattedBallHop.x = parseInt(BattedBall.x  - BattedBall.speed_x * BattedBall.timespeed)  - BALL_SIZE_X/4;
-								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y * BattedBall.timespeed - BattedBall.h - BALL_SIZE_Y/3 - 2);
+								BattedBallHop.x = parseInt(BattedBall.x  - BattedBall.speed_x * BattedBall.timespeed)  - BALL_SIZE_X/2;
+								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y * BattedBall.timespeed - BattedBall.h - BALL_SIZE_Y + 5 );
 								BattedBallHop.scaleX = 0.5 + BattedBall.h/400;
 								BattedBallHop.scaleY = 0.5 + BattedBall.h/400;
 
@@ -1308,11 +1309,12 @@ window.onload = function mogura() {
 
 								this.anime_frame++;
 								if(this.anime_frame > this.anime_speed && batted_speed > 0.5){
-									this.frame--;
+									this.frame_num--;
 									this.anime_frame = 0;
-									if(this.frame < 0){
-									this.frame = 6;
+									if(this.frame_num < 0){
+									this.frame_num = 6;
 									}
+									this.frame = this.frame_num;
 								}
 							}
 
