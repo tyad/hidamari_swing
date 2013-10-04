@@ -5,7 +5,7 @@ window.onload = function mogura() {
 	game.keybind(32, "space");  // spaceキー
 	game.preload(
 		//Background
-		'img/background_title.jpg',	'img/background_batting.jpg',
+		'img/background_title.jpg',	'img/background_batting.jpg', 'img/background_batting_scale2.jpg',
 		//Charactor
 		'img/logo.png',
 		'img/direction.gif',
@@ -32,8 +32,8 @@ window.onload = function mogura() {
 	var SCREEN_SIZE_X = 480;
 	var SCREEN_SIZE_Y = 480;
 	//グラウンド全体サイズ
-	var GROUND_SIZE_X = 2400;
-	var GROUND_SIZE_Y = 1600;
+	var GROUND_SIZE_X = 4800;
+	var GROUND_SIZE_Y = 3200;
 	//スタートボタン位置
 	var STARTBUTTON_X = 90;
 	var STARTBUTTON_Y = 300;
@@ -463,11 +463,9 @@ window.onload = function mogura() {
 
 	//*背景*
 		BackgroundBatting = new Sprite(GROUND_SIZE_X, GROUND_SIZE_Y);
-		BackgroundBatting.image = game.assets['img/background_batting.jpg'];
+		BackgroundBatting.image = game.assets['img/background_batting_scale2.jpg'];
 		BackgroundBatting.x = 0;
-		BackgroundBatting.y = -800;
-		BackgroundBatting.scaleX = 2;
-		BackgroundBatting.scaleY = 2;
+		BackgroundBatting.y = 0;
 
 	//*バーチャルキーパッド*
 		var KeyPad = new Pad();
