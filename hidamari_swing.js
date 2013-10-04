@@ -1012,9 +1012,9 @@ window.onload = function mogura() {
 						}
 						if(game.frame_num % (game.fps/10) == 0){
 							if(this.frame == 11){
-								this.frame = 0;
+								this.frame_num = 0;
 							}else{
-								this.frame++;
+								this.frame_num++;
 							}
 						}
 					}
