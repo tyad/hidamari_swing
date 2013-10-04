@@ -585,7 +585,7 @@ window.onload = function mogura() {
 		//投球間隔カウント変数
 		Pitcher.throw_interval_count = -30; //初回
 		//アニメーションフレーム
-		Pitcher.frame = 0;
+		Pitcher.frame_num = 0;
 		//投球関数（引数で投球コース、スピードとか
 		Pitcher.throw_ball = function(template_num){
 			Ball = new Sprite(BALL_SIZE_X/2, BALL_SIZE_Y/2);
@@ -593,7 +593,7 @@ window.onload = function mogura() {
 			Ball.x = BALL_DEFAULT_X + BALL_SIZE_X/2;
 			Ball.y = BALL_DEFAULT_Y;
 			Ball._element.style.zIndex = 4;
-			Ball.frame = 0;
+			Ball.frame_num = 0;
 			LastBall.num--;
 			LastBall.decrement();
 
@@ -950,10 +950,11 @@ window.onload = function mogura() {
 					Point.addition(0, -1); //空振りスコアの追加
 					Ball.clearEventListener();//一応
 				}else{
-					Ball.frame++;
-					if(Ball.frame > 6){
-						Ball.frame = 0;
+					Ball.frame_num++;
+					if(Ball.frame_num > 6){
+						Ball.frame_num = 0;
 					}
+					Ball.frame = Ball.frame_num;
 				}
 			});
 
@@ -965,7 +966,7 @@ window.onload = function mogura() {
 			if(Camera.timestart){
 				if(this.throw_flag == true){
 					//投球
-					if((this.frame == 9) && (this.throw_interval_count == PITCH_INTERVAL)){
+					if((this.frame_num == 9) && (this.throw_interval_count == PITCH_INTERVAL)){
 						this.throw_flag = false;
 						this.throw_interval_count = 0;
 						//球種を選定する
@@ -994,23 +995,22 @@ window.onload = function mogura() {
 					//投球モーション
 					else if(this.throw_interval_count >= PITCH_INTERVAL){
 						if(game.frame % (game.fps/10) == 0){
-							this.frame++;
+							this.frame_num++;
 						}
 					}
 					//インターバルカウント
-					else if ((this.frame < 9) && (LastBall.num > 0)) {
+					else if ((this.frame_num < 9) && (LastBall.num > 0)) {
 						this.throw_interval_count++;
 						if(GameMode == 5 && LastBall.num != LastBall.max){
 							this.throw_interval_count = PITCH_INTERVAL;
 						}
 					}
 					//セットモーション
-					else if((this.frame >= 9) && (this.throw_interval_count == 0)){
+					else if((this.frame_num >= 9) && (this.throw_interval_count == 0)){
 						if(GameMode == 5 && LastBall.num > 0){
-							this.frame = 3;
+							this.frame_num = 3;
 						}
-						if(game.frame % (game.fps/10) == 0){
-							//console.log('Pitcher.frame:'+this.frame);//for debug
+						if(game.frame_num % (game.fps/10) == 0){
 							if(this.frame == 11){
 								this.frame = 0;
 							}else{
@@ -1020,6 +1020,7 @@ window.onload = function mogura() {
 					}
 				}
 			}
+			this.frame = this.frame_num;
 		});
 
 	//*バット*
