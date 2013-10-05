@@ -109,3 +109,21 @@ body{
 	bottom: 10px;
 	text-align: left;
 }
+
+#now_point{
+	width:480px;
+	height:64px;
+	line-height:64px;
+	font-size:24px;
+	color:#333;
+	text-align:center;
+}
+
+#now_point_end{
+	width:480px;
+	height:64px;
+	line-height:64px;
+	font-size:32px;
+	color:#000;
+	text-align:center;
+}
