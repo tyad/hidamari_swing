@@ -1455,8 +1455,6 @@ window.onload = function mogura() {
 						this.animation_frame++;
 						if(this.opacity > 0){
 							this.opacity -= 0.15;
-							this.scaleY += 0.2;
-							this.scaleX += 0.2;
 						}
 						if(this.animation_frame > 8){
 							Effect.removeChild(this);
