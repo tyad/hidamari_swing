@@ -1,23 +1,18 @@
 enchant();
 
-window.onload = function mogura() {
+window.onload = function hidamari_swing() {
 	var game = new Game(480, 480);
 	game.keybind(32, "space");  // spaceキー
 	game.preload(
 		//Background
 		'img/background_title.jpg',	'img/background_batting.jpg',
-		//Charactor
-		'img/logo.png',
-		'img/direction.gif',
-		'img/switch.gif',
-		'img/yuno.gif',
-		'img/bat.gif',
-		'img/miyako.gif',
-		'img/meetcursor.png',
+		//title chara
+		'img/logo.png',	'img/direction.gif', 'img/switch.gif', 'img/sound.gif', 'img/sound_n.gif',
+		//batting chara
+		'img/yuno.gif',	'img/bat.gif', 'img/miyako.gif', 'img/meetcursor.png',
 		'img/ball.gif',	'img/throw_ball.gif', 'img/ball_shadow.gif',
 		'img/swing_button.png',
 		'img/effect_line.gif',　'img/effect_hit.gif',
-		'img/sound.gif', 'img/sound_n.gif',
 		//BGM
 		'sound/bgm_easy.mp3', 'sound/bgm_normal.mp3',
 		'sound/bgm_hard.mp3', 'sound/bgm_extra1.mp3', 'sound/bgm_extra2.mp3',
@@ -29,14 +24,11 @@ window.onload = function mogura() {
 //コンフィグ定数
 //**********
 	//画面サイズ
-	var SCREEN_SIZE_X = 480;
-	var SCREEN_SIZE_Y = 480;
+	var SCREEN_SIZE_X = 480, SCREEN_SIZE_Y = 480;
 	//グラウンド全体サイズ
-	var GROUND_SIZE_X = 2400;
-	var GROUND_SIZE_Y = 1600;
+	var GROUND_SIZE_X = 2400, GROUND_SIZE_Y = 1600;
 	//スタートボタン位置
-	var STARTBUTTON_X = 90;
-	var STARTBUTTON_Y = 300;
+	var STARTBUTTON_X = 90, STARTBUTTON_Y = 300;
 	//矢印サイズ
 	var DIRECTION_SIZE = 40;
 	//BGM
@@ -51,20 +43,15 @@ window.onload = function mogura() {
 	var CAMERA_BATTING_X = -(GROUND_SIZE_X/2 - SCREEN_SIZE_X/2);
 	var CAMERA_BATTING_Y = -(GROUND_SIZE_Y - SCREEN_SIZE_Y);
 	//表示系の枠
-	var STATES_X = 370;
-	var STATES_Y = 10;
+	var STATES_X = 370, STATES_Y = 10;
 	//残り球数
-	var BALL_NUM = 10;
-	var BALL_KNOCK_NUM = 100; //100本ノック
+	var BALL_NUM = 10, BALL_KNOCK_NUM = 100; //100本ノック
 	//残り球数表示位置
-	var LASTBALL_X = 5;
-	var LASTBALL_Y = 10;
+	var LASTBALL_X = 5, LASTBALL_Y = 10;
 	//得点表示位置
-	var POINT_X = 5;
-	var POINT_Y = 30;
+	var POINT_X = 5, POINT_Y = 30;
 	//ピッチャー-サイズ
-	var PITCHER_SIZE_X = 96;
-	var PITCHER_SIZE_Y = 96;
+	var PITCHER_SIZE_X = 96, PITCHER_SIZE_Y = 96;
 	//ピッチャー-位置
 	var PITCHER_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 + 10;
 	var PITCHER_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 - 190;
@@ -73,35 +60,29 @@ window.onload = function mogura() {
 	//ピッチャー-投球間隔(フレーム)
 	var PITCH_INTERVAL = 60;
 	//バッター-サイズ
-	var BATTER_SIZE_X = 128;
-	var BATTER_SIZE_Y = 128;
+	var BATTER_SIZE_X = 128, BATTER_SIZE_Y = 128;
 	//バッター-デフォルト位置
 	var BATTER_DEFAULT_X = (CAMERA_BATTING_X * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 - 85;
 	var BATTER_DEFAULT_Y = (CAMERA_BATTING_Y * -1) + SCREEN_SIZE_X/2 - PITCHER_SIZE_X/2 + 120;
 	//バッターボックス制限
-	var BATTER_LIMIT_X = 34;
-	var BATTER_LIMIT_Y = 30;
+	var BATTER_LIMIT_X = 34, BATTER_LIMIT_Y = 30;
 	//ミートカーソル-サイズ
-	var MEETCURSOR_SIZE_X = 64;
-	var MEETCURSOR_SIZE_Y = 50;	
+	var MEETCURSOR_SIZE_X = 64, MEETCURSOR_SIZE_Y = 50;	
 	//ミートカーソル-位置
 	var MEETCURSOR_DEFAULT_X = BATTER_DEFAULT_X + 110;
 	var MEETCURSOR_DEFAULT_Y = BATTER_DEFAULT_Y + 60;
 	//ボール-サイズ
-	var BALL_SIZE_X = 15;
-	var BALL_SIZE_Y = 15;
+	var BALL_SIZE = 15;
 	//ボール-投球直後のデフォルト位置
-	var BALL_DEFAULT_X = PITCHER_X + PITCHER_SIZE_X/2 - BALL_SIZE_X/2 -5;
+	var BALL_DEFAULT_X = PITCHER_X + PITCHER_SIZE_X/2 - BALL_SIZE/2 -5;
 	var BALL_DEFAULT_Y = PITCHER_Y + 55;
 	//十字パッド
-	var PAD_X = 0;
-	var PAD_Y = SCREEN_SIZE_Y - 100;
+	var PAD_X = 0, PAD_Y = SCREEN_SIZE_Y - 100;
 	//スイングボタン-サイズ
-	var SWINGBUTTON_SIZE_X = 80;
-	var SWINGBUTTON_SIZE_Y = 80;
+	var SWINGBUTTON_SIZE = 80;
 	//スイングボタン-位置
-	var SWINGBUTTON_X = SCREEN_SIZE_X - SWINGBUTTON_SIZE_X;
-	var SWINGBUTTON_Y = SCREEN_SIZE_X - SWINGBUTTON_SIZE_Y;
+	var SWINGBUTTON_X = SCREEN_SIZE_X - SWINGBUTTON_SIZE;
+	var SWINGBUTTON_Y = SCREEN_SIZE_Y - SWINGBUTTON_SIZE;
 	
 	//メニューの設定
 	var CommonCourse = ["EASY","NORMAL","HARD","STRAIGHT"];
@@ -225,8 +206,6 @@ window.onload = function mogura() {
 		}
 	}
 
-	//console.log(GameSet[Mode][Course]["mode"]);//for debug
-
 	//音ON/OFF用フラグ
 	var SoundFlag = true;
 	function SoundFlagSwitching () {
@@ -238,7 +217,7 @@ window.onload = function mogura() {
 		var GameMode = 0;
 		var BattingBgmFile = '';
 
-		//スペースが押されたとき呼ばれる関数ぶ）
+		//スペースが押されたとき呼ばれる関数呼ぶ
 		function get_space(){
 			//タイトル画面ならゲームスタート
 			if(game.currentScene === SceneTitle){
@@ -263,6 +242,24 @@ window.onload = function mogura() {
 				se.stop();
 				se.play();
 			}
+		}
+
+		//Sprite生成関数
+		function make_Sprite(size_x, size_y, x, y, image_path){
+			var TempSprite = new Sprite(size_x, size_y);
+			TempSprite.x = x;
+			TempSprite.y = y;
+			TempSprite.image = game.assets[image_path];
+			return TempSprite;
+		}
+		//*ラベル生成関数*
+		function make_Label(x, y, class_name, text){
+			//console.log('makelabel');
+			var TempLabel = new Label();
+			TempLabel.x = x;
+			TempLabel.y = y;
+			TempLabel.text = "<div class='"+class_name+"'>"+text+"</div>";
+			return TempLabel;
 		}
 
 //*********************
@@ -295,16 +292,11 @@ window.onload = function mogura() {
 		});
 
 	//*背景*
-		var BackgroundTitle = new Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y);
-		BackgroundTitle.image = game.assets['img/background_title.jpg'];
+		var BackgroundTitle = make_Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y, 0, 0, 'img/background_title.jpg');
 
 	//*ロゴ*
-		var TitleLogo = new Sprite(450,300);
-		TitleLogo.x = 15;
-		TitleLogo.y = 0;
-		TitleLogo.scaleY = 0.9;
-		TitleLogo.scaleX = 0.9;
-		TitleLogo.image = game.assets['img/logo.png'];
+		var TitleLogo = make_Sprite(450, 300, 15, 0, 'img/logo.png');
+		TitleLogo.scale(0.9, 0.9);
 	
 	//*スタートボタン*
 		var StartButton = new Label();
@@ -333,26 +325,17 @@ window.onload = function mogura() {
 		});
 
 	//*枠*
-		var BackFrame = new Label();
-		BackFrame.x = 20;
-		BackFrame.y = SCREEN_SIZE_Y/2 + 60;
-		BackFrame.text = "<div class='backframe'></div>";
+		var BackFrame = make_Label(20, SCREEN_SIZE_Y/2+60, "backframe", "");
 
 	//*矢印*
-		var ModeLeftButton = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
-		ModeLeftButton.image = game.assets['img/direction.gif'];
-		ModeLeftButton.x = 40;
-		ModeLeftButton.y = STARTBUTTON_Y + DIRECTION_SIZE/2;
+		var ModeLeftButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, 40, STARTBUTTON_Y+DIRECTION_SIZE/2, 'img/direction.gif');
 		ModeLeftButton.addEventListener('touchstart', function (e) {
 			CourseDecrement();
 			StartButton.label_update();
 			ModeDiscription.update();
 		});
 
-		var ModeRightButton = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
-		ModeRightButton.image = game.assets['img/direction.gif'];
-		ModeRightButton.x = SCREEN_SIZE_X - DIRECTION_SIZE - 40;
-		ModeRightButton.y = STARTBUTTON_Y + DIRECTION_SIZE/2;
+		var ModeRightButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, SCREEN_SIZE_X-DIRECTION_SIZE-40, STARTBUTTON_Y+DIRECTION_SIZE/2, 'img/direction.gif');
 		ModeRightButton.rotation = 180;
 		ModeRightButton.addEventListener('touchstart', function (e) {
 			CourseIncrement();
@@ -361,10 +344,7 @@ window.onload = function mogura() {
 		});
 
 	//*モード切替ボタン*
-		var ModeSwitch = new Sprite(DIRECTION_SIZE, DIRECTION_SIZE);
-		ModeSwitch.image = game.assets['img/switch.gif'];
-		ModeSwitch.x = SCREEN_SIZE_X/2 + DIRECTION_SIZE + 40;
-		ModeSwitch.y = STARTBUTTON_Y - DIRECTION_SIZE/2 - 25;
+		var ModeSwitch = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, SCREEN_SIZE_X/2+DIRECTION_SIZE+40, STARTBUTTON_Y-DIRECTION_SIZE/2-25, 'img/switch.gif');
 		ModeSwitch.addEventListener('touchstart', function (e) {
 			ModeSwitching();
 			StartButton.label_update();
@@ -373,18 +353,14 @@ window.onload = function mogura() {
 		});
 
 	//*モードラベル*
-		var ModeLabel = new Label();
-		ModeLabel.x = SCREEN_SIZE_X/2 + DIRECTION_SIZE + 90;
-		ModeLabel.y = STARTBUTTON_Y - DIRECTION_SIZE/2 - 15;
+		var ModeLabel = make_Label(SCREEN_SIZE_X/2+DIRECTION_SIZE+90, STARTBUTTON_Y-DIRECTION_SIZE/2-15, "", "");
 		ModeLabel.update = function(){
 			this.text = "<div class='label'>" + GameSet[Mode][Course]["mode"] + "</div>";
 		}
 		ModeLabel.update();
 
 	//*モード説明*
-		var ModeDiscription = new Label();
-		ModeDiscription.x = 0;
-		ModeDiscription.y = STARTBUTTON_Y+70;
+		var ModeDiscription = make_Label(0, STARTBUTTON_Y+70, "", "");
 		ModeDiscription.update = function(){
 			this.text = "<div id='discription'>" + GameSet[Mode][Course]["discription"] + "</div>";
 		}
@@ -418,10 +394,7 @@ window.onload = function mogura() {
 		});
 
 	//*音ボタン*
-		var SoundButton = new Sprite(40, 40);
-		SoundButton.x = SCREEN_SIZE_X-50;
-		SoundButton.y = 10;
-		SoundButton.image = game.assets['img/sound.gif'];
+		var SoundButton = make_Sprite(40, 40, SCREEN_SIZE_Y-50, 10, 'img/sound.gif');
 		SoundButton.addEventListener('touchstart', function (e) {
 			SoundFlagSwitching();
 			if(SoundFlag){
@@ -462,12 +435,8 @@ window.onload = function mogura() {
 		});
 
 	//*背景*
-		BackgroundBatting = new Sprite(GROUND_SIZE_X, GROUND_SIZE_Y);
-		BackgroundBatting.image = game.assets['img/background_batting.jpg'];
-		BackgroundBatting.x = 0;
-		BackgroundBatting.y = -800;
-		BackgroundBatting.scaleX = 2;
-		BackgroundBatting.scaleY = 2;
+		var BackgroundBatting = make_Sprite(GROUND_SIZE_X, GROUND_SIZE_Y, 0, -800, 'img/background_batting.jpg');
+		BackgroundBatting.scale(2,2);
 
 	//*バーチャルキーパッド*
 		var KeyPad = new Pad();
@@ -475,24 +444,18 @@ window.onload = function mogura() {
 		KeyPad.y = PAD_Y;
 
 	//*スイングボタン*
-		var SwingButton = new Sprite(SWINGBUTTON_SIZE_X, SWINGBUTTON_SIZE_Y);
-		SwingButton.image = game.assets['img/swing_button.png'];
-		SwingButton.x = SWINGBUTTON_X;
-		SwingButton.y = SWINGBUTTON_Y;
+		var SwingButton = make_Sprite(SWINGBUTTON_SIZE, SWINGBUTTON_SIZE, SWINGBUTTON_X, SWINGBUTTON_Y, 'img/swing_button.png');
 		// タッチ開始時処理
 		SwingButton.ontouchstart = function() {
 			get_space();
         };
 	
 	//*残り球数*
-		var LastBall = new Label();
-		LastBall.x = LASTBALL_X;
-		LastBall.y = LASTBALL_Y;
+		var LastBall = make_Label(LASTBALL_X, LASTBALL_Y, "", "");
 		LastBall.num = BALL_NUM;
 		LastBall.max = BALL_NUM;
 		LastBall.battedball_num = 0; //打球の数
 		LastBall._element.style.zIndex = 5;
-
 		LastBall.update = function(){
 			this.text = "<div class='statelabel'>残り<img src='img/ball_thum.gif'>×"+this.num+"</div>";
 		}
@@ -507,28 +470,23 @@ window.onload = function mogura() {
 						game.assets[RESULT_BGM].play();
 						game.assets[RESULT_BGM].volume = 0.4;
 					}
-
 					Point.visible = false;
 					StateFrame.visible = false;
 					LastBall.visible = false;
 					game.pushScene(SceneBatting);
 					game.pushScene(SceneResult);
-
 				},3000);
 			}
 		}
 
 	//*得点*
-		var Point = new Label();
-		Point.x = POINT_X;
-		Point.y = POINT_Y;
+		var Point = make_Label(POINT_X, POINT_Y, "", "");
 		Point.num = 0;
 		Point.ball =  new Array(); //ボール別のスコア
 		Point.miss = 0; //空振り率
 		Point.max = 0; //最高飛距離
 		Point.super_hit = 0; //真芯率
 		Point._element.style.zIndex = 5;
-
 		Point.update = function(){
 			this.text = "<div class='statelabel'>合計"+this.num+"m</div>";
 		}
@@ -564,9 +522,9 @@ window.onload = function mogura() {
 		}
 
 	//*表示系枠*
-		var StateFrame = new Label();
-		StateFrame.text = "<div class='stateframe'></div>";
+		var StateFrame = make_Label(0, 0, "stateframe", "");
 		StateFrame._element.style.zIndex = 5;
+	
 	//*表示系グループ*
 		var States = new Group();
 		States.x = STATES_X;
@@ -579,12 +537,8 @@ window.onload = function mogura() {
 		var Ball;
 
 	//*ピッチャー*
-		var Pitcher = new Sprite(PITCHER_SIZE_X, PITCHER_SIZE_Y);
-		Pitcher.x = PITCHER_X;
-		Pitcher.y = PITCHER_Y;
-		Pitcher.image = game.assets['img/yuno.gif'];
+		var Pitcher = make_Sprite(PITCHER_SIZE_X, PITCHER_SIZE_Y, PITCHER_X, PITCHER_Y, 'img/yuno.gif');
 		Pitcher._element.style.zIndex = 2;
-
 		//投げるflag
 		Pitcher.throw_flag = true;
 		//投球間隔カウント変数
@@ -593,15 +547,11 @@ window.onload = function mogura() {
 		Pitcher.frame_num = 0;
 		//投球関数（引数で投球コース、スピードとか
 		Pitcher.throw_ball = function(template_num){
-			Ball = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
-			Ball.image = game.assets['img/throw_ball.gif'];
-			Ball.x = BALL_DEFAULT_X + BALL_SIZE_X/2;
-			Ball.y = BALL_DEFAULT_Y;
+			Ball = make_Sprite(BALL_SIZE, BALL_SIZE, BALL_DEFAULT_X+BALL_SIZE/2, BALL_DEFAULT_Y, 'img/throw_ball.gif');
 			Ball._element.style.zIndex = 4;
 			Ball.frame_num = 0;
 			LastBall.num--;
 			LastBall.decrement();
-
 			//球種の数値は基本的に モード数×100+通し番号 とする イージーの1番目なら101 
 			switch(template_num){
 				case 0:
@@ -658,7 +608,6 @@ window.onload = function mogura() {
 						this.speed_x -=  Ball.carve/21;
 						this.x = this.x + this.speed_x;
 						this.y = this.y + this.speed_y;
-						
 					});
 					break;
 
@@ -670,11 +619,9 @@ window.onload = function mogura() {
 					//フレーム処理
 					Ball.addEventListener('enterframe', function(){
 						this.throw_frame ++;
-
 						if(Ball.throw_frame == 1){
 							this.x += Ball.bure/2;
 						}
-
 						if(this.bure > 0){
 							this.bure *= 0.9;
 						}
@@ -682,7 +629,6 @@ window.onload = function mogura() {
 						if(this.throw_frame %2 == 1){
 							this.plus_x *= -1;
 						}
-
 						this.x = this.x + this.speed_x+this.plus_x;
 						this.y = this.y + this.speed_y;
 					});
@@ -780,7 +726,6 @@ window.onload = function mogura() {
 						this.x = this.x + this.direction_x*this.speed_x;
 						this.y = this.y + this.direction_y*this.speed_y;
 						
-
 						if(this.y < Pitcher.y + 330){
 							this.throw_frame++;
 							switch(this.throw_frame%5){
@@ -799,7 +744,6 @@ window.onload = function mogura() {
 
 				case 306: //超カーブ超シンカー：弧を描く
 					Ball.carve = Math.random() * 2 + 13;
-
 					if(parseInt(Math.random()*10)%2 == 1){
 						Ball.carve *= -1;
 					}
@@ -878,7 +822,6 @@ window.onload = function mogura() {
 						this.y = this.y + this.direction_y*this.speed_y;
 					});
 					break;
-
 
 				//ハード用球種
 				case 601: //ノーマルモード用 ストレート 左右に少し角度がつく
@@ -962,7 +905,6 @@ window.onload = function mogura() {
 					Ball.frame = Ball.frame_num;
 				}
 			});
-
 			//console.log('throw')
 			Camera.addChild(Ball);
 		};
@@ -1029,12 +971,9 @@ window.onload = function mogura() {
 		});
 
 	//*バット*
-		var Bat = new Sprite(96,32);
-		Bat.x = BATTER_DEFAULT_X + BATTER_SIZE_X/2 + 10;
-		Bat.y = BATTER_DEFAULT_Y + BATTER_SIZE_Y/2;
+		var Bat = make_Sprite(96, 32, BATTER_DEFAULT_X+BATTER_SIZE_X/2+10, BATTER_DEFAULT_Y+BATTER_SIZE_Y/2, 'img/bat.gif');
 		Bat.swing_frame = 0; //スイングした時のフレームカウント
 		Bat._element.style.zIndex = 3;
-		Bat.image = game.assets['img/bat.gif'];
 		Bat.rotation = 0;
 		Bat.addEventListener('enterframe', function(){
 			if(Camera.timestart){
@@ -1078,10 +1017,7 @@ window.onload = function mogura() {
 		});
  
 	//*バッター*
-		var Batter = new Sprite(BATTER_SIZE_X, BATTER_SIZE_Y);
-		Batter.x = BATTER_DEFAULT_X;
-		Batter.y = BATTER_DEFAULT_Y;
-		Batter.image = game.assets['img/miyako.gif'];
+		var Batter = make_Sprite(BATTER_SIZE_X, BATTER_SIZE_Y, BATTER_DEFAULT_X, BATTER_DEFAULT_Y, 'img/miyako.gif');
 		Batter.frame = 0;
 		Batter.swing_flag = true;
 		Batter._element.style.zIndex = 3;
@@ -1123,10 +1059,7 @@ window.onload = function mogura() {
 		});
 
 	//*ミートカーソル*
-		var MeetCursor = new Sprite(MEETCURSOR_SIZE_X, MEETCURSOR_SIZE_Y);
-		MeetCursor.x = MEETCURSOR_DEFAULT_X;
-		MeetCursor.y = MEETCURSOR_DEFAULT_Y;
-		MeetCursor.image = game.assets['img/meetcursor.png'];
+		var MeetCursor = make_Sprite(MEETCURSOR_SIZE_X, MEETCURSOR_SIZE_Y, MEETCURSOR_DEFAULT_X, MEETCURSOR_DEFAULT_Y, 'img/meetcursor.png');
 		//ヒットフラグ
 		MeetCursor.hit_flag = false;
 		//芯からずれた際の減少補正
@@ -1141,18 +1074,16 @@ window.onload = function mogura() {
 						//console.log('ヒット'); //for debag
 						MeetCursor.hit_flag = false;
 						//打球角度
-						var angle = 90 - ((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2)) * 2.5 * -1;
+						var angle = 90 - ((Ball.y + BALL_SIZE/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2)) * 2.5 * -1;
 						//console.log('angle:'+angle);//for debug
 						//ミートカーソルとボールの距離計算
-						var distance = Math.sqrt(Math.pow((Ball.x + BALL_SIZE_X/2) - (MeetCursor.x + MEETCURSOR_SIZE_X/2), 2) + Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2) * 0.6);
+						var distance = Math.sqrt(Math.pow((Ball.x + BALL_SIZE/2) - (MeetCursor.x + MEETCURSOR_SIZE_X/2), 2) + Math.pow((Ball.y + BALL_SIZE/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2) * 0.6);
 						//console.log('distance:'+distance);//for debug
 						//真芯値
 						var meetpoint = 32;
 						//打球スピード
 						var batted_speed = (meetpoint - (distance * this.distance_powerfilter))* 0.7;
-						
 						Effect.add(2, Ball.x ,  Ball.y); //ヒットエフェクト
-
 						//真芯演出
 						if(batted_speed > 19.5){
 							Camera.timestop = 10;
@@ -1184,11 +1115,8 @@ window.onload = function mogura() {
 						}
 						//console.log('batted_speed:'+batted_speed);//for debug
 					//*打球*
-						var BattedBall = new Sprite(BALL_SIZE_X, BALL_SIZE_Y);
-						BattedBall.x = Ball.x;
-						BattedBall.y = Ball.y;			
+						var BattedBall = make_Sprite(BALL_SIZE, BALL_SIZE, Ball.x, Ball.y, 'img/ball_shadow.gif');
 						BattedBall.timespeed =1.7;
-						BattedBall.image = game.assets['img/ball_shadow.gif'];
 						BattedBall.speed_x = batted_speed * Math.cos(angle * Math.PI/180);
 						BattedBall.speed_y = batted_speed * Math.sin(angle * Math.PI/180);
 						//打球の地面からの高さ
@@ -1196,11 +1124,11 @@ window.onload = function mogura() {
 						//打球が着地したらtrue
 						BattedBall.stop_flag = false;
 						//浮力
-						BattedBall.buoyancy = 2  + batted_speed * 0.25 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/6;
+						BattedBall.buoyancy = 2  + batted_speed * 0.25 - (Math.sqrt(Math.pow((Ball.y + BALL_SIZE/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/6;
 						if(BattedBall.buoyancy < 0.5){
 							BattedBall.buoyancy = 0.5;
 						}
-						//console.log('tate:'+(Math.sqrt(Math.pow((Ball.y + BALL_SIZE_Y/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/3);
+						//console.log('tate:'+(Math.sqrt(Math.pow((Ball.y + BALL_SIZE/2) - (MeetCursor.y + MEETCURSOR_SIZE_Y/2), 2)))/3);
 						//console.log('buoyancy:'+BattedBall.buoyancy);
 						//飛距離（得点）
 						BattedBall.flown = 0;
@@ -1229,20 +1157,9 @@ window.onload = function mogura() {
 										//console.log('hit_se:'+hit_se);
 										Point.addition(parseInt(BattedBall.flown), hit_se); 
 										Point.update();
-
-									//*旧取得点表示*
-										if(GameMode != 5){
-											var NowPoint = new Label();
-											NowPoint.x = (Camera.x * -1) + SCREEN_SIZE_X/2;
-											NowPoint.y = (Camera.y * -1) + SCREEN_SIZE_Y/2;
-											//console.log(NowPoint.x);
-											NowPoint.text = "<h1 class='label'>飛距離:"+parseInt(BattedBall.flown)+"m</h1>";
-											//Camera.addChild(NowPoint);
-										}
 									
 										setTimeout(function(){
 											Camera.removeChild(this);
-											Camera.removeChild(NowPoint);
 
 											if(GameMode != 5){
 												Pitcher.throw_flag = true;
@@ -1264,8 +1181,8 @@ window.onload = function mogura() {
 										Camera.speed = 2;
 										//グラウンド最下部からある程度離れたらカメラ追従
 										if(this.y <= GROUND_SIZE_Y - 150){
-										Camera.target_x = Camera.target_x + this.speed_x * this.timespeed;
-										Camera.target_y = Camera.target_y + this.speed_y * this.timespeed;									}
+											Camera.target_x = Camera.target_x + this.speed_x * this.timespeed;
+											Camera.target_y = Camera.target_y + this.speed_y * this.timespeed;							}
 										}
 								}
 								if(this.h <= 0 && this.buoyancy <= 0){
@@ -1290,11 +1207,7 @@ window.onload = function mogura() {
 								Camera.removeChild(this);
 							}
 						});
-
-						var BattedBallHop = new Sprite(BALL_SIZE_X*2, BALL_SIZE_Y*2);
-						BattedBallHop.image = game.assets['img/ball.gif'];
-						BattedBallHop.x = Ball.x - BALL_SIZE_X/2;
-						BattedBallHop.y = Ball.y - BALL_SIZE_Y/2;
+						var BattedBallHop = make_Sprite(BALL_SIZE*2, BALL_SIZE*2, Ball.x-BALL_SIZE/2,	Ball.y-BALL_SIZE/2, 'img/ball.gif');
 						BattedBallHop.scaleX = 0.5 + BattedBall.h/400;
 						BattedBallHop.scaleY = 0.5 + BattedBall.h/400;
 						BattedBallHop.anime_frame = 0;
@@ -1302,29 +1215,24 @@ window.onload = function mogura() {
 						BattedBallHop.frame_num = Ball.frame_num;
 						BattedBallHop.addEventListener('enterframe', function(){
 							if(Camera.timestart && batted_speed > 0){
-								BattedBallHop.x = parseInt(BattedBall.x  - BattedBall.speed_x * BattedBall.timespeed)  - BALL_SIZE_X/2;
-								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y * BattedBall.timespeed - BattedBall.h - BALL_SIZE_Y + 5 );
+								BattedBallHop.x = parseInt(BattedBall.x  - BattedBall.speed_x * BattedBall.timespeed)  - BALL_SIZE/2;
+								BattedBallHop.y = parseInt(BattedBall.y -BattedBall.speed_y * BattedBall.timespeed - BattedBall.h - BALL_SIZE + 5 );
 								BattedBallHop.scaleX = 0.5 + BattedBall.h/400;
 								BattedBallHop.scaleY = 0.5 + BattedBall.h/400;
-
-
 								if(LastBall.num == LastBall.max){
 									Camera.removeChild(this);
 								}
-
 								//ボールのアニメのはやさ
 								this.anime_speed = 7 - batted_speed/2;
-								
 								if(this.anime_speed < 0){
 									this.anime_speed = 0;
 								}
-
 								this.anime_frame++;
 								if(this.anime_frame > this.anime_speed && batted_speed > 0.5){
 									this.frame_num--;
 									this.anime_frame = 0;
 									if(this.frame_num < 0){
-									this.frame_num = 6;
+										this.frame_num = 6;
 									}
 									this.frame = this.frame_num;
 								}
@@ -1341,12 +1249,9 @@ window.onload = function mogura() {
 							BallNowPointBar.opacity = 0;
 							BallNowPointBar.backgroundColor = "white";
 							BallNowPointBar._element.style.zIndex = 5;
-
 							BallNowPointBar.end_frame = -3;
 
-							var BallNowPointText = new Label();
-							BallNowPointText.x = 0;
-							BallNowPointText.y = 320;
+							var BallNowPointText = make_Label(0, 320, "", "");
 							BallNowPointText._element.style.zIndex = 5;
 							BallNowPointText.opacity = 0;
 
@@ -1389,13 +1294,9 @@ window.onload = function mogura() {
 									}
 								}
 							});
-
-
-						SceneBatting.addChild(BallNowPointBar);
-						SceneBatting.addChild(BallNowPointText);
+							SceneBatting.addChild(BallNowPointBar);
+							SceneBatting.addChild(BallNowPointText);
 						}
-
-
 						Camera.addChild(BattedBall);
 						Camera.addChild(BattedBallHop);
 
@@ -1404,9 +1305,6 @@ window.onload = function mogura() {
 						if(GameMode == 5){
 							Pitcher.throw_flag = true;
 						}
-
-					}else if(MeetCursor.hit_flag == true){
-						//console.log('スカ');
 					}
 				}
 				//移動 バッターの位置についていく
@@ -1493,7 +1391,6 @@ window.onload = function mogura() {
 				this.x = parseInt(this.x - (this.x - this.target_x)/this.speed);
 				this.y = parseInt(this.y -(this.y - this.target_y)/this.speed);
 
-
 				if(this.x >  this.target_x){
 					Camera.x--;
 				}else if(this.x <  this.target_x){
@@ -1508,7 +1405,6 @@ window.onload = function mogura() {
 
 			}
 
-
 			if(SceneBatting.bgm_fadeout&& game.assets[BattingBgmFile].volume > 0){
 				game.assets[BattingBgmFile].volume -= 0.005;
 				if(game.assets[BattingBgmFile].volume < 0.01){
@@ -1522,8 +1418,6 @@ window.onload = function mogura() {
 		Camera.addChild(MeetCursor);
 		Camera.addChild(Pitcher);
 		Camera.addChild(Batter);
-		//Camera.addChild(KeyPad);
-		//Camera.addChild(SwingButton);
 		Camera.addChild(Effect);
 
 	//add
@@ -1591,16 +1485,6 @@ window.onload = function mogura() {
 			if(this.select_menu == 2){
 				window.location.reload();
 			}
-		}
-
-		//*ラベル生成関数*
-		function make_Label(x, y, class_name, text){
-			//console.log('makelabel');
-			var TempLabel = new Label();
-			TempLabel.x = x;
-			TempLabel.y = y;
-			TempLabel.text = "<div class='"+class_name+"'>"+text+"</div>";
-			return TempLabel;
 		}
 
 		SceneResult.addEventListener('enterframe', function(){
@@ -1684,19 +1568,13 @@ window.onload = function mogura() {
 		BackgroundResult.backgroundColor = "black";
 
 	//*得点*
-		var ResultTitle = new Label();
-		ResultTitle.x = 180;
-		ResultTitle.y = 20;
+		var ResultTitle = make_Label(180, 20, "", "");
 		ResultTitle.opacity = 0;
 		ResultTitle.text = "";
 
 	//*リトライボタン
-		var RetryButton = new Label();
-		//RetryButton.num = 1;
-		RetryButton.x = 100;
-		RetryButton.y = 400;
+		var RetryButton = make_Label(100, 400, "result_button", "もう一度");
 		RetryButton.opacity = 0.3;
-		RetryButton.text = "<div class='result_button'>もう一度</h1>";
 		RetryButton.addEventListener('touchstart', function (e) {
 			SceneResult.select_menu = 1;
 			RetryButton.opacity = 0.8;
@@ -1704,12 +1582,8 @@ window.onload = function mogura() {
 		});
 
 	//*リセットボタン*
-		var ResetButton = new Label();
-		ResetButton.num = 1;
-		ResetButton.x = 260;
-		ResetButton.y = 400;
+		var ResetButton = make_Label(260, 400, "result_button", "メニューへ");
 		ResetButton.opacity = 0.3;
-		ResetButton.text = "<div class='result_button'>メニューへ</h1>";
 		ResetButton.addEventListener('touchstart', function (e) {
 			SceneResult.select_menu = 2;
 			ResetButton.opacity = 0.8;
