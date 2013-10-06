@@ -5,20 +5,20 @@ window.onload = function hidamari_swing() {
 	game.keybind(32, "space");  // spaceキー
 	game.preload(
 		//Background
-		'img/background_title.jpg',	'img/background_batting.jpg',
+		'img/background_title.jpg', 'img/background_batting.jpg',
 		//title chara
-		'img/logo.png',	'img/direction.gif', 'img/switch.gif', 'img/sound.gif', 'img/sound_n.gif',
+		'img/logo.png', 'img/direction.gif', 'img/switch.gif', 'img/sound.gif', 'img/sound_n.gif',
 		//batting chara
-		'img/yuno.gif',	'img/bat.gif', 'img/miyako.gif', 'img/meetcursor.png',
-		'img/ball.gif',	'img/throw_ball.gif', 'img/ball_shadow.gif',
+		'img/yuno.gif', 'img/bat.gif', 'img/miyako.gif', 'img/meetcursor.png',
+		'img/ball.gif', 'img/throw_ball.gif', 'img/ball_shadow.gif',
 		'img/swing_button.png',
-		'img/effect_line.gif',　'img/effect_hit.gif',
+		'img/effect_line.gif', 'img/effect_hit.gif',
 		//BGM
 		'sound/bgm_easy.mp3', 'sound/bgm_normal.mp3',
 		'sound/bgm_hard.mp3', 'sound/bgm_extra1.mp3', 'sound/bgm_extra2.mp3',
 		'sound/bgm_result.mp3',
 		//SE
-		'sound/hit_ex.wav',	'sound/hit_1.wav', 'sound/hit_2.wav', 'sound/hit_3.wav', 'sound/hit_4.wav'
+		'sound/hit_ex.wav', 'sound/hit_1.wav', 'sound/hit_2.wav', 'sound/hit_3.wav', 'sound/hit_4.wav'
 	);
 //**********
 //コンフィグ定数
@@ -387,7 +387,7 @@ window.onload = function hidamari_swing() {
 				$('#help').animate({opacity:0,},
 					{duration:'fast',complete:
 					function(){
-							$('#help').css({'display':'none'});
+						$('#help').css({'display':'none'});
 					},
 				});
 			});
