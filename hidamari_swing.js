@@ -85,8 +85,8 @@ window.onload = function hidamari_swing() {
 	var SWINGBUTTON_Y = SCREEN_SIZE_Y - SWINGBUTTON_SIZE;
 	
 	//メニューの設定
-	var CommonCourse = ["EASY","NORMAL","HARD","STRAIGHT"];
-	var ExtraCourse = ["KNOCK","YUNO","EASY_EX"];
+	var CommonCourse = ["EASY","NORMAL","HARD","STRAIGHT","KIRE"];
+	var ExtraCourse = ["KNOCK","YUNO","EASY_EX","KNOCK_EX"];
 	//
 	var GameSet = {	
 		"COMMON" : {
@@ -106,7 +106,7 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 0.9,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_normal.mp3',
-				"discription" : "10球 / 芯の大きさ：☆☆<br> 変化球も投げてくるコース"
+				"discription" : "10球 / 芯の大きさ：☆☆<br>変化球も投げてくる！"
 			},
 			"HARD" : {
 				"mode" : "通常モード",
@@ -115,7 +115,7 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 1.0,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_hard.mp3',
-				"discription" : "10球 / 芯の大きさ：☆<br> 上手い人向けの難しめコース"
+				"discription" : "10球 / 芯の大きさ：☆<br>上手い人向けの難しめコース！"
 			},
 			"STRAIGHT" : {
 				"mode" : "通常モード",
@@ -124,7 +124,16 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 0.95,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_extra1.mp3',
-				"discription" : "10球 / 芯の大きさ：☆<br>直球で真剣勝負！"
+				"discription" : "10球 / 芯の大きさ：☆<br>直球のみで真剣勝負！"
+			},
+			"KIRE" : {
+				"mode" : "通常モード",
+				"course_name" : "きれきれコース",
+				"gamemode_number" : 7,
+				"powerfilter": 0.85,
+				"ball_number" : 10,
+				"bgm" : 'sound/bgm_extra1.mp3',
+				"discription" : "10球 / 芯の大きさ：☆☆☆<br>だんだん難しくなる変化球コース！"
 			}
 		},
 		"EXTRA" : {
@@ -135,7 +144,7 @@ window.onload = function hidamari_swing() {
 				"ball_number" : 10,
 				"powerfilter": 0.85,
 				"bgm" : 'sound/bgm_easy.mp3',
-				"discription" : "10球 / 芯の大きさ：☆☆☆<br>理不尽な球をしっかり捉えて飛ばそう！"
+				"discription" : "10球 / 芯の大きさ：☆☆☆<br>森で修行して帰ってきた！"
 			},
 			"KNOCK" : {
 				"mode" : "おまけモード",
@@ -144,7 +153,7 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 1.0,
 				"ball_number" : 100,
 				"bgm" : 'sound/bgm_extra2.mp3',
-				"discription" : "100球 / 芯の大きさ：☆<br> カメラ移動なし！テンポよく打ちまくれ！"
+				"discription" : "100球 / 芯の大きさ：☆<br>これはノックと呼べるのか！？とにかく打ちまくれ！"
 			},
 			"EASY_EX" : {
 				"mode" : "おまけモード",
@@ -153,7 +162,16 @@ window.onload = function hidamari_swing() {
 				"ball_number" : 5,
 				"powerfilter": 1.1,
 				"bgm" : 'sound/bgm_easy.mp3',
-				"discription" : "5球 / 芯の大きさ：☆<br>統一球になって帰ってきた！"
+				"discription" : "5球 / 芯の大きさ：☆<br>統一球になったほのぼのコース！"
+			},
+			"KNOCK_EX" : {
+				"mode" : "おまけモード",
+				"course_name" : "バンザイノック",
+				"gamemode_number" : 5,
+				"powerfilter": 0.45,
+				"ball_number" : 100,
+				"bgm" : 'sound/bgm_extra2.mp3',
+				"discription" : "100球 / 芯の大きさ：☆☆☆☆☆<br>わっしょいでーす"
 			}
 		}
 	};
@@ -311,7 +329,7 @@ window.onload = function hidamari_swing() {
 		});
 
 	//*モードラベル*
-		var ModeLabel = make_Label(SCREEN_SIZE_X/2+DIRECTION_SIZE+90, STARTBUTTON_Y-DIRECTION_SIZE/2-15, "", "");
+		var ModeLabel = make_Label(SCREEN_SIZE_X/2+DIRECTION_SIZE+85, STARTBUTTON_Y-DIRECTION_SIZE/2-17, "", "");
 		ModeLabel.update = function(){
 			this.text = "<div class='label'>" + GameSet[Mode][Course]["mode"] + "</div>";
 		}
@@ -439,9 +457,11 @@ window.onload = function hidamari_swing() {
 			if(Mode == "COMMON"){
 				Mode = "EXTRA";
 				Course = ExtraCourse[ExtraCourseIndex];
+				BackFrame.text = "<div class=\"backframe_ex\"></div>";
 			}else{
 				Mode = "COMMON";
 				Course = CommonCourse[CommonCourseIndex];
+				BackFrame.text = "<div class=\"backframe\"></div>";
 			}
 			MarkerPinUpdate();
 		}
@@ -1006,6 +1026,22 @@ window.onload = function hidamari_swing() {
 							if(LastBall.num %2 == 1){
 								this.ball_type += 1 +  parseInt(Math.random()*10%3);
 							}
+						}else if(GameMode == 7){
+							if(LastBall.num > 8){
+								this.ball_type = 202; 		
+							}else if(LastBall.num == 8){
+								this.ball_type = 204;
+							}else if(LastBall.num > 5){
+								this.ball_type = 602;
+							}else if(LastBall.num == 5){
+								this.ball_type = 604;
+							}else if(LastBall.num == 4){
+								this.ball_type = 303;
+							}else{
+								this.ball_type = 306;
+							}
+
+
 						}
 						//投球
 						//console.log('ball_type:' + this.ball_type);
@@ -1583,37 +1619,37 @@ window.onload = function hidamari_swing() {
 			//100本モードとそれ以外のモードで結果表示を変化
 			if(GameMode == 5){
 				if(this.animation_frame == 50){
-					var MaxFlownHead = make_Label(120, 70, "result_type", "最高飛距離");
+					var MaxFlownHead = make_Label(120, 80, "result_type", "最高飛距離");
 					SceneResult.addChild(MaxFlownHead);
 
-					var MaxFlown = make_Label(240, 70, "result_score", Point.max+"m");
+					var MaxFlown = make_Label(240, 80, "result_score", Point.max+"m");
 					SceneResult.addChild(MaxFlown);
 
 					play_se('sound/hit_1.wav');
 				}
 
 				if(this.animation_frame == 70){
-					var SpuerHitHead = make_Label(120, 125, "result_type", "真芯ヒット数");
+					var SpuerHitHead = make_Label(120, 135, "result_type", "真芯ヒット数");
 					SceneResult.addChild(SpuerHitHead);
 
-					var SpuerHitNum = make_Label(240, 125, "result_score", Point.super_hit+"回");
+					var SpuerHitNum = make_Label(240, 135, "result_score", Point.super_hit+"回");
 					SceneResult.addChild(SpuerHitNum);
 
 					play_se('sound/hit_1.wav');
 				}
 
 				if(this.animation_frame == 90){
-					var WhiffNumHead = make_Label(120, 180, "result_type", "空振り数");
+					var WhiffNumHead = make_Label(120, 190, "result_type", "空振り数");
 					SceneResult.addChild(WhiffNumHead);
 
-					var WhiffNum = make_Label(240, 180, "result_score", Point.miss+"回");
+					var WhiffNum = make_Label(240, 190, "result_score", Point.miss+"回");
 					SceneResult.addChild(WhiffNum);
 
 					play_se('sound/hit_1.wav');
 				}
 
 				if(this.animation_frame == 110){
-					var TotalMeter = make_Label(120, 230, "result_total", "合計"+Point.num+"m");
+					var TotalMeter = make_Label(120, 240, "result_total", "合計"+Point.num+"m");
 					SceneResult.addChild(TotalMeter);
 
 					play_se('sound/hit_1.wav');
@@ -1654,8 +1690,8 @@ window.onload = function hidamari_swing() {
 		ResultTitle.opacity = 0;
 		ResultTitle.text = "";
 
-	//*得点*
-		var ModeTitle = make_Label(0, 55, "", "");
+	//*モード表示*
+		var ModeTitle = make_Label(0, 52, "", "");
 		ModeTitle.opacity = 0;
 		ModeTitle.text = "";
 

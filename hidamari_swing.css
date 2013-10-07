@@ -8,6 +8,14 @@ body{
 	opacity: 0.6;
 	border-radius: 10px;
 }
+.backframe_ex{
+	width: 440px;
+	height: 160px;
+	background: #CC2211;
+	opacity: 0.6;
+	border-radius: 10px;
+}
+
 .stateframe{
 	width: 100px;
 	height: 65px;
