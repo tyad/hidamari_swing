@@ -86,7 +86,7 @@ window.onload = function hidamari_swing() {
 	
 	//メニューの設定
 	var CommonCourse = ["EASY","NORMAL","HARD","STRAIGHT","KIRE"];
-	var ExtraCourse = ["KNOCK","YUNO","EASY_EX","KNOCK_EX"];
+	var ExtraCourse = ["YUNO","KNOCK","KNOCK_EX","EASY_EX"];
 	//
 	var GameSet = {	
 		"COMMON" : {
@@ -162,7 +162,7 @@ window.onload = function hidamari_swing() {
 				"ball_number" : 5,
 				"powerfilter": 1.1,
 				"bgm" : 'sound/bgm_easy.mp3',
-				"discription" : "5球 / 芯の大きさ：☆<br>統一球になったほのぼのコース！"
+				"discription" : "5球 / 芯の大きさ：☆<br>統一球になった！目指せ500ｍ！"
 			},
 			"KNOCK_EX" : {
 				"mode" : "おまけモード",
