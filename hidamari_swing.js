@@ -159,52 +159,10 @@ window.onload = function hidamari_swing() {
 	};
 	//
 	var Mode = "COMMON";
-	var ModeSwitching = function(){
-		if(Mode == "COMMON"){
-			Mode = "EXTRA";
-			Course = ExtraCourse[ExtraCourseIndex];
-		}else{
-			Mode = "COMMON";
-			Course = CommonCourse[CommonCourseIndex];
-		}
-	} 
+
 	var Course = "EASY";
 	var CommonCourseIndex = 0;
 	var ExtraCourseIndex = 0;
-	var CourseIncrement = function(){
-		if(Mode == "COMMON"){
-			if(CommonCourseIndex == CommonCourse.length-1){
-				CommonCourseIndex = 0;
-			}else{
-				CommonCourseIndex++;
-			}
-			Course = CommonCourse[CommonCourseIndex];
-		}else{
-			if(ExtraCourseIndex == ExtraCourse.length-1){
-				ExtraCourseIndex = 0;
-			}else{
-				ExtraCourseIndex++;
-			}
-			Course = ExtraCourse[ExtraCourseIndex];
-		}
-	}
-	var CourseDecrement = function(){
-		if(Mode == "COMMON"){
-			if(CommonCourseIndex == 0){
-				CommonCourseIndex = CommonCourse.length-1;
-			}else{
-				CommonCourseIndex--;
-			}
-			Course = CommonCourse[CommonCourseIndex];
-		}else{
-			if(ExtraCourseIndex == 0){
-				ExtraCourseIndex = ExtraCourse.length-1;
-			}else{
-				ExtraCourseIndex--;
-			}
-			Course = ExtraCourse[ExtraCourseIndex];
-		}
-	}
 
 	//音ON/OFF用フラグ
 	var SoundFlag = true;
@@ -325,7 +283,7 @@ window.onload = function hidamari_swing() {
 		});
 
 	//*枠*
-		var BackFrame = make_Label(20, SCREEN_SIZE_Y/2+60, "backframe", "");
+		var BackFrame = make_Label(20, SCREEN_SIZE_Y/2+55, "backframe", "");
 
 	//*矢印*
 		var ModeLeftButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, 40, STARTBUTTON_Y+DIRECTION_SIZE/2, 'img/direction.gif');
@@ -404,6 +362,119 @@ window.onload = function hidamari_swing() {
 			}
 		});
 
+		SceneTitle.addEventListener('enterframe', function (e) {
+			if(ModeLeftButton.scaleX > 1){
+				ModeLeftButton.scaleX -= 0.15;
+				ModeLeftButton.scaleY -= 0.15;
+			}else{
+				ModeLeftButton.scaleX = 1;
+				ModeLeftButton.scaleY = 1;
+			}
+
+			if(ModeRightButton.scaleX > 1){
+				ModeRightButton.scaleX -= 0.15;
+				ModeRightButton.scaleY -= 0.15;
+			}else{
+				ModeRightButton.scaleX = 1;
+				ModeRightButton.scaleY = 1;
+			}
+
+			if(ModeSwitch.scaleX > 1){
+				ModeSwitch.scaleX -= 0.15;
+				ModeSwitch.scaleY -= 0.15;
+			}else{
+				ModeSwitch.scaleX = 1;
+				ModeSwitch.scaleY = 1;
+			}
+
+		});
+
+		var CourseIncrement = function(){
+			ModeRightButton.scaleX = 1.45;
+			ModeRightButton.scaleY = 1.45;
+
+			if(Mode == "COMMON"){
+				if(CommonCourseIndex == CommonCourse.length-1){
+					CommonCourseIndex = 0;
+				}else{
+					CommonCourseIndex++;
+				}
+				Course = CommonCourse[CommonCourseIndex];
+			}else{
+				if(ExtraCourseIndex == ExtraCourse.length-1){
+					ExtraCourseIndex = 0;
+				}else{
+					ExtraCourseIndex++;
+				}
+				Course = ExtraCourse[ExtraCourseIndex];
+			}
+			MarkerPinUpdate();
+		}
+		var CourseDecrement = function(){
+			ModeLeftButton.scaleX = 1.45;
+			ModeLeftButton.scaleY = 1.45;
+
+			if(Mode == "COMMON"){
+				if(CommonCourseIndex == 0){
+					CommonCourseIndex = CommonCourse.length-1;
+				}else{
+					CommonCourseIndex--;
+				}
+				Course = CommonCourse[CommonCourseIndex];
+			}else{
+				if(ExtraCourseIndex == 0){
+					ExtraCourseIndex = ExtraCourse.length-1;
+				}else{
+					ExtraCourseIndex--;
+				}
+				Course = ExtraCourse[ExtraCourseIndex];
+			}
+			MarkerPinUpdate();
+		}
+
+		var ModeSwitching = function(){
+			ModeSwitch.scaleX = 1.45;
+			ModeSwitch.scaleY = 1.45;
+
+			if(Mode == "COMMON"){
+				Mode = "EXTRA";
+				Course = ExtraCourse[ExtraCourseIndex];
+			}else{
+				Mode = "COMMON";
+				Course = CommonCourse[CommonCourseIndex];
+			}
+			MarkerPinUpdate();
+		}
+
+		var ModeMarkerPin = make_Label(0,297,"marker_pin","test");
+
+		var MarkerPinUpdate = function(){
+			var markerText = "";
+			if(Mode == "COMMON"){
+				for (var i = 0; i < CommonCourse.length; i++) {
+					if(CommonCourseIndex == i){
+						markerText = markerText + "●";
+					}else{
+						markerText = markerText + "・";
+					}
+				};
+			}else{
+				for (var i = 0; i < ExtraCourse.length; i++) {
+					if(ExtraCourseIndex == i){
+						markerText = markerText + "●";
+					}else{
+						markerText = markerText + "・";
+					}
+				};
+
+			}
+
+			ModeMarkerPin.text = "<div class=\"marker_pin\">" + markerText + "</div>";
+
+		}
+
+		MarkerPinUpdate();
+
 	//add
 		SceneTitle.addChild(BackgroundTitle);
 		SceneTitle.addChild(TitleLogo);
@@ -414,6 +485,7 @@ window.onload = function hidamari_swing() {
 		SceneTitle.addChild(ModeRightButton);
 		SceneTitle.addChild(ModeSwitch);
 		SceneTitle.addChild(ModeDiscription);
+		SceneTitle.addChild(ModeMarkerPin);
 		SceneTitle.addChild(HelpButton);
 		SceneTitle.addChild(SoundButton);
 
@@ -1473,6 +1545,7 @@ window.onload = function hidamari_swing() {
 
 				SceneResult.addChild(BackgroundResult);
 				SceneResult.addChild(ResultTitle);
+				SceneResult.addChild(ModeTitle);
 				SceneResult.addChild(RetryButton);
 				SceneResult.addChild(ResetButton);
 				
@@ -1492,11 +1565,20 @@ window.onload = function hidamari_swing() {
 			if(BackgroundResult.opacity < 0.7){
 				BackgroundResult.opacity += 0.03;
 			}
+			if(this.animation_frame == 1){
+				ResultTitle.opacity = 0;
+				ModeTitle.opacity = 0;
+			}
 			if(this.animation_frame == 10){
 				ResultTitle.text = "<div id=\"result_title\">結果発表</div>";
+				ModeTitle.text = "<div id=\"mode_title\">" + GameSet[Mode][Course]["course_name"] + "</div>";
 			}
 			if(ResultTitle.opacity < 1){
 				ResultTitle.opacity += 0.05;
+			}
+
+			if(ModeTitle.opacity < 1){
+				ModeTitle.opacity += 0.05;
 			}
 			//100本モードとそれ以外のモードで結果表示を変化
 			if(GameMode == 5){
@@ -1568,9 +1650,14 @@ window.onload = function hidamari_swing() {
 		BackgroundResult.backgroundColor = "black";
 
 	//*得点*
-		var ResultTitle = make_Label(180, 20, "", "");
+		var ResultTitle = make_Label(176, 10, "", "");
 		ResultTitle.opacity = 0;
 		ResultTitle.text = "";
+
+	//*得点*
+		var ModeTitle = make_Label(0, 55, "", "");
+		ModeTitle.opacity = 0;
+		ModeTitle.text = "";
 
 	//*リトライボタン
 		var RetryButton = make_Label(100, 400, "result_button", "もう一度");
@@ -1593,6 +1680,7 @@ window.onload = function hidamari_swing() {
 	//add
 		SceneResult.addChild(BackgroundResult);
 		SceneResult.addChild(ResultTitle);
+		SceneResult.addChild(ModeTitle);
 		SceneResult.addChild(RetryButton);
 		SceneResult.addChild(ResetButton);
 

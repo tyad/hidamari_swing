@@ -64,6 +64,15 @@ body{
 	font-size:32px;
 	color:#fff;
 }
+#mode_title{
+	width:480px;
+	height:16px;
+	line-height:16px;
+	font-size:16px;
+	color:#fff;
+	text-align:center;
+}
+
 .result_num{
 	font-size:20px;
 	color:#fff;
@@ -126,4 +135,14 @@ body{
 	font-size:32px;
 	color:#000;
 	text-align:center;
+}
+
+.marker_pin{
+	width:480px;
+	height:20px;
+	line-height:20px;
+	color:#fff;
+	font-size:20px;
+	text-align:center;
+	letter-spacing:0.5em;
 }
