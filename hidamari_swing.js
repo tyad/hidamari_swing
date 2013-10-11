@@ -183,10 +183,11 @@ window.onload = function hidamari_swing() {
 	var ExtraCourseIndex = 0;
 
 	//音ON/OFF用フラグ
+	console.log(getCookie("SoundFlag"));
 	var SoundFlag = true;
 	function SoundFlagSwitching () {
 		SoundFlag = !SoundFlag;
-		//console.log("SoundFlag:"+SoundFlag);
+		setCookie("SoundFlag",SoundFlag);
 	}
 
 	game.onload = function(){
