@@ -1,5 +1,5 @@
 enchant();
-//test
+
 window.onload = function hidamari_swing() {
 	var game = new Game(480, 480);
 	game.keybind(32, "space");  // spaceキー
