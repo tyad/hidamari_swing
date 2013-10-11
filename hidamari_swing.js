@@ -85,8 +85,8 @@ window.onload = function hidamari_swing() {
 	var SWINGBUTTON_Y = SCREEN_SIZE_Y - SWINGBUTTON_SIZE;
 	
 	//メニューの設定
-	var CommonCourse = ["EASY","NORMAL","HARD","STRAIGHT","KIRE"];
-	var ExtraCourse = ["YUNO","KNOCK","KNOCK_EX","EASY_EX"];
+	var CommonCourse = createCommonCourse();
+	var ExtraCourse = createExtraCourse();
 	//
 	var GameSet = {	
 		"COMMON" : {
@@ -496,6 +496,12 @@ window.onload = function hidamari_swing() {
 
 		MarkerPinUpdate();
 
+		if(CommonCourse.length < 2){
+			ModeMarkerPin.visible = false;
+			ModeLeftButton.visible = false;
+			ModeRightButton.visible = false;
+		}
+
 	//add
 		SceneTitle.addChild(BackgroundTitle);
 		SceneTitle.addChild(TitleLogo);
@@ -566,7 +572,10 @@ window.onload = function hidamari_swing() {
 					Point.visible = false;
 					StateFrame.visible = false;
 					LastBall.visible = false;
-					game.pushScene(SceneBatting);
+					//game.pushScene(SceneBatting);
+					
+					
+
 					game.pushScene(SceneResult);
 				},3000);
 			}
