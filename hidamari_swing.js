@@ -91,6 +91,7 @@ window.onload = function hidamari_swing() {
 	var GameSet = {	
 		"COMMON" : {
 			"EASY" : {
+				"course_e" : "EASY",
 				"mode" : "通常モード",
 				"course_name" : "ほのぼのコース",
 				"type_of_pitch" : 1,
@@ -101,6 +102,7 @@ window.onload = function hidamari_swing() {
 				"discription" : "5球 / 芯の大きさ：☆☆☆<br>ボールを打ち返してみよう！"
 			},
 			"NORMAL" : {
+				"course_e" : "NORMAL",
 				"mode" : "通常モード",
 				"course_name" : "わくわくコース",
 				"type_of_pitch" : 2,
@@ -111,6 +113,7 @@ window.onload = function hidamari_swing() {
 				"discription" : "10球 / 芯の大きさ：☆☆<br>変化球も投げてくる！"
 			},
 			"HARD" : {
+				"course_e" : "HARD",
 				"mode" : "通常モード",
 				"course_name" : "どきどきコース",
 				"type_of_pitch" : 6,
@@ -121,6 +124,7 @@ window.onload = function hidamari_swing() {
 				"discription" : "10球 / 芯の大きさ：☆<br>上手い人向けの難しめコース！"
 			},
 			"STRAIGHT" : {
+				"course_e" : "STRAIGHT",
 				"mode" : "通常モード",
 				"course_name" : "まっすぐコース",
 				"type_of_pitch" : 4,
@@ -131,6 +135,7 @@ window.onload = function hidamari_swing() {
 				"discription" : "10球 / 芯の大きさ：☆<br>直球のみで真剣勝負！"
 			},
 			"KIRE" : {
+				"course_e" : "KIRE",
 				"mode" : "通常モード",
 				"course_name" : "きれきれコース",
 				"type_of_pitch" : 7,
@@ -143,6 +148,7 @@ window.onload = function hidamari_swing() {
 		},
 		"EXTRA" : {
 			"YUNO" : {
+				"course_e" : "YUNO",
 				"mode" : "おまけモード",
 				"course_name" : "ゆのさま",
 				"type_of_pitch" : 3,
@@ -153,6 +159,7 @@ window.onload = function hidamari_swing() {
 				"discription" : "10球 / 芯の大きさ：☆☆☆<br>森で修行して帰ってきた！"
 			},
 			"KNOCK" : {
+				"course_e" : "KNOCK",
 				"mode" : "おまけモード",
 				"course_name" : "100本ノック",
 				"type_of_pitch" : 5,
@@ -163,6 +170,7 @@ window.onload = function hidamari_swing() {
 				"discription" : "100球 / 芯の大きさ：☆<br>これはノックと呼べるのか！？とにかく打ちまくれ！"
 			},
 			"EASY_EX" : {
+				"course_e" : "EASY_EX",
 				"mode" : "おまけモード",
 				"course_name" : "ほのぼのコース×☆☆☆",
 				"type_of_pitch" : 1,
@@ -173,6 +181,7 @@ window.onload = function hidamari_swing() {
 				"discription" : "5球 / 芯の大きさ：☆<br>統一球になった！目指せ500ｍ！"
 			},
 			"KNOCK_EX" : {
+				"course_e" : "KNOCK_EX",
 				"mode" : "おまけモード",
 				"course_name" : "バンザイノック",
 				"type_of_pitch" : 5,
@@ -184,9 +193,8 @@ window.onload = function hidamari_swing() {
 			}
 		}
 	};
-	//
+	//初期モード、コース
 	var Mode = "COMMON";
-
 	var Course = "EASY";
 	var CommonCourseIndex = 0;
 	var ExtraCourseIndex = 0;
@@ -592,7 +600,7 @@ window.onload = function hidamari_swing() {
 					//game.pushScene(SceneBatting);
 					
 					//------クッキー処理-----
-
+					cookieUpdate(GameSet, Point);
 					//--------------------
 					game.pushScene(SceneResult);
 				},3000);
