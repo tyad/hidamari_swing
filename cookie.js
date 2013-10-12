@@ -91,7 +91,7 @@ function unlock(){
 }
 
 //
-function cookieUpdate(course_e, Point){
+function cookieUpdate(course_e, Point, ball_number){
     //◆ほのぼの
     if(course_e === "EASY"){
         var clearlank = getCookie("CLEARLANK-EASY");
@@ -103,7 +103,7 @@ function cookieUpdate(course_e, Point){
             setCookie("CLEARLANK-EASY",1);
         }
         //★全真芯
-        if(Point.super_hit == GameSet[Mode][Course]["ball_number"]){
+        if(Point.super_hit == ball_number){
         
         }
     }
