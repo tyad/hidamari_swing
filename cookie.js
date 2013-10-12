@@ -44,7 +44,7 @@ function getCookie(name){
         }
     }
     if(result[name] === undefined){
-        console.log("undef!");
+        console.log("undef : "+name);
         return 0;
     }
     return parseInt(result[name]);
