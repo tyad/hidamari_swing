@@ -52,7 +52,9 @@ function getCookie(name){
 
 //
 function setCookie(name,value){
-        document.cookie = name+'=' + encodeURIComponent( value );
+    var expire = new Date();
+    expire.setTime( expire.getTime() + 1000 * 3600 * 24 * 365 * 100 );
+    document.cookie = name+'=' + encodeURIComponent( value ) + '; expires=' + expire.toUTCString();
 }
 
 function unlock(){
