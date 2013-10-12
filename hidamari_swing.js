@@ -183,10 +183,14 @@ window.onload = function hidamari_swing() {
 	var ExtraCourseIndex = 0;
 
 	//音ON/OFF用フラグ
-	console.log(getCookie("SoundFlag"));
-	var SoundFlag = true;
+	//console.log(getCookie("SoundFlag"));
+	var SoundFlag = getCookie("SoundFlag");
 	function SoundFlagSwitching () {
-		SoundFlag = !SoundFlag;
+		if(SoundFlag == 0){
+			SoundFlag = 1;
+		}else{
+			SoundFlag = 0;
+		}
 		setCookie("SoundFlag",SoundFlag);
 	}
 
@@ -213,7 +217,7 @@ window.onload = function hidamari_swing() {
 		}
 
 		function play_se(file_pass){
-			if(SoundFlag){
+			if(SoundFlag != 0){
 				//console.log('play se :'+file_pass);
 				var se = game.assets[file_pass];
 				se.stop();
@@ -371,10 +375,15 @@ window.onload = function hidamari_swing() {
 		});
 
 	//*音ボタン*
-		var SoundButton = make_Sprite(40, 40, SCREEN_SIZE_Y-50, 10, 'img/sound.gif');
+		if(SoundFlag == 1){
+			var sound_img = 'img/sound.gif';
+		}else{
+			var sound_img = 'img/sound_n.gif';
+		}
+		var SoundButton = make_Sprite(40, 40, SCREEN_SIZE_Y-50, 10, sound_img);
 		SoundButton.addEventListener('touchstart', function (e) {
 			SoundFlagSwitching();
-			if(SoundFlag){
+			if(SoundFlag == 1){
 				this.image = game.assets['img/sound.gif'];
 			}else{
 				this.image = game.assets['img/sound_n.gif'];
