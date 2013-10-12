@@ -54,6 +54,6 @@ function setCookie(name,value){
         document.cookie = name+'=' + encodeURIComponent( value );
 }
 
-function cookieUpdate(){
+function cookieUpdate(GameMode, Point){
 
 }
