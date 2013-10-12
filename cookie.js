@@ -1,16 +1,16 @@
 //
 function createCommonCourse(){
     var CommonCourse = ["EASY"];
-    if(getCookie("UNLOCK-NORMAL")){
+    if(getCookie("UNLOCK-NORMAL") == 1){
         CommonCourse.push("NORMAL");
     }
-    if(getCookie("UNLOCK-HARD")){
+    if(getCookie("UNLOCK-HARD") == 1){
         CommonCourse.push("HARD");
     }
-    if(getCookie("UNLOCK-STRAIGHT")){
+    if(getCookie("UNLOCK-STRAIGHT") == 1){
         CommonCourse.push("STRAIGHT");
     }
-    if(getCookie("UNLOCK-KIRE")){
+    if(getCookie("UNLOCK-KIRE") == 1){
         CommonCourse.push("KIRE");
     }
     return CommonCourse;
