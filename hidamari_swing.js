@@ -217,7 +217,7 @@ window.onload = function hidamari_swing() {
 		}
 
 		function play_se(file_pass){
-			if(SoundFlag != 0){
+			if(SoundFlag == 1){
 				//console.log('play se :'+file_pass);
 				var se = game.assets[file_pass];
 				se.stop();
@@ -536,7 +536,7 @@ window.onload = function hidamari_swing() {
 		//フレーム更新処理
  		SceneBatting.addEventListener('enterframe', function(){
  			//BGM ループ再生
- 			if(!SceneBatting.bgm_fadeout && SoundFlag){
+ 			if(!SceneBatting.bgm_fadeout && SoundFlag == 1){
 				game.assets[BattingBgmFile].play();
 				game.assets[BattingBgmFile].volume = 0.4;
 			}
@@ -573,7 +573,7 @@ window.onload = function hidamari_swing() {
 				SceneBatting.bgm_fadeout = true;
 				//console.log("ゲーム終了");
 				setTimeout(function(){
-					if(SoundFlag){
+					if(SoundFlag == 1){
 						game.assets[RESULT_BGM].stop();
 						game.assets[RESULT_BGM].play();
 						game.assets[RESULT_BGM].volume = 0.4;
@@ -1580,7 +1580,7 @@ window.onload = function hidamari_swing() {
 				SceneResult.score_ball_num = 1;
 				BackgroundResult.opacity = 0;
 				Pitcher.throw_interval_count = -30; //初回
-				if(SoundFlag){
+				if(SoundFlag == 1){
 					game.assets[RESULT_BGM].stop();
 					game.assets[RESULT_BGM].volume = 0;
 					game.assets[BattingBgmFile].stop();
