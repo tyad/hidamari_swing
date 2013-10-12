@@ -97,6 +97,7 @@ function cookieUpdate(course_e, Point, ball_number){
     //◆ほのぼの
     if(course_e === "EASY"){
         var clearlank = getCookie("CLEARLANK-EASY");
+        console.log(clearlank);
         if(Point.num >= 500 && clearlank < 3){//☆☆☆ 500
             setCookie("CLEARLANK-EASY",3);
         }else if(Point.num >= 400 && clearlank < 2){//☆☆ 400
