@@ -1,16 +1,16 @@
 //
 function createCommonCourse(){
     var CommonCourse = ["EASY"];
-    if(getCookie("UNLOCK_NORMAL")){
+    if(getCookie("UNLOCKNORMAL")){
         CommonCourse.push("NORMAL");
     }
-    if(getCookie("UNLOCK_HARD")){
+    if(getCookie("UNLOCKHARD")){
         CommonCourse.push("HARD");
     }
-    if(getCookie("UNLOCK_STRAIGHT")){
+    if(getCookie("UNLOCKSTRAIGHT")){
         CommonCourse.push("STRAIGHT");
     }
-    if(getCookie("UNLOCK_KIRE")){
+    if(getCookie("UNLOCKKIRE")){
         CommonCourse.push("KIRE");
     }
     return CommonCourse;
@@ -18,14 +18,14 @@ function createCommonCourse(){
 //
 function createExtraCourse(){
     var ExtraCourse = ["KNOCK"];
-    if(getCookie("UNLOCK_YUNO")){
+    if(getCookie("UNLOCKYUNO")){
         ExtraCourse.push("YUNO");
     }
-    if(getCookie("UNLOCK_KNOCK_EX")){
-        ExtraCourse.push("KNOCK_EX");
+    if(getCookie("UNLOCKKNOCKEX")){
+        ExtraCourse.push("KNOCKEX");
     }
-    if(getCookie("UNLOCK_EASY_EX")){
-        ExtraCourse.push("EASY_EX");
+    if(getCookie("UNLOCKEASYEX")){
+        ExtraCourse.push("EASYEX");
     }
     return ExtraCourse;
 }
@@ -57,102 +57,102 @@ function setCookie(name,value){
 function unlock(){
     console.log("unlock check");
     //NORMAL解放
-    if(getCookie("CLEARLANK_EASY") > 0 && getCookie("UNLOCK_NORMAL") == 0){
-        setCookie("UNLOCK_NORMAL",1);
-        console.log('UNLOCK_NORMAL');
+    if(getCookie("CLEARLANKEASY") > 0 && getCookie("UNLOCKNORMAL") == 0){
+        setCookie("UNLOCKNORMAL",1);
+        console.log('UNLOCKNORMAL');
     }
     //HARD解放
-    if(getCookie("CLEARLANK_NORMAL") > 0 && getCookie("UNLOCK_HARD") == 0){
-        setCookie("UNLOCK_HARD",1);
-        console.log('UNLOCK_HARD');
+    if(getCookie("CLEARLANKNORMAL") > 0 && getCookie("UNLOCKHARD") == 0){
+        setCookie("UNLOCKHARD",1);
+        console.log('UNLOCKHARD');
     }
     //STRAIGHT & KIRE解放
-    if(getCookie("CLEARLANK_HARD") > 0 && getCookie("UNLOCK_STRAIGHT") == 0 && getCookie("UNLOCK_KIRE") == 0){
-        setCookie("UNLOCK_STRAIGHT",1);
-        setCookie("UNLOCK_KIRE",1);
-        console.log('UNLOCK_STRAIGHT,KIRE');
+    if(getCookie("CLEARLANKHARD") > 0 && getCookie("UNLOCKSTRAIGHT") == 0 && getCookie("UNLOCKKIRE") == 0){
+        setCookie("UNLOCKSTRAIGHT",1);
+        setCookie("UNLOCKKIRE",1);
+        console.log('UNLOCKSTRAIGHT,KIRE');
     }
     //YUNO解放
-    if(getCookie("CLEARLANK_STRAIGHT") > 0 && getCookie("CLEARLANK_KIRE") > 0 && getCookie("UNLOCK_YUNO") == 0){
-        setCookie("UNLOCK_YUNO",1);
-        console.log('UNLOCK_YUNO');
+    if(getCookie("CLEARLANKSTRAIGHT") > 0 && getCookie("CLEARLANKKIRE") > 0 && getCookie("UNLOCKYUNO") == 0){
+        setCookie("UNLOCKYUNO",1);
+        console.log('UNLOCKYUNO');
     }
     /*あとで
-    //KNOCK_EX解放
-    if(getCookie("CLEARLANK_STRAIGHT") > 0 && getCookie("CLEARLANK_KIRE") > 0 && getCookie("UNLOCK_YUNO") == 0){
-        setCookie("UNLOCK_YUNO",1);
-        console.log('UNLOCK_YUNO');
+    //KNOCKEX解放
+    if(getCookie("CLEARLANKSTRAIGHT") > 0 && getCookie("CLEARLANKKIRE") > 0 && getCookie("UNLOCKYUNO") == 0){
+        setCookie("UNLOCKYUNO",1);
+        console.log('UNLOCKYUNO');
     }
-    //EASY_EX解放
-    if(getCookie("CLEARLANK_STRAIGHT") > 0 && getCookie("CLEARLANK_KIRE") > 0 && getCookie("UNLOCK_YUNO") == 0){
-        setCookie("UNLOCK_YUNO",1);
-        console.log('UNLOCK_YUNO');
+    //EASYEX解放
+    if(getCookie("CLEARLANKSTRAIGHT") > 0 && getCookie("CLEARLANKKIRE") > 0 && getCookie("UNLOCKYUNO") == 0){
+        setCookie("UNLOCKYUNO",1);
+        console.log('UNLOCKYUNO');
     }
     */
 }
 
 //
-function cookieUpdate(course_e, Point, ball_number){
-    console.log(course_e);
+function cookieUpdate(coursee, Point, ballnumber){
+    console.log(coursee);
     console.log(Point.num);
     //◆ほのぼの
-    if(course_e === "EASY"){
-        var clearlank = getCookie("CLEARLANK_EASY");
+    if(coursee === "EASY"){
+        var clearlank = getCookie("CLEARLANKEASY");
         console.log(clearlank);
         if(Point.num >= 500 && clearlank < 3){//☆☆☆ 500
-            setCookie("CLEARLANK_EASY",3);
+            setCookie("CLEARLANKEASY",3);
         }else if(Point.num >= 400 && clearlank < 2){//☆☆ 400
-            setCookie("CLEARLANK_EASY",2);
+            setCookie("CLEARLANKEASY",2);
         }else if(Point.num >= 250 && clearlank < 1){//☆ 250
-            setCookie("CLEARLANK_EASY",1);
+            setCookie("CLEARLANKEASY",1);
         }
         //★全真芯
-        if(Point.super_hit == ball_number){
+        if(Point.superhit == ballnumber){
         
         }
     }
     //◆わくわく
-    else if(course_e === "NORMAL"){
-        var clearlank = getCookie("CLEARLANK_NORMAL");
+    else if(coursee === "NORMAL"){
+        var clearlank = getCookie("CLEARLANKNORMAL");
         if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
-            setCookie("CLEARLANK_NORMAL",3);
+            setCookie("CLEARLANKNORMAL",3);
         }else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
-            setCookie("CLEARLANK_NORMAL",2);
+            setCookie("CLEARLANKNORMAL",2);
         }else if(Point.num >= 500 && clearlank < 1){//☆ 500
-            setCookie("CLEARLANK_NORMAL",1);
+            setCookie("CLEARLANKNORMAL",1);
         }
     }
     //◆どきどき
-    else if(course_e === "HARD"){
-        var clearlank = getCookie("CLEARLANK_HARD");
+    else if(coursee === "HARD"){
+        var clearlank = getCookie("CLEARLANKHARD");
         if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
-            setCookie("CLEARLANK_HARD",3);
+            setCookie("CLEARLANKHARD",3);
         }else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
-            setCookie("CLEARLANK_HARD",2);
+            setCookie("CLEARLANKHARD",2);
         }else if(Point.num >= 500 && clearlank < 1){//☆ 500
-            setCookie("CLEARLANK_HARD",1);
+            setCookie("CLEARLANKHARD",1);
         }
     }
     //◆まっすぐ
-    else if(course_e === "STRAIGHT"){
-        var clearlank = getCookie("CLEARLANK_STRAIGHT");
+    else if(coursee === "STRAIGHT"){
+        var clearlank = getCookie("CLEARLANKSTRAIGHT");
         if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
-            setCookie("CLEARLANK_STRAIGHT",3);
+            setCookie("CLEARLANKSTRAIGHT",3);
         }else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
-            setCookie("CLEARLANK_STRAIGHT",2);
+            setCookie("CLEARLANKSTRAIGHT",2);
         }else if(Point.num >= 500 && clearlank < 1){//☆ 500
-            setCookie("CLEARLANK_STRAIGHT",1);
+            setCookie("CLEARLANKSTRAIGHT",1);
         }
     }
     //◆きれきれ
-    else if(course_e === "KIRE"){
-        var clearlank = getCookie("CLEARLANK_KIRE");
+    else if(coursee === "KIRE"){
+        var clearlank = getCookie("CLEARLANKKIRE");
         if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
-            setCookie("CLEARLANK_KIRE",3);
+            setCookie("CLEARLANKKIRE",3);
         }else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
-            setCookie("CLEARLANK_KIRE",2);
+            setCookie("CLEARLANKKIRE",2);
         }else if(Point.num >= 500 && clearlank < 1){//☆ 500
-            setCookie("CLEARLANK_KIRE",1);
+            setCookie("CLEARLANKKIRE",1);
         }
         //★空振りしない
         if(Point.miss == 0){
@@ -160,55 +160,55 @@ function cookieUpdate(course_e, Point, ball_number){
         }
     }
     //◆ゆのさま
-    else if(course_e === "YUNO"){
-        var clearlank = getCookie("CLEARLANK_YUNO");
+    else if(coursee === "YUNO"){
+        var clearlank = getCookie("CLEARLANKYUNO");
         if(Point.num >= 800 && clearlank < 3){//☆☆☆ 800
-            setCookie("CLEARLANK_YUNO",3);
+            setCookie("CLEARLANKYUNO",3);
         }else if(Point.num >= 600 && clearlank < 2){//☆☆ 600
-            setCookie("CLEARLANK_YUNO",2);
+            setCookie("CLEARLANKYUNO",2);
         }else if(Point.num >= 400 && clearlank < 1){//☆ 400
-            setCookie("CLEARLANK_YUNO",1);
+            setCookie("CLEARLANKYUNO",1);
         }
         //★真芯で返す
         //★空振りしない
     }
     //◆100本ノック
-    else if(course_e === "KNOCK"){
-        var clearlank = getCookie("CLEARLANK_KNOCK");
+    else if(coursee === "KNOCK"){
+        var clearlank = getCookie("CLEARLANKKNOCK");
         if(Point.num >= 8000 && clearlank < 3){//☆☆☆ 8000
-            setCookie("CLEARLANK_KNOCK",3);
+            setCookie("CLEARLANKKNOCK",3);
         }else if(Point.num >= 5000 && clearlank < 2){//☆☆ 5000
-            setCookie("CLEARLANK_KNOCK",2);
+            setCookie("CLEARLANKKNOCK",2);
         }else if(Point.num >= 3000 && clearlank < 1){//☆ 3000
-            setCookie("CLEARLANK_KNOCK",1);
+            setCookie("CLEARLANKKNOCK",1);
         }
         //★真芯20
         //★真芯10
         //★真芯5
     }
     //◆バンザイノック
-    else if(course_e === "KNOCK_EX"){
-        var clearlank = getCookie("CLEARLANK_KNOCK_EX");
+    else if(coursee === "KNOCKEX"){
+        var clearlank = getCookie("CLEARLANKKNOCKEX");
         if(Point.num >= 10000 && clearlank < 3){//☆☆☆ 10000
-            setCookie("CLEARLANK_KNOCK",3);
+            setCookie("CLEARLANKKNOCK",3);
         }else if(Point.num >= 8000 && clearlank < 2){//☆☆ 8000
-            setCookie("CLEARLANK_KNOCK",2);
+            setCookie("CLEARLANKKNOCK",2);
         }else if(Point.num >= 5000 && clearlank < 1){//☆ 5000
-            setCookie("CLEARLANK_KNOCK",1);
+            setCookie("CLEARLANKKNOCK",1);
         }
         //★真芯50
         //★真芯40
         //★真芯30
     }
     //◆ほのぼの☆☆☆
-    else if(course_e === "EASY_EX"){
-        var clearlank = getCookie("CLEARLANK_EASY_EX");
+    else if(coursee === "EASYEX"){
+        var clearlank = getCookie("CLEARLANKEASYEX");
         if(Point.num >= 500 && clearlank < 3){//☆☆☆ 500
-            setCookie("CLEARLANK_EASY_EX",3);
+            setCookie("CLEARLANKEASYEX",3);
         }else if(Point.num >= 400 && clearlank < 2){//☆☆ 400
-            setCookie("CLEARLANK_EASY_EX",2);
+            setCookie("CLEARLANKEASYEX",2);
         }else if(Point.num >= 250 && clearlank < 1){//☆ 250
-            setCookie("CLEARLANK_EASY_EX",1);
+            setCookie("CLEARLANKEASYEX",1);
         }
     }
         /*
