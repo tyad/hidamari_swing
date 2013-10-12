@@ -91,9 +91,9 @@ function unlock(){
 }
 
 //
-function cookieUpdate(GameSet, Point){
+function cookieUpdate(course_e, Point){
     //◆ほのぼの
-    if(GameSet[Mode][Course]["course_e"] === "EASY"){
+    if(course_e === "EASY"){
         var clearlank = getCookie("CLEARLANK-EASY");
         if(Point.num >= 500 && clearlank < 3){//☆☆☆ 500
             setCookie("CLEARLANK-EASY",3);
@@ -108,7 +108,7 @@ function cookieUpdate(GameSet, Point){
         }
     }
     //◆わくわく
-    else if(GameSet[Mode][Course]["course_e"] === "NORMAL"){
+    else if(course_e === "NORMAL"){
         var clearlank = getCookie("CLEARLANK-NORMAL");
         if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
             setCookie("CLEARLANK-NORMAL",3);
@@ -119,7 +119,7 @@ function cookieUpdate(GameSet, Point){
         }
     }
     //◆どきどき
-    else if(GameSet[Mode][Course]["course_e"] === "HARD"){
+    else if(course_e === "HARD"){
         var clearlank = getCookie("CLEARLANK-HARD");
         if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
             setCookie("CLEARLANK-HARD",3);
@@ -130,7 +130,7 @@ function cookieUpdate(GameSet, Point){
         }
     }
     //◆まっすぐ
-    else if(GameSet[Mode][Course]["course_e"] === "STRAIGHT"){
+    else if(course_e === "STRAIGHT"){
         var clearlank = getCookie("CLEARLANK-STRAIGHT");
         if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
             setCookie("CLEARLANK-STRAIGHT",3);
@@ -141,7 +141,7 @@ function cookieUpdate(GameSet, Point){
         }
     }
     //◆きれきれ
-    else if(GameSet[Mode][Course]["course_e"] === "KIRE"){
+    else if(course_e === "KIRE"){
         var clearlank = getCookie("CLEARLANK-KIRE");
         if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
             setCookie("CLEARLANK-KIRE",3);
@@ -156,7 +156,7 @@ function cookieUpdate(GameSet, Point){
         }
     }
     //◆ゆのさま
-    else if(GameSet[Mode][Course]["course_e"] === "YUNO"){
+    else if(course_e === "YUNO"){
         var clearlank = getCookie("CLEARLANK-YUNO");
         if(Point.num >= 800 && clearlank < 3){//☆☆☆ 800
             setCookie("CLEARLANK-YUNO",3);
@@ -169,7 +169,7 @@ function cookieUpdate(GameSet, Point){
         //★空振りしない
     }
     //◆100本ノック
-    else if(GameSet[Mode][Course]["course_e"] === "KNOCK"){
+    else if(course_e === "KNOCK"){
         var clearlank = getCookie("CLEARLANK-KNOCK");
         if(Point.num >= 8000 && clearlank < 3){//☆☆☆ 8000
             setCookie("CLEARLANK-KNOCK",3);
@@ -183,7 +183,7 @@ function cookieUpdate(GameSet, Point){
         //★真芯5
     }
     //◆バンザイノック
-    else if(GameSet[Mode][Course]["course_e"] === "KNOCK_EX"){
+    else if(course_e === "KNOCK_EX"){
         var clearlank = getCookie("CLEARLANK-KNOCK_EX");
         if(Point.num >= 10000 && clearlank < 3){//☆☆☆ 10000
             setCookie("CLEARLANK-KNOCK",3);
@@ -197,7 +197,7 @@ function cookieUpdate(GameSet, Point){
         //★真芯30
     }
     //◆ほのぼの☆☆☆
-    else if(GameSet[Mode][Course]["course_e"] === "EASY_EX"){
+    else if(course_e === "EASY_EX"){
         var clearlank = getCookie("CLEARLANK-EASY_EX");
         if(Point.num >= 500 && clearlank < 3){//☆☆☆ 500
             setCookie("CLEARLANK-EASY_EX",3);

@@ -600,7 +600,7 @@ window.onload = function hidamari_swing() {
 					//game.pushScene(SceneBatting);
 					
 					//------クッキー処理-----
-					cookieUpdate(GameSet, Point);
+					cookieUpdate(GameSet[Mode][Course]["course_e"], Point);
 					//--------------------
 					game.pushScene(SceneResult);
 				},3000);
