@@ -92,6 +92,7 @@ function unlock(){
 
 //
 function cookieUpdate(course_e, Point, ball_number){
+    console.log(course_e);
     //◆ほのぼの
     if(course_e === "EASY"){
         var clearlank = getCookie("CLEARLANK-EASY");
