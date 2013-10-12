@@ -93,7 +93,7 @@ window.onload = function hidamari_swing() {
 			"EASY" : {
 				"mode" : "通常モード",
 				"course_name" : "ほのぼのコース",
-				"gamemode_number" : 1,
+				"type_of_pitch" : 1,
 				"nock" : 0,
 				"ball_number" : 5,
 				"powerfilter": 0.85,
@@ -103,7 +103,7 @@ window.onload = function hidamari_swing() {
 			"NORMAL" : {
 				"mode" : "通常モード",
 				"course_name" : "わくわくコース",
-				"gamemode_number" : 2,
+				"type_of_pitch" : 2,
 				"nock" : 0,
 				"powerfilter": 0.9,
 				"ball_number" : 10,
@@ -113,7 +113,7 @@ window.onload = function hidamari_swing() {
 			"HARD" : {
 				"mode" : "通常モード",
 				"course_name" : "どきどきコース",
-				"gamemode_number" : 6,
+				"type_of_pitch" : 6,
 				"nock" : 0,
 				"powerfilter": 1.0,
 				"ball_number" : 10,
@@ -123,7 +123,7 @@ window.onload = function hidamari_swing() {
 			"STRAIGHT" : {
 				"mode" : "通常モード",
 				"course_name" : "まっすぐコース",
-				"gamemode_number" : 4,
+				"type_of_pitch" : 4,
 				"nock" : 0,
 				"powerfilter": 0.95,
 				"ball_number" : 10,
@@ -133,7 +133,7 @@ window.onload = function hidamari_swing() {
 			"KIRE" : {
 				"mode" : "通常モード",
 				"course_name" : "きれきれコース",
-				"gamemode_number" : 7,
+				"type_of_pitch" : 7,
 				"nock" : 0,
 				"powerfilter": 0.85,
 				"ball_number" : 10,
@@ -145,7 +145,7 @@ window.onload = function hidamari_swing() {
 			"YUNO" : {
 				"mode" : "おまけモード",
 				"course_name" : "ゆのさま",
-				"gamemode_number" : 3,
+				"type_of_pitch" : 3,
 				"nock" : 0,
 				"ball_number" : 10,
 				"powerfilter": 0.85,
@@ -155,7 +155,7 @@ window.onload = function hidamari_swing() {
 			"KNOCK" : {
 				"mode" : "おまけモード",
 				"course_name" : "100本ノック",
-				"gamemode_number" : 5,
+				"type_of_pitch" : 5,
 				"nock" : 1,
 				"powerfilter": 1.0,
 				"ball_number" : 100,
@@ -165,7 +165,7 @@ window.onload = function hidamari_swing() {
 			"EASY_EX" : {
 				"mode" : "おまけモード",
 				"course_name" : "ほのぼのコース×☆☆☆",
-				"gamemode_number" : 1,
+				"type_of_pitch" : 1,
 				"nock" : 0,
 				"ball_number" : 5,
 				"powerfilter": 1.1,
@@ -175,7 +175,7 @@ window.onload = function hidamari_swing() {
 			"KNOCK_EX" : {
 				"mode" : "おまけモード",
 				"course_name" : "バンザイノック",
-				"gamemode_number" : 5,
+				"type_of_pitch" : 5,
 				"nock" : 1,
 				"powerfilter": 0.45,
 				"ball_number" : 100,
@@ -203,7 +203,7 @@ window.onload = function hidamari_swing() {
 	}
 
 	game.onload = function(){
-		var GameMode = 0;
+		//var GameMode = 0;
 		var BattingBgmFile = '';
 
 		//スペースが押されたとき呼ばれる関数呼ぶ
@@ -297,7 +297,7 @@ window.onload = function hidamari_swing() {
 		};
 		StartButton.label_update();
 		StartButton.game_start = function(){
-			GameMode = GameSet[Mode][Course]["gamemode_number"];
+			//GameMode = GameSet[Mode][Course]["gamemode_number"];
 			BattingBgmFile = GameSet[Mode][Course]["bgm"];
 			LastBall.num = GameSet[Mode][Course]["ball_number"];
 			LastBall.max = GameSet[Mode][Course]["ball_number"];
@@ -1038,23 +1038,23 @@ window.onload = function hidamari_swing() {
 						this.throw_interval_count = 0;
 						//球種を選定する
 						//ストレートを設定
-						this.ball_type = GameMode*100 + 1;
-						if(GameMode == 1){//イージーモード
+						this.ball_type = GameSet[Mode][Course]["type_of_pitch"]*100 + 1;
+						if(GameSet[Mode][Course]["type_of_pitch"] == 1){//イージーモード
 						
-						}else if(GameMode == 2){//ノーマルモード
+						}else if(GameSet[Mode][Course]["type_of_pitch"] == 2){//ノーマルモード
 							//残り球数が奇数の時に変化球を混ぜる
 							if(LastBall.num %2 == 1){
 								this.ball_type += 1 +  parseInt(Math.random()*10%3);
 							}
-						}else if(GameMode == 3){//ゆのさまモード
+						}else if(GameSet[Mode][Course]["type_of_pitch"] == 3){//ゆのさまモード
 							//常に変化球も投げる
 							this.ball_type += parseInt(Math.random()*10%8);
-						}else if(GameMode == 6){
+						}else if(GameSet[Mode][Course]["type_of_pitch"] == 6){
 							//残り球数が奇数の時に変化球を混ぜる
 							if(LastBall.num %2 == 1){
 								this.ball_type += 1 +  parseInt(Math.random()*10%3);
 							}
-						}else if(GameMode == 7){
+						}else if(GameSet[Mode][Course]["type_of_pitch"] == 7){
 							if(LastBall.num > 8){
 								this.ball_type = 202; 		
 							}else if(LastBall.num == 8){
@@ -1084,13 +1084,13 @@ window.onload = function hidamari_swing() {
 					//インターバルカウント
 					else if ((this.frame_num < 9) && (LastBall.num > 0)) {
 						this.throw_interval_count++;
-						if(GameMode == 5 && LastBall.num != LastBall.max){
+						if(GameSet[Mode][Course]["nock"] == 1 && LastBall.num != LastBall.max){
 							this.throw_interval_count = PITCH_INTERVAL;
 						}
 					}
 					//セットモーション
 					else if((this.frame_num >= 9) && (this.throw_interval_count == 0)){
-						if(GameMode == 5 && LastBall.num > 0){
+						if(GameSet[Mode][Course]["nock"] == 1 && LastBall.num > 0){
 							this.frame_num = 3;
 						}
 						if(game.frame % (game.fps/10) == 0){
@@ -1139,7 +1139,7 @@ window.onload = function hidamari_swing() {
 						Batter.frame = 5; //振るアニメ
 					}
 					//投球されている場合振り切ったままになるように制御
-					if(Pitcher.throw_flag == false && this.swing_frame > 10 && GameMode != 5){
+					if(Pitcher.throw_flag == false && this.swing_frame > 10 && GameSet[Mode][Course]["nock"] == 0){
 						this.swing_frame = 10;
 					}
 					if(this.swing_frame >= 15){
@@ -1297,7 +1297,7 @@ window.onload = function hidamari_swing() {
 										setTimeout(function(){
 											Camera.removeChild(this);
 
-											if(GameMode != 5){
+											if(GameSet[Mode][Course]["nock"] == 0){
 												Pitcher.throw_flag = true;
 											}
 											if(LastBall.num > 0){
@@ -1313,7 +1313,7 @@ window.onload = function hidamari_swing() {
 										this.flown += batted_speed * 0.05 * this.timespeed;
 									}
 									//カメラ追従
-									if(GameMode != 5 && this.y >= CAMERA_BATTING_Y && Camera.timestop == 0){
+									if(GameSet[Mode][Course]["nock"] == 0 && this.y >= CAMERA_BATTING_Y && Camera.timestop == 0){
 										Camera.speed = 2;
 										//グラウンド最下部からある程度離れたらカメラ追従
 										if(this.y <= GROUND_SIZE_Y - 150){
@@ -1378,7 +1378,7 @@ window.onload = function hidamari_swing() {
 
 
 					//*飛距離表示*
-						if(GameMode != 5){
+						if(GameSet[Mode][Course]["nock"] == 0){
 							var BallNowPointBar = new Sprite(SCREEN_SIZE_Y, 60);
 							BallNowPointBar.x = 0;
 							BallNowPointBar.y = 320;
@@ -1438,7 +1438,7 @@ window.onload = function hidamari_swing() {
 
 						BattedBall._element.style.zIndex = 2;
 						BattedBallHop._element.style.zIndex = 2;
-						if(GameMode == 5){
+						if(GameSet[Mode][Course]["nock"] == 1){
 							Pitcher.throw_flag = true;
 						}
 					}
@@ -1645,7 +1645,7 @@ window.onload = function hidamari_swing() {
 				ModeTitle.opacity += 0.05;
 			}
 			//100本モードとそれ以外のモードで結果表示を変化
-			if(GameMode == 5){
+			if(GameSet[Mode][Course]["nock"] == 1){
 				if(this.animation_frame == 50){
 					var MaxFlownHead = make_Label(120, 80, "result_type", "最高飛距離");
 					SceneResult.addChild(MaxFlownHead);

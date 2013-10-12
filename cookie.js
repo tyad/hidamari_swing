@@ -125,6 +125,6 @@ function cookieUpdate(GameMode, Point){
         ◆特殊
         ★合計365m
         ★合計3桁ゾロ目
-        */
-    }
+
+    }*/
 }
