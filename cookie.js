@@ -58,6 +58,8 @@ function setCookie(name,value){
 function unlock(){
     console.log("unlock check");
     //NORMAL解放
+    console.log(getCookie("CLEARLANK-EASY"));
+    console.log(getCookie("UNLOCK-NORMAL"));
     if(getCookie("CLEARLANK-EASY") > 0 && getCookie("UNLOCK-NORMAL") == 0){
         setCookie("UNLOCK-NORMAL",1);
         console.log('UNLOCK-NORMAL');
