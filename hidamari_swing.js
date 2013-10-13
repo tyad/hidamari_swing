@@ -203,9 +203,9 @@ window.onload = function hidamari_swing() {
 	var SoundFlag = getCookie("SoundFlag");
 	function SoundFlagSwitching () {
 		if(SoundFlag != 1){
-			SoundFlag = 0;
-		}else{
 			SoundFlag = 1;
+		}else{
+			SoundFlag = 0;
 		}
 		setCookie("SoundFlag",SoundFlag);
 	}
