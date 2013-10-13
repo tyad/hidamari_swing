@@ -59,23 +59,23 @@ function unlock(){
 	//NORMAL解放
 	console.log(getCookie("CLEARLANK-EASY"));
 	console.log(getCookie("UNLOCK-NORMAL"));
-	if(getCookie("CLEARLANK-EASY") > 0 && getCookie("UNLOCK-NORMAL") == 0){
+	if(getCookie("CLEARLANK-EASY") > 0 && getCookie("UNLOCK-NORMAL") != 1){
 		setCookie("UNLOCK-NORMAL",1);
 		console.log('UNLOCK-NORMAL');
 	}
 	//HARD解放
-	if(getCookie("CLEARLANK-NORMAL") > 0 && getCookie("UNLOCK-HARD") == 0){
+	if(getCookie("CLEARLANK-NORMAL") > 0 && getCookie("UNLOCK-HARD") != 1){
 		setCookie("UNLOCK-HARD",1);
 		console.log('UNLOCK-HARD');
 	}
 	//STRAIGHT & KIRE解放
-	if(getCookie("CLEARLANK-HARD") > 0 && getCookie("UNLOCK-STRAIGHT") == 0 && getCookie("UNLOCK-KIRE") == 0){
+	if(getCookie("CLEARLANK-HARD") > 0 && getCookie("UNLOCK-STRAIGHT") == 0 && getCookie("UNLOCK-KIRE") != 1){
 		setCookie("UNLOCK-STRAIGHT",1);
 		setCookie("UNLOCK-KIRE",1);
 		console.log('UNLOCK-STRAIGHT,KIRE');
 	}
 	//YUNO解放
-	if(getCookie("CLEARLANK-STRAIGHT") > 0 && getCookie("CLEARLANK-KIRE") > 0 && getCookie("UNLOCK-YUNO") == 0){
+	if(getCookie("CLEARLANK-STRAIGHT") > 0 && getCookie("CLEARLANK-KIRE") > 0 && getCookie("UNLOCK-YUNO") != 1){
 		setCookie("UNLOCK-YUNO",1);
 		console.log('UNLOCK-YUNO');
 	}
