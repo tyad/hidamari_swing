@@ -49,7 +49,7 @@ function getCookie(kword){
 		kdata = unescape(scookie.substring(start + kword.length, end));
 	}
 	if(!isNumber(kdata)){
-		console.log("undef : "+kdata);
+		console.log("undefined　or NaN : "+kword);
 		return 0;
 	}
 	return parseInt(kdata);
