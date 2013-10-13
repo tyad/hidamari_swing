@@ -94,7 +94,7 @@ function unlock(){
 	}
 	*/
 	//EASY_EX解放
-	if(getCookie("CLEARLANK-EASY") == 3 && && getCookie("UNLOCK-EASY_EX") != 1){
+	if(getCookie("CLEARLANK-EASY") == 3 && getCookie("UNLOCK-EASY_EX") != 1){
 		setCookie("UNLOCK-EASY_EX",1);
 		console.log('UNLOCK-EASY_EX');//ポップアップ表示と置き換えてね
 	}
