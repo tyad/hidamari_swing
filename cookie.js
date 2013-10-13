@@ -40,7 +40,7 @@ function getCookie(kword){
 		end = scookie.indexOf(";", start);
 		kdata = unescape(scookie.substring(start + kword.length, end));
 	}
-	if(kdata === undefined){
+	if(!isNumber(kdata)){
 		console.log("undef : "+kdata);
 		return 0;
 	}
