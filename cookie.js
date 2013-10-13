@@ -31,6 +31,14 @@ function createExtraCourse(){
 }
 
 //
+function isNumber(x){ 
+    if( typeof(x) != 'number' && typeof(x) != 'string' )
+        return false;
+    else 
+        return (x == parseFloat(x) && isFinite(x));
+}
+
+//
 function getCookie(kword){
 	kword = kword + "=";
 	kdata = "";
