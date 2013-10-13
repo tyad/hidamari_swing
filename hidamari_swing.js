@@ -202,7 +202,7 @@ window.onload = function hidamari_swing() {
 	//音ON/OFF用フラグ
 	var SoundFlag = getCookie("SoundFlag");
 	function SoundFlagSwitching () {
-		if(SoundFlag == 0){
+		if(SoundFlag != 0){
 			SoundFlag = 1;
 		}else{
 			SoundFlag = 0;
