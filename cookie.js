@@ -31,25 +31,20 @@ function createExtraCourse(){
 }
 
 //
-function getCookie(name){
-	var result = null;
-    var cookieName = name + '=';
-    var allcookies = document.cookie;
-    var position = allcookies.indexOf( cookieName );
-    if( position != -1 ){
-        var startIndex = position + cookieName.length;
-        var endIndex = allcookies.indexOf( ';', startIndex );
-        if( endIndex == -1 ){
-            endIndex = allcookies.length;
-        }
-        result = decodeURIComponent(
-            allcookies.substring( startIndex, endIndex ) );
-    }
-	if(result === undefined){
-		console.log("undef : "+result);
+function getCookie(kword){
+	kword = kword + "=";
+	kdata = "";
+	scookie = document.cookie + ";";
+	start = scookie.indexOf(kword);
+	if (start != -1){
+		end = scookie.indexOf(";", start);
+		kdata = unescape(scookie.substring(start + kword.length, end));
+	}
+	if(kdata === undefined){
+		console.log("undef : "+kdata);
 		return 0;
 	}
-	return parseInt(result);
+	return parseInt(kdata);
 }
 
 //
