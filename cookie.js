@@ -31,20 +31,25 @@ function createExtraCourse(){
 }
 
 //
-function getCookie(kword){
-	kword = kword + "=";
-	kdata = "";
-	scookie = document.cookie + ";";
-	start = scookie.indexOf(kword);
-	if (start != -1){	// キーワードと一致するものあり
-		end = scookie.indexOf(";", start);	// 情報の末尾位置を検索
-		kdata = unescape(scookie.substring(start + kword.length, end));
-	}
-	if(kdata === undefined){
-		console.log("undef : "+kdata);
+function getCookie(name){
+	var result = null;
+    var cookieName = name + '=';
+    var allcookies = document.cookie;
+    var position = allcookies.indexOf( cookieName );
+    if( position != -1 ){
+        var startIndex = position + cookieName.length;
+        var endIndex = allcookies.indexOf( ';', startIndex );
+        if( endIndex == -1 ){
+            endIndex = allcookies.length;
+        }
+        result = decodeURIComponent(
+            allcookies.substring( startIndex, endIndex ) );
+    }
+	if(result === undefined){
+		console.log("undef : "+result);
 		return 0;
 	}
-	return parseInt(kdata);
+	return parseInt(result);
 }
 
 //
@@ -57,8 +62,6 @@ function setCookie(name,value){
 function unlock(){
 	console.log("unlock check");
 	//NORMAL解放
-	console.log(getCookie("CLEARLANK-EASY"));
-	console.log(getCookie("UNLOCK-NORMAL"));
 	if(getCookie("CLEARLANK-EASY") > 0 && getCookie("UNLOCK-NORMAL") != 1){
 		setCookie("UNLOCK-NORMAL",1);
 		console.log('UNLOCK-NORMAL');
@@ -69,7 +72,7 @@ function unlock(){
 		console.log('UNLOCK-HARD');
 	}
 	//STRAIGHT & KIRE解放
-	if(getCookie("CLEARLANK-HARD") > 0 && getCookie("UNLOCK-STRAIGHT") == 0 && getCookie("UNLOCK-KIRE") != 1){
+	if(getCookie("CLEARLANK-HARD") > 0 && getCookie("UNLOCK-STRAIGHT") != 1 && getCookie("UNLOCK-KIRE") != 1){
 		setCookie("UNLOCK-STRAIGHT",1);
 		setCookie("UNLOCK-KIRE",1);
 		console.log('UNLOCK-STRAIGHT,KIRE');
@@ -81,12 +84,12 @@ function unlock(){
 	}
 	/*あとで
 	//KNOCK_EX解放
-	if(getCookie("CLEARLANK-STRAIGHT") > 0 && getCookie("CLEARLANK-KIRE") > 0 && getCookie("UNLOCK-YUNO") == 0){
+	if(getCookie("CLEARLANK-STRAIGHT") > 0 && getCookie("CLEARLANK-KIRE") > 0 && getCookie("UNLOCK-YUNO") != 1){
 		setCookie("UNLOCK-YUNO",1);
 		console.log('UNLOCK-YUNO');
 	}
 	//EASY_EX解放
-	if(getCookie("CLEARLANK-STRAIGHT") > 0 && getCookie("CLEARLANK-KIRE") > 0 && getCookie("UNLOCK-YUNO") == 0){
+	if(getCookie("CLEARLANK-STRAIGHT") > 0 && getCookie("CLEARLANK-KIRE") > 0 && getCookie("UNLOCK-YUNO") != 1){
 		setCookie("UNLOCK-YUNO",1);
 		console.log('UNLOCK-YUNO');
 	}
