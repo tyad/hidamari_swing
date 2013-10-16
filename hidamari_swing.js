@@ -99,7 +99,7 @@ window.onload = function hidamari_swing() {
 				"ball_number" : 5,
 				"powerfilter": 0.85,
 				"bgm" : 'sound/bgm_easy.mp3',
-				"discription" : "5球 / 芯の大きさ：☆☆☆<br>ボールを打ち返してみよう！"
+				"discription" : "5球 / 合計ノルマ:250m<br>ボールを打ち返してみよう！"
 			},
 			"NORMAL" : {
 				"course_e" : "NORMAL",
@@ -613,7 +613,7 @@ window.onload = function hidamari_swing() {
 		Point.ball =  new Array(); //ボール別のスコア
 		Point.miss = 0; //空振り率
 		Point.max = 0; //最高飛距離
-		Point.super_hit = 0; //真芯率
+		Point.justmeet = 0; //真芯率
 		Point._element.style.zIndex = 5;
 		Point.update = function(){
 			this.text = "<div class='statelabel'>合計"+this.num+"m</div>";
@@ -629,7 +629,7 @@ window.onload = function hidamari_swing() {
 
 			//真芯カウントの追加
 			if(hit_se == 'sound/hit_ex.wav'){
-				this.super_hit++;
+				this.justmeet++;
 			}
 			//飛距離0なら空振り
 			if(point == 0){
@@ -646,7 +646,7 @@ window.onload = function hidamari_swing() {
 			Point.ball =  new Array(); //ボール別のスコア
 			Point.miss = 0; //空振り率
 			Point.max = 0; //最高飛距離
-			Point.super_hit = 0; //真芯率
+			Point.justmeet = 0; //真芯率
 		}
 
 	//*表示系枠*
@@ -1668,7 +1668,7 @@ window.onload = function hidamari_swing() {
 					var SpuerHitHead = make_Label(120, 135, "result_type", "真芯ヒット数");
 					SceneResult.addChild(SpuerHitHead);
 
-					var SpuerHitNum = make_Label(240, 135, "result_score", Point.super_hit+"回");
+					var SpuerHitNum = make_Label(240, 135, "result_score", Point.justmeet+"回");
 					SceneResult.addChild(SpuerHitNum);
 
 					play_se('sound/hit_1.wav');

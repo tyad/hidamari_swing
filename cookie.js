@@ -1,3 +1,27 @@
+var TROPHY_DATA = {
+	"TROPHY-EASY-CLEAR":{
+		"name":"ほのぼの",
+		"text":"ほのぼのコースをクリアした"
+	},
+	"TROPHY-EASY-RANKMAX":{
+		"name":"芽生えドライブ",
+		"text":"ほのぼのコースをカンペキクリア"
+	},
+	"TROPHY-EASY-ALLJUSTMEET":{
+		"name":"カッキーン！",
+		"text":"ほのぼのコースで全ての球を真芯ヒットさせた"
+	}
+}
+
+var COURSE_DATA = {
+	"EASY":{
+		"name":"ほのぼのコース"
+	},
+	"NORMAL":{
+		"name":"わくわくコース"
+	}
+}
+
 //通常コース生成
 function createCommonCourse(){
 	var CommonCourse = ["EASY"];
@@ -68,7 +92,7 @@ function unlock(){
 	//NORMAL解放
 	if(getCookie("CLEARLANK-EASY") > 0 && getCookie("UNLOCK-NORMAL") != 1){
 		setCookie("UNLOCK-NORMAL",1);
-		console.log('UNLOCK-NORMAL');//ポップアップ表示と置き換えてね
+		popUp("UNLOCK","NORMAL");
 	}
 	//HARD解放
 	if(getCookie("CLEARLANK-NORMAL") > 0 && getCookie("UNLOCK-HARD") != 1){
@@ -110,17 +134,22 @@ function cookieUpdate(course_e, Point, ball_number){
 		console.log(clearlank);
 		if(Point.num >= 500 && clearlank < 3){//☆☆☆ 500
 			setCookie("CLEARLANK-EASY",3);
+			if(getCookie("TROPHY-EASY-RANKMAX") == 0){
+				setCookie("TROPHY-EASY-RANKMAX",1);
+				popUp("TROPHY","TROPHY-EASY-RANKMAX");
+			}
 		}else if(Point.num >= 400 && clearlank < 2){//☆☆ 400
 			setCookie("CLEARLANK-EASY",2);
 		}else if(Point.num >= 250 && clearlank < 1){//☆ 250
 			setCookie("CLEARLANK-EASY",1);
 		}
-		/*お好きにどうぞ
+
 		//★全真芯
-		if(Point.super_hit == ball_number){
-		
+		if(Point.justmeet == ball_number && getCookie("TROPHY-EASY-ALLJUSTMEET") == 0){
+			setCookie("TROPHY-EASY-ALLJUSTMEET",1);
+			popUp("TROPHY","TROPHY-EASY-ALLJUSTMEET");
 		}
-		*/
+
 	}
 	//◆わくわく
 	else if(course_e === "NORMAL"){
@@ -257,4 +286,48 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//アンロック判定
 	unlock();
+}
+
+function popUp(type,data_name){
+
+	var scale = $('#enchant-stage').find('div').css('-webkit-transform');
+	var popup_count = 0;
+	for(var i = 0;;i++){
+		if($(".pop"+i).length === 0){
+			popup_count = i;
+			break;
+		}
+	}
+
+	var css_top = popup_count*24 + 4;
+
+	if(type == "TROPHY"){
+	$('body').append("<div class=\"popup pop" + popup_count + "\">★実績解除：" + TROPHY_DATA[data_name]['name'] + "</div>");
+	}else if(type == "UNLOCK"){
+	$('body').append("<div class=\"popup pop" + popup_count + "\">[!] " + COURSE_DATA[data_name]['name'] + "解禁！</div>");
+	}
+
+	$('.pop' + popup_count).css({
+		'display':'block',
+		'-webkit-transform-origin':'0px 0px',
+		'-webkit-transform':scale,
+		'top':css_top,
+	});
+
+	setTimeout( function() {
+		$('.pop' + popup_count).animate(
+			{'opacity':'0.9'},
+			'fast'
+		);
+	}, $(".popup").length * 50);
+
+	setTimeout( function() {
+		$('.pop' + popup_count).animate({opacity:0,},
+			{duration:'fast',complete:
+			function(){
+				$('.pop' + popup_count).remove();
+			},
+		});
+	}, 4000);
+
 }
