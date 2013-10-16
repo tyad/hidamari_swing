@@ -290,7 +290,6 @@ function cookieUpdate(course_e, Point, ball_number){
 
 function popUp(type,data_name){
 
-
 	var popup_count = 0;
 	for(var i = 0;;i++){
 		if($(".pop"+i).length === 0){
@@ -298,30 +297,29 @@ function popUp(type,data_name){
 			break;
 		}
 	}
+	//画面のscaleの値
+	var matrix_value = new WebKitCSSMatrix($('#enchant-stage').find('div').css('-webkit-transform')).a;
+	//すこしずらしたかったら
+	//matrix_value = (matrix_value+0.1) * 10;
+	//とかにして調節してね
+	matrix_value = (matrix_value) * 10;
+	matrix_value = Math.round(matrix_value) / 10;
 
-	var css_top = popup_count*24 + 4;
-
-
-
-
+	//実際サイズの高さ分ずらす
+	var css_top = popup_count*$('.popup').outerHeight()*matrix_value;
 	if(type == "TROPHY"){
-	$('body').append("<div class=\"popup pop" + popup_count + "\">★実績解除：" + TROPHY_DATA[data_name]['name'] + "</div>");
+		$('body').append("<div class=\"popup pop" + popup_count + "\">★実績解除：" + TROPHY_DATA[data_name]['name'] + "</div>");
 	}else if(type == "UNLOCK"){
-	$('body').append("<div class=\"popup pop" + popup_count + "\">[!] " + COURSE_DATA[data_name]['name'] + "解禁！</div>");
+		$('body').append("<div class=\"popup pop" + popup_count + "\">[!] " + COURSE_DATA[data_name]['name'] + "解禁！</div>");
 	}
 
-	$('.pop' + popup_count).css({
-		'top':css_top,
-
-	});
-
 	var scale = $('#enchant-stage').find('div').css('-webkit-transform');
-
 
 	$('.pop' + popup_count).css({
 		'display':'block',
 		'-webkit-transform-origin':'0px 0px',
 		'-webkit-transform':scale,
+		'top':css_top
 	});
 
 	setTimeout( function() {
