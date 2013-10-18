@@ -17,7 +17,7 @@ var TROPHY_DATA = {
 		"text":"ほのぼのコースをクリア"
 	},
 	"TROPHY-NORMAL-RANKMAX":{
-		"name":"仮",
+		"name":"流星レコード",
 		"text":"わくわくコースで★★★"
 	},
 
@@ -26,7 +26,7 @@ var TROPHY_DATA = {
 		"text":"どきどきコースをクリア"
 	},
 	"TROPHY-HARD-RANKMAX":{
-		"name":"仮",
+		"name":"あやふやロケット",
 		"text":"どきどきコースで★★★"
 	},
 
@@ -35,7 +35,7 @@ var TROPHY_DATA = {
 		"text":"まっすぐコースをクリア"
 	},
 	"TROPHY-STRAIGHT-RANKMAX":{
-		"name":"仮",
+		"name":"なんかいいキモチ",
 		"text":"まっすぐコースで★★★"
 	},
 
@@ -44,7 +44,7 @@ var TROPHY_DATA = {
 		"text":"きれきれコースをクリア"
 	},
 	"TROPHY-KIRE-RANKMAX":{
-		"name":"仮",
+		"name":"なればいいカンジ",
 		"text":"きれきれコースで★★★"
 	},
 
@@ -53,7 +53,7 @@ var TROPHY_DATA = {
 		"text":"ゆのさまをクリア"
 	},
 	"TROPHY-YUNO-RANKMAX":{
-		"name":"仮",
+		"name":"VIP",
 		"text":"ゆのさまで★★★"
 	},
 
@@ -62,25 +62,25 @@ var TROPHY_DATA = {
 		"text":"100本ノックをクリア"
 	},
 	"TROPHY-KNOCK-RANKMAX":{
-		"name":"仮",
+		"name":"はなまる",
 		"text":"100本ノックで★★★"
 	},
 
 	"TROPHY-EASY_EX-CLEAR":{
-		"name":"ほのぼの×SP",
+		"name":"あららできちゃった",
 		"text":"ほのぼのコース×SPをクリア"
 	},
 	"TROPHY-EASY_EX-RANKMAX":{
-		"name":"仮",
+		"name":"あればできちゃうね",
 		"text":"ほのぼのコース×SPで★★★"
 	},
 
 	"TROPHY-KNOCK_EX-CLEAR":{
-		"name":"バンザイ！",
+		"name":"わっしょい",
 		"text":"バンザイノックをクリア"
 	},
 	"TROPHY-KNOCK_EX-RANKMAX":{
-		"name":"わっしょい！",
+		"name":"わしょしょい",
 		"text":"バンザイノックで★★★"
 	}
 }
@@ -197,12 +197,13 @@ function unlock(){
 	if(getCookie("CLEARLANK-HARD") > 0 && getCookie("UNLOCK-STRAIGHT") != 1 && getCookie("UNLOCK-KIRE") != 1){
 		setCookie("UNLOCK-STRAIGHT",1);
 		setCookie("UNLOCK-KIRE",1);
-		console.log('UNLOCK-STRAIGHT,KIRE');//ポップアップ表示と置き換えてね
+		popUp("UNLOCK","STRAIGHT");
+		popUp("UNLOCK","KIRE");
 	}
 	//YUNO解放
 	if(getCookie("CLEARLANK-STRAIGHT") > 0 && getCookie("CLEARLANK-KIRE") > 0 && getCookie("UNLOCK-YUNO") != 1){
 		setCookie("UNLOCK-YUNO",1);
-		console.log('UNLOCK-YUNO');//ポップアップ表示と置き換えてね
+		popUp("UNLOCK","YUNO");
 	}
 	/*命名規則に従って変えてください
 	//KNOCK_EX解放
@@ -214,7 +215,7 @@ function unlock(){
 	//EASY_EX解放
 	if(getCookie("CLEARLANK-EASY") == 3 && getCookie("UNLOCK-EASY_EX") != 1){
 		setCookie("UNLOCK-EASY_EX",1);
-		console.log('UNLOCK-EASY_EX');//ポップアップ表示と置き換えてね
+		popUp("UNLOCK","EASY_EX");
 	}
 }
 
