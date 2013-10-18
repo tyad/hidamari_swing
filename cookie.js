@@ -257,6 +257,10 @@ function cookieUpdate(course_e, Point, ball_number){
 		var clearlank = getCookie("CLEARLANK-NORMAL");
 		if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
 			setCookie("CLEARLANK-NORMAL",3);
+			if(getCookie("TROPHY-NORMAL-RANKMAX") == 0){
+				setCookie("TROPHY-NORMAL-RANKMAX",1);
+				popUp("TROPHY","TROPHY-NORMAL-RANKMAX");
+			}
 		}else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
 			setCookie("CLEARLANK-NORMAL",2);
 		}else if(Point.num >= 500 && clearlank < 1){//☆ 500
@@ -275,6 +279,10 @@ function cookieUpdate(course_e, Point, ball_number){
 		var clearlank = getCookie("CLEARLANK-HARD");
 		if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
 			setCookie("CLEARLANK-HARD",3);
+			if(getCookie("TROPHY-HARD-RANKMAX") == 0){
+				setCookie("TROPHY-HARD-RANKMAX",1);
+				popUp("TROPHY","TROPHY-HARD-RANKMAX");
+			}
 		}else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
 			setCookie("CLEARLANK-HARD",2);
 		}else if(Point.num >= 500 && clearlank < 1){//☆ 500
@@ -293,6 +301,10 @@ function cookieUpdate(course_e, Point, ball_number){
 		var clearlank = getCookie("CLEARLANK-STRAIGHT");
 		if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
 			setCookie("CLEARLANK-STRAIGHT",3);
+			if(getCookie("TROPHY-STRAIGHT-RANKMAX") == 0){
+				setCookie("TROPHY-STRAIGHT-RANKMAX",1);
+				popUp("TROPHY","TROPHY-STRAIGHT-RANKMAX");
+			}
 		}else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
 			setCookie("CLEARLANK-STRAIGHT",2);
 		}else if(Point.num >= 500 && clearlank < 1){//☆ 500
@@ -310,6 +322,10 @@ function cookieUpdate(course_e, Point, ball_number){
 		var clearlank = getCookie("CLEARLANK-KIRE");
 		if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
 			setCookie("CLEARLANK-KIRE",3);
+			if(getCookie("TROPHY-KIRE-RANKMAX") == 0){
+				setCookie("TROPHY-KIRE-RANKMAX",1);
+				popUp("TROPHY","TROPHY-KIRE-RANKMAX");
+			}
 		}else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
 			setCookie("CLEARLANK-KIRE",2);
 		}else if(Point.num >= 500 && clearlank < 1){//☆ 500
@@ -334,6 +350,10 @@ function cookieUpdate(course_e, Point, ball_number){
 		var clearlank = getCookie("CLEARLANK-YUNO");
 		if(Point.num >= 900 && clearlank < 3){//☆☆☆ 800
 			setCookie("CLEARLANK-YUNO",3);
+			if(getCookie("TROPHY-YUNO-RANKMAX") == 0){
+				setCookie("TROPHY-YUNO-RANKMAX",1);
+				popUp("TROPHY","TROPHY-YUNO-RANKMAX");
+			}
 		}else if(Point.num >= 700 && clearlank < 2){//☆☆ 600
 			setCookie("CLEARLANK-YUNO",2);
 		}else if(Point.num >= 400 && clearlank < 1){//☆ 400
@@ -356,6 +376,10 @@ function cookieUpdate(course_e, Point, ball_number){
 		var clearlank = getCookie("CLEARLANK-KNOCK");
 		if(Point.num >= 8000 && clearlank < 3){//☆☆☆ 8000
 			setCookie("CLEARLANK-KNOCK",3);
+			if(getCookie("TROPHY-KNOCK-RANKMAX") == 0){
+				setCookie("TROPHY-KNOCK-RANKMAX",1);
+				popUp("TROPHY","TROPHY-KNOCK-RANKMAX");
+			}
 		}else if(Point.num >= 5000 && clearlank < 2){//☆☆ 5000
 			setCookie("CLEARLANK-KNOCK",2);
 		}else if(Point.num >= 3000 && clearlank < 1){//☆ 3000
@@ -383,6 +407,10 @@ function cookieUpdate(course_e, Point, ball_number){
 		var clearlank = getCookie("CLEARLANK-KNOCK_EX");
 		if(Point.num >= 10000 && clearlank < 3){//☆☆☆ 10000
 			setCookie("CLEARLANK-KNOCK_EX",3);
+			if(getCookie("TROPHY-KNOCK_EX-RANKMAX") == 0){
+				setCookie("TROPHY-KNOCK_EX-RANKMAX",1);
+				popUp("TROPHY","TROPHY-KNOCK_EX-RANKMAX");
+			}
 		}else if(Point.num >= 8000 && clearlank < 2){//☆☆ 8000
 			setCookie("CLEARLANK-KNOCK_EX",2);
 		}else if(Point.num >= 5000 && clearlank < 1){//☆ 5000
@@ -409,6 +437,10 @@ function cookieUpdate(course_e, Point, ball_number){
 		var clearlank = getCookie("CLEARLANK-EASY_EX");
 		if(Point.num >= 500 && clearlank < 3){//☆☆☆ 500
 			setCookie("CLEARLANK-EASY_EX",3);
+			if(getCookie("TROPHY-EASY_EX-RANKMAX") == 0){
+				setCookie("TROPHY-EASY_EX-RANKMAX",1);
+				popUp("TROPHY","TROPHY-EASY_EX-RANKMAX");
+			}
 		}else if(Point.num >= 400 && clearlank < 2){//☆☆ 400
 			setCookie("CLEARLANK-EASY_EX",2);
 		}else if(Point.num >= 250 && clearlank < 1){//☆ 250
