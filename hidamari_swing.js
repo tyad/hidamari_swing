@@ -99,7 +99,10 @@ window.onload = function hidamari_swing() {
 				"ball_number" : 5,
 				"powerfilter": 0.85,
 				"bgm" : 'sound/bgm_easy.mp3',
-				"discription" : "5球 / 合計ノルマ:250m<br>ボールを打ち返してみよう！"
+				"discription" : "5球 / ノルマ:250m<br>ボールを打ち返してみよう！",
+				"norma_rank_first": 250,
+				"norma_rank_second": 400,
+				"norma_rank_third": 500
 			},
 			"NORMAL" : {
 				"course_e" : "NORMAL",
@@ -110,7 +113,10 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 0.9,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_normal.mp3',
-				"discription" : "10球 / 芯の大きさ：☆☆<br>変化球も投げてくる！"
+				"discription" : "10球 / ノルマ:500m<br>変化球も投げてくる！",
+				"norma_rank_first": 500,
+				"norma_rank_second": 800,
+				"norma_rank_third": 1000
 			},
 			"HARD" : {
 				"course_e" : "HARD",
@@ -121,7 +127,10 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 1.0,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_hard.mp3',
-				"discription" : "10球 / 芯の大きさ：☆<br>上手い人向けの難しめコース！"
+				"discription" : "10球 / ノルマ:500m<br>上手い人向けの難しめコース！",
+				"norma_rank_first": 500,
+				"norma_rank_second": 800,
+				"norma_rank_third": 1000
 			},
 			"STRAIGHT" : {
 				"course_e" : "STRAIGHT",
@@ -132,7 +141,10 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 0.95,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_extra1.mp3',
-				"discription" : "10球 / 芯の大きさ：☆<br>直球のみで真剣勝負！"
+				"discription" : "10球 / ノルマ:500m<br>直球のみで真剣勝負！",
+				"norma_rank_first": 500,
+				"norma_rank_second": 800,
+				"norma_rank_third": 1000
 			},
 			"KIRE" : {
 				"course_e" : "KIRE",
@@ -143,7 +155,10 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 0.85,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_extra1.mp3',
-				"discription" : "10球 / 芯の大きさ：☆☆☆<br>だんだん難しくなる変化球コース！"
+				"discription" : "10球 / ノルマ:500m<br>だんだん難しくなる変化球コース！",
+				"norma_rank_first": 500,
+				"norma_rank_second": 800,
+				"norma_rank_third": 1000
 			}
 		},
 		"EXTRA" : {
@@ -156,7 +171,10 @@ window.onload = function hidamari_swing() {
 				"ball_number" : 10,
 				"powerfilter": 0.85,
 				"bgm" : 'sound/bgm_easy.mp3',
-				"discription" : "10球 / 芯の大きさ：☆☆☆<br>森で修行して帰ってきた！"
+				"discription" : "10球 / ノルマ:400m<br>森で修行して帰ってきた！",
+				"norma_rank_first": 400,
+				"norma_rank_second": 700,
+				"norma_rank_third": 900
 			},
 			"KNOCK" : {
 				"course_e" : "KNOCK",
@@ -167,18 +185,24 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 1.0,
 				"ball_number" : 100,
 				"bgm" : 'sound/bgm_extra2.mp3',
-				"discription" : "100球 / 芯の大きさ：☆<br>これはノックと呼べるのか！？とにかく打ちまくれ！"
+				"discription" : "100球 / ノルマ:3000m<br>これはノックと呼べるのか！？とにかく打ちまくれ！",
+				"norma_rank_first": 3000,
+				"norma_rank_second": 5000,
+				"norma_rank_third": 8000
 			},
 			"EASY_EX" : {
 				"course_e" : "EASY_EX",
 				"mode" : "おまけモード",
-				"course_name" : "ほのぼのコース×☆☆☆",
+				"course_name" : "ほのぼのコース×SP",
 				"type_of_pitch" : 1,
 				"nock" : 0,
 				"ball_number" : 5,
 				"powerfilter": 1.1,
 				"bgm" : 'sound/bgm_easy.mp3',
-				"discription" : "5球 / 芯の大きさ：☆<br>統一球になった！目指せ500ｍ！"
+				"discription" : "5球 / ノルマ:250m<br>統一球になった！",
+				"norma_rank_first": 250,
+				"norma_rank_second":400,
+				"norma_rank_third": 500
 			},
 			"KNOCK_EX" : {
 				"course_e" : "KNOCK_EX",
@@ -189,7 +213,10 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 0.45,
 				"ball_number" : 100,
 				"bgm" : 'sound/bgm_extra2.mp3',
-				"discription" : "100球 / 芯の大きさ：☆☆☆☆☆<br>わっしょいでーす"
+				"discription" : "100球 / ノルマ:5000m<br>わっしょいでーす",
+				"norma_rank_first": 5000,
+				"norma_rank_second":8000,
+				"norma_rank_third": 10000
 			}
 		}
 	};
@@ -1690,6 +1717,37 @@ window.onload = function hidamari_swing() {
 
 					play_se('sound/hit_1.wav');
 				}
+
+				if(this.animation_frame == 130){
+
+					if(checkClearRank(Point.num)>0){
+						var ClearText = make_Label(0, 275, "result_text", "ノルマクリア！");
+						SceneResult.addChild(ClearText);
+						
+					}else{
+						var ClearText = make_Label(0, 275+this.score_ball_num*20, "result_text", "もう一度挑戦しよう！")
+						SceneResult.addChild(ClearText);
+					}
+
+
+					if(checkClearRank(Point.num) == 2){
+						var RankText = make_Label(0, 290+this.score_ball_num*20, "result_text", "★★");
+						SceneResult.addChild(RankText);
+						
+					}
+
+					if(checkClearRank(Point.num) == 3){
+						var RankText = make_Label(0, 290+this.score_ball_num*20, "result_text", "★★★");
+						SceneResult.addChild(RankText);
+						play_se('sound/hit_ex.wav');
+					}else if(checkClearRank(Point.num) > 0){
+						play_se('sound/hit_1.wav');
+					}
+
+				}
+
+
+
 			}else{
 				if(this.animation_frame > 50){
 					if(this.animation_frame %10 == 0 && this.score_ball_num <= LastBall.max){
@@ -1712,6 +1770,36 @@ window.onload = function hidamari_swing() {
 
 						play_se('sound/hit_1.wav');
 				}
+
+
+				if(this.animation_frame == 80 + LastBall.max *10){
+
+					if(checkClearRank(Point.num)>0){
+						var ClearText = make_Label(0, 105+this.score_ball_num*20, "result_text", "ノルマクリア！");
+						SceneResult.addChild(ClearText);
+						
+					}else{
+						var ClearText = make_Label(0, 105+this.score_ball_num*20, "result_text", "もう一度挑戦しよう！")
+						SceneResult.addChild(ClearText);
+					}
+
+
+					if(checkClearRank(Point.num) == 2){
+						var RankText = make_Label(0, 120+this.score_ball_num*20, "result_text", "★★");
+						SceneResult.addChild(RankText);
+						
+					}
+
+					if(checkClearRank(Point.num) == 3){
+						var RankText = make_Label(0, 120+this.score_ball_num*20, "result_text", "★★★");
+						SceneResult.addChild(RankText);
+						play_se('sound/hit_ex.wav');
+					}else if(checkClearRank(Point.num) > 0){
+						play_se('sound/hit_1.wav');
+					}
+
+				}
+
 			}
 		});
 
@@ -1732,7 +1820,7 @@ window.onload = function hidamari_swing() {
 		ModeTitle.text = "";
 
 	//*リトライボタン
-		var RetryButton = make_Label(100, 400, "result_button", "もう一度");
+		var RetryButton = make_Label(100, 410, "result_button", "もう一度");
 		RetryButton.opacity = 0.3;
 		RetryButton.addEventListener('touchstart', function (e) {
 			SceneResult.select_menu = 1;
@@ -1741,7 +1829,7 @@ window.onload = function hidamari_swing() {
 		});
 
 	//*リセットボタン*
-		var ResetButton = make_Label(260, 400, "result_button", "メニューへ");
+		var ResetButton = make_Label(260, 410, "result_button", "メニューへ");
 		ResetButton.opacity = 0.3;
 		ResetButton.addEventListener('touchstart', function (e) {
 			SceneResult.select_menu = 2;
@@ -1755,6 +1843,20 @@ window.onload = function hidamari_swing() {
 		SceneResult.addChild(ModeTitle);
 		SceneResult.addChild(RetryButton);
 		SceneResult.addChild(ResetButton);
+
+
+		function checkClearRank(total){
+			if(total >= GameSet[Mode][Course]["norma_rank_third"]){
+				return 3;
+			}else if(total >= GameSet[Mode][Course]["norma_rank_second"]){
+				return 2;
+			}else if(total >= GameSet[Mode][Course]["norma_rank_first"]){
+				return 1;
+			}else{
+				return 0;
+			}
+			
+		}
 
 //##########
 //ゲーム管理
