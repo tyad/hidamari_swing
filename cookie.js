@@ -506,7 +506,7 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		if(getCookie("TROPHY-KNOCK-JUSTMEET-20") == 0 && Point.justmeet >= 20){//★真芯20
 			setCookie("TROPHY-KNOCK-JUSTMEET-20",1);
-			popUp("TROPHY","KNOCK-JUSTMEET-20";
+			popUp("TROPHY","KNOCK-JUSTMEET-20");
 		}
 
 		if(getCookie("TROPHY-KNOCK-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
@@ -575,7 +575,7 @@ function cookieUpdate(course_e, Point, ball_number){
 			setCookie("TROPHY-KNOCK_HARD-CLEAR",1);
 			popUp("TROPHY","TROPHY-KNOCK_HARD-CLEAR");
 		}
-		
+
 	}
 
 	//◆ほのぼのSP
