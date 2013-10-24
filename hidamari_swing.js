@@ -200,9 +200,9 @@ window.onload = function hidamari_swing() {
 				"ball_number" : 100,
 				"bgm" : 'sound/bgm_extra2.mp3',
 				"discription" : "100球 / ノルマ:2000m<br>てごわいぞ",
-				"norma_rank_first": 2000,
-				"norma_rank_second": 4000,
-				"norma_rank_third": 5000
+				"norma_rank_first": 3000,
+				"norma_rank_second": 5000,
+				"norma_rank_third": 8000
 			},
 			"EASY_EX" : {
 				"course_e" : "EASY_EX",

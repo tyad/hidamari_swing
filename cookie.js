@@ -556,17 +556,18 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 	}
 
+	//どきどきノック
 	else if(course_e === "KNOCK_HARD"){
 		var clearlank = getCookie("CLEARLANK-KNOCK_HARD");
-		if(Point.num >= 5000 && clearlank < 3){//☆☆☆ 8000
+		if(Point.num >= 8000 && clearlank < 3){//☆☆☆ 8000
 			setCookie("CLEARLANK-KNOCK_HARD",3);
 			if(getCookie("TROPHY-KNOCK_HARD-RANKMAX") == 0){
 				setCookie("TROPHY-KNOCK_HARD-RANKMAX",1);
 				popUp("TROPHY","TROPHY-KNOCK_HARD-RANKMAX");
 			}
-		}else if(Point.num >= 4000 && clearlank < 2){//☆☆ 5000
+		}else if(Point.num >= 5000 && clearlank < 2){//☆☆ 5000
 			setCookie("CLEARLANK-KNOCK_HARD",2);
-		}else if(Point.num >= 2000 && clearlank < 1){//☆ 3000
+		}else if(Point.num >= 3000 && clearlank < 1){//☆ 3000
 			setCookie("CLEARLANK-KNOCK_HARD",1);
 		}
 
