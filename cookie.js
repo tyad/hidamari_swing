@@ -656,7 +656,7 @@ function addCount(ball){
 	}
 
 	//累計飛距離100000トロフィー
-	if(getCookie("TROPHY-TOTAL-POINT-100000") == 0 && getCookie("TOTAL-POINT") >= 10000){
+	if(getCookie("TROPHY-TOTAL-POINT-100000") == 0 && getCookie("TOTAL-POINT") >= 100000){
 		setCookie("TROPHY-TOTAL-POINT-100000",1);
 		popUp("TROPHY","TROPHY-TOTAL-POINT-100000");
 	}
