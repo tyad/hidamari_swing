@@ -626,6 +626,7 @@ function addCount(ball){
 		popUp("TROPHY","TROPHY-TOTAL-MISS-100");
 	}
 
+	unlock();
 }
 
 function popUp(type,data_name){
