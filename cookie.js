@@ -70,9 +70,22 @@ var TROPHY_DATA = {
 		"text":"100本ノックをクリア"
 	},
 	"TROPHY-KNOCK-RANKMAX":{
-		"name":"パワーヒッター",
+		"name":"アベレージヒッター",
 		"text":"100本ノックで★★★"
 	},
+	"TROPHY-KNOCK-JUSTMEET-5":{
+		"name":"きっちり",
+		"text":"100本ノックで1プレイ真芯5回以上"
+	},
+	"TROPHY-KNOCK-JUSTMEET-10":{
+		"name":"どんぴしゃ",
+		"text":"100本ノックで1プレイ真芯10回以上"
+	},
+	"TROPHY-KNOCK-JUSTMEET-20":{
+		"name":"パワーヒッター",
+		"text":"100本ノックで1プレイ真芯20回以上"
+	},
+
 
 	"TROPHY-EASY_EX-CLEAR":{
 		"name":"ずっしり",
@@ -91,6 +104,28 @@ var TROPHY_DATA = {
 		"name":"わしょしょい",
 		"text":"バンザイノックで★★★"
 	},
+	"TROPHY-KNOCK_EX-JUSTMEET-10":{
+		"name":"かっとび",
+		"text":"バンザイノックで1プレイ真芯10回以上"
+	},
+	"TROPHY-KNOCK_EX-JUSTMEET-25":{
+		"name":"ふっとび",
+		"text":"バンザイノックで1プレイ真芯25回以上"
+	},
+	"TROPHY-KNOCK_EX-JUSTMEET-50":{
+		"name":"ぶっとび",
+		"text":"バンザイノックで1プレイ真芯50回以上"
+	},
+
+	"TROPHY-KNOCK_HARD-CLEAR":{
+		"name":"はなまる",
+		"text":"どきどきノックをクリア"
+	},
+	"TROPHY-KNOCK_HARD-RANKMAX":{
+		"name":"いぶし銀",
+		"text":"どきどきノックで★★★"
+	},
+
 
 	"TROPHY-TOTAL-JUSTMEET-1":{
 		"name":"ガツーン！",
@@ -127,7 +162,7 @@ var TROPHY_DATA = {
 	},
 
 	"TROPHY-TOTAL-MISS-100":{
-		"name":"素振りは基本",
+		"name":"あらら",
 		"text":"100回空振りした(見逃しも含む)"
 	},
 
@@ -471,7 +506,7 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		if(getCookie("TROPHY-KNOCK-JUSTMEET-20") == 0 && Point.justmeet >= 20){//★真芯20
 			setCookie("TROPHY-KNOCK-JUSTMEET-20",1);
-			popUp("TROPHY","TROPHY-KNOCK-CLEAR");
+			popUp("TROPHY","KNOCK-JUSTMEET-20";
 		}
 
 		if(getCookie("TROPHY-KNOCK-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
@@ -505,16 +540,44 @@ function cookieUpdate(course_e, Point, ball_number){
 			popUp("TROPHY","TROPHY-KNOCK_EX-CLEAR");
 		}
 
-		/*お好きにどうぞ
-		if(Point.num >= 8000 && clearlank < 3){//★真芯50
-			setCookie("なんちゃらJUSTMEET",3);
-		}else if(Point.num >= 5000 && clearlank < 2){//★真芯40
-			setCookie("なんちゃらJUSTMEET",2);
-		}else if(Point.num >= 3000 && clearlank < 1){//★真芯30
-			setCookie("なんちゃらJUSTMEET",1);
+		if(getCookie("TROPHY-KNOCK_EX-JUSTMEET-50") == 0 && Point.justmeet >= 50){//★真芯50
+			setCookie("TROPHY-KNOCK_EX-JUSTMEET-50",1);
+			popUp("TROPHY","TROPHY-KNOCK_EX-JUSTMEET-50");
 		}
-		*/
+
+		if(getCookie("TROPHY-KNOCK_EX-JUSTMEET-25") == 0 && Point.justmeet >= 25){//★真芯25
+			setCookie("TROPHY-KNOCK_EX-JUSTMEET-25",1);
+			popUp("TROPHY","TROPHY-KNOCK_EX-JUSTMEET-25");
+		}
+
+		if(getCookie("TROPHY-KNOCK_EX-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
+			setCookie("TROPHY-KNOCK_EX-JUSTMEET-10",1);
+			popUp("TROPHY","TROPHY-KNOCK_EX-JUSTMEET-10");
+		}
 	}
+
+	else if(course_e === "KNOCK_HARD"){
+		var clearlank = getCookie("CLEARLANK-KNOCK_HARD");
+		if(Point.num >= 5000 && clearlank < 3){//☆☆☆ 8000
+			setCookie("CLEARLANK-KNOCK_HARD",3);
+			if(getCookie("TROPHY-KNOCK_HARD-RANKMAX") == 0){
+				setCookie("TROPHY-KNOCK_HARD-RANKMAX",1);
+				popUp("TROPHY","TROPHY-KNOCK_HARD-RANKMAX");
+			}
+		}else if(Point.num >= 4000 && clearlank < 2){//☆☆ 5000
+			setCookie("CLEARLANK-KNOCK_HARD",2);
+		}else if(Point.num >= 2000 && clearlank < 1){//☆ 3000
+			setCookie("CLEARLANK-KNOCK_HARD",1);
+		}
+
+		//クリアトロフィー
+		if(getCookie("TROPHY-KNOCK_HARD-CLEAR") == 0 && Point.num >= 3000){
+			setCookie("TROPHY-KNOCK_HARD-CLEAR",1);
+			popUp("TROPHY","TROPHY-KNOCK_HARD-CLEAR");
+		}
+		
+	}
+
 	//◆ほのぼのSP
 	else if(course_e === "EASY_EX"){
 		var clearlank = getCookie("CLEARLANK-EASY_EX");
