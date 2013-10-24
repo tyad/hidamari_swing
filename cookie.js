@@ -647,8 +647,8 @@ function popUp(type,data_name){
 	matrix_value = Math.round(matrix_value) / 10;
 
 	//実際サイズの高さ分ずらす
-	var css_top = (((450) - (popup_count *  26)) *matrix_value)* 0.95;
-	var css_left = (270 * matrix_value )* 0.95;
+	var css_top = ((popup_count *  24 + 5) *matrix_value)* 0.95;
+	var css_left = (5 * matrix_value )* 0.95;
 	if(type == "TROPHY"){
 		$('body').append("<div class=\"popup pop" + popup_count + "\">★実績解除：" + TROPHY_DATA[data_name]['name'] + "</div>");
 	}else if(type == "UNLOCK"){
