@@ -190,6 +190,20 @@ window.onload = function hidamari_swing() {
 				"norma_rank_second": 5000,
 				"norma_rank_third": 8000
 			},
+			"KNOCK_HARD" : {
+				"course_e" : "KNOCK_HARD",
+				"mode" : "おまけモード",
+				"course_name" : "どきどきノック",
+				"type_of_pitch" : 6,
+				"nock" : 1,
+				"powerfilter": 0.9,
+				"ball_number" : 100,
+				"bgm" : 'sound/bgm_extra2.mp3',
+				"discription" : "100球 / ノルマ:2000m<br>てごわいぞ",
+				"norma_rank_first": 2000,
+				"norma_rank_second": 4000,
+				"norma_rank_third": 5000
+			},
 			"EASY_EX" : {
 				"course_e" : "EASY_EX",
 				"mode" : "おまけモード",
@@ -653,6 +667,7 @@ window.onload = function hidamari_swing() {
 			this.obj['hit_se'] = hit_se;
 			this.obj['score'] = point;
 			this.ball.push(this.obj);
+			addCount(this.obj);
 
 			//真芯カウントの追加
 			if(hit_se == 'sound/hit_ex.wav'){

@@ -1,6 +1,6 @@
 var TROPHY_DATA = {
 	"TROPHY-EASY-CLEAR":{
-		"name":"ほのぼの",
+		"name":"はじまり",
 		"text":"ほのぼのコースをクリア"
 	},
 	"TROPHY-EASY-RANKMAX":{
@@ -14,7 +14,7 @@ var TROPHY_DATA = {
 
 	"TROPHY-NORMAL-CLEAR":{
 		"name":"わくわく",
-		"text":"ほのぼのコースをクリア"
+		"text":"わくわくコースをクリア"
 	},
 	"TROPHY-NORMAL-RANKMAX":{
 		"name":"流星レコード",
@@ -31,7 +31,7 @@ var TROPHY_DATA = {
 	},
 
 	"TROPHY-STRAIGHT-CLEAR":{
-		"name":"まっすぐ",
+		"name":"ノビのび",
 		"text":"まっすぐコースをクリア"
 	},
 	"TROPHY-STRAIGHT-RANKMAX":{
@@ -40,7 +40,7 @@ var TROPHY_DATA = {
 	},
 
 	"TROPHY-KIRE-CLEAR":{
-		"name":"きれきれ",
+		"name":"キレもの",
 		"text":"きれきれコースをクリア"
 	},
 	"TROPHY-KIRE-RANKMAX":{
@@ -56,22 +56,30 @@ var TROPHY_DATA = {
 		"name":"VIP",
 		"text":"ゆのさまで★★★"
 	},
+	"TROPHY-YUNO-JUSTMEET":{
+		"name":"とんでけー",
+		"text":"ゆのさまで真芯ヒットする"
+	},
+	"TROPHY-YUNO-NOMISS":{
+		"name":"ねばりうち",
+		"text":"ゆのさまで空振りしない"
+	},
 
 	"TROPHY-KNOCK-CLEAR":{
 		"name":"おつかれさま",
 		"text":"100本ノックをクリア"
 	},
 	"TROPHY-KNOCK-RANKMAX":{
-		"name":"はなまる",
+		"name":"パワーヒッター",
 		"text":"100本ノックで★★★"
 	},
 
 	"TROPHY-EASY_EX-CLEAR":{
-		"name":"あららできちゃった",
+		"name":"ずっしり",
 		"text":"ほのぼのコース×SPをクリア"
 	},
 	"TROPHY-EASY_EX-RANKMAX":{
-		"name":"あればできちゃうね",
+		"name":"あららできちゃった",
 		"text":"ほのぼのコース×SPで★★★"
 	},
 
@@ -82,6 +90,50 @@ var TROPHY_DATA = {
 	"TROPHY-KNOCK_EX-RANKMAX":{
 		"name":"わしょしょい",
 		"text":"バンザイノックで★★★"
+	},
+
+	"TROPHY-TOTAL-JUSTMEET-1":{
+		"name":"ガツーン！",
+		"text":"初めて真芯でヒットさせた"
+	},
+	"TROPHY-TOTAL-JUSTMEET-10":{
+		"name":"ドカーン！",
+		"text":"10回真芯ヒットさせた"
+	},
+	"TROPHY-TOTAL-JUSTMEET-100":{
+		"name":"芸術的な爆発",
+		"text":"100回真芯ヒットさせた"
+	},
+	"TROPHY-TOTAL-JUSTMEET-365":{
+		"name":"打撃爆発×365",
+		"text":"365回真芯ヒットさせた"
+	},
+
+	"TROPHY-TOTAL-POINT-1000":{
+		"name":"さてさて",
+		"text":"累計1000m飛ばした"
+	},
+	"TROPHY-TOTAL-POINT-3980":{
+		"name":"それでそれで",
+		"text":"累計3980m飛ばした"
+	},
+	"TROPHY-TOTAL-POINT-10000":{
+		"name":"そんでもって",
+		"text":"累計10000m飛ばした"
+	},
+	"TROPHY-TOTAL-POINT-100000":{
+		"name":"ひだまりスラッガー",
+		"text":"累計100000m飛ばした"
+	},
+
+	"TROPHY-TOTAL-MISS-100":{
+		"name":"素振りは基本",
+		"text":"100回空振りした(見逃しも含む)"
+	},
+
+	"TROPHY-TOTAL-GAMEPLAY-100":{
+		"name":"ありがとう！",
+		"text":"100回遊んだ"
 	}
 }
 
@@ -112,6 +164,9 @@ var COURSE_DATA = {
 	},
 	"KNOCK_EX" : {
 		"name":"バンザイノック"
+	},
+	"KNOCK_HARD" : {
+		"name":"どきどきノック"
 	}
 }
 
@@ -140,6 +195,9 @@ function createExtraCourse(){
 	}
 	if(getCookie("UNLOCK-KNOCK_EX")){
 		ExtraCourse.push("KNOCK_EX");
+	}
+	if(getCookie("UNLOCK-KNOCK_HARD")){
+		ExtraCourse.push("KNOCK_HARD");
 	}
 	if(getCookie("UNLOCK-EASY_EX")){
 		ExtraCourse.push("EASY_EX");
@@ -205,18 +263,28 @@ function unlock(){
 		setCookie("UNLOCK-YUNO",1);
 		popUp("UNLOCK","YUNO");
 	}
-	/*命名規則に従って変えてください
-	//KNOCK_EX解放
-	if(getCookie("なんちゃらJUSTMEET") > 0 && getCookie("UNLOCK-KNOCK_EX") != 1){
+
+	//KNOCK_EX解放 真芯累計10
+	if(getCookie("TROPHY-TOTAL-JUSTMEET-10") > 0 && getCookie("UNLOCK-KNOCK_EX") != 1){
 		setCookie("UNLOCK-KNOCK_EX",1);
-		console.log('UNLOCK-KNOCK_EX');//ポップアップ表示と置き換えてね
+		popUp("UNLOCK","KNOCK_EX");
 	}
-	*/
+
+	//KNOCK_HARD解放 累計飛距離3980
+	if(getCookie("TROPHY-TOTAL-POINT-3980") > 0 && getCookie("UNLOCK-KNOCK_HARD") != 1){
+		setCookie("UNLOCK-KNOCK_HARD",1);
+		popUp("UNLOCK","KNOCK_HARD");
+	}
+
+	
 	//EASY_EX解放
 	if(getCookie("CLEARLANK-EASY") == 3 && getCookie("UNLOCK-EASY_EX") != 1){
 		setCookie("UNLOCK-EASY_EX",1);
 		popUp("UNLOCK","EASY_EX");
 	}
+
+
+
 }
 
 //クッキー更新
@@ -366,10 +434,18 @@ function cookieUpdate(course_e, Point, ball_number){
 			popUp("TROPHY","TROPHY-YUNO-CLEAR");
 		}
 
-		/*お好きにどうぞ
 		//★真芯で返す
+		if(getCookie("TROPHY-YUNO-JUSTMEET") == 0 && Point.justmeet > 0){
+			setCookie("TROPHY-YUNO-JUSTMEET",1);
+			popUp("TROPHY","TROPHY-YUNO-JUSTMEET");
+		}
 		//★空振りしない
-		*/
+		if(getCookie("TROPHY-YUNO-NOMISS") == 0 && Point.miss == 0){
+			setCookie("TROPHY-YUNO-NOMISS",1);
+			popUp("TROPHY","TROPHY-YUNO-NOMISS");
+		}
+
+		
 	}
 	//◆100本ノック
 	else if(course_e === "KNOCK"){
@@ -392,15 +468,22 @@ function cookieUpdate(course_e, Point, ball_number){
 			popUp("TROPHY","TROPHY-KNOCK-CLEAR");
 		}
 
-		/*お好きにどうぞ
-		if(Point.num >= 8000 && clearlank < 3){//★真芯20
-			setCookie("なんちゃらJUSTMEET",3);
-		}else if(Point.num >= 5000 && clearlank < 2){//★真芯10
-			setCookie("なんちゃらJUSTMEET",2);
-		}else if(Point.num >= 3000 && clearlank < 1){//★真芯5
-			setCookie("なんちゃらJUSTMEET",1);
+
+		if(getCookie("TROPHY-KNOCK-JUSTMEET-20") == 0 && Point.justmeet >= 20){//★真芯20
+			setCookie("TROPHY-KNOCK-JUSTMEET-20",1);
+			popUp("TROPHY","TROPHY-KNOCK-CLEAR");
 		}
-		*/
+
+		if(getCookie("TROPHY-KNOCK-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
+			setCookie("TROPHY-KNOCK-JUSTMEET-10",1);
+			popUp("TROPHY","TROPHY-KNOCK-JUSTMEET-10");
+		}
+
+		if(getCookie("TROPHY-KNOCK-JUSTMEET-5") == 0 && Point.justmeet >= 5){//★真芯5
+			setCookie("TROPHY-KNOCK-JUSTMEET-5",1);
+			popUp("TROPHY","TROPHY-KNOCK-JUSTMEET-5");
+		}
+
 	}
 	//◆バンザイノック
 	else if(course_e === "KNOCK_EX"){
@@ -453,25 +536,96 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 	}
-		/*お好きにどうぞ
-		◆累計(「TOTAL-なんちゃら」　とかがいいかもね)
-		★初真芯
-		★真芯10
-		★真芯100
-		★真芯1000
 
-		★累計10000m
-		★累計100000m
+	var countGamePlay = getCookie("TOTAL-GAMEPLAY");
+	countGamePlay ++;
+	setCookie("TOTAL-GAMEPLAY", countGamePlay);
 
-		★空振り100
-
-		◆特殊（「SPECIAL-なんちゃら」　とか？）
-		★合計365m
-		★合計3桁ゾロ目
-		*/
+	//100回プレイ
+	if(getCookie("TROPHY-TOTAL-GAMEPLAY-100") == 0 && getCookie("TOTAL-GAMEPLAY") >= 100){
+		setCookie("TROPHY-TOTAL-GAMEPLAY-100",1);
+		popUp("TROPHY","TROPHY-TOTAL-GAMEPLAY-100");
+	}
 
 	//アンロック判定
 	unlock();
+}
+
+function addCount(ball){
+	if(ball['hit_se'] == 'sound/hit_ex.wav'){
+		var countJustMeet = getCookie("TOTAL-JUSTMEET");
+		countJustMeet++;
+		setCookie("TOTAL-JUSTMEET", countJustMeet);
+	}
+
+
+	//飛距離0なら空振り
+	if(ball['score'] == 0){
+		var countMiss = getCookie("TOTAL-MISS");
+		countMiss++;
+		setCookie("TOTAL-MISS", countMiss);
+	}else{
+		var countHit = getCookie("TOTAL-HIT");
+		countHit ++;
+		setCookie("TOTAL-HIT", countHit);
+	}
+
+	var countPoint = getCookie("TOTAL-POINT");
+	countPoint += ball['score'];
+	setCookie("TOTAL-POINT", countPoint);
+
+	//累計飛距離1000トロフィー
+	if(getCookie("TROPHY-TOTAL-POINT-1000") == 0 && getCookie("TOTAL-POINT") >= 1000){
+		setCookie("TROPHY-TOTAL-POINT-1000",1);
+		popUp("TROPHY","TROPHY-TOTAL-POINT-1000");
+	}
+
+	//累計飛距離3980トロフィー
+	if(getCookie("TROPHY-TOTAL-POINT-3980") == 0 && getCookie("TOTAL-POINT") >= 3980){
+		setCookie("TROPHY-TOTAL-POINT-3980",1);
+		popUp("TROPHY","TROPHY-TOTAL-POINT-3980");
+	}
+	//累計飛距離10000トロフィー
+	if(getCookie("TROPHY-TOTAL-POINT-10000") == 0 && getCookie("TOTAL-POINT") >= 10000){
+		setCookie("TROPHY-TOTAL-POINT-10000",1);
+		popUp("TROPHY","TROPHY-TOTAL-POINT-10000");
+	}
+
+	//累計飛距離100000トロフィー
+	if(getCookie("TROPHY-TOTAL-POINT-100000") == 0 && getCookie("TOTAL-POINT") >= 10000){
+		setCookie("TROPHY-TOTAL-POINT-100000",1);
+		popUp("TROPHY","TROPHY-TOTAL-POINT-100000");
+	}
+
+	//初真芯トロフィー
+	if(getCookie("TROPHY-TOTAL-JUSTMEET-1") == 0 && getCookie("TOTAL-JUSTMEET") >= 1){
+		setCookie("TROPHY-TOTAL-JUSTMEET-1",1);
+		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-1");
+	}
+
+	//真芯10トロフィー
+	if(getCookie("TROPHY-TOTAL-JUSTMEET-10") == 0 && getCookie("TOTAL-JUSTMEET") >= 10){
+		setCookie("TROPHY-TOTAL-JUSTMEET-10",1);
+		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-10");
+	}
+	//真芯100トロフィー
+	if(getCookie("TROPHY-TOTAL-JUSTMEET-100") == 0 && getCookie("TOTAL-JUSTMEET") >= 100){
+		setCookie("TROPHY-TOTAL-JUSTMEET-100",1);
+		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-100");
+	}
+	//真芯365トロフィー
+	if(getCookie("TROPHY-TOTAL-JUSTMEET-365") == 0 && getCookie("TOTAL-JUSTMEET") >= 365){
+		setCookie("TROPHY-TOTAL-JUSTMEET-365",1);
+		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-365");
+	}
+
+
+	//100回空振りトロフィー
+	if(getCookie("TROPHY-TOTAL-MISS-100") == 0 && getCookie("TOTAL-MISS") >= 100){
+		setCookie("TROPHY-TOTAL-MISS-100",1);
+		popUp("TROPHY","TROPHY-TOTAL-MISS-100");
+	}
+
 }
 
 function popUp(type,data_name){
@@ -488,12 +642,12 @@ function popUp(type,data_name){
 	//すこしずらしたかったら
 	//matrix_value = (matrix_value+0.1) * 10;
 	//とかにして調節してね
-	matrix_value = (matrix_value) * 10;
+	matrix_value = (matrix_value - 0.1) * 10;
 	matrix_value = Math.round(matrix_value) / 10;
 
 	//実際サイズの高さ分ずらす
-	var css_top = (popup_count * ($('.popup').outerHeight() + 2))*matrix_value + (2 * matrix_value);
-	var css_left = 270 * matrix_value;
+	var css_top = ((490) - (popup_count *  26)) *matrix_value;
+	var css_left = (300 * matrix_value )* 0.97;
 	if(type == "TROPHY"){
 		$('body').append("<div class=\"popup pop" + popup_count + "\">★実績解除：" + TROPHY_DATA[data_name]['name'] + "</div>");
 	}else if(type == "UNLOCK"){
