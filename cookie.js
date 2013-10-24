@@ -276,25 +276,25 @@ function setCookie(name,value){
 function unlock(){
 	console.log("unlock check");
 	//NORMAL解放
-	if(getCookie("CLEARLANK-EASY") > 0 && getCookie("UNLOCK-NORMAL") != 1){
+	if(getCookie("CLEARRANK-EASY") > 0 && getCookie("UNLOCK-NORMAL") != 1){
 
 		setCookie("UNLOCK-NORMAL",1);
 		popUp("UNLOCK","NORMAL");
 	}
 	//HARD解放
-	if(getCookie("CLEARLANK-NORMAL") > 0 && getCookie("UNLOCK-HARD") != 1){
+	if(getCookie("CLEARRANK-NORMAL") > 0 && getCookie("UNLOCK-HARD") != 1){
 		setCookie("UNLOCK-HARD",1);
 		popUp("UNLOCK","HARD");
 	}
 	//STRAIGHT & KIRE解放
-	if(getCookie("CLEARLANK-HARD") > 0 && getCookie("UNLOCK-STRAIGHT") != 1 && getCookie("UNLOCK-KIRE") != 1){
+	if(getCookie("CLEARRANK-HARD") > 0 && getCookie("UNLOCK-STRAIGHT") != 1 && getCookie("UNLOCK-KIRE") != 1){
 		setCookie("UNLOCK-STRAIGHT",1);
 		setCookie("UNLOCK-KIRE",1);
 		popUp("UNLOCK","STRAIGHT");
 		popUp("UNLOCK","KIRE");
 	}
 	//YUNO解放
-	if(getCookie("CLEARLANK-STRAIGHT") > 0 && getCookie("CLEARLANK-KIRE") > 0 && getCookie("UNLOCK-YUNO") != 1){
+	if(getCookie("CLEARRANK-STRAIGHT") > 0 && getCookie("CLEARRANK-KIRE") > 0 && getCookie("UNLOCK-YUNO") != 1){
 		setCookie("UNLOCK-YUNO",1);
 		popUp("UNLOCK","YUNO");
 	}
@@ -313,7 +313,7 @@ function unlock(){
 
 	
 	//EASY_EX解放
-	if(getCookie("CLEARLANK-EASY") == 3 && getCookie("UNLOCK-EASY_EX") != 1){
+	if(getCookie("CLEARRANK-EASY") == 3 && getCookie("UNLOCK-EASY_EX") != 1){
 		setCookie("UNLOCK-EASY_EX",1);
 		popUp("UNLOCK","EASY_EX");
 	}
@@ -328,18 +328,18 @@ function cookieUpdate(course_e, Point, ball_number){
 	console.log(Point.num);//for debug
 	//◆ほのぼの
 	if(course_e === "EASY"){
-		var clearlank = getCookie("CLEARLANK-EASY");
-		console.log(clearlank);
-		if(Point.num >= 500 && clearlank < 3){//☆☆☆ 500
-			setCookie("CLEARLANK-EASY",3);
+		var clearrank = getCookie("CLEARRANK-EASY");
+		console.log(clearrank);
+		if(Point.num >= 500 && clearrank < 3){//☆☆☆ 500
+			setCookie("CLEARRANK-EASY",3);
 			if(getCookie("TROPHY-EASY-RANKMAX") == 0){
 				setCookie("TROPHY-EASY-RANKMAX",1);
 				popUp("TROPHY","TROPHY-EASY-RANKMAX");
 			}
-		}else if(Point.num >= 400 && clearlank < 2){//☆☆ 400
-			setCookie("CLEARLANK-EASY",2);
-		}else if(Point.num >= 250 && clearlank < 1){//☆ 250
-			setCookie("CLEARLANK-EASY",1);
+		}else if(Point.num >= 400 && clearrank < 2){//☆☆ 400
+			setCookie("CLEARRANK-EASY",2);
+		}else if(Point.num >= 250 && clearrank < 1){//☆ 250
+			setCookie("CLEARRANK-EASY",1);
 		}
 
 		//クリアトロフィー
@@ -357,17 +357,17 @@ function cookieUpdate(course_e, Point, ball_number){
 	}
 	//◆わくわく
 	else if(course_e === "NORMAL"){
-		var clearlank = getCookie("CLEARLANK-NORMAL");
-		if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
-			setCookie("CLEARLANK-NORMAL",3);
+		var clearrank = getCookie("CLEARRANK-NORMAL");
+		if(Point.num >= 1000 && clearrank < 3){//☆☆☆ 1000
+			setCookie("CLEARRANK-NORMAL",3);
 			if(getCookie("TROPHY-NORMAL-RANKMAX") == 0){
 				setCookie("TROPHY-NORMAL-RANKMAX",1);
 				popUp("TROPHY","TROPHY-NORMAL-RANKMAX");
 			}
-		}else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
-			setCookie("CLEARLANK-NORMAL",2);
-		}else if(Point.num >= 500 && clearlank < 1){//☆ 500
-			setCookie("CLEARLANK-NORMAL",1);
+		}else if(Point.num >= 800 && clearrank < 2){//☆☆ 800
+			setCookie("CLEARRANK-NORMAL",2);
+		}else if(Point.num >= 500 && clearrank < 1){//☆ 500
+			setCookie("CLEARRANK-NORMAL",1);
 		}
 
 		//クリアトロフィー
@@ -379,17 +379,17 @@ function cookieUpdate(course_e, Point, ball_number){
 	}
 	//◆どきどき
 	else if(course_e === "HARD"){
-		var clearlank = getCookie("CLEARLANK-HARD");
-		if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
-			setCookie("CLEARLANK-HARD",3);
+		var clearrank = getCookie("CLEARRANK-HARD");
+		if(Point.num >= 1000 && clearrank < 3){//☆☆☆ 1000
+			setCookie("CLEARRANK-HARD",3);
 			if(getCookie("TROPHY-HARD-RANKMAX") == 0){
 				setCookie("TROPHY-HARD-RANKMAX",1);
 				popUp("TROPHY","TROPHY-HARD-RANKMAX");
 			}
-		}else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
-			setCookie("CLEARLANK-HARD",2);
-		}else if(Point.num >= 500 && clearlank < 1){//☆ 500
-			setCookie("CLEARLANK-HARD",1);
+		}else if(Point.num >= 800 && clearrank < 2){//☆☆ 800
+			setCookie("CLEARRANK-HARD",2);
+		}else if(Point.num >= 500 && clearrank < 1){//☆ 500
+			setCookie("CLEARRANK-HARD",1);
 		}
 
 		//クリアトロフィー
@@ -401,17 +401,17 @@ function cookieUpdate(course_e, Point, ball_number){
 	}
 	//◆まっすぐ
 	else if(course_e === "STRAIGHT"){
-		var clearlank = getCookie("CLEARLANK-STRAIGHT");
-		if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
-			setCookie("CLEARLANK-STRAIGHT",3);
+		var clearrank = getCookie("CLEARRANK-STRAIGHT");
+		if(Point.num >= 1000 && clearrank < 3){//☆☆☆ 1000
+			setCookie("CLEARRANK-STRAIGHT",3);
 			if(getCookie("TROPHY-STRAIGHT-RANKMAX") == 0){
 				setCookie("TROPHY-STRAIGHT-RANKMAX",1);
 				popUp("TROPHY","TROPHY-STRAIGHT-RANKMAX");
 			}
-		}else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
-			setCookie("CLEARLANK-STRAIGHT",2);
-		}else if(Point.num >= 500 && clearlank < 1){//☆ 500
-			setCookie("CLEARLANK-STRAIGHT",1);
+		}else if(Point.num >= 800 && clearrank < 2){//☆☆ 800
+			setCookie("CLEARRANK-STRAIGHT",2);
+		}else if(Point.num >= 500 && clearrank < 1){//☆ 500
+			setCookie("CLEARRANK-STRAIGHT",1);
 		}
 
 		//クリアトロフィー
@@ -422,17 +422,17 @@ function cookieUpdate(course_e, Point, ball_number){
 	}
 	//◆きれきれ
 	else if(course_e === "KIRE"){
-		var clearlank = getCookie("CLEARLANK-KIRE");
-		if(Point.num >= 1000 && clearlank < 3){//☆☆☆ 1000
-			setCookie("CLEARLANK-KIRE",3);
+		var clearrank = getCookie("CLEARRANK-KIRE");
+		if(Point.num >= 1000 && clearrank < 3){//☆☆☆ 1000
+			setCookie("CLEARRANK-KIRE",3);
 			if(getCookie("TROPHY-KIRE-RANKMAX") == 0){
 				setCookie("TROPHY-KIRE-RANKMAX",1);
 				popUp("TROPHY","TROPHY-KIRE-RANKMAX");
 			}
-		}else if(Point.num >= 800 && clearlank < 2){//☆☆ 800
-			setCookie("CLEARLANK-KIRE",2);
-		}else if(Point.num >= 500 && clearlank < 1){//☆ 500
-			setCookie("CLEARLANK-KIRE",1);
+		}else if(Point.num >= 800 && clearrank < 2){//☆☆ 800
+			setCookie("CLEARRANK-KIRE",2);
+		}else if(Point.num >= 500 && clearrank < 1){//☆ 500
+			setCookie("CLEARRANK-KIRE",1);
 		}
 
 		//クリアトロフィー
@@ -450,17 +450,17 @@ function cookieUpdate(course_e, Point, ball_number){
 	}
 	//◆ゆのさま
 	else if(course_e === "YUNO"){
-		var clearlank = getCookie("CLEARLANK-YUNO");
-		if(Point.num >= 900 && clearlank < 3){//☆☆☆ 800
-			setCookie("CLEARLANK-YUNO",3);
+		var clearrank = getCookie("CLEARRANK-YUNO");
+		if(Point.num >= 900 && clearrank < 3){//☆☆☆ 800
+			setCookie("CLEARRANK-YUNO",3);
 			if(getCookie("TROPHY-YUNO-RANKMAX") == 0){
 				setCookie("TROPHY-YUNO-RANKMAX",1);
 				popUp("TROPHY","TROPHY-YUNO-RANKMAX");
 			}
-		}else if(Point.num >= 700 && clearlank < 2){//☆☆ 600
-			setCookie("CLEARLANK-YUNO",2);
-		}else if(Point.num >= 400 && clearlank < 1){//☆ 400
-			setCookie("CLEARLANK-YUNO",1);
+		}else if(Point.num >= 700 && clearrank < 2){//☆☆ 600
+			setCookie("CLEARRANK-YUNO",2);
+		}else if(Point.num >= 400 && clearrank < 1){//☆ 400
+			setCookie("CLEARRANK-YUNO",1);
 		}
 
 		//クリアトロフィー
@@ -484,17 +484,17 @@ function cookieUpdate(course_e, Point, ball_number){
 	}
 	//◆100本ノック
 	else if(course_e === "KNOCK"){
-		var clearlank = getCookie("CLEARLANK-KNOCK");
-		if(Point.num >= 8000 && clearlank < 3){//☆☆☆ 8000
-			setCookie("CLEARLANK-KNOCK",3);
+		var clearrank = getCookie("CLEARRANK-KNOCK");
+		if(Point.num >= 8000 && clearrank < 3){//☆☆☆ 8000
+			setCookie("CLEARRANK-KNOCK",3);
 			if(getCookie("TROPHY-KNOCK-RANKMAX") == 0){
 				setCookie("TROPHY-KNOCK-RANKMAX",1);
 				popUp("TROPHY","TROPHY-KNOCK-RANKMAX");
 			}
-		}else if(Point.num >= 5000 && clearlank < 2){//☆☆ 5000
-			setCookie("CLEARLANK-KNOCK",2);
-		}else if(Point.num >= 3000 && clearlank < 1){//☆ 3000
-			setCookie("CLEARLANK-KNOCK",1);
+		}else if(Point.num >= 5000 && clearrank < 2){//☆☆ 5000
+			setCookie("CLEARRANK-KNOCK",2);
+		}else if(Point.num >= 3000 && clearrank < 1){//☆ 3000
+			setCookie("CLEARRANK-KNOCK",1);
 		}
 
 		//クリアトロフィー
@@ -522,17 +522,17 @@ function cookieUpdate(course_e, Point, ball_number){
 	}
 	//◆バンザイノック
 	else if(course_e === "KNOCK_EX"){
-		var clearlank = getCookie("CLEARLANK-KNOCK_EX");
-		if(Point.num >= 10000 && clearlank < 3){//☆☆☆ 10000
-			setCookie("CLEARLANK-KNOCK_EX",3);
+		var clearrank = getCookie("CLEARRANK-KNOCK_EX");
+		if(Point.num >= 10000 && clearrank < 3){//☆☆☆ 10000
+			setCookie("CLEARRANK-KNOCK_EX",3);
 			if(getCookie("TROPHY-KNOCK_EX-RANKMAX") == 0){
 				setCookie("TROPHY-KNOCK_EX-RANKMAX",1);
 				popUp("TROPHY","TROPHY-KNOCK_EX-RANKMAX");
 			}
-		}else if(Point.num >= 8000 && clearlank < 2){//☆☆ 8000
-			setCookie("CLEARLANK-KNOCK_EX",2);
-		}else if(Point.num >= 5000 && clearlank < 1){//☆ 5000
-			setCookie("CLEARLANK-KNOCK_EX",1);
+		}else if(Point.num >= 8000 && clearrank < 2){//☆☆ 8000
+			setCookie("CLEARRANK-KNOCK_EX",2);
+		}else if(Point.num >= 5000 && clearrank < 1){//☆ 5000
+			setCookie("CLEARRANK-KNOCK_EX",1);
 		}
 		//クリアトロフィー
 		if(getCookie("TROPHY-KNOCK_EX-CLEAR") == 0 && Point.num >= 5000){
@@ -558,17 +558,17 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//どきどきノック
 	else if(course_e === "KNOCK_HARD"){
-		var clearlank = getCookie("CLEARLANK-KNOCK_HARD");
-		if(Point.num >= 8000 && clearlank < 3){//☆☆☆ 8000
-			setCookie("CLEARLANK-KNOCK_HARD",3);
+		var clearrank = getCookie("CLEARRANK-KNOCK_HARD");
+		if(Point.num >= 8000 && clearrank < 3){//☆☆☆ 8000
+			setCookie("CLEARRANK-KNOCK_HARD",3);
 			if(getCookie("TROPHY-KNOCK_HARD-RANKMAX") == 0){
 				setCookie("TROPHY-KNOCK_HARD-RANKMAX",1);
 				popUp("TROPHY","TROPHY-KNOCK_HARD-RANKMAX");
 			}
-		}else if(Point.num >= 5000 && clearlank < 2){//☆☆ 5000
-			setCookie("CLEARLANK-KNOCK_HARD",2);
-		}else if(Point.num >= 3000 && clearlank < 1){//☆ 3000
-			setCookie("CLEARLANK-KNOCK_HARD",1);
+		}else if(Point.num >= 5000 && clearrank < 2){//☆☆ 5000
+			setCookie("CLEARRANK-KNOCK_HARD",2);
+		}else if(Point.num >= 3000 && clearrank < 1){//☆ 3000
+			setCookie("CLEARRANK-KNOCK_HARD",1);
 		}
 
 		//クリアトロフィー
@@ -581,17 +581,17 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//◆ほのぼのSP
 	else if(course_e === "EASY_EX"){
-		var clearlank = getCookie("CLEARLANK-EASY_EX");
-		if(Point.num >= 500 && clearlank < 3){//☆☆☆ 500
-			setCookie("CLEARLANK-EASY_EX",3);
+		var clearrank = getCookie("CLEARRANK-EASY_EX");
+		if(Point.num >= 500 && clearrank < 3){//☆☆☆ 500
+			setCookie("CLEARRANK-EASY_EX",3);
 			if(getCookie("TROPHY-EASY_EX-RANKMAX") == 0){
 				setCookie("TROPHY-EASY_EX-RANKMAX",1);
 				popUp("TROPHY","TROPHY-EASY_EX-RANKMAX");
 			}
-		}else if(Point.num >= 400 && clearlank < 2){//☆☆ 400
-			setCookie("CLEARLANK-EASY_EX",2);
-		}else if(Point.num >= 250 && clearlank < 1){//☆ 250
-			setCookie("CLEARLANK-EASY_EX",1);
+		}else if(Point.num >= 400 && clearrank < 2){//☆☆ 400
+			setCookie("CLEARRANK-EASY_EX",2);
+		}else if(Point.num >= 250 && clearrank < 1){//☆ 250
+			setCookie("CLEARRANK-EASY_EX",1);
 		}
 		//クリアトロフィー
 		if(getCookie("TROPHY-EASY_EX-CLEAR") == 0 && Point.num >= 250){

@@ -398,11 +398,29 @@ window.onload = function hidamari_swing() {
 		ModeLabel.update();
 
 	//*モード説明*
-		var ModeDiscription = make_Label(0, STARTBUTTON_Y+70, "", "");
+		var ModeDiscription = make_Label(0, STARTBUTTON_Y+65, "", "");
 		ModeDiscription.update = function(){
 			this.text = "<div id='discription'>" + GameSet[Mode][Course]["discription"] + "</div>";
 		}
 		ModeDiscription.update();
+
+	//*モードクリア表示*
+		var ModeClearLabel = make_Label(0, STARTBUTTON_Y+119, "", "");
+		ModeClearLabel.update = function(){
+			var rank = getCookie("CLEARRANK-" + GameSet[Mode][Course]["course_e"]);
+			if(rank==0){
+				this.text = "<div id='clear_label'>未クリア</div>";
+			}else if(rank==1){
+				this.text = "<div id='clear_label'>★</div>";
+			}else if(rank==2){
+				this.text = "<div id='clear_label'>★★</div>";
+			}else if(rank==3){
+				this.text = "<div id='clear_label'>★★★</div>";
+			}
+
+		}
+
+		ModeClearLabel.update();
 
 	//*操作説明ボタン*
 		var HelpButton = new Label();
@@ -578,6 +596,7 @@ window.onload = function hidamari_swing() {
 		SceneTitle.addChild(ModeRightButton);
 		SceneTitle.addChild(ModeSwitch);
 		SceneTitle.addChild(ModeDiscription);
+		SceneTitle.addChild(ModeClearLabel);
 		SceneTitle.addChild(ModeMarkerPin);
 		SceneTitle.addChild(HelpButton);
 		SceneTitle.addChild(SoundButton);

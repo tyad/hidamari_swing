@@ -86,6 +86,14 @@ body{
 	text-align: center;
 	width: 480px;
 }
+
+#clear_label{
+	color: white;
+	font-size: 16px;
+	text-align: center;
+	width: 480px;
+}
+
 #result_title{
 	font-size:32px;
 	color:#fff;
