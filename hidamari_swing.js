@@ -199,7 +199,7 @@ window.onload = function hidamari_swing() {
 				"powerfilter": 0.9,
 				"ball_number" : 100,
 				"bgm" : 'sound/bgm_extra2.mp3',
-				"discription" : "100球 / ノルマ:2000m<br>てごわいぞ",
+				"discription" : "100球 / ノルマ:3000m<br>てごわいぞ",
 				"norma_rank_first": 3000,
 				"norma_rank_second": 5000,
 				"norma_rank_third": 8000
