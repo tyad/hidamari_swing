@@ -74,7 +74,7 @@ var TROPHY_DATA = {
 		"text":"100本ノックで★★★"
 	},
 	"TROPHY-KNOCK-JUSTMEET-5":{
-		"name":"きっちり",
+		"name":"ぴったり",
 		"text":"100本ノックで1プレイ真芯5回以上"
 	},
 	"TROPHY-KNOCK-JUSTMEET-10":{
@@ -88,7 +88,7 @@ var TROPHY_DATA = {
 
 
 	"TROPHY-EASY_EX-CLEAR":{
-		"name":"ずっしり",
+		"name":"統一球の脅威",
 		"text":"ほのぼのコース×SPをクリア"
 	},
 	"TROPHY-EASY_EX-RANKMAX":{
@@ -125,6 +125,18 @@ var TROPHY_DATA = {
 		"name":"いぶし銀",
 		"text":"どきどきノックで★★★"
 	},
+	"TROPHY-KNOCK_HARD-JUSTMEET-5":{
+		"name":"場外に飛んだボールたち",
+		"text":"どきどきノックで1プレイ真芯5回以上"
+	},
+	"TROPHY-KNOCK_HARD-JUSTMEET-10":{
+		"name":"星になったボールたち",
+		"text":"どきどきノックで1プレイ真芯10回以上"
+	},
+	"TROPHY-KNOCK_HARD-JUSTMEET-15":{
+		"name":"砕かれたボールたち",
+		"text":"どきどきノックで1プレイ真芯15回以上"
+	},
 
 
 	"TROPHY-TOTAL-JUSTMEET-1":{
@@ -135,12 +147,16 @@ var TROPHY_DATA = {
 		"name":"ドカーン！",
 		"text":"10回真芯ヒットさせた"
 	},
+	"TROPHY-TOTAL-JUSTMEET-50":{
+		"name":"爆発だ",
+		"text":"50回真芯ヒットさせた"
+	},
 	"TROPHY-TOTAL-JUSTMEET-100":{
 		"name":"芸術的な爆発",
 		"text":"100回真芯ヒットさせた"
 	},
 	"TROPHY-TOTAL-JUSTMEET-365":{
-		"name":"打撃爆発×365",
+		"name":"真芯爆発×365",
 		"text":"365回真芯ヒットさせた"
 	},
 
@@ -224,10 +240,13 @@ function createCommonCourse(){
 }
 //エクストラコース生成
 function createExtraCourse(){
-	var ExtraCourse = ["KNOCK"];
+	var ExtraCourse = [];
 	if(getCookie("UNLOCK-YUNO")){
 		ExtraCourse.push("YUNO");
 	}
+
+	ExtraCourse.push("KNOCK");
+
 	if(getCookie("UNLOCK-KNOCK_EX")){
 		ExtraCourse.push("KNOCK_EX");
 	}
@@ -305,8 +324,8 @@ function unlock(){
 		popUp("UNLOCK","KNOCK_EX");
 	}
 
-	//KNOCK_HARD解放 累計飛距離3980
-	if(getCookie("TROPHY-TOTAL-POINT-3980") > 0 && getCookie("UNLOCK-KNOCK_HARD") != 1){
+	//KNOCK_HARD解放 累計飛距離10000
+	if(getCookie("TROPHY-TOTAL-POINT-10000") > 0 && getCookie("UNLOCK-KNOCK_HARD") != 1){
 		setCookie("UNLOCK-KNOCK_HARD",1);
 		popUp("UNLOCK","KNOCK_HARD");
 	}
@@ -577,6 +596,21 @@ function cookieUpdate(course_e, Point, ball_number){
 			popUp("TROPHY","TROPHY-KNOCK_HARD-CLEAR");
 		}
 
+		if(getCookie("TROPHY-KNOCK_HARD-JUSTMEET-15") == 0 && Point.justmeet >= 15){//★真芯15
+			setCookie("TROPHY-KNOCK_HARD-JUSTMEET-15",1);
+			popUp("TROPHY","TROPHY-KNOCK_EX-JUSTMEET-15");
+		}
+
+		if(getCookie("TROPHY-KNOCK_HARD-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
+			setCookie("TROPHY-KNOCK_HARD-JUSTMEET-10",1);
+			popUp("TROPHY","TROPHY-KNOCK_HARD-JUSTMEET-10");
+		}
+
+		if(getCookie("TROPHY-KNOCK_HARD-JUSTMEET-5") == 0 && Point.justmeet >= 5){//★真芯5
+			setCookie("TROPHY-KNOCK_HARD-JUSTMEET-5",1);
+			popUp("TROPHY","TROPHY-KNOCK_HARD-JUSTMEET-5");
+		}
+
 	}
 
 	//◆ほのぼのSP
@@ -671,6 +705,11 @@ function addCount(ball){
 	if(getCookie("TROPHY-TOTAL-JUSTMEET-10") == 0 && getCookie("TOTAL-JUSTMEET") >= 10){
 		setCookie("TROPHY-TOTAL-JUSTMEET-10",1);
 		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-10");
+	}
+	//真芯50トロフィー
+	if(getCookie("TROPHY-TOTAL-JUSTMEET-50") == 0 && getCookie("TOTAL-JUSTMEET") >= 50){
+		setCookie("TROPHY-TOTAL-JUSTMEET-50",1);
+		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-50");
 	}
 	//真芯100トロフィー
 	if(getCookie("TROPHY-TOTAL-JUSTMEET-100") == 0 && getCookie("TOTAL-JUSTMEET") >= 100){
