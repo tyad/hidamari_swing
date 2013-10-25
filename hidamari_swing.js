@@ -684,7 +684,7 @@ window.onload = function hidamari_swing() {
 
 		});
 		SceneRecord.addEventListener('leftbuttondown', function(){
-
+			trophyBackPage();
 		});
 		SceneRecord.addEventListener('rightbuttondown', function(){
 			trophyNextPage();
