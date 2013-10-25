@@ -470,13 +470,13 @@ function cookieUpdate(course_e, Point, ball_number){
 	//◆ゆのさま
 	else if(course_e === "YUNO"){
 		var clearrank = getCookie("CLEARRANK-YUNO");
-		if(Point.num >= 900 && clearrank < 3){//☆☆☆ 800
+		if(Point.num >= 800 && clearrank < 3){//☆☆☆ 800
 			setCookie("CLEARRANK-YUNO",3);
 			if(getCookie("TROPHY-YUNO-RANKMAX") == 0){
 				setCookie("TROPHY-YUNO-RANKMAX",1);
 				popUp("TROPHY","TROPHY-YUNO-RANKMAX");
 			}
-		}else if(Point.num >= 700 && clearrank < 2){//☆☆ 600
+		}else if(Point.num >= 600 && clearrank < 2){//☆☆ 600
 			setCookie("CLEARRANK-YUNO",2);
 		}else if(Point.num >= 400 && clearrank < 1){//☆ 400
 			setCookie("CLEARRANK-YUNO",1);

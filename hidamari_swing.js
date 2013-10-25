@@ -173,8 +173,8 @@ window.onload = function hidamari_swing() {
 				"bgm" : 'sound/bgm_easy.mp3',
 				"discription" : "10球 / ノルマ:400m<br>森で修行して帰ってきた！",
 				"norma_rank_first": 400,
-				"norma_rank_second": 700,
-				"norma_rank_third": 900
+				"norma_rank_second": 600,
+				"norma_rank_third": 800
 			},
 			"KNOCK" : {
 				"course_e" : "KNOCK",
