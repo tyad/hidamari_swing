@@ -452,6 +452,16 @@ window.onload = function hidamari_swing() {
 			});
 		});
 
+		//*記録閲覧ボタン*
+		var RecordButton = new Label();
+		RecordButton.x = 10;
+		RecordButton.y = SCREEN_SIZE_Y-60;
+		RecordButton.text = "<h1 id='helpbutton' class='button'>記録ルーム</h1>";
+		RecordButton.addEventListener('touchstart', function (e) {
+			game.popScene(SceneTitle);
+			game.pushScene(SceneRecord);
+		});
+
 	//*音ボタン*
 		if(SoundFlag == 1){
 			var sound_img = 'img/sound.gif';
@@ -601,8 +611,20 @@ window.onload = function hidamari_swing() {
 		SceneTitle.addChild(ModeDiscription);
 		SceneTitle.addChild(ModeClearLabel);
 		SceneTitle.addChild(ModeMarkerPin);
+		SceneTitle.addChild(RecordButton);
 		SceneTitle.addChild(HelpButton);
 		SceneTitle.addChild(SoundButton);
+
+//*********************
+//実績画面
+//*******************
+		var SceneRecord = new Scene();
+
+		//*背景*
+		var BackgroundRecord = make_Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y, 0, 0, 'img/background_title.jpg');
+
+		
+		SceneRecord.addChild(BackgroundRecord);
 
 
 //*********************
