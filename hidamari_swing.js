@@ -456,7 +456,7 @@ window.onload = function hidamari_swing() {
 		var RecordButton = new Label();
 		RecordButton.x = 10;
 		RecordButton.y = SCREEN_SIZE_Y-60;
-		RecordButton.text = "<h1 id='helpbutton' class='button'>記録ルーム</h1>";
+		RecordButton.text = "<h1 id='recordbutton'>記録ルーム</h1>";
 		RecordButton.addEventListener('touchstart', function (e) {
 			game.popScene(SceneTitle);
 			game.pushScene(SceneRecord);
@@ -623,8 +623,43 @@ window.onload = function hidamari_swing() {
 		//*背景*
 		var BackgroundRecord = make_Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y, 0, 0, 'img/background_title.jpg');
 
-		
+		//*枠*
+		var RecordFrame = make_Label(10, 10, "recordframe", "");
+
+		var getTROPHY = [];
+			
+		for(var key in TROPHY_DATA){
+			if(getCookie(key)){
+				getTROPHY.push(TROPHY_DATA[key]);
+			}
+		}
+
+		//*トロフィーリスト*
+		var TrophyList = make_Label(10, 10, "trophy_list", "");
+			TrophyList.text = "<div id=trophy_list>";
+			console.log(TROPHY_DATA)
+
+		for(var i = 0;i<getTROPHY.length;i++){
+			TrophyList.text += "<p>"+TROPHY_DATA[i]['name']+"</p>";
+		}
+			TrophyList.text += "</div>";
+
+		//*記録閲覧ボタン*
+		var TitleBackButton = new Label();
+		TitleBackButton.x = SCREEN_SIZE_X-130;
+		TitleBackButton.y = SCREEN_SIZE_Y-60;
+		TitleBackButton.text = "<h1 id='helpbutton' class='button'>戻る</h1>";
+		TitleBackButton.addEventListener('touchstart', function (e) {
+			game.popScene(SceneRecord);
+			game.pushScene(SceneTitle);
+		});
+
+
+
 		SceneRecord.addChild(BackgroundRecord);
+		SceneRecord.addChild(RecordFrame);
+		SceneRecord.addChild(TitleBackButton);
+		SceneRecord.addChild(TrophyList);
 
 
 //*********************
