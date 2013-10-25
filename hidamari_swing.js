@@ -638,6 +638,7 @@ window.onload = function hidamari_swing() {
 
 		//*トロフィーリスト*
 		var TrophyList = make_Label(10, 10, "trophy_list", "");
+
 		function trophyListUpdate(page){
 			var trophyText = ""
 				trophyText = "<div id='trophy_list'>";
@@ -664,12 +665,18 @@ window.onload = function hidamari_swing() {
 		});
 
 		function trophyNextPage(){
-			if(nowTrophyPage*8 > getTrophy.length){
+			if(nowTrophyPage*8 < getTrophy.length){
 				nowTrophyPage++;
 				trophyListUpdate(nowTrophyPage);
 			}
 		}
 
+		function trophyBackPage(){
+			if(nowTrophyPage > 1){
+				nowTrophyPage--;
+				trophyListUpdate(nowTrophyPage);
+			}
+		}
 		SceneRecord.addEventListener('upbuttondown', function(){
 
 		});
