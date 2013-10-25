@@ -626,11 +626,11 @@ window.onload = function hidamari_swing() {
 		//*枠*
 		var RecordFrame = make_Label(10, 10, "recordframe", "");
 
-		var getTROPHY = [];
+		var getTrophy = [];
 			
 		for(var key in TROPHY_DATA){
 			if(getCookie(key)){
-				getTROPHY.push(TROPHY_DATA[key]);
+				getTrophy.push(TROPHY_DATA[key]);
 			}
 		}
 
@@ -639,8 +639,8 @@ window.onload = function hidamari_swing() {
 			TrophyList.text = "<div id=trophy_list>";
 			console.log(TROPHY_DATA)
 
-		for(var i = 0;i<getTROPHY.length;i++){
-			TrophyList.text += "<p>"+TROPHY_DATA[i]['name']+"</p>";
+		for(var i = 0;i<getTrophy.length;i++){
+			TrophyList.text += "<p>"+getTrophy[i]['name']+"</p>";
 		}
 			TrophyList.text += "</div>";
 
