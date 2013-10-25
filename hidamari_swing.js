@@ -427,6 +427,7 @@ window.onload = function hidamari_swing() {
 
 	//*操作説明ボタン*
 		var HelpButton = new Label();
+		HelpButton.width = 130;
 		HelpButton.x = SCREEN_SIZE_X-130;
 		HelpButton.y = SCREEN_SIZE_Y-60;
 		HelpButton.text = "<h1 id='helpbutton' class='button'>操作説明</h1>";
@@ -454,6 +455,7 @@ window.onload = function hidamari_swing() {
 
 		//*記録閲覧ボタン*
 		var RecordButton = new Label();
+		RecordButton.width = 130;
 		RecordButton.x = 10;
 		RecordButton.y = SCREEN_SIZE_Y-60;
 		RecordButton.text = "<h1 id='recordbutton'>記録ルーム</h1>";
