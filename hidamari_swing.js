@@ -670,16 +670,16 @@ window.onload = function hidamari_swing() {
 			}
 		}
 
-		SceneTitle.addEventListener('upbuttondown', function(){
+		SceneRecord.addEventListener('upbuttondown', function(){
 
 		});
-		SceneTitle.addEventListener('downbuttondown', function(){
+		SceneRecord.addEventListener('downbuttondown', function(){
 
 		});
-		SceneTitle.addEventListener('leftbuttondown', function(){
+		SceneRecord.addEventListener('leftbuttondown', function(){
 
 		});
-		SceneTitle.addEventListener('rightbuttondown', function(){
+		SceneRecord.addEventListener('rightbuttondown', function(){
 			trophyNextPage();
 		});
 
