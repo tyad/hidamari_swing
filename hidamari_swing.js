@@ -634,15 +634,24 @@ window.onload = function hidamari_swing() {
 			}
 		}
 
+		var nowTrophyPage = 1;
+
 		//*トロフィーリスト*
 		var TrophyList = make_Label(10, 10, "trophy_list", "");
-			TrophyList.text = "<div id=trophy_list>";
-			console.log(TROPHY_DATA)
+		function trophyListUpdate(page){
+			var trophyText = ""
+				trophyText = "<div id='trophy_list'>";
+				console.log(TROPHY_DATA)
 
-		for(var i = 0;i<getTrophy.length;i++){
-			TrophyList.text += "<p>"+getTrophy[i]['name']+"</p>";
+			for(var i = (page-1)*8;i<getTrophy.length && i < (page-1)*8 + 8;i++){
+				trophyText += "<p><span>"+getTrophy[i]['name']+"</span><br>"+getTrophy[i]['text']+"</p>";
+			}
+
+			trophyText += "</div>";
+			TrophyList.text = trophyText;
 		}
-			TrophyList.text += "</div>";
+
+		trophyListUpdate(nowTrophyPage);
 
 		//*記録閲覧ボタン*
 		var TitleBackButton = new Label();
@@ -654,6 +663,25 @@ window.onload = function hidamari_swing() {
 			game.pushScene(SceneTitle);
 		});
 
+		function trophyNextPage(){
+			if(nowTrophyPage*8 > getTrophy.length){
+				nowTrophyPage++;
+				trophyListUpdate(nowTrophyPage);
+			}
+		}
+
+		SceneTitle.addEventListener('upbuttondown', function(){
+
+		});
+		SceneTitle.addEventListener('downbuttondown', function(){
+
+		});
+		SceneTitle.addEventListener('leftbuttondown', function(){
+
+		});
+		SceneTitle.addEventListener('rightbuttondown', function(){
+			trophyNextPage();
+		});
 
 
 		SceneRecord.addChild(BackgroundRecord);
