@@ -88,7 +88,7 @@ var TROPHY_DATA = {
 
 
 	"TROPHY-EASY_EX-CLEAR":{
-		"name":"統一球の脅威",
+		"name":"統一球でもへっちゃら",
 		"text":"ほのぼのコース×SPをクリア"
 	},
 	"TROPHY-EASY_EX-RANKMAX":{
@@ -126,15 +126,15 @@ var TROPHY_DATA = {
 		"text":"どきどきノックで★★★"
 	},
 	"TROPHY-KNOCK_HARD-JUSTMEET-5":{
-		"name":"場外に飛んだボールたち",
+		"name":"ボールは場外へ",
 		"text":"どきどきノックで1プレイ真芯5回以上"
 	},
 	"TROPHY-KNOCK_HARD-JUSTMEET-10":{
-		"name":"星になったボールたち",
+		"name":"ボールは星になった",
 		"text":"どきどきノックで1プレイ真芯10回以上"
 	},
 	"TROPHY-KNOCK_HARD-JUSTMEET-15":{
-		"name":"砕かれたボールたち",
+		"name":"ボールを砕いた",
 		"text":"どきどきノックで1プレイ真芯15回以上"
 	},
 
@@ -148,11 +148,11 @@ var TROPHY_DATA = {
 		"text":"10回真芯ヒットさせた"
 	},
 	"TROPHY-TOTAL-JUSTMEET-50":{
-		"name":"爆発だ",
+		"name":"爆発だ！",
 		"text":"50回真芯ヒットさせた"
 	},
 	"TROPHY-TOTAL-JUSTMEET-100":{
-		"name":"芸術的な爆発",
+		"name":"芸術的な爆発！",
 		"text":"100回真芯ヒットさせた"
 	},
 	"TROPHY-TOTAL-JUSTMEET-365":{
@@ -161,22 +161,25 @@ var TROPHY_DATA = {
 	},
 
 	"TROPHY-TOTAL-POINT-1000":{
-		"name":"さてさて",
+		"name":"さてさて1000m",
 		"text":"累計1000m飛ばした"
 	},
 	"TROPHY-TOTAL-POINT-3980":{
-		"name":"それでそれで",
+		"name":"それでそれで3980m",
 		"text":"累計3980m飛ばした"
 	},
 	"TROPHY-TOTAL-POINT-10000":{
-		"name":"そんでもって",
+		"name":"そんでもって10000m",
 		"text":"累計10000m飛ばした"
 	},
 	"TROPHY-TOTAL-POINT-100000":{
 		"name":"ひだまりスラッガー",
 		"text":"累計100000m飛ばした"
 	},
-
+	"TROPHY-TOTAL-MISS-1":{
+		"name":"おっと",
+		"text":"空振りした(見逃しも含む)"
+	},
 	"TROPHY-TOTAL-MISS-100":{
 		"name":"あらら",
 		"text":"100回空振りした(見逃しも含む)"
@@ -722,7 +725,11 @@ function addCount(ball){
 		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-365");
 	}
 
-
+	//空振りトロフィー
+	if(getCookie("TROPHY-TOTAL-MISS-1") == 0 && getCookie("TOTAL-MISS") >= 1){
+		setCookie("TROPHY-TOTAL-MISS-1",1);
+		popUp("TROPHY","TROPHY-TOTAL-MISS-1");
+	}
 	//100回空振りトロフィー
 	if(getCookie("TROPHY-TOTAL-MISS-100") == 0 && getCookie("TOTAL-MISS") >= 100){
 		setCookie("TROPHY-TOTAL-MISS-100",1);
