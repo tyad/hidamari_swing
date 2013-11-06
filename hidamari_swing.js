@@ -402,14 +402,15 @@ window.onload = function hidamari_swing() {
 		var ModeClearLabel = make_Label(0, STARTBUTTON_Y+119, "", "");
 		ModeClearLabel.update = function(){
 			var rank = getCookie("CLEARRANK-" + GameSet[Mode][Course]["course_e"]);
+			var high_score = getCookie("HIGHSCORE-" + GameSet[Mode][Course]["course_e"]);
 			if(rank==0){
-				this.text = "<div id='clear_label'>未クリア</div>";
+				this.text = "<div id='clear_label'>未クリア</div><div>ハイスコア:"+high_score+"点</div>";
 			}else if(rank==1){
-				this.text = "<div id='clear_label'>★</div>";
+				this.text = "<div id='clear_label'>★</div><div>ハイスコア:"+high_score+"点</div>";
 			}else if(rank==2){
-				this.text = "<div id='clear_label'>★★</div>";
+				this.text = "<div id='clear_label'>★★</div><div>ハイスコア:"+high_score+"点</div>";
 			}else if(rank==3){
-				this.text = "<div id='clear_label'>★★★</div>";
+				this.text = "<div id='clear_label'>★★★</div><div>ハイスコア:"+high_score+"点</div>";
 			}
 
 		}
