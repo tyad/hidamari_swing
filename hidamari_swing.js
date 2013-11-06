@@ -404,13 +404,13 @@ window.onload = function hidamari_swing() {
 			var rank = getCookie("CLEARRANK-" + GameSet[Mode][Course]["course_e"]);
 			var high_score = getCookie("HIGHSCORE-" + GameSet[Mode][Course]["course_e"]);
 			if(rank==0){
-				this.text = "<div id='clear_label'>未クリア<br>ハイスコア:"+high_score+"点</div>";
+				this.text = "<div id='clear_label'>未クリア-ハイスコア:"+high_score+"点</div>";
 			}else if(rank==1){
-				this.text = "<div id='clear_label'>★<br>ハイスコア:"+high_score+"点</div>";
+				this.text = "<div id='clear_label'>★-ハイスコア:"+high_score+"点</div>";
 			}else if(rank==2){
-				this.text = "<div id='clear_label'>★★<br>ハイスコア:"+high_score+"点</div>";
+				this.text = "<div id='clear_label'>★★-ハイスコア:"+high_score+"点</div>";
 			}else if(rank==3){
-				this.text = "<div id='clear_label'>★★★<br>ハイスコア:"+high_score+"点</div>";
+				this.text = "<div id='clear_label'>★★★-ハイスコア:"+high_score+"点</div>";
 			}
 
 		}
