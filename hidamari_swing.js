@@ -8,6 +8,7 @@ window.onload = function hidamari_swing() {
 		'img/background_title.jpg', 'img/background_batting.jpg',
 		//title chara
 		'img/logo.png', 'img/direction.gif', 'img/switch.gif', 'img/sound.gif', 'img/sound_n.gif',
+		'img/trophy_direction.gif',
 		//batting chara
 		'img/yuno.gif', 'img/bat.gif', 'img/miyako.gif', 'img/meetcursor.png',
 		'img/ball.gif', 'img/throw_ball.gif', 'img/ball_shadow.gif',
@@ -404,13 +405,13 @@ window.onload = function hidamari_swing() {
 			var rank = getCookie("CLEARRANK-" + GameSet[Mode][Course]["course_e"]);
 			var high_score = getCookie("HIGHSCORE-" + GameSet[Mode][Course]["course_e"]);
 			if(rank==0){
-				this.text = "<div id='clear_label'>未クリア-ハイスコア:"+high_score+"点</div>";
+				this.text = "<div id='clear_label'></div>";
 			}else if(rank==1){
-				this.text = "<div id='clear_label'>★-ハイスコア:"+high_score+"点</div>";
+				this.text = "<div id='clear_label'>ハイスコア:"+high_score+"点</div>";
 			}else if(rank==2){
-				this.text = "<div id='clear_label'>★★-ハイスコア:"+high_score+"点</div>";
+				this.text = "<div id='clear_label'>ハイスコア:"+high_score+"点★★</div>";
 			}else if(rank==3){
-				this.text = "<div id='clear_label'>★★★-ハイスコア:"+high_score+"点</div>";
+				this.text = "<div id='clear_label'>ハイスコア:"+high_score+"点★★★</div>";
 			}
 
 		}
@@ -657,7 +658,7 @@ window.onload = function hidamari_swing() {
 
 		trophyListUpdate(nowTrophyPage);
 
-		//*記録閲覧ボタン*
+		//*戻るボタン*
 		var TitleBackButton = new Label();
 		TitleBackButton.x = SCREEN_SIZE_X-130;
 		TitleBackButton.y = SCREEN_SIZE_Y-60;
@@ -667,10 +668,30 @@ window.onload = function hidamari_swing() {
 			game.pushScene(SceneTitle);
 		});
 
+		var RecordTrophyText = make_Label(60, 425, "", "");
+		RecordTrophyText.text = "<div id='trophy_text'>page1/10 取得数コ</div>";
+		function trophyTextUpdate(){
+		RecordTrophyText.text = "<div id='trophy_text'>page"+nowTrophyPage+"/"+(getTrophy.length-1)/8+" 取得数"+getTrophy.length+"コ</div>";	
+		}
+		//*矢印*
+		var TrophyLeftButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, 14, 420, 'img/trophy_direction.gif');
+		TrophyLeftButton.addEventListener('touchstart', function (e) {
+
+		});
+
+		var TrophyRightButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, SCREEN_SIZE_X-DIRECTION_SIZE-140, 420, 'img/trophy_direction.gif');
+		TrophyRightButton.rotation = 180;
+		TrophyRightButton.addEventListener('touchstart', function (e) {
+
+		});
+
+
+
 		function trophyNextPage(){
 			if(nowTrophyPage*8 < getTrophy.length){
 				nowTrophyPage++;
 				trophyListUpdate(nowTrophyPage);
+				trophyTextUpdate();
 			}
 		}
 
@@ -678,8 +699,10 @@ window.onload = function hidamari_swing() {
 			if(nowTrophyPage > 1){
 				nowTrophyPage--;
 				trophyListUpdate(nowTrophyPage);
+				trophyTextUpdate();
 			}
 		}
+
 		SceneRecord.addEventListener('upbuttondown', function(){
 
 		});
@@ -698,7 +721,9 @@ window.onload = function hidamari_swing() {
 		SceneRecord.addChild(RecordFrame);
 		SceneRecord.addChild(TitleBackButton);
 		SceneRecord.addChild(TrophyList);
-
+		SceneRecord.addChild(RecordTrophyText);
+		SceneRecord.addChild(TrophyLeftButton);
+		SceneRecord.addChild(TrophyRightButton);
 
 //*********************
 //バッティング画面

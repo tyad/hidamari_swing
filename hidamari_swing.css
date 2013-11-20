@@ -104,7 +104,7 @@ body{
 
 #clear_label{
 	color: white;
-	font-size: 16px;
+	font-size: 14px;
 	text-align: center;
 	width: 480px;
 }
@@ -133,7 +133,10 @@ div#trophy_list p span{
 	font-size:12px;
 }
 
-
+#trophy_text{
+font-size:20px;
+color:#fff;
+}
 
 
 /* リザルト */
