@@ -1,6 +1,18 @@
 enchant();
 
 window.onload = function hidamari_swing() {
+
+	//等倍モード
+	if(get['option'] == 'realsize'){
+		console.log('realsize');
+		//document.querySelector('#enchant-stage').children[1].style.webkitTransform = 'scale(1.0)';
+		var $div = $('<div/>');
+		$div.attr('id',"enchant-stage");
+		$('body').append($div);
+		console.log($div);
+		//document.querySelector('body').append(<div id="enchant-stage"></div>);
+	}
+
 	var game = new Game(480, 480);
 	game.keybind(32, "space");  // spaceキー
 	game.preload(
@@ -8,7 +20,7 @@ window.onload = function hidamari_swing() {
 		'img/background_title.jpg', 'img/background_batting.jpg',
 		//title chara
 		'img/logo.png', 'img/direction.gif', 'img/switch.gif', 'img/sound.gif', 'img/sound_n.gif',
-		'img/trophy_direction.gif',
+		'img/trophy_direction.gif','img/realsize.gif',
 		//batting chara
 		'img/yuno.gif', 'img/bat.gif', 'img/miyako.gif', 'img/meetcursor.png',
 		'img/ball.gif', 'img/throw_ball.gif', 'img/ball_shadow.gif',
@@ -449,13 +461,21 @@ window.onload = function hidamari_swing() {
 			game.pushScene(SceneRecord);
 		});
 
+	//等倍モードボタン
+		var RealSizeButton = make_Sprite(40, 40, 10, 10, 'img/realsize.gif');
+		RealSizeButton.addEventListener('touchstart', function (e) {
+			var url = "http://chachatyad.com/test/hidamari_swing?optoin=realsize";
+			window.open(url, "window_name", "width=480,height=480,scrollbars=no");
+		});
+
+
 	//*音ボタン*
 		if(SoundFlag == 1){
 			var sound_img = 'img/sound.gif';
 		}else{
 			var sound_img = 'img/sound_n.gif';
 		}
-		var SoundButton = make_Sprite(40, 40, SCREEN_SIZE_Y-50, 10, sound_img);
+		var SoundButton = make_Sprite(40, 40, SCREEN_SIZE_X-50, 10, sound_img);
 		SoundButton.addEventListener('touchstart', function (e) {
 			SoundFlagSwitching();
 			if(SoundFlag == 1){
@@ -465,6 +485,7 @@ window.onload = function hidamari_swing() {
 			}
 		});
 
+	//event listener
 		SceneTitle.addEventListener('enterframe', function (e) {
 			if(ModeLeftButton.scaleX > 1){
 				ModeLeftButton.scaleX -= 0.15;
@@ -601,6 +622,7 @@ window.onload = function hidamari_swing() {
 		SceneTitle.addChild(RecordButton);
 		SceneTitle.addChild(HelpButton);
 		SceneTitle.addChild(SoundButton);
+		SceneTitle.addChild(RealSizeButton);
 
 
 
@@ -2058,5 +2080,7 @@ window.onload = function hidamari_swing() {
 		game.addEventListener('spacebuttondown', get_space);
 		game.pushScene(SceneTitle);
 	};
+
 	game.start();
+
 };
