@@ -153,7 +153,7 @@ window.onload = function hidamari_swing() {
 				"course_name" : "きれきれコース",
 				"type_of_pitch" : 7,
 				"nock" : 0,
-				"powerfilter": 0.8,
+				"powerfilter": 0.75,
 				"ball_number" : 10,
 				"bgm" : 'sound/bgm_extra1.mp3',
 				"discription" : "10球 / ノルマ:500m<br>だんだん難しくなる変化球コース！",
@@ -460,7 +460,7 @@ window.onload = function hidamari_swing() {
 		RecordButton.width = 130;
 		RecordButton.x = 10;
 		RecordButton.y = SCREEN_SIZE_Y-60;
-		RecordButton.text = "<h1 id='recordbutton'>記録ルーム</h1>";
+		RecordButton.text = "<h1 id='recordbutton'>トロフィー</h1>";
 		RecordButton.addEventListener('touchstart', function (e) {
 			game.popScene(SceneTitle);
 			game.pushScene(SceneRecord);
@@ -633,7 +633,7 @@ window.onload = function hidamari_swing() {
 		var getTrophy = [];
 			
 		for(var key in TROPHY_DATA){
-			if(getCookie(key)){
+			if(getCookie(key)||true){
 				getTrophy.push(TROPHY_DATA[key]);
 			}
 		}
@@ -668,22 +668,36 @@ window.onload = function hidamari_swing() {
 			game.pushScene(SceneTitle);
 		});
 
-		var RecordTrophyText = make_Label(60, 425, "", "");
-		RecordTrophyText.text = "<div id='trophy_text'>page1/10 取得数コ</div>";
-		function trophyTextUpdate(){
-		RecordTrophyText.text = "<div id='trophy_text'>page"+nowTrophyPage+"/"+(getTrophy.length-1)/8+" 取得数"+getTrophy.length+"コ</div>";	
-		}
-		//*矢印*
-		var TrophyLeftButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, 14, 420, 'img/trophy_direction.gif');
-		TrophyLeftButton.addEventListener('touchstart', function (e) {
 
+		//*矢印*
+		var TrophyLeftButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, 14, 425, 'img/trophy_direction.gif');
+		TrophyLeftButton.addEventListener('touchstart', function (e) {
+			trophyBackPage();
 		});
 
-		var TrophyRightButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, SCREEN_SIZE_X-DIRECTION_SIZE-140, 420, 'img/trophy_direction.gif');
+		var TrophyRightButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, SCREEN_SIZE_X-DIRECTION_SIZE-140, 425, 'img/trophy_direction.gif');
 		TrophyRightButton.rotation = 180;
 		TrophyRightButton.addEventListener('touchstart', function (e) {
-
+			trophyNextPage();
 		});
+
+
+		var RecordTrophyText = make_Label(60, 430, "", "");
+		RecordTrophyText.text = "<div id='trophy_text'></div>";
+		function trophyTextUpdate(){
+			RecordTrophyText.text = "<div id='trophy_text'>page"+nowTrophyPage+"/"+(parseInt((getTrophy.length-1)/8)+1)+" 取得数"+getTrophy.length+"コ</div>";	
+			if(nowTrophyPage*8 < getTrophy.length){
+				TrophyRightButton.visible = true;
+			}else{
+				TrophyRightButton.visible = false;
+			}
+
+			if(nowTrophyPage == 1){
+				TrophyLeftButton.visible = false;
+			}else{
+				TrophyLeftButton.visible = true;
+			}
+		}
 
 
 
@@ -702,6 +716,8 @@ window.onload = function hidamari_swing() {
 				trophyTextUpdate();
 			}
 		}
+
+		trophyTextUpdate();
 
 		SceneRecord.addEventListener('upbuttondown', function(){
 
