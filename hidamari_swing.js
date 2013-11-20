@@ -464,7 +464,7 @@ window.onload = function hidamari_swing() {
 	//等倍モードボタン
 		var RealSizeButton = make_Sprite(40, 40, 10, 10, 'img/realsize.gif');
 		RealSizeButton.addEventListener('touchstart', function (e) {
-			var url = "http://chachatyad.com/test/hidamari_swing?optoin=realsize";
+			var url = "http://chachatyad.com/test/hidamari_swing/?optoin=realsize";
 			window.open(url, "window_name", "width=480,height=480,scrollbars=no");
 		});
 
