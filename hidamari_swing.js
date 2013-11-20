@@ -434,28 +434,11 @@ window.onload = function hidamari_swing() {
 		HelpButton.y = SCREEN_SIZE_Y-60;
 		HelpButton.text = "<h1 id='helpbutton' class='button'>操作説明</h1>";
 		HelpButton.addEventListener('touchstart', function (e) {
-			//console.log('ヘルプ');
-			var scale = $('#enchant-stage').find('div').css('-webkit-transform');
-			$('#help').css({
-				'display':'block',
-				'-webkit-transform-origin':'0px 0px',
-				'-webkit-transform':scale,
-			});
-			$('#help').animate(
-				{'opacity':'1'},
-				'fast'
-			);
-			$('#help').click(function(){
-				$('#help').animate({opacity:0,},
-					{duration:'fast',complete:
-					function(){
-						$('#help').css({'display':'none'});
-					},
-				});
-			});
+			game.popScene(SceneTitle);
+			game.pushScene(SceneHelp);
 		});
 
-		//*記録閲覧ボタン*
+	//*記録閲覧ボタン*
 		var RecordButton = new Label();
 		RecordButton.width = 130;
 		RecordButton.x = 10;
@@ -619,6 +602,48 @@ window.onload = function hidamari_swing() {
 		SceneTitle.addChild(HelpButton);
 		SceneTitle.addChild(SoundButton);
 
+
+
+//*********************
+//操作説明画面
+//*******************
+		var SceneHelp = new Scene();
+		//*背景*
+		var BackgroundHelp = make_Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y, 0, 0, 'img/background_title.jpg');
+		//*戻るボタン*
+		var HelpTitleBackButton = new Label();
+		HelpTitleBackButton.x = SCREEN_SIZE_X-130;
+		HelpTitleBackButton.y = SCREEN_SIZE_Y-60;
+		HelpTitleBackButton.text = "<h1 id='helpbutton' class='button'>戻る</h1>";
+		HelpTitleBackButton.addEventListener('touchstart', function (e) {
+			game.popScene(SceneHelp);
+			game.pushScene(SceneTitle);
+		});
+		var HelpText = make_Label(10, 10, "help", "<p>操作説明</p><p>バッターを操作してボールを打つ</p><img src='./img/swing.png'>	<p><p><div><b>PCでの操作</b></div><div>スペースキーでスイング / 矢印キーで上下左右移動</div></p><p><div><b>スマホ・タブレットでの操作</b></div><div>右下の〇でスイング / 左下の矢印で上下左右移動</div></p><p><div>左方向に飛んだら振りが早め、右方向に飛んだら振りが遅め</div><div>これを参考にタイミングよくジャストミートしよう！</div></p></p><span class='copyright'>[BGM]フリーBGM・音楽素材MusMus:http://musmus.main.jp</span></div>");
+
+		SceneHelp.addEventListener('upbuttondown', function(){
+
+		});
+		SceneHelp.addEventListener('downbuttondown', function(){
+
+		});
+		SceneHelp.addEventListener('leftbuttondown', function(){
+
+		});
+		SceneHelp.addEventListener('rightbuttondown', function(){
+
+		});
+
+		SceneHelp.addChild(BackgroundHelp);
+		//SceneHelp.addChild(HelpFrame);
+		SceneHelp.addChild(HelpText);
+		SceneHelp.addChild(HelpTitleBackButton);
+
+
+
+
+
+
 //*********************
 //実績画面
 //*******************
@@ -681,7 +706,6 @@ window.onload = function hidamari_swing() {
 			trophyNextPage();
 		});
 
-
 		var RecordTrophyText = make_Label(60, 430, "", "");
 		RecordTrophyText.text = "<div id='trophy_text'></div>";
 		function trophyTextUpdate(){
@@ -698,8 +722,6 @@ window.onload = function hidamari_swing() {
 				TrophyLeftButton.visible = true;
 			}
 		}
-
-
 
 		function trophyNextPage(){
 			if(nowTrophyPage*8 < getTrophy.length){
@@ -731,7 +753,6 @@ window.onload = function hidamari_swing() {
 		SceneRecord.addEventListener('rightbuttondown', function(){
 			trophyNextPage();
 		});
-
 
 		SceneRecord.addChild(BackgroundRecord);
 		SceneRecord.addChild(RecordFrame);
