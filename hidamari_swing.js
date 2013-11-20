@@ -407,11 +407,11 @@ window.onload = function hidamari_swing() {
 			if(rank==0){
 				this.text = "<div id='clear_label'>クリアしてません</div>";
 			}else if(rank==1){
-				this.text = "<div id='clear_label'>ハイスコア:"+high_score+"点</div>";
+				this.text = "<div id='clear_label'>ハイスコア:"+high_score+"m</div>";
 			}else if(rank==2){
-				this.text = "<div id='clear_label'>ハイスコア:"+high_score+"点★★</div>";
+				this.text = "<div id='clear_label'>ハイスコア:"+high_score+"m ★★</div>";
 			}else if(rank==3){
-				this.text = "<div id='clear_label'>ハイスコア:"+high_score+"点★★★</div>";
+				this.text = "<div id='clear_label'>ハイスコア:"+high_score+"m ★★★</div>";
 			}
 
 		}
