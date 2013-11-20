@@ -378,8 +378,10 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		//ハイスコア更新
 		if(Point.num >= getCookie("HIGHSCORE-EASY")){
+			if(getCookie("HIGHSCORE-EASY") != 0){
+				popUp("HIGHSCORE","");
+			}
 			setCookie("HIGHSCORE-EASY",Point.num);
-			popUp("HIGHSCORE","");
 		}
 
 	}
@@ -406,8 +408,11 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		//ハイスコア更新
 		if(Point.num >= getCookie("HIGHSCORE-NORMAL")){
+			if(getCookie("HIGHSCORE-NORMAL") != 0){
+				popUp("HIGHSCORE","");
+			}
 			setCookie("HIGHSCORE-NORMAL",Point.num);
-			popUp("HIGHSCORE","");
+
 		}
 
 	}
@@ -434,8 +439,10 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		//ハイスコア更新
 		if(Point.num >= getCookie("HIGHSCORE-HARD")){
+			if(getCookie("HIGHSCORE-HARD") != 0){
+				popUp("HIGHSCORE","");
+			}
 			setCookie("HIGHSCORE-HARD",Point.num);
-			popUp("HIGHSCORE","");
 		}
 
 	}
@@ -462,8 +469,10 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		//ハイスコア更新
 		if(Point.num >= getCookie("HIGHSCORE-STRAIGHT")){
+			if(getCookie("HIGHSCORE-STRAIGHT") != 0){
+				popUp("HIGHSCORE","");
+			}
 			setCookie("HIGHSCORE-STRAIGHT",Point.num);
-			popUp("HIGHSCORE","");
 		}
 	}
 	//◆きれきれ
@@ -489,8 +498,10 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		//ハイスコア更新
 		if(Point.num >= getCookie("HIGHSCORE-KIRE")){
+			if(getCookie("HIGHSCORE-KIRE") != 0){
+				popUp("HIGHSCORE","");
+			}
 			setCookie("HIGHSCORE-KIRE",Point.num);
-			popUp("HIGHSCORE","");
 		}
 	}
 	//◆ゆのさま
@@ -527,8 +538,10 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		//ハイスコア更新
 		if(Point.num >= getCookie("HIGHSCORE-YUNO")){
+			if(getCookie("HIGHSCORE-YUNO") != 0){
+				popUp("HIGHSCORE","");
+			}
 			setCookie("HIGHSCORE-YUNO",Point.num);
-			popUp("HIGHSCORE","");
 		}
 	}
 	//◆100本ノック
@@ -570,8 +583,10 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		//ハイスコア更新
 		if(Point.num >= getCookie("HIGHSCORE-KNOCK")){
+			if(getCookie("HIGHSCORE-KNOCK") != 0){
+				popUp("HIGHSCORE","");
+			}	
 			setCookie("HIGHSCORE-KNOCK",Point.num);
-			popUp("HIGHSCORE","");
 		}
 
 	}
@@ -612,8 +627,10 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		//ハイスコア更新
 		if(Point.num >= getCookie("HIGHSCORE-KNOCK_EX")){
+			if(getCookie("HIGHSCORE-KNOCK_EX") != 0){
+				popUp("HIGHSCORE","");
+			}	
 			setCookie("HIGHSCORE-KNOCK_EX",Point.num);
-			popUp("HIGHSCORE","");
 		}
 	}
 
@@ -655,8 +672,10 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		//ハイスコア更新
 		if(Point.num >= getCookie("HIGHSCORE-KNOCK_HARD")){
+			if(getCookie("HIGHSCORE-KNOCK_HARD") != 0){
+				popUp("HIGHSCORE","");
+			}	
 			setCookie("HIGHSCORE-KNOCK_HARD",Point.num);
-			popUp("HIGHSCORE","");
 		}
 	}
 
@@ -682,8 +701,10 @@ function cookieUpdate(course_e, Point, ball_number){
 
 		//ハイスコア更新
 		if(Point.num >= getCookie("HIGHSCORE-EASY_EX")){
+			if(getCookie("HIGHSCORE-EASY_EX") != 0){
+				popUp("HIGHSCORE","");
+			}	
 			setCookie("HIGHSCORE-EASY_EX",Point.num);
-			popUp("HIGHSCORE","");
 		}
 
 	}
@@ -814,7 +835,7 @@ function popUp(type,data_name){
 	}else if(type == "UNLOCK"){
 		$('body').append("<div class=\"popup pop" + popup_count + "\">[!] " + COURSE_DATA[data_name]['name'] + "解禁！</div>");
 	}else if(type == "HIGHSCORE"){
-		$('body').append("<div class=\"popup pop" + popup_count + "\">ハイスコア更新</div>");
+		$('body').append("<div class=\"popup pop" + popup_count + "\">ハイスコアが更新されました！</div>");
 	}
 
 	var scale = $('#enchant-stage').find('div').css('-webkit-transform');

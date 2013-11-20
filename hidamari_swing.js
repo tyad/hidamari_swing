@@ -633,7 +633,7 @@ window.onload = function hidamari_swing() {
 		var getTrophy = [];
 			
 		for(var key in TROPHY_DATA){
-			if(getCookie(key)||true){
+			if(getCookie(key)){
 				getTrophy.push(TROPHY_DATA[key]);
 			}
 		}
