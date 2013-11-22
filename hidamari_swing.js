@@ -3,6 +3,7 @@ enchant();
 window.onload = function hidamari_swing() {
 
 	//等倍モード
+	/*
 	if(get['option'] == 'realsize'){
 		console.log('realsize');
 		//document.querySelector('#enchant-stage').children[1].style.webkitTransform = 'scale(1.0)';
@@ -12,6 +13,7 @@ window.onload = function hidamari_swing() {
 		console.log($div);
 		//document.querySelector('body').append(<div id="enchant-stage"></div>);
 	}
+	*/
 
 	var game = new Game(480, 480);
 	game.keybind(32, "space");  // spaceキー
@@ -20,7 +22,7 @@ window.onload = function hidamari_swing() {
 		'img/background_title.jpg', 'img/background_batting.jpg',
 		//title chara
 		'img/logo.png', 'img/direction.gif', 'img/switch.gif', 'img/sound.gif', 'img/sound_n.gif',
-		'img/trophy_direction.gif','img/realsize.gif',
+		'img/trophy_direction.gif','img/realsize.gif','img/window_full.png','img/window_x1.png','img/window_x1.5.png',
 		//batting chara
 		'img/yuno.gif', 'img/bat.gif', 'img/miyako.gif', 'img/meetcursor.png',
 		'img/ball.gif', 'img/throw_ball.gif', 'img/ball_shadow.gif',
@@ -33,6 +35,7 @@ window.onload = function hidamari_swing() {
 		//SE
 		'sound/hit_ex.wav', 'sound/hit_1.wav', 'sound/hit_2.wav', 'sound/hit_3.wav', 'sound/hit_4.wav'
 	);
+
 //**********
 //コンフィグ定数
 //**********
@@ -303,6 +306,7 @@ window.onload = function hidamari_swing() {
 			TempSprite.image = game.assets[image_path];
 			return TempSprite;
 		}
+
 		//*ラベル生成関数*
 		function make_Label(x, y, class_name, text){
 			//console.log('makelabel');
@@ -425,7 +429,6 @@ window.onload = function hidamari_swing() {
 			}else if(rank==3){
 				this.text = "<div id='clear_label'>ハイスコア:"+high_score+"m ★★★</div>";
 			}
-
 		}
 
 		ModeClearLabel.update();
@@ -437,7 +440,6 @@ window.onload = function hidamari_swing() {
 			ModeClearLabel.update();
 		}
 		ModeDiscription.update();
-
 
 	//*操作説明ボタン*
 		var HelpButton = new Label();
@@ -461,12 +463,44 @@ window.onload = function hidamari_swing() {
 			game.pushScene(SceneRecord);
 		});
 
-	//等倍モードボタン
-		var RealSizeButton = make_Sprite(40, 40, 10, 10, 'img/realsize.gif');
-		RealSizeButton.addEventListener('touchstart', function (e) {
-			var url = "http://chachatyad.com/test/hidamari_swing/?optoin=realsize";
-			window.open(url, "window_name", "width=480,height=480,scrollbars=no");
+
+	/* 失敗
+	//画面モードボタン
+		var DotByDotSizeButton = make_Sprite(36, 28, 10, 10, 'img/window_x1.png');
+		DotByDotSizeButton.addEventListener('touchstart', function (e) {
+			//$('body').css('width',$(window).width()+'px');
+			document.querySelector('#enchant-stage').children[0].style.webkitTransform = 'scale(1.0)';
+			document.querySelector('#enchant-stage').children[1].style.webkitTransform = 'scale(1.0)';
+			$('#enchant-stage').css('width',480+'px');
+			$('#enchant-stage').css('height',480+'px');
+			$('body').css('width',$(window).innerWidth()+'px');
+			$('#enchant-stage').css('padding-top',($(window).innerHeight()-480)/2+'px');
 		});
+		var DoubleSizeButton = make_Sprite(36, 28, 48, 10, 'img/window_x1.5.png');
+		DoubleSizeButton.addEventListener('touchstart', function (e) {
+			//$('body').css('width',$(window).width()+'px');
+			document.querySelector('#enchant-stage').children[0].style.webkitTransform = 'scale(1.5)';
+			document.querySelector('#enchant-stage').children[1].style.webkitTransform = 'scale(1.5)';
+			$('#enchant-stage').css('width',620+'px');
+			$('#enchant-stage').css('height',620+'px');
+			$('body').css('width',$(window).innerWidth()+'px');
+			$('#enchant-stage').css('padding-top',($(window).innerHeight()-620)/4-2+'px');
+		});
+
+		var FullSizeButton = make_Sprite(36, 28, 86, 10, 'img/window_full.png');
+		FullSizeButton.addEventListener('touchstart', function (e) {
+			//$('body').css('width',$(window).width()+'px');
+
+			var fullscale = $(window).innerHeight()/480;
+			$('body').css('width',$(window).innerWidth()+'px');
+			document.querySelector('#enchant-stage').children[0].style.webkitTransform = 'scale('+fullscale+')';
+			document.querySelector('#enchant-stage').children[1].style.webkitTransform = 'scale('+fullscale+')';
+			$('#enchant-stage').css('width',(480*fullscale)+'px');
+			$('#enchant-stage').css('height',$(window).innerHeight()+'px');
+			$('#enchant-stage').css('padding-top',0+'px');
+			console.log('hohohoho : '+fullscale);
+		});
+	*/
 
 
 	//*音ボタン*
@@ -622,8 +656,6 @@ window.onload = function hidamari_swing() {
 		SceneTitle.addChild(RecordButton);
 		SceneTitle.addChild(HelpButton);
 		SceneTitle.addChild(SoundButton);
-		SceneTitle.addChild(RealSizeButton);
-
 
 
 //*********************
@@ -707,7 +739,7 @@ window.onload = function hidamari_swing() {
 
 		//*戻るボタン*
 		var TitleBackButton = new Label();
-		TitleBackButton.x = SCREEN_SIZE_X-130;
+		TitleBackButton.x = 10;
 		TitleBackButton.y = SCREEN_SIZE_Y-60;
 		TitleBackButton.text = "<h1 id='helpbutton' class='button'>戻る</h1>";
 		TitleBackButton.addEventListener('touchstart', function (e) {
@@ -717,18 +749,18 @@ window.onload = function hidamari_swing() {
 
 
 		//*矢印*
-		var TrophyLeftButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, 14, 425, 'img/trophy_direction.gif');
+		var TrophyLeftButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, 139, 425, 'img/trophy_direction.gif');
 		TrophyLeftButton.addEventListener('touchstart', function (e) {
 			trophyBackPage();
 		});
 
-		var TrophyRightButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, SCREEN_SIZE_X-DIRECTION_SIZE-140, 425, 'img/trophy_direction.gif');
+		var TrophyRightButton = make_Sprite(DIRECTION_SIZE, DIRECTION_SIZE, SCREEN_SIZE_X-DIRECTION_SIZE-15, 425, 'img/trophy_direction.gif');
 		TrophyRightButton.rotation = 180;
 		TrophyRightButton.addEventListener('touchstart', function (e) {
 			trophyNextPage();
 		});
 
-		var RecordTrophyText = make_Label(60, 430, "", "");
+		var RecordTrophyText = make_Label(185, 430, "", "");
 		RecordTrophyText.text = "<div id='trophy_text'></div>";
 		function trophyTextUpdate(){
 			RecordTrophyText.text = "<div id='trophy_text'>page"+nowTrophyPage+"/"+(parseInt((getTrophy.length-1)/8)+1)+" 取得数"+getTrophy.length+"コ</div>";	
@@ -2082,5 +2114,12 @@ window.onload = function hidamari_swing() {
 	};
 
 	game.start();
-
+	
+	/* 戦績
+	$('body').css('width',$(window).innerWidth()+'px');
+	//$('body').css('margin','auto');
+	$('#enchant-stage').css('margin','auto');
+	$('#enchant-stage').css('width',$(window).innerHeight()+'px');
+	//$('#enchant-stage').css('position','relative');
+	*/
 };

@@ -1,6 +1,12 @@
 body{
 	font-family: "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","メイリオ",Meiryo,Arial,Verdana,"ＭＳ Ｐゴシック",sans-serif;
 }
+/*
+#enchant-stage{
+	margin: auto;
+	width:480px;
+}
+*/
 .backframe{
 	width: 440px;
 	height: 160px;
@@ -131,6 +137,8 @@ div#trophy_list p span{
 #trophy_text{
 	font-size:20px;
 	color:#fff;
+	width:220px;
+	text-align: center;
 }
 
 /* リザルト */
