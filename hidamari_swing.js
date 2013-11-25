@@ -798,10 +798,10 @@ window.onload = function hidamari_swing() {
 						SceneBatting.StateFrame.visible = false;
 						SceneBatting.LastBall.visible = false;
 						
+						game.pushScene(SceneResult);
 						//------クッキー処理-----
 						cookieUpdate(GameSet[Mode][Course]["course_e"], SceneBatting.Point, GameSet[Mode][Course]["ball_number"]);
 						//--------------------
-						game.pushScene(SceneResult);
 					},3000);
 				}
 			}
@@ -1916,7 +1916,6 @@ window.onload = function hidamari_swing() {
 							var ClearText = make_Label(0, 275+this.score_ball_num*20, "result_text", "もう一度挑戦しよう！")
 							SceneResult.addChild(ClearText);
 						}
-
 
 						if(checkClearRank(SceneBatting.Point.num) == 2){
 							var RankText = make_Label(0, 290+this.score_ball_num*20, "result_text", "★★");
