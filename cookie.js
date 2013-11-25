@@ -281,7 +281,7 @@ function getCookie(kword){
 		kdata = unescape(scookie.substring(start + kword.length, end));
 	}
 	if(!isNumber(kdata)){
-		console.log("undefined　or NaN : "+kword);
+		//console.log("undefined　or NaN : "+kword);
 		return 0;
 	}
 	return parseInt(kdata);
@@ -296,7 +296,7 @@ function setCookie(name,value){
 
 //アンロック判定関数
 function unlock(){
-	console.log("unlock check");
+	//console.log("unlock check");
 	//NORMAL解放
 	if(getCookie("CLEARRANK-EASY") > 0 && getCookie("UNLOCK-NORMAL") != 1){
 
@@ -339,15 +339,12 @@ function unlock(){
 		setCookie("UNLOCK-EASY_EX",1);
 		popUp("UNLOCK","EASY_EX");
 	}
-
-
-
 }
 
 //クッキー更新
 function cookieUpdate(course_e, Point, ball_number){
-	console.log(course_e);//for debug
-	console.log(Point.num);//for debug
+	//console.log(course_e);//for debug
+	//console.log(Point.num);//for debug
 	//◆ほのぼの
 	if(course_e === "EASY"){
 		var clearrank = getCookie("CLEARRANK-EASY");
