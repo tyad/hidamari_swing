@@ -830,11 +830,11 @@ function popUp(type,data_name){
 	var css_top = ((popup_count *  24 + 5) *matrix_value)* 0.95;
 	var css_left = (5 * matrix_value )* 0.95;
 	if(type == "TROPHY"){
-		$('body').append("<div class=\"popup pop" + popup_count + "\">★実績解除：" + TROPHY_DATA[data_name]['name'] + "</div>");
+		$('#enchant-stage').append("<div class=\"popup pop" + popup_count + "\">★実績解除：" + TROPHY_DATA[data_name]['name'] + "</div>");
 	}else if(type == "UNLOCK"){
-		$('body').append("<div class=\"popup pop" + popup_count + "\">[!] " + COURSE_DATA[data_name]['name'] + "解禁！</div>");
+		$('#enchant-stage').append("<div class=\"popup pop" + popup_count + "\">[!] " + COURSE_DATA[data_name]['name'] + "解禁！</div>");
 	}else if(type == "HIGHSCORE"){
-		$('body').append("<div class=\"popup pop" + popup_count + "\">ハイスコアが更新されました！</div>");
+		$('#enchant-stage').append("<div class=\"popup pop" + popup_count + "\">ハイスコアが更新されました！</div>");
 	}
 
 	var scale = $('#enchant-stage').find('div').css('-webkit-transform');
