@@ -333,7 +333,6 @@ function unlock(){
 		popUp("UNLOCK","KNOCK_HARD");
 	}
 
-	
 	//EASY_EX解放
 	if(getCookie("CLEARRANK-EASY") == 3 && getCookie("UNLOCK-EASY_EX") != 1){
 		setCookie("UNLOCK-EASY_EX",1);
@@ -348,7 +347,7 @@ function cookieUpdate(course_e, Point, ball_number){
 	//◆ほのぼの
 	if(course_e === "EASY"){
 		var clearrank = getCookie("CLEARRANK-EASY");
-		console.log(clearrank);
+		//console.log(clearrank);
 		if(Point.num >= 500 && clearrank < 3){//☆☆☆ 500
 			setCookie("CLEARRANK-EASY",3);
 			if(getCookie("TROPHY-EASY-RANKMAX") == 0){
@@ -382,6 +381,7 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 	}
+
 	//◆わくわく
 	else if(course_e === "NORMAL"){
 		var clearrank = getCookie("CLEARRANK-NORMAL");
@@ -409,10 +409,10 @@ function cookieUpdate(course_e, Point, ball_number){
 				popUp("HIGHSCORE","");
 			}
 			setCookie("HIGHSCORE-NORMAL",Point.num);
-
 		}
 
 	}
+
 	//◆どきどき
 	else if(course_e === "HARD"){
 		var clearrank = getCookie("CLEARRANK-HARD");
@@ -441,8 +441,8 @@ function cookieUpdate(course_e, Point, ball_number){
 			}
 			setCookie("HIGHSCORE-HARD",Point.num);
 		}
-
 	}
+
 	//◆まっすぐ
 	else if(course_e === "STRAIGHT"){
 		var clearrank = getCookie("CLEARRANK-STRAIGHT");
@@ -472,6 +472,7 @@ function cookieUpdate(course_e, Point, ball_number){
 			setCookie("HIGHSCORE-STRAIGHT",Point.num);
 		}
 	}
+
 	//◆きれきれ
 	else if(course_e === "KIRE"){
 		var clearrank = getCookie("CLEARRANK-KIRE");
@@ -501,6 +502,7 @@ function cookieUpdate(course_e, Point, ball_number){
 			setCookie("HIGHSCORE-KIRE",Point.num);
 		}
 	}
+
 	//◆ゆのさま
 	else if(course_e === "YUNO"){
 		var clearrank = getCookie("CLEARRANK-YUNO");
@@ -541,6 +543,7 @@ function cookieUpdate(course_e, Point, ball_number){
 			setCookie("HIGHSCORE-YUNO",Point.num);
 		}
 	}
+
 	//◆100本ノック
 	else if(course_e === "KNOCK"){
 		var clearrank = getCookie("CLEARRANK-KNOCK");
@@ -587,6 +590,7 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 	}
+
 	//◆バンザイノック
 	else if(course_e === "KNOCK_EX"){
 		var clearrank = getCookie("CLEARRANK-KNOCK_EX");
@@ -727,7 +731,6 @@ function addCount(ball){
 		setCookie("TOTAL-JUSTMEET", countJustMeet);
 	}
 
-
 	//飛距離0なら空振り
 	if(ball['score'] == 0){
 		var countMiss = getCookie("TOTAL-MISS");
@@ -808,7 +811,6 @@ function addCount(ball){
 }
 
 function popUp(type,data_name){
-
 	var popup_count = 0;
 	for(var i = 0;;i++){
 		if($(".pop"+i).length === 0){
@@ -860,5 +862,4 @@ function popUp(type,data_name){
 			},
 		});
 	}, 4000);
-
 }
