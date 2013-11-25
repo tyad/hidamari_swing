@@ -1834,6 +1834,11 @@ window.onload = function hidamari_swing() {
 				}
 				if(this.select_menu == 2){
 					//window.location.reload();
+					if(SoundFlag == 1){
+						game.assets[RESULT_BGM].stop();
+						game.assets[RESULT_BGM].volume = 0;
+						game.assets[BattingBgmFile].stop();
+					}
 					game.popScene(SceneResult);
 					game.popScene(SceneBatting);
 					initAll();
