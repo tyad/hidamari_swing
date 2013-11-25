@@ -89,6 +89,7 @@ window.onload = function hidamari_swing() {
 	//メニューの設定
 	var CommonCourse = createCommonCourse();
 	var ExtraCourse = createExtraCourse();
+
 	//
 	var GameSet = {	
 		"COMMON" : {
@@ -2050,6 +2051,8 @@ window.onload = function hidamari_swing() {
 		var SceneResult;
 
 		function initAll(){
+			CommonCourse = createCommonCourse();
+			ExtraCourse = createExtraCourse();
 			SceneTitle = initTitle();
 			SceneHelp = initHelp();
 			SceneRecord = initRecord();
