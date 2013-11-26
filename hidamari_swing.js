@@ -15,7 +15,7 @@ window.onload = function hidamari_swing() {
 		'img/swing_button.png',
 		'img/effect_line.gif', 'img/effect_hit.gif',
 		//BGM
-		'sound/bgm_easy.mp3', 'sound/bgm_normal.mp3',
+		'sound/bgm_title.mp3','sound/bgm_easy.mp3', 'sound/bgm_normal.mp3',
 		'sound/bgm_hard.mp3', 'sound/bgm_extra1.mp3', 'sound/bgm_extra2.mp3',
 		'sound/bgm_result.mp3',
 		//SE
@@ -34,6 +34,7 @@ window.onload = function hidamari_swing() {
 	//矢印サイズ
 	var DIRECTION_SIZE = 40;
 	//BGM
+	var TITLE_BGM = 'sound/bgm_title.mp3';
 	var BATTING_BGM_EASY = 'sound/bgm_easy.mp3';
 	var BATTING_BGM_NORMAL = 'sound/bgm_normal.mp3';
 	var BATTING_BGM_HARD = 'sound/bgm_hard.mp3';
@@ -311,7 +312,14 @@ window.onload = function hidamari_swing() {
 		function initTitle(){
 	 		//*タイトルシーン*
 			var SceneTitle = new Scene();
-
+			//BGM ループ再生
+ 			SceneTitle.addEventListener('enterframe', function(){
+ 				if(true){
+	 				//console.log('un');
+					game.assets[TITLE_BGM].play();
+					game.assets[TITLE_BGM].volume = 0.4;
+				}
+ 			});
 			//矢印キーによるモード選択
 			SceneTitle.addEventListener('upbuttondown', function(){
 				ModeSwitching();
