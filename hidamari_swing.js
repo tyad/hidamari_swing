@@ -244,14 +244,14 @@ window.onload = function hidamari_swing() {
 	var ExtraCourseIndex = 0;
 
 	//音ON/OFF用フラグ
-	var SoundFlag = getCookie("SoundFlag");
+	var SoundFlag = getCookie("HIDAMARISWING-SOUNDFLAG");
 	function SoundFlagSwitching () {
 		if(SoundFlag != 1){
 			SoundFlag = 1;
 		}else{
 			SoundFlag = 0;
 		}
-		setCookie("SoundFlag",SoundFlag);
+		setCookie("HIDAMARISWING-SOUNDFLAG",SoundFlag);
 	}
 
 	game.onload = function(){

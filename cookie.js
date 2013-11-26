@@ -1,191 +1,191 @@
 var TROPHY_DATA = {
-	"TROPHY-EASY-CLEAR":{
+	"HIDAMARISWING-TROPHY-EASY-CLEAR":{
 		"name":"はじまり",
 		"text":"ほのぼのコースをクリア"
 	},
-	"TROPHY-EASY-RANKMAX":{
+	"HIDAMARISWING-TROPHY-EASY-RANKMAX":{
 		"name":"芽生えドライブ",
 		"text":"ほのぼのコースで★★★"
 	},
-	"TROPHY-EASY-ALLJUSTMEET":{
+	"HIDAMARISWING-TROPHY-EASY-ALLJUSTMEET":{
 		"name":"カッキーン！",
 		"text":"ほのぼのコースで全ての球を真芯ヒットさせた"
 	},
 
-	"TROPHY-NORMAL-CLEAR":{
+	"HIDAMARISWING-TROPHY-NORMAL-CLEAR":{
 		"name":"わくわく",
 		"text":"わくわくコースをクリア"
 	},
-	"TROPHY-NORMAL-RANKMAX":{
+	"HIDAMARISWING-TROPHY-NORMAL-RANKMAX":{
 		"name":"流星レコード",
 		"text":"わくわくコースで★★★"
 	},
 
-	"TROPHY-HARD-CLEAR":{
+	"HIDAMARISWING-TROPHY-HARD-CLEAR":{
 		"name":"どきどき",
 		"text":"どきどきコースをクリア"
 	},
-	"TROPHY-HARD-RANKMAX":{
+	"HIDAMARISWING-TROPHY-HARD-RANKMAX":{
 		"name":"あやふやロケット",
 		"text":"どきどきコースで★★★"
 	},
 
-	"TROPHY-STRAIGHT-CLEAR":{
+	"HIDAMARISWING-TROPHY-STRAIGHT-CLEAR":{
 		"name":"ノビのび",
 		"text":"まっすぐコースをクリア"
 	},
-	"TROPHY-STRAIGHT-RANKMAX":{
+	"HIDAMARISWING-TROPHY-STRAIGHT-RANKMAX":{
 		"name":"なんかいいキモチ",
 		"text":"まっすぐコースで★★★"
 	},
 
-	"TROPHY-KIRE-CLEAR":{
+	"HIDAMARISWING-TROPHY-KIRE-CLEAR":{
 		"name":"キレもの",
 		"text":"きれきれコースをクリア"
 	},
-	"TROPHY-KIRE-RANKMAX":{
+	"HIDAMARISWING-TROPHY-KIRE-RANKMAX":{
 		"name":"なればいいカンジ",
 		"text":"きれきれコースで★★★"
 	},
 
-	"TROPHY-YUNO-CLEAR":{
+	"HIDAMARISWING-TROPHY-YUNO-CLEAR":{
 		"name":"ゆのさま",
 		"text":"ゆのさまをクリア"
 	},
-	"TROPHY-YUNO-RANKMAX":{
+	"HIDAMARISWING-TROPHY-YUNO-RANKMAX":{
 		"name":"VIP",
 		"text":"ゆのさまで★★★"
 	},
-	"TROPHY-YUNO-JUSTMEET":{
+	"HIDAMARISWING-TROPHY-YUNO-JUSTMEET":{
 		"name":"とんでけー",
 		"text":"ゆのさまで真芯ヒットする"
 	},
-	"TROPHY-YUNO-NOMISS":{
+	"HIDAMARISWING-TROPHY-YUNO-NOMISS":{
 		"name":"ねばりうち",
 		"text":"ゆのさまで空振りしない"
 	},
 
-	"TROPHY-KNOCK-CLEAR":{
+	"HIDAMARISWING-TROPHY-KNOCK-CLEAR":{
 		"name":"おつかれさま",
 		"text":"100本ノックをクリア"
 	},
-	"TROPHY-KNOCK-RANKMAX":{
+	"HIDAMARISWING-TROPHY-KNOCK-RANKMAX":{
 		"name":"アベレージヒッター",
 		"text":"100本ノックで★★★"
 	},
-	"TROPHY-KNOCK-JUSTMEET-5":{
+	"HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-5":{
 		"name":"ぴったり",
 		"text":"100本ノックで1プレイ真芯5回以上"
 	},
-	"TROPHY-KNOCK-JUSTMEET-10":{
+	"HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-10":{
 		"name":"どんぴしゃ",
 		"text":"100本ノックで1プレイ真芯10回以上"
 	},
-	"TROPHY-KNOCK-JUSTMEET-20":{
+	"HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-20":{
 		"name":"パワーヒッター",
 		"text":"100本ノックで1プレイ真芯20回以上"
 	},
 
 
-	"TROPHY-EASY_EX-CLEAR":{
+	"HIDAMARISWING-TROPHY-EASY_EX-CLEAR":{
 		"name":"統一球でもへっちゃら",
 		"text":"ほのぼのコース×SPをクリア"
 	},
-	"TROPHY-EASY_EX-RANKMAX":{
+	"HIDAMARISWING-TROPHY-EASY_EX-RANKMAX":{
 		"name":"あららできちゃった",
 		"text":"ほのぼのコース×SPで★★★"
 	},
 
-	"TROPHY-KNOCK_EX-CLEAR":{
+	"HIDAMARISWING-TROPHY-KNOCK_EX-CLEAR":{
 		"name":"わっしょい",
 		"text":"バンザイノックをクリア"
 	},
-	"TROPHY-KNOCK_EX-RANKMAX":{
+	"HIDAMARISWING-TROPHY-KNOCK_EX-RANKMAX":{
 		"name":"わしょしょい",
 		"text":"バンザイノックで★★★"
 	},
-	"TROPHY-KNOCK_EX-JUSTMEET-10":{
+	"HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-10":{
 		"name":"かっとび",
 		"text":"バンザイノックで1プレイ真芯10回以上"
 	},
-	"TROPHY-KNOCK_EX-JUSTMEET-25":{
+	"HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-25":{
 		"name":"ふっとび",
 		"text":"バンザイノックで1プレイ真芯25回以上"
 	},
-	"TROPHY-KNOCK_EX-JUSTMEET-50":{
+	"HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-50":{
 		"name":"ぶっとび",
 		"text":"バンザイノックで1プレイ真芯50回以上"
 	},
 
-	"TROPHY-KNOCK_HARD-CLEAR":{
+	"HIDAMARISWING-TROPHY-KNOCK_HARD-CLEAR":{
 		"name":"はなまる",
 		"text":"どきどきノックをクリア"
 	},
-	"TROPHY-KNOCK_HARD-RANKMAX":{
+	"HIDAMARISWING-TROPHY-KNOCK_HARD-RANKMAX":{
 		"name":"いぶし銀",
 		"text":"どきどきノックで★★★"
 	},
-	"TROPHY-KNOCK_HARD-JUSTMEET-5":{
+	"HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-5":{
 		"name":"ボールは場外へ",
 		"text":"どきどきノックで1プレイ真芯5回以上"
 	},
-	"TROPHY-KNOCK_HARD-JUSTMEET-10":{
+	"HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-10":{
 		"name":"ボールは星になった",
 		"text":"どきどきノックで1プレイ真芯10回以上"
 	},
-	"TROPHY-KNOCK_HARD-JUSTMEET-15":{
+	"HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-15":{
 		"name":"ボールを砕いた",
 		"text":"どきどきノックで1プレイ真芯15回以上"
 	},
 
 
-	"TROPHY-TOTAL-JUSTMEET-1":{
+	"HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-1":{
 		"name":"ガツーン！",
 		"text":"初めて真芯でヒットさせた"
 	},
-	"TROPHY-TOTAL-JUSTMEET-10":{
+	"HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-10":{
 		"name":"ドカーン！",
 		"text":"10回真芯ヒットさせた"
 	},
-	"TROPHY-TOTAL-JUSTMEET-50":{
+	"HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-50":{
 		"name":"爆発だ！",
 		"text":"50回真芯ヒットさせた"
 	},
-	"TROPHY-TOTAL-JUSTMEET-100":{
+	"HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-100":{
 		"name":"芸術的な爆発！",
 		"text":"100回真芯ヒットさせた"
 	},
-	"TROPHY-TOTAL-JUSTMEET-365":{
+	"HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-365":{
 		"name":"真芯爆発×365",
 		"text":"365回真芯ヒットさせた"
 	},
 
-	"TROPHY-TOTAL-POINT-1000":{
+	"HIDAMARISWING-TROPHY-TOTAL-POINT-1000":{
 		"name":"さてさて1000m",
 		"text":"累計1000m飛ばした"
 	},
-	"TROPHY-TOTAL-POINT-3980":{
+	"HIDAMARISWING-TROPHY-TOTAL-POINT-3980":{
 		"name":"それでそれで3980m",
 		"text":"累計3980m飛ばした"
 	},
-	"TROPHY-TOTAL-POINT-10000":{
+	"HIDAMARISWING-TROPHY-TOTAL-POINT-10000":{
 		"name":"そんでもって10000m",
 		"text":"累計10000m飛ばした"
 	},
-	"TROPHY-TOTAL-POINT-100000":{
+	"HIDAMARISWING-TROPHY-TOTAL-POINT-100000":{
 		"name":"ひだまりスラッガー",
 		"text":"累計100000m飛ばした"
 	},
-	"TROPHY-TOTAL-MISS-1":{
+	"HIDAMARISWING-TROPHY-TOTAL-MISS-1":{
 		"name":"おっと",
 		"text":"空振りした(見逃しも含む)"
 	},
-	"TROPHY-TOTAL-MISS-100":{
+	"HIDAMARISWING-TROPHY-TOTAL-MISS-100":{
 		"name":"あらら",
 		"text":"100回空振りした(見逃しも含む)"
 	},
 
-	"TROPHY-TOTAL-GAMEPLAY-100":{
+	"HIDAMARISWING-TROPHY-TOTAL-GAMEPLAY-100":{
 		"name":"ありがとう！",
 		"text":"100回遊んだ"
 	}
@@ -227,16 +227,16 @@ var COURSE_DATA = {
 //通常コース生成
 function createCommonCourse(){
 	var CommonCourse = ["EASY"];
-	if(getCookie("UNLOCK-NORMAL") == 1){
+	if(getCookie("HIDAMARISWING-UNLOCK-NORMAL") == 1){
 		CommonCourse.push("NORMAL");
 	}
-	if(getCookie("UNLOCK-HARD") == 1){
+	if(getCookie("HIDAMARISWING-UNLOCK-HARD") == 1){
 		CommonCourse.push("HARD");
 	}
-	if(getCookie("UNLOCK-STRAIGHT") == 1){
+	if(getCookie("HIDAMARISWING-UNLOCK-STRAIGHT") == 1){
 		CommonCourse.push("STRAIGHT");
 	}
-	if(getCookie("UNLOCK-KIRE") == 1){
+	if(getCookie("HIDAMARISWING-UNLOCK-KIRE") == 1){
 		CommonCourse.push("KIRE");
 	}
 	return CommonCourse;
@@ -244,19 +244,19 @@ function createCommonCourse(){
 //エクストラコース生成
 function createExtraCourse(){
 	var ExtraCourse = [];
-	if(getCookie("UNLOCK-YUNO")){
+	if(getCookie("HIDAMARISWING-UNLOCK-YUNO")){
 		ExtraCourse.push("YUNO");
 	}
 
 	ExtraCourse.push("KNOCK");
 
-	if(getCookie("UNLOCK-KNOCK_EX")){
+	if(getCookie("HIDAMARISWING-UNLOCK-KNOCK_EX")){
 		ExtraCourse.push("KNOCK_EX");
 	}
-	if(getCookie("UNLOCK-KNOCK_HARD")){
+	if(getCookie("HIDAMARISWING-UNLOCK-KNOCK_HARD")){
 		ExtraCourse.push("KNOCK_HARD");
 	}
-	if(getCookie("UNLOCK-EASY_EX")){
+	if(getCookie("HIDAMARISWING-UNLOCK-EASY_EX")){
 		ExtraCourse.push("EASY_EX");
 	}
 	return ExtraCourse;
@@ -298,44 +298,44 @@ function setCookie(name,value){
 function unlock(){
 	//console.log("unlock check");
 	//NORMAL解放
-	if(getCookie("CLEARRANK-EASY") > 0 && getCookie("UNLOCK-NORMAL") != 1){
+	if(getCookie("HIDAMARISWING-CLEARRANK-EASY") > 0 && getCookie("HIDAMARISWING-UNLOCK-NORMAL") != 1){
 
-		setCookie("UNLOCK-NORMAL",1);
+		setCookie("HIDAMARISWING-UNLOCK-NORMAL",1);
 		popUp("UNLOCK","NORMAL");
 	}
 	//HARD解放
-	if(getCookie("CLEARRANK-NORMAL") > 0 && getCookie("UNLOCK-HARD") != 1){
-		setCookie("UNLOCK-HARD",1);
+	if(getCookie("HIDAMARISWING-CLEARRANK-NORMAL") > 0 && getCookie("HIDAMARISWING-UNLOCK-HARD") != 1){
+		setCookie("HIDAMARISWING-UNLOCK-HARD",1);
 		popUp("UNLOCK","HARD");
 	}
 	//STRAIGHT & KIRE解放
-	if(getCookie("CLEARRANK-HARD") > 0 && getCookie("UNLOCK-STRAIGHT") != 1 && getCookie("UNLOCK-KIRE") != 1){
-		setCookie("UNLOCK-STRAIGHT",1);
-		setCookie("UNLOCK-KIRE",1);
+	if(getCookie("HIDAMARISWING-CLEARRANK-HARD") > 0 && getCookie("HIDAMARISWING-UNLOCK-STRAIGHT") != 1 && getCookie("HIDAMARISWING-UNLOCK-KIRE") != 1){
+		setCookie("HIDAMARISWING-UNLOCK-STRAIGHT",1);
+		setCookie("HIDAMARISWING-UNLOCK-KIRE",1);
 		popUp("UNLOCK","STRAIGHT");
 		popUp("UNLOCK","KIRE");
 	}
 	//YUNO解放
-	if(getCookie("CLEARRANK-STRAIGHT") > 0 && getCookie("CLEARRANK-KIRE") > 0 && getCookie("UNLOCK-YUNO") != 1){
-		setCookie("UNLOCK-YUNO",1);
+	if(getCookie("HIDAMARISWING-CLEARRANK-STRAIGHT") > 0 && getCookie("HIDAMARISWING-CLEARRANK-KIRE") > 0 && getCookie("HIDAMARISWING-UNLOCK-YUNO") != 1){
+		setCookie("HIDAMARISWING-UNLOCK-YUNO",1);
 		popUp("UNLOCK","YUNO");
 	}
 
 	//KNOCK_EX解放 真芯累計10
-	if(getCookie("TROPHY-TOTAL-JUSTMEET-10") > 0 && getCookie("UNLOCK-KNOCK_EX") != 1){
-		setCookie("UNLOCK-KNOCK_EX",1);
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-10") > 0 && getCookie("HIDAMARISWING-UNLOCK-KNOCK_EX") != 1){
+		setCookie("HIDAMARISWING-UNLOCK-KNOCK_EX",1);
 		popUp("UNLOCK","KNOCK_EX");
 	}
 
 	//KNOCK_HARD解放 累計飛距離10000
-	if(getCookie("TROPHY-TOTAL-POINT-10000") > 0 && getCookie("UNLOCK-KNOCK_HARD") != 1){
-		setCookie("UNLOCK-KNOCK_HARD",1);
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-POINT-10000") > 0 && getCookie("HIDAMARISWING-UNLOCK-KNOCK_HARD") != 1){
+		setCookie("HIDAMARISWING-UNLOCK-KNOCK_HARD",1);
 		popUp("UNLOCK","KNOCK_HARD");
 	}
 
 	//EASY_EX解放
-	if(getCookie("CLEARRANK-EASY") == 3 && getCookie("UNLOCK-EASY_EX") != 1){
-		setCookie("UNLOCK-EASY_EX",1);
+	if(getCookie("HIDAMARISWING-CLEARRANK-EASY") == 3 && getCookie("HIDAMARISWING-UNLOCK-EASY_EX") != 1){
+		setCookie("HIDAMARISWING-UNLOCK-EASY_EX",1);
 		popUp("UNLOCK","EASY_EX");
 	}
 }
@@ -346,30 +346,30 @@ function cookieUpdate(course_e, Point, ball_number){
 	//console.log(Point.num);//for debug
 	//◆ほのぼの
 	if(course_e === "EASY"){
-		var clearrank = getCookie("CLEARRANK-EASY");
+		var clearrank = getCookie("HIDAMARISWING-CLEARRANK-EASY");
 		//console.log(clearrank);
 		if(Point.num >= 500 && clearrank < 3){//☆☆☆ 500
-			setCookie("CLEARRANK-EASY",3);
-			if(getCookie("TROPHY-EASY-RANKMAX") == 0){
-				setCookie("TROPHY-EASY-RANKMAX",1);
-				popUp("TROPHY","TROPHY-EASY-RANKMAX");
+			setCookie("HIDAMARISWING-CLEARRANK-EASY",3);
+			if(getCookie("HIDAMARISWING-TROPHY-EASY-RANKMAX") == 0){
+				setCookie("HIDAMARISWING-TROPHY-EASY-RANKMAX",1);
+				popUp("TROPHY","HIDAMARISWING-TROPHY-EASY-RANKMAX");
 			}
 		}else if(Point.num >= 400 && clearrank < 2){//☆☆ 400
-			setCookie("CLEARRANK-EASY",2);
+			setCookie("HIDAMARISWING-CLEARRANK-EASY",2);
 		}else if(Point.num >= 250 && clearrank < 1){//☆ 250
-			setCookie("CLEARRANK-EASY",1);
+			setCookie("HIDAMARISWING-CLEARRANK-EASY",1);
 		}
 
 		//クリアトロフィー
-		if(getCookie("TROPHY-EASY-CLEAR") == 0 && Point.num >= 250){
-			setCookie("TROPHY-EASY-CLEAR",1);
-			popUp("TROPHY","TROPHY-EASY-CLEAR");
+		if(getCookie("HIDAMARISWING-TROPHY-EASY-CLEAR") == 0 && Point.num >= 250){
+			setCookie("HIDAMARISWING-TROPHY-EASY-CLEAR",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-EASY-CLEAR");
 		}
 
 		//★全真芯
-		if(Point.justmeet == ball_number && getCookie("TROPHY-EASY-ALLJUSTMEET") == 0){
-			setCookie("TROPHY-EASY-ALLJUSTMEET",1);
-			popUp("TROPHY","TROPHY-EASY-ALLJUSTMEET");
+		if(Point.justmeet == ball_number && getCookie("HIDAMARISWING-TROPHY-EASY-ALLJUSTMEET") == 0){
+			setCookie("HIDAMARISWING-TROPHY-EASY-ALLJUSTMEET",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-EASY-ALLJUSTMEET");
 		}
 
 		//ハイスコア更新
@@ -384,23 +384,23 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//◆わくわく
 	else if(course_e === "NORMAL"){
-		var clearrank = getCookie("CLEARRANK-NORMAL");
+		var clearrank = getCookie("HIDAMARISWING-CLEARRANK-NORMAL");
 		if(Point.num >= 1000 && clearrank < 3){//☆☆☆ 1000
-			setCookie("CLEARRANK-NORMAL",3);
-			if(getCookie("TROPHY-NORMAL-RANKMAX") == 0){
-				setCookie("TROPHY-NORMAL-RANKMAX",1);
-				popUp("TROPHY","TROPHY-NORMAL-RANKMAX");
+			setCookie("HIDAMARISWING-CLEARRANK-NORMAL",3);
+			if(getCookie("HIDAMARISWING-TROPHY-NORMAL-RANKMAX") == 0){
+				setCookie("HIDAMARISWING-TROPHY-NORMAL-RANKMAX",1);
+				popUp("TROPHY","HIDAMARISWING-TROPHY-NORMAL-RANKMAX");
 			}
 		}else if(Point.num >= 800 && clearrank < 2){//☆☆ 800
-			setCookie("CLEARRANK-NORMAL",2);
+			setCookie("HIDAMARISWING-CLEARRANK-NORMAL",2);
 		}else if(Point.num >= 500 && clearrank < 1){//☆ 500
-			setCookie("CLEARRANK-NORMAL",1);
+			setCookie("HIDAMARISWING-CLEARRANK-NORMAL",1);
 		}
 
 		//クリアトロフィー
-		if(getCookie("TROPHY-NORMAL-CLEAR") == 0 && Point.num >= 500){
-			setCookie("TROPHY-NORMAL-CLEAR",1);
-			popUp("TROPHY","TROPHY-NORMAL-CLEAR");
+		if(getCookie("HIDAMARISWING-TROPHY-NORMAL-CLEAR") == 0 && Point.num >= 500){
+			setCookie("HIDAMARISWING-TROPHY-NORMAL-CLEAR",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-NORMAL-CLEAR");
 		}
 
 		//ハイスコア更新
@@ -415,23 +415,23 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//◆どきどき
 	else if(course_e === "HARD"){
-		var clearrank = getCookie("CLEARRANK-HARD");
+		var clearrank = getCookie("HIDAMARISWING-CLEARRANK-HARD");
 		if(Point.num >= 1000 && clearrank < 3){//☆☆☆ 1000
-			setCookie("CLEARRANK-HARD",3);
-			if(getCookie("TROPHY-HARD-RANKMAX") == 0){
-				setCookie("TROPHY-HARD-RANKMAX",1);
-				popUp("TROPHY","TROPHY-HARD-RANKMAX");
+			setCookie("HIDAMARISWING-CLEARRANK-HARD",3);
+			if(getCookie("HIDAMARISWING-TROPHY-HARD-RANKMAX") == 0){
+				setCookie("HIDAMARISWING-TROPHY-HARD-RANKMAX",1);
+				popUp("TROPHY","HIDAMARISWING-TROPHY-HARD-RANKMAX");
 			}
 		}else if(Point.num >= 800 && clearrank < 2){//☆☆ 800
-			setCookie("CLEARRANK-HARD",2);
+			setCookie("HIDAMARISWING-CLEARRANK-HARD",2);
 		}else if(Point.num >= 500 && clearrank < 1){//☆ 500
-			setCookie("CLEARRANK-HARD",1);
+			setCookie("HIDAMARISWING-CLEARRANK-HARD",1);
 		}
 
 		//クリアトロフィー
-		if(getCookie("TROPHY-HARD-CLEAR") == 0 && Point.num >= 500){
-			setCookie("TROPHY-HARD-CLEAR",1);
-			popUp("TROPHY","TROPHY-HARD-CLEAR");
+		if(getCookie("HIDAMARISWING-TROPHY-HARD-CLEAR") == 0 && Point.num >= 500){
+			setCookie("HIDAMARISWING-TROPHY-HARD-CLEAR",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-HARD-CLEAR");
 		}
 
 		//ハイスコア更新
@@ -445,23 +445,23 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//◆まっすぐ
 	else if(course_e === "STRAIGHT"){
-		var clearrank = getCookie("CLEARRANK-STRAIGHT");
+		var clearrank = getCookie("HIDAMARISWING-CLEARRANK-STRAIGHT");
 		if(Point.num >= 1000 && clearrank < 3){//☆☆☆ 1000
-			setCookie("CLEARRANK-STRAIGHT",3);
-			if(getCookie("TROPHY-STRAIGHT-RANKMAX") == 0){
-				setCookie("TROPHY-STRAIGHT-RANKMAX",1);
-				popUp("TROPHY","TROPHY-STRAIGHT-RANKMAX");
+			setCookie("HIDAMARISWING-CLEARRANK-STRAIGHT",3);
+			if(getCookie("HIDAMARISWING-TROPHY-STRAIGHT-RANKMAX") == 0){
+				setCookie("HIDAMARISWING-TROPHY-STRAIGHT-RANKMAX",1);
+				popUp("TROPHY","HIDAMARISWING-TROPHY-STRAIGHT-RANKMAX");
 			}
 		}else if(Point.num >= 800 && clearrank < 2){//☆☆ 800
-			setCookie("CLEARRANK-STRAIGHT",2);
+			setCookie("HIDAMARISWING-CLEARRANK-STRAIGHT",2);
 		}else if(Point.num >= 500 && clearrank < 1){//☆ 500
-			setCookie("CLEARRANK-STRAIGHT",1);
+			setCookie("HIDAMARISWING-CLEARRANK-STRAIGHT",1);
 		}
 
 		//クリアトロフィー
-		if(getCookie("TROPHY-STRAIGHT-CLEAR") == 0 && Point.num >= 500){
-			setCookie("TROPHY-STRAIGHT-CLEAR",1);
-			popUp("TROPHY","TROPHY-STRAIGHT-CLEAR");
+		if(getCookie("HIDAMARISWING-TROPHY-STRAIGHT-CLEAR") == 0 && Point.num >= 500){
+			setCookie("HIDAMARISWING-TROPHY-STRAIGHT-CLEAR",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-STRAIGHT-CLEAR");
 		}
 
 		//ハイスコア更新
@@ -475,23 +475,23 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//◆きれきれ
 	else if(course_e === "KIRE"){
-		var clearrank = getCookie("CLEARRANK-KIRE");
+		var clearrank = getCookie("HIDAMARISWING-CLEARRANK-KIRE");
 		if(Point.num >= 1000 && clearrank < 3){//☆☆☆ 1000
-			setCookie("CLEARRANK-KIRE",3);
-			if(getCookie("TROPHY-KIRE-RANKMAX") == 0){
-				setCookie("TROPHY-KIRE-RANKMAX",1);
-				popUp("TROPHY","TROPHY-KIRE-RANKMAX");
+			setCookie("HIDAMARISWING-CLEARRANK-KIRE",3);
+			if(getCookie("HIDAMARISWING-TROPHY-KIRE-RANKMAX") == 0){
+				setCookie("HIDAMARISWING-TROPHY-KIRE-RANKMAX",1);
+				popUp("TROPHY","HIDAMARISWING-TROPHY-KIRE-RANKMAX");
 			}
 		}else if(Point.num >= 800 && clearrank < 2){//☆☆ 800
-			setCookie("CLEARRANK-KIRE",2);
+			setCookie("HIDAMARISWING-CLEARRANK-KIRE",2);
 		}else if(Point.num >= 500 && clearrank < 1){//☆ 500
-			setCookie("CLEARRANK-KIRE",1);
+			setCookie("HIDAMARISWING-CLEARRANK-KIRE",1);
 		}
 
 		//クリアトロフィー
-		if(getCookie("TROPHY-KIRE-CLEAR") == 0 && Point.num >= 500){
-			setCookie("TROPHY-KIRE-CLEAR",1);
-			popUp("TROPHY","TROPHY-KIRE-CLEAR");
+		if(getCookie("HIDAMARISWING-TROPHY-KIRE-CLEAR") == 0 && Point.num >= 500){
+			setCookie("HIDAMARISWING-TROPHY-KIRE-CLEAR",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KIRE-CLEAR");
 		}
 
 		//ハイスコア更新
@@ -505,34 +505,34 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//◆ゆのさま
 	else if(course_e === "YUNO"){
-		var clearrank = getCookie("CLEARRANK-YUNO");
+		var clearrank = getCookie("HIDAMARISWING-CLEARRANK-YUNO");
 		if(Point.num >= 800 && clearrank < 3){//☆☆☆ 800
-			setCookie("CLEARRANK-YUNO",3);
-			if(getCookie("TROPHY-YUNO-RANKMAX") == 0){
-				setCookie("TROPHY-YUNO-RANKMAX",1);
-				popUp("TROPHY","TROPHY-YUNO-RANKMAX");
+			setCookie("HIDAMARISWING-CLEARRANK-YUNO",3);
+			if(getCookie("HIDAMARISWING-TROPHY-YUNO-RANKMAX") == 0){
+				setCookie("HIDAMARISWING-TROPHY-YUNO-RANKMAX",1);
+				popUp("TROPHY","HIDAMARISWING-TROPHY-YUNO-RANKMAX");
 			}
 		}else if(Point.num >= 600 && clearrank < 2){//☆☆ 600
-			setCookie("CLEARRANK-YUNO",2);
+			setCookie("HIDAMARISWING-CLEARRANK-YUNO",2);
 		}else if(Point.num >= 400 && clearrank < 1){//☆ 400
-			setCookie("CLEARRANK-YUNO",1);
+			setCookie("HIDAMARISWING-CLEARRANK-YUNO",1);
 		}
 
 		//クリアトロフィー
-		if(getCookie("TROPHY-YUNO-CLEAR") == 0 && Point.num >= 400){
-			setCookie("TROPHY-YUNO-CLEAR",1);
-			popUp("TROPHY","TROPHY-YUNO-CLEAR");
+		if(getCookie("HIDAMARISWING-TROPHY-YUNO-CLEAR") == 0 && Point.num >= 400){
+			setCookie("HIDAMARISWING-TROPHY-YUNO-CLEAR",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-YUNO-CLEAR");
 		}
 
 		//★真芯で返す
-		if(getCookie("TROPHY-YUNO-JUSTMEET") == 0 && Point.justmeet > 0){
-			setCookie("TROPHY-YUNO-JUSTMEET",1);
-			popUp("TROPHY","TROPHY-YUNO-JUSTMEET");
+		if(getCookie("HIDAMARISWING-TROPHY-YUNO-JUSTMEET") == 0 && Point.justmeet > 0){
+			setCookie("HIDAMARISWING-TROPHY-YUNO-JUSTMEET",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-YUNO-JUSTMEET");
 		}
 		//★空振りしない
-		if(getCookie("TROPHY-YUNO-NOMISS") == 0 && Point.miss == 0){
-			setCookie("TROPHY-YUNO-NOMISS",1);
-			popUp("TROPHY","TROPHY-YUNO-NOMISS");
+		if(getCookie("HIDAMARISWING-TROPHY-YUNO-NOMISS") == 0 && Point.miss == 0){
+			setCookie("HIDAMARISWING-TROPHY-YUNO-NOMISS",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-YUNO-NOMISS");
 		}
 
 		//ハイスコア更新
@@ -546,39 +546,39 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//◆100本ノック
 	else if(course_e === "KNOCK"){
-		var clearrank = getCookie("CLEARRANK-KNOCK");
+		var clearrank = getCookie("HIDAMARISWING-CLEARRANK-KNOCK");
 		if(Point.num >= 8000 && clearrank < 3){//☆☆☆ 8000
-			setCookie("CLEARRANK-KNOCK",3);
-			if(getCookie("TROPHY-KNOCK-RANKMAX") == 0){
-				setCookie("TROPHY-KNOCK-RANKMAX",1);
-				popUp("TROPHY","TROPHY-KNOCK-RANKMAX");
+			setCookie("HIDAMARISWING-CLEARRANK-KNOCK",3);
+			if(getCookie("HIDAMARISWING-TROPHY-KNOCK-RANKMAX") == 0){
+				setCookie("HIDAMARISWING-TROPHY-KNOCK-RANKMAX",1);
+				popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK-RANKMAX");
 			}
 		}else if(Point.num >= 5000 && clearrank < 2){//☆☆ 5000
-			setCookie("CLEARRANK-KNOCK",2);
+			setCookie("HIDAMARISWING-CLEARRANK-KNOCK",2);
 		}else if(Point.num >= 3000 && clearrank < 1){//☆ 3000
-			setCookie("CLEARRANK-KNOCK",1);
+			setCookie("HIDAMARISWING-CLEARRANK-KNOCK",1);
 		}
 
 		//クリアトロフィー
-		if(getCookie("TROPHY-KNOCK-CLEAR") == 0 && Point.num >= 3000){
-			setCookie("TROPHY-KNOCK-CLEAR",1);
-			popUp("TROPHY","TROPHY-KNOCK-CLEAR");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK-CLEAR") == 0 && Point.num >= 3000){
+			setCookie("HIDAMARISWING-TROPHY-KNOCK-CLEAR",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK-CLEAR");
 		}
 
 
-		if(getCookie("TROPHY-KNOCK-JUSTMEET-20") == 0 && Point.justmeet >= 20){//★真芯20
-			setCookie("TROPHY-KNOCK-JUSTMEET-20",1);
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-20") == 0 && Point.justmeet >= 20){//★真芯20
+			setCookie("HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-20",1);
 			popUp("TROPHY","KNOCK-JUSTMEET-20");
 		}
 
-		if(getCookie("TROPHY-KNOCK-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
-			setCookie("TROPHY-KNOCK-JUSTMEET-10",1);
-			popUp("TROPHY","TROPHY-KNOCK-JUSTMEET-10");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
+			setCookie("HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-10",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-10");
 		}
 
-		if(getCookie("TROPHY-KNOCK-JUSTMEET-5") == 0 && Point.justmeet >= 5){//★真芯5
-			setCookie("TROPHY-KNOCK-JUSTMEET-5",1);
-			popUp("TROPHY","TROPHY-KNOCK-JUSTMEET-5");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-5") == 0 && Point.justmeet >= 5){//★真芯5
+			setCookie("HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-5",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK-JUSTMEET-5");
 		}
 
 		//ハイスコア更新
@@ -593,37 +593,37 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//◆バンザイノック
 	else if(course_e === "KNOCK_EX"){
-		var clearrank = getCookie("CLEARRANK-KNOCK_EX");
+		var clearrank = getCookie("HIDAMARISWING-CLEARRANK-KNOCK_EX");
 		if(Point.num >= 10000 && clearrank < 3){//☆☆☆ 10000
-			setCookie("CLEARRANK-KNOCK_EX",3);
-			if(getCookie("TROPHY-KNOCK_EX-RANKMAX") == 0){
-				setCookie("TROPHY-KNOCK_EX-RANKMAX",1);
-				popUp("TROPHY","TROPHY-KNOCK_EX-RANKMAX");
+			setCookie("HIDAMARISWING-CLEARRANK-KNOCK_EX",3);
+			if(getCookie("HIDAMARISWING-TROPHY-KNOCK_EX-RANKMAX") == 0){
+				setCookie("HIDAMARISWING-TROPHY-KNOCK_EX-RANKMAX",1);
+				popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK_EX-RANKMAX");
 			}
 		}else if(Point.num >= 8000 && clearrank < 2){//☆☆ 8000
-			setCookie("CLEARRANK-KNOCK_EX",2);
+			setCookie("HIDAMARISWING-CLEARRANK-KNOCK_EX",2);
 		}else if(Point.num >= 5000 && clearrank < 1){//☆ 5000
-			setCookie("CLEARRANK-KNOCK_EX",1);
+			setCookie("HIDAMARISWING-CLEARRANK-KNOCK_EX",1);
 		}
 		//クリアトロフィー
-		if(getCookie("TROPHY-KNOCK_EX-CLEAR") == 0 && Point.num >= 5000){
-			setCookie("TROPHY-KNOCK_EX-CLEAR",1);
-			popUp("TROPHY","TROPHY-KNOCK_EX-CLEAR");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK_EX-CLEAR") == 0 && Point.num >= 5000){
+			setCookie("HIDAMARISWING-TROPHY-KNOCK_EX-CLEAR",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK_EX-CLEAR");
 		}
 
-		if(getCookie("TROPHY-KNOCK_EX-JUSTMEET-50") == 0 && Point.justmeet >= 50){//★真芯50
-			setCookie("TROPHY-KNOCK_EX-JUSTMEET-50",1);
-			popUp("TROPHY","TROPHY-KNOCK_EX-JUSTMEET-50");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-50") == 0 && Point.justmeet >= 50){//★真芯50
+			setCookie("HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-50",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-50");
 		}
 
-		if(getCookie("TROPHY-KNOCK_EX-JUSTMEET-25") == 0 && Point.justmeet >= 25){//★真芯25
-			setCookie("TROPHY-KNOCK_EX-JUSTMEET-25",1);
-			popUp("TROPHY","TROPHY-KNOCK_EX-JUSTMEET-25");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-25") == 0 && Point.justmeet >= 25){//★真芯25
+			setCookie("HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-25",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-25");
 		}
 
-		if(getCookie("TROPHY-KNOCK_EX-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
-			setCookie("TROPHY-KNOCK_EX-JUSTMEET-10",1);
-			popUp("TROPHY","TROPHY-KNOCK_EX-JUSTMEET-10");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
+			setCookie("HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-10",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-10");
 		}
 
 		//ハイスコア更新
@@ -637,38 +637,38 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//どきどきノック
 	else if(course_e === "KNOCK_HARD"){
-		var clearrank = getCookie("CLEARRANK-KNOCK_HARD");
+		var clearrank = getCookie("HIDAMARISWING-CLEARRANK-KNOCK_HARD");
 		if(Point.num >= 8000 && clearrank < 3){//☆☆☆ 8000
-			setCookie("CLEARRANK-KNOCK_HARD",3);
-			if(getCookie("TROPHY-KNOCK_HARD-RANKMAX") == 0){
-				setCookie("TROPHY-KNOCK_HARD-RANKMAX",1);
-				popUp("TROPHY","TROPHY-KNOCK_HARD-RANKMAX");
+			setCookie("HIDAMARISWING-CLEARRANK-KNOCK_HARD",3);
+			if(getCookie("HIDAMARISWING-TROPHY-KNOCK_HARD-RANKMAX") == 0){
+				setCookie("HIDAMARISWING-TROPHY-KNOCK_HARD-RANKMAX",1);
+				popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK_HARD-RANKMAX");
 			}
 		}else if(Point.num >= 5000 && clearrank < 2){//☆☆ 5000
-			setCookie("CLEARRANK-KNOCK_HARD",2);
+			setCookie("HIDAMARISWING-CLEARRANK-KNOCK_HARD",2);
 		}else if(Point.num >= 3000 && clearrank < 1){//☆ 3000
-			setCookie("CLEARRANK-KNOCK_HARD",1);
+			setCookie("HIDAMARISWING-CLEARRANK-KNOCK_HARD",1);
 		}
 
 		//クリアトロフィー
-		if(getCookie("TROPHY-KNOCK_HARD-CLEAR") == 0 && Point.num >= 3000){
-			setCookie("TROPHY-KNOCK_HARD-CLEAR",1);
-			popUp("TROPHY","TROPHY-KNOCK_HARD-CLEAR");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK_HARD-CLEAR") == 0 && Point.num >= 3000){
+			setCookie("HIDAMARISWING-TROPHY-KNOCK_HARD-CLEAR",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK_HARD-CLEAR");
 		}
 
-		if(getCookie("TROPHY-KNOCK_HARD-JUSTMEET-15") == 0 && Point.justmeet >= 15){//★真芯15
-			setCookie("TROPHY-KNOCK_HARD-JUSTMEET-15",1);
-			popUp("TROPHY","TROPHY-KNOCK_EX-JUSTMEET-15");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-15") == 0 && Point.justmeet >= 15){//★真芯15
+			setCookie("HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-15",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK_EX-JUSTMEET-15");
 		}
 
-		if(getCookie("TROPHY-KNOCK_HARD-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
-			setCookie("TROPHY-KNOCK_HARD-JUSTMEET-10",1);
-			popUp("TROPHY","TROPHY-KNOCK_HARD-JUSTMEET-10");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-10") == 0 && Point.justmeet >= 10){//★真芯10
+			setCookie("HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-10",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-10");
 		}
 
-		if(getCookie("TROPHY-KNOCK_HARD-JUSTMEET-5") == 0 && Point.justmeet >= 5){//★真芯5
-			setCookie("TROPHY-KNOCK_HARD-JUSTMEET-5",1);
-			popUp("TROPHY","TROPHY-KNOCK_HARD-JUSTMEET-5");
+		if(getCookie("HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-5") == 0 && Point.justmeet >= 5){//★真芯5
+			setCookie("HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-5",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-KNOCK_HARD-JUSTMEET-5");
 		}
 
 		//ハイスコア更新
@@ -682,22 +682,22 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	//◆ほのぼのSP
 	else if(course_e === "EASY_EX"){
-		var clearrank = getCookie("CLEARRANK-EASY_EX");
+		var clearrank = getCookie("HIDAMARISWING-CLEARRANK-EASY_EX");
 		if(Point.num >= 500 && clearrank < 3){//☆☆☆ 500
-			setCookie("CLEARRANK-EASY_EX",3);
-			if(getCookie("TROPHY-EASY_EX-RANKMAX") == 0){
-				setCookie("TROPHY-EASY_EX-RANKMAX",1);
-				popUp("TROPHY","TROPHY-EASY_EX-RANKMAX");
+			setCookie("HIDAMARISWING-CLEARRANK-EASY_EX",3);
+			if(getCookie("HIDAMARISWING-TROPHY-EASY_EX-RANKMAX") == 0){
+				setCookie("HIDAMARISWING-TROPHY-EASY_EX-RANKMAX",1);
+				popUp("TROPHY","HIDAMARISWING-TROPHY-EASY_EX-RANKMAX");
 			}
 		}else if(Point.num >= 400 && clearrank < 2){//☆☆ 400
-			setCookie("CLEARRANK-EASY_EX",2);
+			setCookie("HIDAMARISWING-CLEARRANK-EASY_EX",2);
 		}else if(Point.num >= 250 && clearrank < 1){//☆ 250
-			setCookie("CLEARRANK-EASY_EX",1);
+			setCookie("HIDAMARISWING-CLEARRANK-EASY_EX",1);
 		}
 		//クリアトロフィー
-		if(getCookie("TROPHY-EASY_EX-CLEAR") == 0 && Point.num >= 250){
-			setCookie("TROPHY-EASY_EX-CLEAR",1);
-			popUp("TROPHY","TROPHY-EASY_EX-CLEAR");
+		if(getCookie("HIDAMARISWING-TROPHY-EASY_EX-CLEAR") == 0 && Point.num >= 250){
+			setCookie("HIDAMARISWING-TROPHY-EASY_EX-CLEAR",1);
+			popUp("TROPHY","HIDAMARISWING-TROPHY-EASY_EX-CLEAR");
 		}
 
 		//ハイスコア更新
@@ -710,14 +710,14 @@ function cookieUpdate(course_e, Point, ball_number){
 
 	}
 
-	var countGamePlay = getCookie("TOTAL-GAMEPLAY");
+	var countGamePlay = getCookie("HIDAMARISWING-TOTAL-GAMEPLAY");
 	countGamePlay ++;
-	setCookie("TOTAL-GAMEPLAY", countGamePlay);
+	setCookie("HIDAMARISWING-TOTAL-GAMEPLAY", countGamePlay);
 
 	//100回プレイ
-	if(getCookie("TROPHY-TOTAL-GAMEPLAY-100") == 0 && getCookie("TOTAL-GAMEPLAY") >= 100){
-		setCookie("TROPHY-TOTAL-GAMEPLAY-100",1);
-		popUp("TROPHY","TROPHY-TOTAL-GAMEPLAY-100");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-GAMEPLAY-100") == 0 && getCookie("HIDAMARISWING-TOTAL-GAMEPLAY") >= 100){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-GAMEPLAY-100",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-GAMEPLAY-100");
 	}
 
 	//アンロック判定
@@ -726,85 +726,85 @@ function cookieUpdate(course_e, Point, ball_number){
 
 function addCount(ball){
 	if(ball['hit_se'] == 'sound/hit_ex.wav'){
-		var countJustMeet = getCookie("TOTAL-JUSTMEET");
+		var countJustMeet = getCookie("HIDAMARISWING-TOTAL-JUSTMEET");
 		countJustMeet++;
-		setCookie("TOTAL-JUSTMEET", countJustMeet);
+		setCookie("HIDAMARISWING-TOTAL-JUSTMEET", countJustMeet);
 	}
 
 	//飛距離0なら空振り
 	if(ball['score'] == 0){
-		var countMiss = getCookie("TOTAL-MISS");
+		var countMiss = getCookie("HIDAMARISWING-TOTAL-MISS");
 		countMiss++;
-		setCookie("TOTAL-MISS", countMiss);
+		setCookie("HIDAMARISWING-TOTAL-MISS", countMiss);
 	}else{
-		var countHit = getCookie("TOTAL-HIT");
+		var countHit = getCookie("HIDAMARISWING-TOTAL-HIT");
 		countHit ++;
-		setCookie("TOTAL-HIT", countHit);
+		setCookie("HIDAMARISWING-TOTAL-HIT", countHit);
 	}
 
-	var countPoint = getCookie("TOTAL-POINT");
+	var countPoint = getCookie("HIDAMARISWING-TOTAL-POINT");
 	countPoint += ball['score'];
-	setCookie("TOTAL-POINT", countPoint);
+	setCookie("HIDAMARISWING-TOTAL-POINT", countPoint);
 
 	//累計飛距離1000トロフィー
-	if(getCookie("TROPHY-TOTAL-POINT-1000") == 0 && getCookie("TOTAL-POINT") >= 1000){
-		setCookie("TROPHY-TOTAL-POINT-1000",1);
-		popUp("TROPHY","TROPHY-TOTAL-POINT-1000");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-POINT-1000") == 0 && getCookie("HIDAMARISWING-TOTAL-POINT") >= 1000){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-POINT-1000",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-POINT-1000");
 	}
 
 	//累計飛距離3980トロフィー
-	if(getCookie("TROPHY-TOTAL-POINT-3980") == 0 && getCookie("TOTAL-POINT") >= 3980){
-		setCookie("TROPHY-TOTAL-POINT-3980",1);
-		popUp("TROPHY","TROPHY-TOTAL-POINT-3980");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-POINT-3980") == 0 && getCookie("HIDAMARISWING-TOTAL-POINT") >= 3980){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-POINT-3980",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-POINT-3980");
 	}
 	//累計飛距離10000トロフィー
-	if(getCookie("TROPHY-TOTAL-POINT-10000") == 0 && getCookie("TOTAL-POINT") >= 10000){
-		setCookie("TROPHY-TOTAL-POINT-10000",1);
-		popUp("TROPHY","TROPHY-TOTAL-POINT-10000");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-POINT-10000") == 0 && getCookie("HIDAMARISWING-TOTAL-POINT") >= 10000){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-POINT-10000",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-POINT-10000");
 	}
 
 	//累計飛距離100000トロフィー
-	if(getCookie("TROPHY-TOTAL-POINT-100000") == 0 && getCookie("TOTAL-POINT") >= 100000){
-		setCookie("TROPHY-TOTAL-POINT-100000",1);
-		popUp("TROPHY","TROPHY-TOTAL-POINT-100000");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-POINT-100000") == 0 && getCookie("HIDAMARISWING-TOTAL-POINT") >= 100000){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-POINT-100000",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-POINT-100000");
 	}
 
 	//初真芯トロフィー
-	if(getCookie("TROPHY-TOTAL-JUSTMEET-1") == 0 && getCookie("TOTAL-JUSTMEET") >= 1){
-		setCookie("TROPHY-TOTAL-JUSTMEET-1",1);
-		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-1");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-1") == 0 && getCookie("HIDAMARISWING-TOTAL-JUSTMEET") >= 1){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-1",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-1");
 	}
 
 	//真芯10トロフィー
-	if(getCookie("TROPHY-TOTAL-JUSTMEET-10") == 0 && getCookie("TOTAL-JUSTMEET") >= 10){
-		setCookie("TROPHY-TOTAL-JUSTMEET-10",1);
-		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-10");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-10") == 0 && getCookie("HIDAMARISWING-TOTAL-JUSTMEET") >= 10){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-10",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-10");
 	}
 	//真芯50トロフィー
-	if(getCookie("TROPHY-TOTAL-JUSTMEET-50") == 0 && getCookie("TOTAL-JUSTMEET") >= 50){
-		setCookie("TROPHY-TOTAL-JUSTMEET-50",1);
-		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-50");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-50") == 0 && getCookie("HIDAMARISWING-TOTAL-JUSTMEET") >= 50){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-50",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-50");
 	}
 	//真芯100トロフィー
-	if(getCookie("TROPHY-TOTAL-JUSTMEET-100") == 0 && getCookie("TOTAL-JUSTMEET") >= 100){
-		setCookie("TROPHY-TOTAL-JUSTMEET-100",1);
-		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-100");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-100") == 0 && getCookie("HIDAMARISWING-TOTAL-JUSTMEET") >= 100){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-100",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-100");
 	}
 	//真芯365トロフィー
-	if(getCookie("TROPHY-TOTAL-JUSTMEET-365") == 0 && getCookie("TOTAL-JUSTMEET") >= 365){
-		setCookie("TROPHY-TOTAL-JUSTMEET-365",1);
-		popUp("TROPHY","TROPHY-TOTAL-JUSTMEET-365");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-365") == 0 && getCookie("HIDAMARISWING-TOTAL-JUSTMEET") >= 365){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-365",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-JUSTMEET-365");
 	}
 
 	//空振りトロフィー
-	if(getCookie("TROPHY-TOTAL-MISS-1") == 0 && getCookie("TOTAL-MISS") >= 1){
-		setCookie("TROPHY-TOTAL-MISS-1",1);
-		popUp("TROPHY","TROPHY-TOTAL-MISS-1");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-MISS-1") == 0 && getCookie("HIDAMARISWING-TOTAL-MISS") >= 1){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-MISS-1",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-MISS-1");
 	}
 	//100回空振りトロフィー
-	if(getCookie("TROPHY-TOTAL-MISS-100") == 0 && getCookie("TOTAL-MISS") >= 100){
-		setCookie("TROPHY-TOTAL-MISS-100",1);
-		popUp("TROPHY","TROPHY-TOTAL-MISS-100");
+	if(getCookie("HIDAMARISWING-TROPHY-TOTAL-MISS-100") == 0 && getCookie("HIDAMARISWING-TOTAL-MISS") >= 100){
+		setCookie("HIDAMARISWING-TROPHY-TOTAL-MISS-100",1);
+		popUp("TROPHY","HIDAMARISWING-TROPHY-TOTAL-MISS-100");
 	}
 
 	unlock();
