@@ -414,8 +414,8 @@ window.onload = function hidamari_swing() {
 			//*モードクリア表示*
 			SceneTitle.ModeClearLabel = make_Label(0, STARTBUTTON_Y+119, "", "");
 			SceneTitle.ModeClearLabel.update = function(){
-				var rank = getCookie("CLEARRANK-" + GameSet[Mode][Course]["course_e"]);
-				var high_score = getCookie("HIGHSCORE-" + GameSet[Mode][Course]["course_e"]);
+				var rank = getCookie("HIDAMARISWING-CLEARRANK-" + GameSet[Mode][Course]["course_e"]);
+				var high_score = getCookie("HIDAMARISWING-HIGHSCORE-" + GameSet[Mode][Course]["course_e"]);
 				if(rank==0){
 					this.text = "<div id='clear_label'>ハイスコア:"+high_score+"m</div>";
 				}else if(rank==1){
