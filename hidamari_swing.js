@@ -314,7 +314,7 @@ window.onload = function hidamari_swing() {
 			var SceneTitle = new Scene();
 			//BGM ループ再生
  			SceneTitle.addEventListener('enterframe', function(){
- 				if(true){
+ 				if(SoundFlag == 1){
 	 				//console.log('un');
 					game.assets[TITLE_BGM].play();
 					game.assets[TITLE_BGM].volume = 0.4;
@@ -366,6 +366,7 @@ window.onload = function hidamari_swing() {
 				SceneBatting.LastBall.max = GameSet[Mode][Course]["ball_number"];
 				SceneBatting.MeetCursor.distance_powerfilter = GameSet[Mode][Course]["powerfilter"];
 				SceneBatting.LastBall.update();
+				game.assets[TITLE_BGM].stop();
 				play_se('sound/hit_1.wav');
 				game.popScene(SceneTitle);
 				game.pushScene(SceneBatting);
