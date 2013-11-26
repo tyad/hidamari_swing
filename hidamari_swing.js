@@ -318,6 +318,8 @@ window.onload = function hidamari_swing() {
 	 				//console.log('un');
 					game.assets[TITLE_BGM].play();
 					game.assets[TITLE_BGM].volume = 0.4;
+				}else{
+					game.assets[TITLE_BGM].stop();
 				}
  			});
 			//矢印キーによるモード選択
