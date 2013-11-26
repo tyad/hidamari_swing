@@ -373,11 +373,11 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 		//ハイスコア更新
-		if(Point.num >= getCookie("HIGHSCORE-EASY")){
-			if(getCookie("HIGHSCORE-EASY") != 0){
+		if(Point.num >= getCookie("HIDAMARISWING-HIGHSCORE-EASY")){
+			if(getCookie("HIDAMARISWING-HIGHSCORE-EASY") != 0){
 				popUp("HIGHSCORE","");
 			}
-			setCookie("HIGHSCORE-EASY",Point.num);
+			setCookie("HIDAMARISWING-HIGHSCORE-EASY",Point.num);
 		}
 
 	}
@@ -404,11 +404,11 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 		//ハイスコア更新
-		if(Point.num >= getCookie("HIGHSCORE-NORMAL")){
-			if(getCookie("HIGHSCORE-NORMAL") != 0){
+		if(Point.num >= getCookie("HIDAMARISWING-HIGHSCORE-NORMAL")){
+			if(getCookie("HIDAMARISWING-HIGHSCORE-NORMAL") != 0){
 				popUp("HIGHSCORE","");
 			}
-			setCookie("HIGHSCORE-NORMAL",Point.num);
+			setCookie("HIDAMARISWING-HIGHSCORE-NORMAL",Point.num);
 		}
 
 	}
@@ -435,11 +435,11 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 		//ハイスコア更新
-		if(Point.num >= getCookie("HIGHSCORE-HARD")){
-			if(getCookie("HIGHSCORE-HARD") != 0){
+		if(Point.num >= getCookie("HIDAMARISWING-HIGHSCORE-HARD")){
+			if(getCookie("HIDAMARISWING-HIGHSCORE-HARD") != 0){
 				popUp("HIGHSCORE","");
 			}
-			setCookie("HIGHSCORE-HARD",Point.num);
+			setCookie("HIDAMARISWING-HIGHSCORE-HARD",Point.num);
 		}
 	}
 
@@ -465,11 +465,11 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 		//ハイスコア更新
-		if(Point.num >= getCookie("HIGHSCORE-STRAIGHT")){
-			if(getCookie("HIGHSCORE-STRAIGHT") != 0){
+		if(Point.num >= getCookie("HIDAMARISWING-HIGHSCORE-STRAIGHT")){
+			if(getCookie("HIDAMARISWING-HIGHSCORE-STRAIGHT") != 0){
 				popUp("HIGHSCORE","");
 			}
-			setCookie("HIGHSCORE-STRAIGHT",Point.num);
+			setCookie("HIDAMARISWING-HIGHSCORE-STRAIGHT",Point.num);
 		}
 	}
 
@@ -495,11 +495,11 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 		//ハイスコア更新
-		if(Point.num >= getCookie("HIGHSCORE-KIRE")){
-			if(getCookie("HIGHSCORE-KIRE") != 0){
+		if(Point.num >= getCookie("HIDAMARISWING-HIGHSCORE-KIRE")){
+			if(getCookie("HIDAMARISWING-HIGHSCORE-KIRE") != 0){
 				popUp("HIGHSCORE","");
 			}
-			setCookie("HIGHSCORE-KIRE",Point.num);
+			setCookie("HIDAMARISWING-HIGHSCORE-KIRE",Point.num);
 		}
 	}
 
@@ -536,11 +536,11 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 		//ハイスコア更新
-		if(Point.num >= getCookie("HIGHSCORE-YUNO")){
-			if(getCookie("HIGHSCORE-YUNO") != 0){
+		if(Point.num >= getCookie("HIDAMARISWING-HIGHSCORE-YUNO")){
+			if(getCookie("HIDAMARISWING-HIGHSCORE-YUNO") != 0){
 				popUp("HIGHSCORE","");
 			}
-			setCookie("HIGHSCORE-YUNO",Point.num);
+			setCookie("HIDAMARISWING-HIGHSCORE-YUNO",Point.num);
 		}
 	}
 
@@ -582,11 +582,11 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 		//ハイスコア更新
-		if(Point.num >= getCookie("HIGHSCORE-KNOCK")){
-			if(getCookie("HIGHSCORE-KNOCK") != 0){
+		if(Point.num >= getCookie("HIDAMARISWING-HIGHSCORE-KNOCK")){
+			if(getCookie("HIDAMARISWING-HIGHSCORE-KNOCK") != 0){
 				popUp("HIGHSCORE","");
 			}	
-			setCookie("HIGHSCORE-KNOCK",Point.num);
+			setCookie("HIDAMARISWING-HIGHSCORE-KNOCK",Point.num);
 		}
 
 	}
@@ -627,11 +627,11 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 		//ハイスコア更新
-		if(Point.num >= getCookie("HIGHSCORE-KNOCK_EX")){
-			if(getCookie("HIGHSCORE-KNOCK_EX") != 0){
+		if(Point.num >= getCookie("HIDAMARISWING-HIGHSCORE-KNOCK_EX")){
+			if(getCookie("HIDAMARISWING-HIGHSCORE-KNOCK_EX") != 0){
 				popUp("HIGHSCORE","");
 			}	
-			setCookie("HIGHSCORE-KNOCK_EX",Point.num);
+			setCookie("HIDAMARISWING-HIGHSCORE-KNOCK_EX",Point.num);
 		}
 	}
 
@@ -672,11 +672,11 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 		//ハイスコア更新
-		if(Point.num >= getCookie("HIGHSCORE-KNOCK_HARD")){
-			if(getCookie("HIGHSCORE-KNOCK_HARD") != 0){
+		if(Point.num >= getCookie("HIDAMARISWING-HIGHSCORE-KNOCK_HARD")){
+			if(getCookie("HIDAMARISWING-HIGHSCORE-KNOCK_HARD") != 0){
 				popUp("HIGHSCORE","");
 			}	
-			setCookie("HIGHSCORE-KNOCK_HARD",Point.num);
+			setCookie("HIDAMARISWING-HIGHSCORE-KNOCK_HARD",Point.num);
 		}
 	}
 
@@ -701,11 +701,11 @@ function cookieUpdate(course_e, Point, ball_number){
 		}
 
 		//ハイスコア更新
-		if(Point.num >= getCookie("HIGHSCORE-EASY_EX")){
-			if(getCookie("HIGHSCORE-EASY_EX") != 0){
+		if(Point.num >= getCookie("HIDAMARISWING-HIGHSCORE-EASY_EX")){
+			if(getCookie("HIDAMARISWING-HIGHSCORE-EASY_EX") != 0){
 				popUp("HIGHSCORE","");
 			}	
-			setCookie("HIGHSCORE-EASY_EX",Point.num);
+			setCookie("HIDAMARISWING-HIGHSCORE-EASY_EX",Point.num);
 		}
 
 	}
