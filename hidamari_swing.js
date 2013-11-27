@@ -19,7 +19,8 @@ window.onload = function hidamari_swing() {
 		'sound/bgm_hard.mp3', 'sound/bgm_extra1.mp3', 'sound/bgm_extra2.mp3',
 		'sound/bgm_result.mp3',
 		//SE
-		'sound/hit_ex.wav', 'sound/hit_1.wav', 'sound/hit_2.wav', 'sound/hit_3.wav', 'sound/hit_4.wav'
+		'sound/hit_ex.wav', 'sound/hit_1.wav', 'sound/hit_2.wav', 'sound/hit_3.wav', 'sound/hit_4.wav',
+		'sound/return.wav', 'sound/select.wav', 'sound/swing.wav', 'sound/switching.wav'
 	);
 
 //**********
@@ -337,11 +338,13 @@ window.onload = function hidamari_swing() {
 			});
 			SceneTitle.addEventListener('leftbuttondown', function(){
 				CourseDecrement();
+				play_se('sound/select.wav');
 				SceneTitle.StartButton.label_update();
 				SceneTitle.ModeDiscription.update();
 			});
 			SceneTitle.addEventListener('rightbuttondown', function(){
 				CourseIncrement();
+				play_se('sound/select.wav');
 				SceneTitle.StartButton.label_update();
 				SceneTitle.ModeDiscription.update();
 			});
@@ -443,6 +446,7 @@ window.onload = function hidamari_swing() {
 			SceneTitle.HelpButton.y = SCREEN_SIZE_Y-60;
 			SceneTitle.HelpButton.text = "<h1 id='helpbutton' class='button'>操作説明</h1>";
 			SceneTitle.HelpButton.addEventListener('touchstart', function (e) {
+				play_se('sound/switching.wav');
 				game.popScene(SceneTitle);
 				game.pushScene(SceneHelp);
 			});
@@ -454,6 +458,7 @@ window.onload = function hidamari_swing() {
 			SceneTitle.RecordButton.y = SCREEN_SIZE_Y-60;
 			SceneTitle.RecordButton.text = "<h1 id='recordbutton'>トロフィー</h1>";
 			SceneTitle.RecordButton.addEventListener('touchstart', function (e) {
+				play_se('sound/switching.wav');
 				game.popScene(SceneTitle);
 				game.pushScene(SceneRecord);
 			});
@@ -472,6 +477,7 @@ window.onload = function hidamari_swing() {
 				}else{
 					this.image = game.assets['img/sound_n.gif'];
 				}
+				play_se('sound/switching.wav');
 			});
 
 			//event listener
@@ -521,6 +527,7 @@ window.onload = function hidamari_swing() {
 					Course = ExtraCourse[ExtraCourseIndex];
 				}
 				SceneTitle.ModeMarkerPin.update();
+				play_se('sound/select.wav');
 			}
 			var CourseDecrement = function(){
 				SceneTitle.ModeLeftButton.scaleX = 1.45;
@@ -542,6 +549,7 @@ window.onload = function hidamari_swing() {
 					Course = ExtraCourse[ExtraCourseIndex];
 				}
 				SceneTitle.ModeMarkerPin.update();
+				play_se('sound/select.wav');
 			}
 
 			var ModeSwitching = function(){
@@ -557,6 +565,7 @@ window.onload = function hidamari_swing() {
 					SceneTitle.BackFrame.text = "<div class=\"backframe\"></div>";
 				}
 				SceneTitle.ModeMarkerPin.update();
+				play_se('sound/switching.wav');
 			}
 
 			//*モードマーカーピン*
@@ -627,6 +636,7 @@ window.onload = function hidamari_swing() {
 			SceneHelp.HelpTitleBackButton.y = SCREEN_SIZE_Y-60;
 			SceneHelp.HelpTitleBackButton.text = "<h1 id='helpbutton' class='button'>戻る</h1>";
 			SceneHelp.HelpTitleBackButton.addEventListener('touchstart', function (e) {
+				play_se('sound/switching.wav');
 				game.popScene(SceneHelp);
 				game.pushScene(SceneTitle);
 			});
@@ -683,6 +693,7 @@ window.onload = function hidamari_swing() {
 			SceneRecord.RecordTitleBackButton.y = SCREEN_SIZE_Y-60;
 			SceneRecord.RecordTitleBackButton.text = "<h1 id='helpbutton' class='button'>戻る</h1>";
 			SceneRecord.RecordTitleBackButton.addEventListener('touchstart', function (e) {
+				play_se('sound/switching.wav');
 				game.popScene(SceneRecord);
 				game.pushScene(SceneTitle);
 			});
@@ -1378,6 +1389,7 @@ window.onload = function hidamari_swing() {
 			//スイング（スペース押したときの）処理
 			SceneBatting.Batter.swing = function(){
 				//console.log('swing'); //for debug
+				play_se('sound/swing.wav');
 				this.swing_flag = false;	
 				SceneBatting.Camera.addChild(SceneBatting.Bat);
 			}
@@ -1845,12 +1857,12 @@ window.onload = function hidamari_swing() {
 					SceneBatting.LastBall.visible = true;
 				}
 				if(this.select_menu == 2){
-					//window.location.reload();
 					if(SoundFlag == 1){
 						game.assets[RESULT_BGM].stop();
 						game.assets[RESULT_BGM].volume = 0;
 						game.assets[BattingBgmFile].stop();
 					}
+					play_se('sound/return.wav');
 					game.popScene(SceneResult);
 					game.popScene(SceneBatting);
 					initAll();
