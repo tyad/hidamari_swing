@@ -740,16 +740,16 @@ window.onload = function hidamari_swing() {
 					nowTrophyPage++;
 					trophyListUpdate(nowTrophyPage);
 					trophyTextUpdate();
+					play_se('sound/select.wav');
 				}
-				play_se('sound/select.wav');
 			}
 			function trophyBackPage(){
 				if(nowTrophyPage > 1){
 					nowTrophyPage--;
 					trophyListUpdate(nowTrophyPage);
 					trophyTextUpdate();
+					play_se('sound/select.wav');
 				}
-				play_se('sound/select.wav');
 			}
 			trophyTextUpdate();
 			SceneRecord.addEventListener('leftbuttondown', function(){
