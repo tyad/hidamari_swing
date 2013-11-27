@@ -341,13 +341,11 @@ window.onload = function hidamari_swing() {
 			});
 			SceneTitle.addEventListener('leftbuttondown', function(){
 				CourseDecrement();
-				play_se('sound/select.wav');
 				SceneTitle.StartButton.label_update();
 				SceneTitle.ModeDiscription.update();
 			});
 			SceneTitle.addEventListener('rightbuttondown', function(){
 				CourseIncrement();
-				play_se('sound/select.wav');
 				SceneTitle.StartButton.label_update();
 				SceneTitle.ModeDiscription.update();
 			});
