@@ -246,7 +246,7 @@ window.onload = function hidamari_swing() {
 	var ExtraCourseIndex = 0;
 
 	//音ON/OFF用フラグ
-	var SoundFlag = 1;//getCookie("HIDAMARISWING-SOUNDFLAG");
+	var SoundFlag = getCookie("HIDAMARISWING-SOUNDFLAG");
 	function SoundFlagSwitching () {
 		if(SoundFlag != 1){
 			SoundFlag = 1;
@@ -528,7 +528,9 @@ window.onload = function hidamari_swing() {
 					Course = ExtraCourse[ExtraCourseIndex];
 				}
 				SceneTitle.ModeMarkerPin.update();
-				play_se('sound/select.wav');
+				if(CommonCourse.length >= 2){
+					play_se('sound/select.wav');
+				}
 			}
 			var CourseDecrement = function(){
 				SceneTitle.ModeLeftButton.scaleX = 1.45;
@@ -550,7 +552,9 @@ window.onload = function hidamari_swing() {
 					Course = ExtraCourse[ExtraCourseIndex];
 				}
 				SceneTitle.ModeMarkerPin.update();
-				play_se('sound/select.wav');
+				if(CommonCourse.length >= 2){
+					play_se('sound/select.wav');
+				}
 			}
 
 			var ModeSwitching = function(){
@@ -631,6 +635,9 @@ window.onload = function hidamari_swing() {
 			//*背景*
 			SceneHelp.BackgroundHelp = make_Sprite(SCREEN_SIZE_X, SCREEN_SIZE_Y, 0, 0, 'img/background_title.jpg');
 
+			//*枠*
+			SceneHelp.HelpFrame = make_Label(10, 10, "recordframe", "");
+
 			//*戻るボタン*
 			SceneHelp.HelpTitleBackButton = new Label();
 			SceneHelp.HelpTitleBackButton.x = SCREEN_SIZE_X-130;
@@ -643,8 +650,9 @@ window.onload = function hidamari_swing() {
 			});
 
 			//*テキスト*/
-			SceneHelp.HelpText = make_Label(10, 10, "help", "<p>操作説明</p><p>バッターを操作してボールを打つ</p><img src='./img/swing.png'>	<p><p><div><b>PCでの操作</b></div><div>スペースキーでスイング / 矢印キーで上下左右移動</div></p><p><div><b>スマホ・タブレットでの操作</b></div><div>右下の〇でスイング / 左下の矢印で上下左右移動</div></p><p><div>左方向に飛んだら振りが早め、右方向に飛んだら振りが遅め</div><div>これを参考にタイミングよくジャストミートしよう！</div></p></p><span class='copyright'>[BGM]フリーBGM・音楽素材MusMus:http://musmus.main.jp</span></div>");
+			SceneHelp.HelpText = make_Label(10, 10, "help", "<p>操作説明</p><p>バッターを操作してボールを打つ</p><img src='./img/swing.png'>	<p><p><div><b>PCでの操作</b></div><div>スペースキーでスイング / 矢印キーで上下左右移動</div></p><p><div><b>スマホ・タブレットでの操作</b></div><div>右下の〇でスイング / 左下の矢印で上下左右移動</div></p><p><div>左方向に飛んだら振りが早め<br>右方向に飛んだら振りが遅め</div><div>これを参考にタイミングよくジャストミートしよう！</div></p></p></div>");
 			SceneHelp.addChild(SceneHelp.BackgroundHelp);
+			SceneHelp.addChild(SceneHelp.HelpFrame);
 			SceneHelp.addChild(SceneHelp.HelpText);
 			SceneHelp.addChild(SceneHelp.HelpTitleBackButton);
 
@@ -733,6 +741,7 @@ window.onload = function hidamari_swing() {
 					trophyListUpdate(nowTrophyPage);
 					trophyTextUpdate();
 				}
+				play_se('sound/select.wav');
 			}
 			function trophyBackPage(){
 				if(nowTrophyPage > 1){
@@ -740,6 +749,7 @@ window.onload = function hidamari_swing() {
 					trophyListUpdate(nowTrophyPage);
 					trophyTextUpdate();
 				}
+				play_se('sound/select.wav');
 			}
 			trophyTextUpdate();
 			SceneRecord.addEventListener('leftbuttondown', function(){
@@ -1810,11 +1820,13 @@ window.onload = function hidamari_swing() {
 			//リトライ=1, リセット=2
 			SceneResult.select_menu = 0;
 			SceneResult.addEventListener('leftbuttondown', function(){
+				play_se('sound/select.wav');
 				SceneResult.select_menu = 1;
 				SceneResult.RetryButton.opacity = 0.8;
 				SceneResult.ResetButton.opacity = 0.3;
 			});
 			SceneResult.addEventListener('rightbuttondown', function(){
+				play_se('sound/select.wav');
 				SceneResult.select_menu = 2;
 				SceneResult.ResetButton.opacity = 0.8;
 				SceneResult.RetryButton.opacity = 0.3;
@@ -1854,8 +1866,7 @@ window.onload = function hidamari_swing() {
 					SceneBatting.Point.visible = true;
 					SceneBatting.StateFrame.visible = true;
 					SceneBatting.LastBall.visible = true;
-				}
-				if(this.select_menu == 2){
+				}else if(this.select_menu == 2){
 					if(SoundFlag == 1){
 						game.assets[RESULT_BGM].stop();
 						game.assets[RESULT_BGM].volume = 0;

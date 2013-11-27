@@ -68,13 +68,13 @@ body{
 }
 
 .help{
-	font-size: 14px;
+	font-size: 16px;
+	color: #fff;
 	text-align:center;
-	background: #eee;
-	border: 5px solid #888;
 	border-radius: 10px;
 	width: 450px;
 	height: 450px;
+	
 }
 
 .popup{
