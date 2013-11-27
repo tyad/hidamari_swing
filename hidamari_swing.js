@@ -246,7 +246,7 @@ window.onload = function hidamari_swing() {
 	var ExtraCourseIndex = 0;
 
 	//音ON/OFF用フラグ
-	var SoundFlag = getCookie("HIDAMARISWING-SOUNDFLAG");
+	var SoundFlag = 1;//getCookie("HIDAMARISWING-SOUNDFLAG");
 	function SoundFlagSwitching () {
 		if(SoundFlag != 1){
 			SoundFlag = 1;
@@ -267,13 +267,13 @@ window.onload = function hidamari_swing() {
 				SceneTitle.StartButton.game_start();
 			}
 			//バッティング画面ならスイング
-			if(game.currentScene === SceneBatting){
+			else if(game.currentScene === SceneBatting){
 				if(SceneBatting.Batter.swing_flag == true){
 					SceneBatting.Batter.swing();
 				}
 			}
 			//リザルト画面なら決定(選択しなければ発動しない)
-			if(game.currentScene === SceneResult){
+			else if(game.currentScene === SceneResult){
 				SceneResult.decide();
 			}
 		}
@@ -674,9 +674,9 @@ window.onload = function hidamari_swing() {
 			//*トロフィーリスト*
 			SceneRecord.TrophyList = make_Label(10, 10, "trophy_list", "");
 			function trophyListUpdate(page){
-				var trophyText = ""
-					trophyText = "<div id='trophy_list'>";
-					//console.log(TROPHY_DATA)
+				var trophyText = "";
+				trophyText = "<div id='trophy_list'>";
+				//console.log(TROPHY_DATA)
 
 				for(var i = (page-1)*8;i<getTrophy.length && i < (page-1)*8 + 8;i++){
 					trophyText += "<p><span>"+getTrophy[i]['name']+"</span><br>"+getTrophy[i]['text']+"</p>";
@@ -1607,7 +1607,6 @@ window.onload = function hidamari_swing() {
 										this.frame = this.frame_num;
 									}
 								}
-
 							});
 
 
@@ -1660,7 +1659,6 @@ window.onload = function hidamari_swing() {
 												SceneBatting.removeChild(this);
 												SceneBatting.removeChild(BallNowPointText);							
 											}
-
 										}
 									}
 								});
@@ -1729,7 +1727,7 @@ window.onload = function hidamari_swing() {
 							}
 						});					
 						break;
-					}
+				}
 			}
 
 			//*カメラ*
