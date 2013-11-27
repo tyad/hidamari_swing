@@ -278,7 +278,6 @@ window.onload = function hidamari_swing() {
 			else if(game.currentScene === SceneResult && space_control == 0){
 				SceneResult.decide();
 			}
-			space_control = 1;
 		}
 
 		function play_se(file_pass){
@@ -2074,7 +2073,10 @@ window.onload = function hidamari_swing() {
 //##########
 //ゲーム管理
 //##########
-		game.addEventListener('spacebuttondown', get_space);
+		game.addEventListener('spacebuttondown', function(){
+			get_space();
+			space_control = 1;
+		});
 		game.addEventListener('spacebuttonup', function(){
 			space_control = 0;
 		});
