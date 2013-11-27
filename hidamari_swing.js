@@ -260,22 +260,25 @@ window.onload = function hidamari_swing() {
 		//var GameMode = 0;
 		var BattingBgmFile = '';
 
+		//スペースキー制御用変数
+		var space_control = 0;
 		//スペースが押されたとき呼ばれる関数呼ぶ
 		function get_space(){
 			//タイトル画面ならゲームスタート
-			if(game.currentScene === SceneTitle){
+			if(game.currentScene === SceneTitle && space_control == 0){
 				SceneTitle.StartButton.game_start();
 			}
 			//バッティング画面ならスイング
-			else if(game.currentScene === SceneBatting){
+			else if(game.currentScene === SceneBatting && space_control == 0){
 				if(SceneBatting.Batter.swing_flag == true){
 					SceneBatting.Batter.swing();
 				}
 			}
 			//リザルト画面なら決定(選択しなければ発動しない)
-			else if(game.currentScene === SceneResult){
+			else if(game.currentScene === SceneResult && space_control == 0){
 				SceneResult.decide();
 			}
+			space_control = 1;
 		}
 
 		function play_se(file_pass){
@@ -2063,7 +2066,9 @@ window.onload = function hidamari_swing() {
 //ゲーム管理
 //##########
 		game.addEventListener('spacebuttondown', get_space);
-
+		game.addEventListener('spacebuttonup', function(){
+			space_control = 0;
+		});
 		var SceneTitle;
 		var SceneHelp;
 		var SceneRecord;
