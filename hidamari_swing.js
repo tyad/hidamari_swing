@@ -2092,6 +2092,9 @@ window.onload = function hidamari_swing() {
 			SceneRecord = initRecord();
 			SceneBatting = initBatting();
 			SceneResult = initResult();
+			if(Mode == "EXTRA"){
+				SceneTitle.BackFrame.text = "<div class=\"backframe_ex\"></div>";
+			}
 		}
 
 		//すべてのシーンを設定
