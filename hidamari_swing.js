@@ -15,12 +15,12 @@ window.onload = function hidamari_swing() {
 		'img/swing_button.png',
 		'img/effect_line.gif', 'img/effect_hit.gif',
 		//BGM
-		'sound/bgm_title.mp3','sound/bgm_easy.mp3', 'sound/bgm_normal.mp3',
-		'sound/bgm_hard.mp3', 'sound/bgm_extra1.mp3', 'sound/bgm_extra2.mp3',
-		'sound/bgm_result.mp3',
+		'sound/bgm_title.ogg','sound/bgm_easy.ogg', 'sound/bgm_normal.ogg',
+		'sound/bgm_hard.ogg', 'sound/bgm_extra1.ogg', 'sound/bgm_extra2.ogg',
+		'sound/bgm_result.ogg',
 		//SE
-		'sound/hit_ex.wav', 'sound/hit_1.wav', 'sound/hit_2.wav', 'sound/hit_3.wav', 'sound/hit_4.wav',
-		'sound/return.wav', 'sound/select.wav', 'sound/swing.wav', 'sound/switching.wav'
+		'sound/hit_ex.ogg', 'sound/hit_1.ogg', 'sound/hit_2.ogg', 'sound/hit_3.ogg', 'sound/hit_4.ogg',
+		'sound/return.ogg', 'sound/select.ogg', 'sound/swing.ogg', 'sound/switching.ogg'
 	);
 
 //**********
@@ -35,13 +35,13 @@ window.onload = function hidamari_swing() {
 	//矢印サイズ
 	var DIRECTION_SIZE = 40;
 	//BGM
-	var TITLE_BGM = 'sound/bgm_title.mp3';
-	var BATTING_BGM_EASY = 'sound/bgm_easy.mp3';
-	var BATTING_BGM_NORMAL = 'sound/bgm_normal.mp3';
-	var BATTING_BGM_HARD = 'sound/bgm_hard.mp3';
-	var BATTING_BGM_EXTRA1 = 'sound/bgm_extra1.mp3';
-	var BATTING_BGM_EXTRA2 = 'sound/bgm_extra2.mp3';
-	var RESULT_BGM = 'sound/bgm_result.mp3';
+	var TITLE_BGM = 'sound/bgm_title.ogg';
+	var BATTING_BGM_EASY = 'sound/bgm_easy.ogg';
+	var BATTING_BGM_NORMAL = 'sound/bgm_normal.ogg';
+	var BATTING_BGM_HARD = 'sound/bgm_hard.ogg';
+	var BATTING_BGM_EXTRA1 = 'sound/bgm_extra1.ogg';
+	var BATTING_BGM_EXTRA2 = 'sound/bgm_extra2.ogg';
+	var RESULT_BGM = 'sound/bgm_result.ogg';
 
 	//バッティング画面-デフォルトカメラ位置
 	var CAMERA_BATTING_X = -(GROUND_SIZE_X/2 - SCREEN_SIZE_X/2);
@@ -103,7 +103,7 @@ window.onload = function hidamari_swing() {
 				"nock" : 0,
 				"ball_number" : 5,
 				"powerfilter": 0.85,
-				"bgm" : 'sound/bgm_easy.mp3',
+				"bgm" : 'sound/bgm_easy.ogg',
 				"discription" : "5球 / ノルマ:250m<br>ボールを打ち返してみよう！",
 				"norma_rank_first": 250,
 				"norma_rank_second": 400,
@@ -117,7 +117,7 @@ window.onload = function hidamari_swing() {
 				"nock" : 0,
 				"powerfilter": 0.9,
 				"ball_number" : 10,
-				"bgm" : 'sound/bgm_normal.mp3',
+				"bgm" : 'sound/bgm_normal.ogg',
 				"discription" : "10球 / ノルマ:500m<br>変化球も投げてくる！",
 				"norma_rank_first": 500,
 				"norma_rank_second": 800,
@@ -131,7 +131,7 @@ window.onload = function hidamari_swing() {
 				"nock" : 0,
 				"powerfilter": 1.0,
 				"ball_number" : 10,
-				"bgm" : 'sound/bgm_hard.mp3',
+				"bgm" : 'sound/bgm_hard.ogg',
 				"discription" : "10球 / ノルマ:500m<br>上手い人向けの難しめコース！",
 				"norma_rank_first": 500,
 				"norma_rank_second": 800,
@@ -145,7 +145,7 @@ window.onload = function hidamari_swing() {
 				"nock" : 0,
 				"powerfilter": 0.9,
 				"ball_number" : 10,
-				"bgm" : 'sound/bgm_extra1.mp3',
+				"bgm" : 'sound/bgm_extra1.ogg',
 				"discription" : "10球 / ノルマ:500m<br>直球のみで真剣勝負！",
 				"norma_rank_first": 500,
 				"norma_rank_second": 800,
@@ -159,7 +159,7 @@ window.onload = function hidamari_swing() {
 				"nock" : 0,
 				"powerfilter": 0.75,
 				"ball_number" : 10,
-				"bgm" : 'sound/bgm_extra1.mp3',
+				"bgm" : 'sound/bgm_extra1.ogg',
 				"discription" : "10球 / ノルマ:500m<br>だんだん難しくなる変化球コース！",
 				"norma_rank_first": 500,
 				"norma_rank_second": 800,
@@ -175,7 +175,7 @@ window.onload = function hidamari_swing() {
 				"nock" : 0,
 				"ball_number" : 10,
 				"powerfilter": 0.85,
-				"bgm" : 'sound/bgm_easy.mp3',
+				"bgm" : 'sound/bgm_easy.ogg',
 				"discription" : "10球 / ノルマ:400m<br>森で修行して帰ってきた！",
 				"norma_rank_first": 400,
 				"norma_rank_second": 600,
@@ -189,7 +189,7 @@ window.onload = function hidamari_swing() {
 				"nock" : 1,
 				"powerfilter": 1.0,
 				"ball_number" : 100,
-				"bgm" : 'sound/bgm_extra2.mp3',
+				"bgm" : 'sound/bgm_extra2.ogg',
 				"discription" : "100球 / ノルマ:3000m<br>これはノックと呼べるのか！？とにかく打ちまくれ！",
 				"norma_rank_first": 3000,
 				"norma_rank_second": 5000,
@@ -203,7 +203,7 @@ window.onload = function hidamari_swing() {
 				"nock" : 1,
 				"powerfilter": 0.9,
 				"ball_number" : 100,
-				"bgm" : 'sound/bgm_extra2.mp3',
+				"bgm" : 'sound/bgm_extra2.ogg',
 				"discription" : "100球 / ノルマ:3000m<br>てごわいぞ",
 				"norma_rank_first": 3000,
 				"norma_rank_second": 5000,
@@ -217,7 +217,7 @@ window.onload = function hidamari_swing() {
 				"nock" : 0,
 				"ball_number" : 5,
 				"powerfilter": 1.2,
-				"bgm" : 'sound/bgm_easy.mp3',
+				"bgm" : 'sound/bgm_easy.ogg',
 				"discription" : "5球 / ノルマ:250m<br>統一球になった！",
 				"norma_rank_first": 250,
 				"norma_rank_second":400,
@@ -231,7 +231,7 @@ window.onload = function hidamari_swing() {
 				"nock" : 1,
 				"powerfilter": 0.45,
 				"ball_number" : 100,
-				"bgm" : 'sound/bgm_extra2.mp3',
+				"bgm" : 'sound/bgm_extra2.ogg',
 				"discription" : "100球 / ノルマ:5000m<br>わっしょいでーす",
 				"norma_rank_first": 5000,
 				"norma_rank_second":8000,
@@ -372,7 +372,7 @@ window.onload = function hidamari_swing() {
 				SceneBatting.MeetCursor.distance_powerfilter = GameSet[Mode][Course]["powerfilter"];
 				SceneBatting.LastBall.update();
 				game.assets[TITLE_BGM].stop();
-				play_se('sound/hit_1.wav');
+				play_se('sound/hit_1.ogg');
 				game.popScene(SceneTitle);
 				game.pushScene(SceneBatting);
 			}
@@ -446,7 +446,7 @@ window.onload = function hidamari_swing() {
 			SceneTitle.HelpButton.y = SCREEN_SIZE_Y-60;
 			SceneTitle.HelpButton.text = "<h1 id='helpbutton' class='button'>操作説明</h1>";
 			SceneTitle.HelpButton.addEventListener('touchstart', function (e) {
-				play_se('sound/switching.wav');
+				play_se('sound/switching.ogg');
 				game.popScene(SceneTitle);
 				game.pushScene(SceneHelp);
 			});
@@ -458,7 +458,7 @@ window.onload = function hidamari_swing() {
 			SceneTitle.RecordButton.y = SCREEN_SIZE_Y-60;
 			SceneTitle.RecordButton.text = "<h1 id='recordbutton'>トロフィー</h1>";
 			SceneTitle.RecordButton.addEventListener('touchstart', function (e) {
-				play_se('sound/switching.wav');
+				play_se('sound/switching.ogg');
 				game.popScene(SceneTitle);
 				game.pushScene(SceneRecord);
 			});
@@ -477,7 +477,7 @@ window.onload = function hidamari_swing() {
 				}else{
 					this.image = game.assets['img/sound_n.gif'];
 				}
-				play_se('sound/switching.wav');
+				play_se('sound/switching.ogg');
 			});
 
 			//event listener
@@ -528,7 +528,7 @@ window.onload = function hidamari_swing() {
 				}
 				SceneTitle.ModeMarkerPin.update();
 				if(CommonCourse.length >= 2){
-					play_se('sound/select.wav');
+					play_se('sound/select.ogg');
 				}
 			}
 			var CourseDecrement = function(){
@@ -552,7 +552,7 @@ window.onload = function hidamari_swing() {
 				}
 				SceneTitle.ModeMarkerPin.update();
 				if(CommonCourse.length >= 2){
-					play_se('sound/select.wav');
+					play_se('sound/select.ogg');
 				}
 			}
 
@@ -569,7 +569,7 @@ window.onload = function hidamari_swing() {
 					SceneTitle.BackFrame.text = "<div class=\"backframe\"></div>";
 				}
 				SceneTitle.ModeMarkerPin.update();
-				play_se('sound/switching.wav');
+				play_se('sound/switching.ogg');
 			}
 
 			//*モードマーカーピン*
@@ -643,7 +643,7 @@ window.onload = function hidamari_swing() {
 			SceneHelp.HelpTitleBackButton.y = SCREEN_SIZE_Y-60;
 			SceneHelp.HelpTitleBackButton.text = "<h1 id='helpbutton' class='button'>戻る</h1>";
 			SceneHelp.HelpTitleBackButton.addEventListener('touchstart', function (e) {
-				play_se('sound/switching.wav');
+				play_se('sound/switching.ogg');
 				game.popScene(SceneHelp);
 				game.pushScene(SceneTitle);
 			});
@@ -701,7 +701,7 @@ window.onload = function hidamari_swing() {
 			SceneRecord.RecordTitleBackButton.y = SCREEN_SIZE_Y-60;
 			SceneRecord.RecordTitleBackButton.text = "<h1 id='helpbutton' class='button'>戻る</h1>";
 			SceneRecord.RecordTitleBackButton.addEventListener('touchstart', function (e) {
-				play_se('sound/switching.wav');
+				play_se('sound/switching.ogg');
 				game.popScene(SceneRecord);
 				game.pushScene(SceneTitle);
 			});
@@ -739,7 +739,7 @@ window.onload = function hidamari_swing() {
 					nowTrophyPage++;
 					trophyListUpdate(nowTrophyPage);
 					trophyTextUpdate();
-					play_se('sound/select.wav');
+					play_se('sound/select.ogg');
 				}
 			}
 			function trophyBackPage(){
@@ -747,7 +747,7 @@ window.onload = function hidamari_swing() {
 					nowTrophyPage--;
 					trophyListUpdate(nowTrophyPage);
 					trophyTextUpdate();
-					play_se('sound/select.wav');
+					play_se('sound/select.ogg');
 				}
 			}
 			trophyTextUpdate();
@@ -860,7 +860,7 @@ window.onload = function hidamari_swing() {
 				addCount(this.obj);
 
 				//真芯カウントの追加
-				if(hit_se == 'sound/hit_ex.wav'){
+				if(hit_se == 'sound/hit_ex.ogg'){
 					this.justmeet++;
 				}
 				//飛距離0なら空振り
@@ -1399,7 +1399,7 @@ window.onload = function hidamari_swing() {
 			//スイング（スペース押したときの）処理
 			SceneBatting.Batter.swing = function(){
 				//console.log('swing'); //for debug
-				play_se('sound/swing.wav');
+				play_se('sound/swing.ogg');
 				this.swing_flag = false;	
 				SceneBatting.Camera.addChild(SceneBatting.Bat);
 			}
@@ -1478,20 +1478,20 @@ window.onload = function hidamari_swing() {
 							var hit_se ='';
 							//var hit_se = 0;
 							if(batted_speed > 19.5){
-								play_se('sound/hit_ex.wav');
-								hit_se = 'sound/hit_ex.wav';
+								play_se('sound/hit_ex.ogg');
+								hit_se = 'sound/hit_ex.ogg';
 							}else if(batted_speed>14){
-								play_se('sound/hit_1.wav');
-								hit_se = 'sound/hit_1.wav';
+								play_se('sound/hit_1.ogg');
+								hit_se = 'sound/hit_1.ogg';
 							}else if(batted_speed > 10){
-								play_se('sound/hit_2.wav');
-								hit_se = 'sound/hit_2.wav';
+								play_se('sound/hit_2.ogg');
+								hit_se = 'sound/hit_2.ogg';
 							}else if(batted_speed > 6){
-								play_se('sound/hit_3.wav');
-								hit_se = 'sound/hit_3.wav';
+								play_se('sound/hit_3.ogg');
+								hit_se = 'sound/hit_3.ogg';
 							}else if(batted_speed > 0){
-								play_se('sound/hit_4.wav');
-								hit_se = 'sound/hit_4.wav';
+								play_se('sound/hit_4.ogg');
+								hit_se = 'sound/hit_4.ogg';
 							}
 							//console.log('batted_speed:'+batted_speed);//for debug
 						//*打球*
@@ -1819,13 +1819,13 @@ window.onload = function hidamari_swing() {
 			//リトライ=1, リセット=2
 			SceneResult.select_menu = 0;
 			SceneResult.addEventListener('leftbuttondown', function(){
-				play_se('sound/select.wav');
+				play_se('sound/select.ogg');
 				SceneResult.select_menu = 1;
 				SceneResult.RetryButton.opacity = 0.8;
 				SceneResult.ResetButton.opacity = 0.3;
 			});
 			SceneResult.addEventListener('rightbuttondown', function(){
-				play_se('sound/select.wav');
+				play_se('sound/select.ogg');
 				SceneResult.select_menu = 2;
 				SceneResult.ResetButton.opacity = 0.8;
 				SceneResult.RetryButton.opacity = 0.3;
@@ -1871,7 +1871,7 @@ window.onload = function hidamari_swing() {
 						game.assets[RESULT_BGM].volume = 0;
 						game.assets[BattingBgmFile].stop();
 					}
-					play_se('sound/return.wav');
+					play_se('sound/return.ogg');
 					game.popScene(SceneResult);
 					game.popScene(SceneBatting);
 					initAll();
@@ -1908,7 +1908,7 @@ window.onload = function hidamari_swing() {
 						var MaxFlown = make_Label(240, 80, "result_score", SceneBatting.Point.max+"m");
 						SceneResult.addChild(MaxFlown);
 
-						play_se('sound/hit_1.wav');
+						play_se('sound/hit_1.ogg');
 					}
 
 					if(this.animation_frame == 70){
@@ -1918,7 +1918,7 @@ window.onload = function hidamari_swing() {
 						var SpuerHitNum = make_Label(240, 135, "result_score", SceneBatting.Point.justmeet+"回");
 						SceneResult.addChild(SpuerHitNum);
 
-						play_se('sound/hit_1.wav');
+						play_se('sound/hit_1.ogg');
 					}
 
 					if(this.animation_frame == 90){
@@ -1928,14 +1928,14 @@ window.onload = function hidamari_swing() {
 						var WhiffNum = make_Label(240, 190, "result_score", SceneBatting.Point.miss+"回");
 						SceneResult.addChild(WhiffNum);
 
-						play_se('sound/hit_1.wav');
+						play_se('sound/hit_1.ogg');
 					}
 
 					if(this.animation_frame == 110){
 						var TotalMeter = make_Label(120, 240, "result_total", "合計"+SceneBatting.Point.num+"m");
 						SceneResult.addChild(TotalMeter);
 
-						play_se('sound/hit_1.wav');
+						play_se('sound/hit_1.ogg');
 					}
 
 					if(this.animation_frame == 130){
@@ -1958,9 +1958,9 @@ window.onload = function hidamari_swing() {
 						if(checkClearRank(SceneBatting.Point.num) == 3){
 							var RankText = make_Label(0, 290+this.score_ball_num*20, "result_text", "★★★");
 							SceneResult.addChild(RankText);
-							play_se('sound/hit_ex.wav');
+							play_se('sound/hit_ex.ogg');
 						}else if(checkClearRank(SceneBatting.Point.num) > 0){
-							play_se('sound/hit_1.wav');
+							play_se('sound/hit_1.ogg');
 						}
 
 					}
@@ -1984,7 +1984,7 @@ window.onload = function hidamari_swing() {
 							var TotalMeter = make_Label(120, 70+this.score_ball_num*20, "result_total", "合計"+SceneBatting.Point.num+"m");
 							SceneResult.addChild(TotalMeter);
 
-							play_se('sound/hit_1.wav');
+							play_se('sound/hit_1.ogg');
 					}
 
 					if(this.animation_frame == 80 + SceneBatting.LastBall.max *10){
@@ -2006,9 +2006,9 @@ window.onload = function hidamari_swing() {
 						if(checkClearRank(SceneBatting.Point.num) == 3){
 							var RankText = make_Label(0, 120+this.score_ball_num*20, "result_text", "★★★");
 							SceneResult.addChild(RankText);
-							play_se('sound/hit_ex.wav');
+							play_se('sound/hit_ex.ogg');
 						}else if(checkClearRank(SceneBatting.Point.num) > 0){
-							play_se('sound/hit_1.wav');
+							play_se('sound/hit_1.ogg');
 						}
 
 					}
