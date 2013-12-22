@@ -725,7 +725,7 @@ function cookieUpdate(course_e, Point, ball_number){
 }
 
 function addCount(ball){
-	if(ball['hit_se'] == 'sound/hit_ex.wav'){
+	if(ball['hit_se'] == 'sound/hit_ex.ogg'){
 		var countJustMeet = getCookie("HIDAMARISWING-TOTAL-JUSTMEET");
 		countJustMeet++;
 		setCookie("HIDAMARISWING-TOTAL-JUSTMEET", countJustMeet);
